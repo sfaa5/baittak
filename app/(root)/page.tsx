@@ -28,13 +28,13 @@ export default function Home() {
             {/* top search */}
             <div className="absolute -top-7 left-1/5 lg:left-1/3 bg-secondary text-white flex justify-between items-center w-4/5 md:w-4/5 lg:w-1/3  px-3 sm:px-6 py-4 rounded-sm">
               <div className="inline-flex text-base font-medium hover:text-primary">
-                <LuHome className="size-6 items-center mr-4" /> Rent
+                <LuHome className="size-5 xs:size-6 items-center mr-2  xs:mr-4" /> Rent
               </div>
               <div className="inline-flex text-base font-medium hover:text-primary">
-                <LuHome className="size-6 items-center  mr-4" /> Buy
+                <LuHome className="size-5 xs:size-6 items-center  mr-2 xs:mr-4" /> Buy
               </div>
               <div className="inline-flex text-base font-medium hover:text-primary">
-                <LuHome className="size-6 items-center  mr-4" /> Projects
+                <LuHome className="size-5 xs:size-6 items-center  mr-2 xs:mr-4" /> Projects
               </div>
             </div>
             {/* search */}
@@ -58,17 +58,17 @@ export default function Home() {
                 />
               </div>
 
-              <button className="inline-flex items-center px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full max-w-48 hidden xl:flex">
+              <button className=" items-center px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full max-w-48 hidden xl:flex">
                 Type
                 <IoIosArrowDown className="ml-24  h-5 w-5 text-gray-500" />
               </button>
 
-              <button className="inline-flex items-center px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full max-w-60 hidden 2xl:flex">
+              <button className=" items-center px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full max-w-60 hidden 2xl:flex">
                 Room & Bath
                 <IoIosArrowDown className="ml-20  h-5 w-5 text-gray-500" />
               </button>
 
-              <button className="inline-flex items-center  bg-primary px-8 py-3 rounded-lg font-semibold text-base hidden md:flex">
+              <button className=" items-center  bg-primary px-8 py-3 rounded-lg font-semibold text-base hidden md:flex">
                 Search
                 <GoSearch className="ml-3 font-bold " />
               </button>
