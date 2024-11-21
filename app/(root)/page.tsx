@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { FiMapPin } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
