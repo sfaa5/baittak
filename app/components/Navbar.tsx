@@ -8,11 +8,9 @@ import { TfiWorld } from "react-icons/tfi";
 
 const Navbar = () => {
   return (
-    <header className="px-14 py-3  shadow-sm font-work-sans h-[100]">
+
       <nav className="flex justify-between items-center">
-        <Link href="/">
-          <Image src="/BaittakLOGO1 2.png" alt="logo" width={200} height={30} />
-        </Link>
+   
 
         <div className="flex flex-col  gap-4">
           <div className="flex gap-8 justify-end">
@@ -40,7 +38,7 @@ const Navbar = () => {
 
         </div>
       </nav>
-    </header>
+ 
   );
 };
 
