@@ -12,7 +12,7 @@ export default function Home() {
         {/* content */}
         <div className="absolute   h-96 rounded-full blur"></div>
         <div className="flex relative flex-col pt-24  gap-3 pl-6 md:pl-0">
-          <h1 className="h1 text-secondary">
+          <h1 className="h1 text-white sm:text-secondary">
             All Properties <br />
             on one lace
           </h1>
@@ -27,13 +27,13 @@ export default function Home() {
           <div className="relative w-full   h-36 bg-[#F5F5F5] bg-opacity-80 flex  items-center px-2 sm:px-8 rounded-md justify-center flex-wrap">
             {/* top search */}
             <div className="absolute -top-7 left-1/5 lg:left-1/3 bg-secondary text-white flex justify-between items-center w-4/5 md:w-4/5 lg:w-1/3  px-3 sm:px-6 py-4 rounded-sm">
-              <div className="inline-flex text-base font-bold">
+              <div className="inline-flex text-base font-medium hover:text-primary">
                 <LuHome className="size-6 items-center mr-4" /> Rent
               </div>
-              <div className="inline-flex text-base font-bold">
+              <div className="inline-flex text-base font-medium hover:text-primary">
                 <LuHome className="size-6 items-center  mr-4" /> Buy
               </div>
-              <div className="inline-flex text-base font-bold">
+              <div className="inline-flex text-base font-medium hover:text-primary">
                 <LuHome className="size-6 items-center  mr-4" /> Projects
               </div>
             </div>

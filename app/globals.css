@@ -13,30 +13,49 @@
       rgba(212, 223, 240, 0.1) 100%,
       transparent 100%
     );
-    top: 50px;
-    left:20px;
-    width: 300px;
-    height: 240px;
+    top: 60px;
+    left:10px;
+    width: 100px;
+    height: 100px;
   }
 
 
-  @screen md {
-    .blur {
-      width: 400px; /* Smaller width for medium screens */
-      top: 60px;
-      left: 15px;
-    }
-  }
 
   @screen sm {
     .blur {
-      width: 500px; /* Even smaller for small screens */
+      width: 300px; /* Even smaller for small screens */
       top: 60px;
       left: -6px;
-      height: 300px;
+      height: 200px;
+    }
+  }
+  
+  @screen md {
+    .blur {
+      width: 250px; /* Smaller width for medium screens */
+      top: 60px;
+      left: 15px;
+      height: 200px;
+    }
+  }
+  
+  @screen lg {
+    .blur {
+      width: 350px; /* Smaller width for medium screens */
+      top: 60px;
+      left: -20px;
+      height: 200px;
     }
   }
 
+  @screen xl {
+    .blur {
+      width: 450px; /* Smaller width for medium screens */
+      top: 60px;
+      left: 20px;
+      height: 300px;
+    }
+  }
 
 
   .flex-between {
