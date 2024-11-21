@@ -37,7 +37,7 @@ function MobileNavbar() {
         <CiMenuFries className="text-[32px] text-secondry" />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
-        <div className="mt-32 mb-40 text-center text-2xl">
+        <div className="mt-14 mb-40 text-center text-2xl">
           <Link href="/">
           <Image src="/BaittakLOGO1 2.png" alt="logo" width={200} height={30} />
           </Link>
@@ -51,8 +51,8 @@ function MobileNavbar() {
                 key={index}
                 className={` ${
                   link.path === pathname &&
-                  "text-accent border-b-2 border-accent"
-                } text-xl capitalize hover:text-accent transition-all`}
+                  "text-secondry border-b-2 border-secondry"
+                } text-xl capitalize hover:text-primary transition-all`}
               >
                 {link.name}
               </Link>
