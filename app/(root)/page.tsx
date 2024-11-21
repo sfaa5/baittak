@@ -10,7 +10,7 @@ export default function Home() {
       <div className="container relative mx-auto h-full flex flex-col gap-44">
         {/* content */}
         <div className="absolute   h-96 rounded-full blur"></div>
-        <div className="flex relative flex-col pt-40 pl-18 gap-3 pl-6 md:pl-0">
+        <div className="flex relative flex-col pt-40  gap-3 pl-6 md:pl-0">
           <h1 className="h1 text-secondary">
             All Properties <br />
             on one lace
