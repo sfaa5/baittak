@@ -23,7 +23,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="relative w-[1400] h-[150] bg-[#F5F5F5] bg-opacity-80 flex  items-center px-5 rounded-md justify-center ml-16">
+        <div className="relative w-[1400] h-40 bg-[#F5F5F5] bg-opacity-80 flex  items-center px-5 rounded-md justify-center ml-16">
           {/* top search */}
           <div className="absolute -top-7 left-[400] bg-secondary flex justify-between items-center w-[600] h-[60] px-6 py-6 rounded-sm">
             <div className="inline-flex text-base font-bold">
@@ -37,7 +37,7 @@ export default function Home() {
             </div>
           </div>
           {/* search */}
-          <div className="flex justify-around items-center w-full pt-7">
+          <div className="flex justify-around items-center w-full pt-7 ">
             <button className="bg-primary px-8 py-3 rounded-lg font-semibold text-base">
               Rent
             </button>
