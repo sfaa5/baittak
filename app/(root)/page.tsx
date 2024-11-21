@@ -25,7 +25,7 @@ export default function Home() {
         <div className="w-full  flex justify-center px-16">
           <div className="relative w-full   h-36 bg-[#F5F5F5] bg-opacity-80 flex  items-center px-8 rounded-md justify-center ">
             {/* top search */}
-            <div className="absolute -top-7 left-1/3 bg-secondary text-white flex justify-between items-center w-1/3 h-[60] px-6 py-6 rounded-sm">
+            <div className="absolute -top-7 left-1/3 bg-secondary text-white flex justify-between items-center w-1/3  px-6 py-4 rounded-sm">
               <div className="inline-flex text-base font-bold">
                 <LuHome className="size-6 items-center mr-5" /> Rent
               </div>
