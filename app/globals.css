@@ -1,21 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --radius: 0.5rem;
+  }
+
+  .h1 {
+    @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .blur {
+    inset: 0;
+    background: radial-gradient(
+      circle,
+      #78b84eee 25%,
+      rgba(212, 223, 240, 0.1) 70%,
+      transparent 100%
+    );
+    top: 80px;
+    left:-220px;
+    width: 900px;
+  
+
+  }
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
 }
+
+.w-md-editor-toolbar {
+  padding: 10px !important;
+}
+
+
