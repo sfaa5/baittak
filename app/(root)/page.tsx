@@ -23,9 +23,9 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="relative w-[1400] h-40 bg-[#F5F5F5] bg-opacity-80 flex  items-center px-5 rounded-md justify-center ml-16">
+        <div className="relative w-full h-36 bg-[#F5F5F5] bg-opacity-80 flex  items-center px-5 rounded-md justify-center ml-16">
           {/* top search */}
-          <div className="absolute -top-7 left-[400] bg-secondary flex justify-between items-center w-[600] h-[60] px-6 py-6 rounded-sm">
+          <div className="absolute -top-7 left-[400] bg-secondary flex justify-between items-center w-2/4 h-[60] px-6 py-6 rounded-sm">
             <div className="inline-flex text-base font-bold">
               <LuHome className="size-6 items-center mr-5" /> Rent
             </div>
