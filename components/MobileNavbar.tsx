@@ -58,6 +58,7 @@ function MobileNavbar() {
               </Link>
             );
           })}
+          <div className="border "></div>
         </nav>
       </SheetContent>
     </Sheet>
