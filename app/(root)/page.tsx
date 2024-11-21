@@ -9,7 +9,7 @@ export default function Home() {
     <section className="h-full pb-36 bg-hero-pattern bg-cover  w-full ">
       <div className="container relative mx-auto h-full flex flex-col gap-44">
         {/* content */}
-        <div className="absolute  w-96 h-96 rounded-full blur"></div>
+        <div className="absolute   h-96 rounded-full blur"></div>
         <div className="flex relative flex-col pt-40 pl-18 gap-3 pl-6 md:pl-0">
           <h1 className="h1 text-secondary">
             All Properties <br />

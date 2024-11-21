@@ -9,16 +9,34 @@
     inset: 0;
     background: radial-gradient(
       circle,
-      #78b84eee 25%,
-      rgba(212, 223, 240, 0.1) 70%,
+      #78b84ec5 60%,
+      rgba(212, 223, 240, 0.1) 100%,
       transparent 100%
     );
     top: 80px;
-    left:-220px;
-    width: 900px;
-  
-
+    left:20px;
+    width: 420px;
   }
+
+
+  @screen md {
+    .blur {
+      width: 400px; /* Smaller width for medium screens */
+      top: 60px;
+      left: 15px;
+    }
+  }
+
+  @screen sm {
+    .blur {
+      width: 600px; /* Even smaller for small screens */
+      top: 80px;
+      left: -6px;
+    }
+  }
+
+
+
   .flex-between {
     @apply flex justify-between items-center;
   }
