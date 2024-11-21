@@ -6,7 +6,7 @@ import { LuHome } from "react-icons/lu";
 
 export default function Home() {
   return (
-    <section className="h-[800] bg-hero-pattern bg-cover  w-full">
+    <section className="h-full pb-36 bg-hero-pattern bg-cover  w-full">
       <div className="container relative mx-auto h-full flex flex-col gap-44">
 
         {/* content */}
