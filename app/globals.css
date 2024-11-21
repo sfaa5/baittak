@@ -15,7 +15,7 @@
     );
     top: 80px;
     left:20px;
-    width: 420px;
+    width: 390px;
   }
 
 
@@ -29,7 +29,7 @@
 
   @screen sm {
     .blur {
-      width: 600px; /* Even smaller for small screens */
+      width: 500px; /* Even smaller for small screens */
       top: 80px;
       left: -6px;
     }
