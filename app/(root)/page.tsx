@@ -6,7 +6,7 @@ import { LuHome } from "react-icons/lu";
 export default function Home() {
   return (
     // landing
-    <section className="h-full pb-36 bg-hero-pattern bg-cover  w-full">
+    <section className="h-full pb-36 bg-hero-pattern bg-cover  w-full ">
       <div className="container relative mx-auto h-full flex flex-col gap-44">
         {/* content */}
         <div className="absolute  w-96 h-96 rounded-full blur"></div>
@@ -22,10 +22,10 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="w-full  flex justify-center px-16">
-          <div className="relative w-full   h-36 bg-[#F5F5F5] bg-opacity-80 flex  items-center px-8 rounded-md justify-center ">
+        <div className="w-full  flex justify-center px-0 xl:px-16">
+          <div className="relative w-full   h-36 bg-[#F5F5F5] bg-opacity-80 flex  items-center px-8 rounded-md justify-center flex-wrap">
             {/* top search */}
-            <div className="absolute -top-7 left-1/3 bg-secondary text-white flex justify-between items-center w-1/3  px-6 py-4 rounded-sm">
+            <div className="absolute -top-7 left-1/5 lg:left-1/3 bg-secondary text-white flex justify-between items-center w-2/3 lg:w-1/3  px-6 py-4 rounded-sm">
               <div className="inline-flex text-base font-bold">
                 <LuHome className="size-6 items-center mr-5" /> Rent
               </div>
@@ -37,7 +37,7 @@ export default function Home() {
               </div>
             </div>
             {/* search */}
-            <div className="realtive flex justify-around items-center w-full pt-7 ">
+            <div className="realtive flex justify-around items-center w-full pt-7 flex-wrap">
               <button className="bg-primary px-8 py-3 rounded-lg font-semibold text-base">
                 Rent
               </button>

@@ -6,7 +6,7 @@ import MobileNavbar from "./MobileNavbar";
 
 function Header() {
   return (
-    <header className="px-14 py-3  shadow-sm font-work-sans h-[100]">
+    <header className=" md:px-14 px-5 py-3  shadow-sm font-work-sans h-[100]">
       <div className=" mx-auto flex justify-between items-center">
         {/*logo */}
         <Link href="/">
