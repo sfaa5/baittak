@@ -18,9 +18,9 @@ function Footer() {
             <input
               type="text"
               placeholder="Enter your email address"
-              className="w-full px-5 py-6  border rounded-[6px] border-gray-300  focus:outline-none focus:ring-2 focus:ring-black-100"
+              className="w-full px-1 sm:px-5 py-6  border rounded-[6px] border-gray-300  focus:outline-none focus:ring-2 focus:ring-black-100"
             />
-            <button className="absolute right-4 bg-primary text-white px-10 py-2 top-1/2 transform -translate-y-1/2  rounded-[6px] font-medium text-sm ">
+            <button className="absolute right-2 sm:right-4 bg-primary text-white px-8 sm:px-10 py-2 top-1/2 transform -translate-y-1/2  rounded-[6px] font-medium text-sm ">
               Submit
             </button>
           </div>
@@ -91,8 +91,8 @@ function Footer() {
         </div>
 
         <div className="flex justify-between py-5">
-            <div className="flex text-2xl gap-3"><IoLogoInstagram /> <CiFacebook /> <CiYoutube /></div>
-            <span>©2024 Baittal.com. All rights reserved</span>
+            <div className="flex text-xl sm:text-3xl gap-1 sm:gap-3"><IoLogoInstagram /> <CiFacebook /> <CiYoutube /></div>
+            <span className="text-sm sm:text-base">©2024 Baittal.com. All rights reserved</span>
         </div>
       </div>
     </footer>
