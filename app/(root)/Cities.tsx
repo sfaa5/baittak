@@ -25,10 +25,10 @@ function Cities() {
       <div className="container mx-auto flex w-full justify-center  py-32 ">
         <div className="flex flex-col  items-center gap-16">
           <div className="flex flex-col  items-center">
-            <h1 className=" text-4xl font-semibold text-secondary ">
+            <h1 className=" text-3xl font-semibold  text-secondary ">
               We are available in many <br />
             </h1>
-            <h1 className=" text-4xl font-semibold text-secondary ">
+            <h1 className=" text-3xl font-semibold text-secondary ">
               Cities & Areas
             </h1>
           </div>
