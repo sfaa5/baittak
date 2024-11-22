@@ -38,7 +38,7 @@ function Cities() {
               return (
                 <div key={index}  className="relative ">
                   <h3
-                    className={`absolute text-3xl font-medium left-1/2 -translate-x-1/2 top-5 ${
+                    className={`absolute text-2xl font-medium left-1/2 -translate-x-1/2 top-5 ${
                       index % 2 === 0 ? "text-[#DDDDDD]" : "text-secondry"
                     }`}
                   >
