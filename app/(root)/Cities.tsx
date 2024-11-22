@@ -36,7 +36,7 @@ function Cities() {
           <div className="grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {cities.map((city, index) => {
               return (
-                <div className="relative ">
+                <div key={index}  className="relative ">
                   <h3
                     className={`absolute text-3xl font-medium left-1/2 -translate-x-1/2 top-5 ${
                       index % 2 === 0 ? "text-[#DDDDDD]" : "text-secondry"
@@ -44,7 +44,7 @@ function Cities() {
                   >
                     {city.name}
                   </h3>
-                  <img className="hover:w-72 w-full object-cover " src={city.path} alt={city.name} />
+                  <img className=" w-full object-cover " src={city.path} alt={city.name} />
                 </div>
               );
             })}
