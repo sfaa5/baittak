@@ -6,11 +6,11 @@ import MobileNavbar from "./MobileNavbar";
 
 function Header() {
   return (
-    <header className=" md:px-14 px-5 py-3   font-work-sans">
+    <header className=" md:px-14 px-1 py-3   font-work-sans">
       <div className=" mx-auto flex justify-between items-center">
         {/* mobile button */}
         <div className=" xl:hidden  ">
-        <button className="bg-primary px-3 py-2 rounded-sm font-semibold text-xs"> Post Property</button>
+        <button className="bg-primary px-2 py-2 rounded-sm font-semibold text-xs"> Post Property</button>
         </div>
 
         {/*logo */}
