@@ -23,7 +23,7 @@ function Header() {
         </Link>
 
         {/* desktop nav */}
-        <div className="hidden xl:flex items-center gap-8">
+        <div className="hidden xl:flex items-center ">
           <Navbar />
           <Link href="/contact"></Link>
         </div>

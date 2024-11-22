@@ -9,10 +9,10 @@ import { TfiWorld } from "react-icons/tfi";
 const Navbar = () => {
   return (
 
-      <nav className="flex justify-between items-center">
+      <nav className="flex justify-between items-center ">
    
 
-        <div className="flex flex-col  gap-4">
+        <div className="flex flex-col  gap-4 ">
           <div className="flex gap-8 justify-end">
 
             <Link href="/" > <div className="flex items-center  gap-2" ><TfiWorld />  <span>Enlish</span> </div></Link>

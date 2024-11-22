@@ -17,6 +17,10 @@ const cities = [
     name: "AJMAN",
     path: "/home/Rectangle 12.png",
   },
+  {
+    name: "SHARJAH",
+    path: "/home/Rectangle 11.png",
+  },
 ];
 
 function Cities() {
@@ -33,7 +37,7 @@ function Cities() {
             </h1>
           </div>
 
-          <div className="grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {cities.map((city, index) => {
               return (
                 <div key={index}  className="relative ">
