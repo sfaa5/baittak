@@ -25,13 +25,13 @@ const Navbar = () => {
 
           <div className="flex items-center justify-between gap-20">
 
-            <div className="flex gap-20">
-              <Link className="text-secondary font-semibold text-lg" href="/">Property</Link>
-              <Link className="text-secondary font-semibold text-lg" href="/">Projects</Link>
-              <Link className="text-secondary font-semibold text-lg" href="/">Agency</Link>
-              <Link className="text-secondary font-semibold text-lg" href="/">Property</Link>
+            <div className="flex gap-16">
+              <Link className="text-secondary font-medium text-lg" href="/">Property</Link>
+              <Link className="text-secondary font-medium text-lg" href="/">Projects</Link>
+              <Link className="text-secondary font-medium  text-lg" href="/">Agency</Link>
+              <Link className="text-secondary  font-medium text-lg" href="/">Property</Link>
             </div>
-            <button className="bg-primary px-5 py-1 rounded-sm font-semibold text-lg"> Post Property</button>
+            <button className="bg-primary px-5 py-1 rounded-[6px] font-medium text-lg"> Post Property</button>
           </div>
 
 

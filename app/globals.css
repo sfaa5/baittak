@@ -5,11 +5,14 @@
 @tailwind utilities;
 
 @layer utilities {
+
+
+
   .blur {
     inset: 0;
     background: radial-gradient(
       circle,
-      #78b84ec5 60%,
+      #78b84ec5 40%,
       rgba(212, 223, 240, 0.1) 100%,
       transparent 100%
     );
@@ -50,10 +53,10 @@
 
   @screen xl {
     .blur {
-      width: 450px; /* Smaller width for medium screens */
+      width: 410px; /* Smaller width for medium screens */
       top: 60px;
-      left: 20px;
-      height: 300px;
+      left: 10px;
+      height: 200px;
     }
   }
 
@@ -67,7 +70,7 @@
 @layer base {
 
   .h1{
-    @apply text-[45px] xl:text-[70px] leading-[1.1] font-semibold;
+    @apply text-[45px] xl:text-[60px] leading-[1.1] font-semibold;
   }
   .h2{
     @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;

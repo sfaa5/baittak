@@ -10,6 +10,11 @@ const config: Config = {
     ],
     theme: {
     	extend: {
+			container:{
+				center:true,
+				padding:"18px",
+				
+			},
     		screens: {
     			xs: '475px'
     		},
