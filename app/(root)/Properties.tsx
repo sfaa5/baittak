@@ -7,7 +7,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 function Properties() {
   return (
     <section>
-      <div className="container  ">
+      <div className="container mx-auto flex w-full justify-center  py-32 ">
         <div className="flex flex-col  items-center gap-16">
           <div className="flex flex-col  items-center">
             <h1 className=" text-3xl font-semibold  text-secondary ">
