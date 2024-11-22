@@ -58,7 +58,9 @@ function MobileNavbar() {
               </Link>
             );
           })}
-          <div className="border "></div>
+          <div className="border-t-2 border-indigo-500">
+            kbklfb
+          </div>
         </nav>
       </SheetContent>
     </Sheet>

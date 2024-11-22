@@ -3,10 +3,12 @@ import { FiMapPin } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
 import { LuHome } from "react-icons/lu";
+import Cities from "./Cities";
 
 export default function Home() {
   return (
-    // landing
+    <>
+    {/* // landing */}
     <section className="h-[70vh] pb-36 bg-hero-pattern bg-cover  w-full ">
       <div className="container relative mx-auto h-full flex flex-col gap-36">
         {/* content */}
@@ -28,13 +30,16 @@ export default function Home() {
             {/* top search */}
             <div className="absolute -top-7 left-1/5 lg:left-1/3 bg-secondary text-white flex justify-between items-center w-4/5 md:w-4/5 lg:w-1/3  px-3 sm:px-6 py-4 rounded-sm">
               <div className="inline-flex text-base font-medium hover:text-primary">
-                <LuHome className="size-5 xs:size-6 items-center mr-2  xs:mr-4" /> Rent
+                <LuHome className="size-5 xs:size-6 items-center mr-2  xs:mr-4" />{" "}
+                Rent
               </div>
               <div className="inline-flex text-base font-medium hover:text-primary">
-                <LuHome className="size-5 xs:size-6 items-center  mr-2 xs:mr-4" /> Buy
+                <LuHome className="size-5 xs:size-6 items-center  mr-2 xs:mr-4" />{" "}
+                Buy
               </div>
               <div className="inline-flex text-base font-medium hover:text-primary">
-                <LuHome className="size-5 xs:size-6 items-center  mr-2 xs:mr-4" /> Projects
+                <LuHome className="size-5 xs:size-6 items-center  mr-2 xs:mr-4" />{" "}
+                Projects
               </div>
             </div>
             {/* search */}
@@ -53,9 +58,7 @@ export default function Home() {
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black-100"
                 />
                 <FiMapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <BsSearchHeartFill
-                  className="absolute right-4 top-1/2  -translate-y-1/2  text-white text-4xl bg-primary  rounded-full p-2 md:hidden "
-                />
+                <BsSearchHeartFill className="absolute right-4 top-1/2  -translate-y-1/2  text-white text-4xl bg-primary  rounded-full p-2 md:hidden " />
               </div>
 
               <button className=" items-center px-4 py-3 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full max-w-48 hidden xl:flex">
@@ -77,5 +80,9 @@ export default function Home() {
         </div>
       </div>
     </section>
+
+    {/* // Cities and areas */}
+    <Cities/>
+    </>
   );
 }
