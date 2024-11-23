@@ -8,10 +8,8 @@ interface HeaderProps {
 }
 function Footer({ padding }: HeaderProps) {
   return (
-    <footer className=" bg-secondary mx-auto flex w-full   pt-10  bottom-0 ">
-      <div className="container mx-auto flex flex-col text-white"
-       style={{ padding: `0px ${padding} ` }}
-      >
+    <footer className={`bg-secondary mx-auto flex w-full   pt-10  bottom-0 `}>
+      <div className={`container mx-auto flex flex-col text-white lg:px-[${padding}]`}>
 
         <div className="flex flex-col md:flex-row  items-center justify-between border-b-2  pb-10">
           <img

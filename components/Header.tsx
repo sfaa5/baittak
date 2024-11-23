@@ -7,15 +7,15 @@ import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 
 interface HeaderProps {
-  padding?: string; // Define the type of the padding prop
+  padding?: any; // Define the type of the padding prop
 }
 
 function Header({ padding }: HeaderProps) {
   return (
     <header className="px-1 py-3  font-work-sans border-b-[1px]" >
       <div
-        className={`container mx-auto flex justify-between items-center `}
-        style={{ padding: `0px ${padding} ` }}
+        className={`container mx-auto flex justify-between items-center lg:px-[${padding}] `}
+        // style={{ padding: `0px ${padding} ` }}
       >
         {/* mobile button */}
         <div className=" xl:hidden  ">

@@ -13,7 +13,7 @@ import { MdArrowForwardIos, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "re
 
 function page() {
   return (
-    <div className="container px-[120px] mx-auto pt-3">
+    <div className="container lg:px-[120px]  mx-auto pt-3">
       {/* Search */}
       <div className="flex flex-col px-3 py-5 bg-[#F5F5F5] rounded-t-[.7rem]">
         <div className="flex justify-start gap-4 overflow-hidden">
