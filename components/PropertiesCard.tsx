@@ -9,15 +9,10 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
 
 function PropertiesCard() {
-    const router = useRouter();
-
-    const handleCardClick = () => {
-      router.push(`/property/id`);
-    };
 
   return (
     <div className="relative max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[190%] border-[1px]"
-    onClick={handleCardClick}
+    
     >
       <div className="absolute text-white bg-primary text-sm px-6 py-1 top-3">
         For Rent

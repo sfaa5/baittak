@@ -5,7 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { LuHome } from "react-icons/lu";
 import Cities from "./Cities";
 import Properties from "./Properties";
-import Footer from "@/components/Footer";
+
 
 
 export default function Home() {
@@ -86,7 +86,7 @@ export default function Home() {
 
     <Properties/>
 
-    <Footer/>
+
 
     </>
   );

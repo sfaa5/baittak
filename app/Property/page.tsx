@@ -1,16 +1,15 @@
 import PropertiesCard from "@/components/PropertiesCard";
 import React from "react";
-import { BsSearchHeartFill } from "react-icons/bs";
-import { CiHeart } from "react-icons/ci";
-import { FaRegMap, FaWhatsapp } from "react-icons/fa";
-import { FiMapPin, FiPhoneCall } from "react-icons/fi";
+
+import { FaRegMap } from "react-icons/fa";
+import { FiMapPin } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
 
 import { IoIosArrowDown, IoIosList } from "react-icons/io";
-import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
-import { LiaBedSolid } from "react-icons/lia";
+import { IoHomeSharp  } from "react-icons/io5";
+
 import { MdArrowForwardIos, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import { PiBathtubLight } from "react-icons/pi";
+
 
 function page() {
   return (

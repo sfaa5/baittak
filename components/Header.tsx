@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation"; // Use usePathname for App Router
+
+
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 
