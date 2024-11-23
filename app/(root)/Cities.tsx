@@ -49,7 +49,7 @@ function Cities() {
                   >
                     {city.name}
                   </h3>
-                  <Image className=" w-full object-cover " src={city.path} alt={city.name} />
+                  <Image className=" w-full object-cover " width={378} height={426} src={city.path} alt={city.name} />
                 </div>
               );
             })}
