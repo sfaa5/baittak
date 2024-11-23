@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
-import { useRouter } from "next/router";
+
 
 function Header() {
 
