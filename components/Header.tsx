@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 
 interface HeaderProps {
-  padding?: any; // Define the type of the padding prop
+  padding?: String; // Define the type of the padding prop
 }
 
 function Header({ padding }: HeaderProps) {
