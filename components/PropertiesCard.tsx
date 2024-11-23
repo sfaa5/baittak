@@ -1,5 +1,5 @@
 "use client"
-import { useRouter } from "next/router";
+
 import { CiHeart } from "react-icons/ci";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiMapPin, FiPhoneCall } from "react-icons/fi";
