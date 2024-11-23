@@ -2,31 +2,27 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation"; // Use usePathname for App Router
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 
+interface HeaderProps {
+  padding?: string; // Define the type of the padding prop
+}
 
-function Header() {
-
-  const [isPropertyPage, setIsPropertyPage] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const pathname = window.location.pathname;
-      console.log(pathname);
-      setIsPropertyPage(pathname === "/Property");
-    }
-  }, [window.location.pathname]);
-  
-  const customPaddingX = isPropertyPage ? "px-28" : "px-0";
-
-
+function Header({ padding }: HeaderProps) {
   return (
-    <header className="  px-1 py-3   font-work-sans">
-      <div className={`container mx-auto flex justify-between items-center ${customPaddingX}`}>
+    <header className="px-1 py-3  font-work-sans border-b-[1px]" >
+      <div
+        className={`container mx-auto flex justify-between items-center `}
+        style={{ padding: `0px ${padding} ` }}
+      >
         {/* mobile button */}
         <div className=" xl:hidden  ">
-        <button className="bg-primary px-2 py-2 rounded-sm font-semibold text-xs"> Post Property</button>
+          <button className="bg-primary px-2 py-2 rounded-sm font-semibold text-xs">
+
+            Post Property
+          </button>
         </div>
 
         {/*logo */}

@@ -6,7 +6,10 @@
 
 @layer utilities {
 
-
+.containerS{
+  padding: 0px 120px ;
+  
+}
 
   .blur {
     inset: 0;

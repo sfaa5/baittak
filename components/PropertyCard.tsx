@@ -21,8 +21,7 @@ function PropertyCard() {
 
     {/* Left Arrow */}
     <button className="absolute text-xl left-2 top-1/3 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all duration-300">
-  <MdKeyboardArrowLeft/> 
-
+    <MdKeyboardArrowLeft/> 
     </button>
 
     {/* Right Arrow */}
@@ -51,12 +50,12 @@ function PropertyCard() {
 
         <div className="flex gap-3 justify-center">
           <div className="flex items-center gap-1">
-            <LiaBedSolid className="text-primary text-2xl" />{" "}
+            <LiaBedSolid className="text-primary text-2xl" />
             <span>5 rooms</span>
           </div>
 
           <div className="flex items-center gap-1">
-            <PiBathtubLight className="text-primary text-2xl" />{" "}
+            <PiBathtubLight className="text-primary text-2xl" />
             <span>5 bath</span>
           </div>
           <div className="flex items-center gap-1">

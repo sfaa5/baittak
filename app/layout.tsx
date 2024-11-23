@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const workSans = localFont({
   src: [
@@ -70,9 +71,9 @@ export default function RootLayout({
       <body
         className={workSans.variable}
       >
-        <Header/>
+       
         {children}
-      
+      <Footer/>
       </body>
     </html>
   );

@@ -30,7 +30,7 @@ function Cities() {
       <div className="container mx-auto flex w-full justify-center  py-32 ">
         <div className="flex flex-col  items-center gap-16">
           <div className="flex flex-col  items-center">
-            <h1 className=" text-3xl font-semibold  text-secondary ">
+            <h1 className=" text-3xl  font-semibold  text-secondary ">
               We are available in many <br />
             </h1>
             <h1 className=" text-3xl font-semibold text-secondary ">
@@ -49,7 +49,7 @@ function Cities() {
                   >
                     {city.name}
                   </h3>
-                  <Image className=" w-full object-cover " width={378} height={426} src={city.path} alt={city.name} />
+                  <img className=" w-full object-cover "  src={city.path} alt={city.name} />
                 </div>
               );
             })}
