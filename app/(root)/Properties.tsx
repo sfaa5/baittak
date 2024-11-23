@@ -1,8 +1,5 @@
 import React from "react";
-import { LiaBedSolid } from "react-icons/lia";
-import { PiBathtubLight } from "react-icons/pi";
-import { FiMapPin } from "react-icons/fi";
-import { MdKeyboardArrowRight } from "react-icons/md";
+
 import PropertyCard from "@/components/PropertyCard";
 
 function Properties() {

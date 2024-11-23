@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const cities = [
@@ -48,7 +49,7 @@ function Cities() {
                   >
                     {city.name}
                   </h3>
-                  <img className=" w-full object-cover " src={city.path} alt={city.name} />
+                  <Image className=" w-full object-cover " src={city.path} alt={city.name} />
                 </div>
               );
             })}
