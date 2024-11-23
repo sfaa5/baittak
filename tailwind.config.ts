@@ -94,17 +94,7 @@ const config: Config = {
 	plugins: [
         require("tailwindcss-animate"),
         require("@tailwindcss/typography"),
-        function ({ addComponents, theme }) {
-            addComponents({
-                ".custom-container": {
-                    maxWidth: "1536px", // You can adjust this value
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    paddingLeft: theme("spacing.4"), // Example spacing
-                    paddingRight: theme("spacing.4"), // Example spacing
-                },
-            });
-        },
+       
     ],
 };
 
