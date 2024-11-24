@@ -61,30 +61,30 @@ function page() {
       <div className="flex gap-32 bg-[#F5F5F5] justify-center border-t-[1px] py-8 rounded-b-[.7rem]">
         <div className="flex flex-col gap-3">
           <div className="flex gap-2">
-            <div className="text-secondary text-base font-medium ">Dubai</div>{" "}
+            <div className="text-secondary text-base font-medium ">Dubai</div>
             <span className="text-[#707070] text-sm font-normal">(1200)</span>
           </div>
           <div className="flex gap-2">
-            <div className="text-secondary text-base font-medium ">Dubai</div>{" "}
+            <div className="text-secondary text-base font-medium ">Dubai</div>
             <span className="text-[#707070] text-sm font-normal">(1200)</span>
           </div>
           <div className="flex gap-2">
-            <div className="text-secondary text-base font-medium ">Dubai</div>{" "}
+            <div className="text-secondary text-base font-medium ">Dubai</div>
             <span className="text-[#707070] text-sm font-normal">(1200)</span>
           </div>
         </div>
 
         <div className="flex flex-col gap-3 ">
           <div className="flex gap-2">
-            <div className="text-secondary text-base font-medium ">Dubai</div>{" "}
+            <div className="text-secondary text-base font-medium ">Dubai</div>
             <span className="text-[#707070] text-sm font-normal">(1200)</span>
           </div>
           <div className="flex gap-2">
-            <div className="text-secondary text-base font-medium ">Dubai</div>{" "}
+            <div className="text-secondary text-base font-medium ">Dubai</div>
             <span className="text-[#707070] text-sm font-normal">(1200)</span>
           </div>
           <div className="flex gap-2">
-            <div className="text-secondary text-base font-medium ">Dubai</div>{" "}
+            <div className="text-secondary text-base font-medium ">Dubai</div>
             <span className="text-[#707070] text-sm font-normal">(1200)</span>
           </div>
         </div>

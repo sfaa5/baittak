@@ -13,7 +13,7 @@ import {
   const links = [
     {
       name: "Property",
-      path: "/property",
+      path: "/Property",
     },
     {
       name: "Projects",
@@ -25,7 +25,7 @@ import {
     },
     {
       name: "property",
-      path: "/property",
+      path: "/Property",
     },
   ];
 
