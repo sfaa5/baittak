@@ -38,8 +38,8 @@ function PropertiesCard() {
           />
         </div>
         {/* details */}
-        <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 ">
-          <div className="flex flex-wrap gap-2 justify-between">
+        <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 lg:w-[650px]">
+          <div className="flex flex-wrap justify-between">
             
             <div className=" flex items-end ">
               <div className="text-3xl text-secondary font-semibold">

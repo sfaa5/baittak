@@ -121,7 +121,7 @@ function page() {
       </div>
 
       
-        <div className="flex gap-4 flex-col xl:w-[75%]">
+        <div className="flex gap-4 flex-col mt-5 xl:w-[75%]">
 
           <ul className="flex items-center gap-2 mb-5">
             <li className="flex gap-3">
