@@ -143,8 +143,8 @@ function page() {
             <p>
               Compounds for rent in Qurtubah Bedrooms:1 Bathrooms:1 Living
               Rooms:1 Area in Square meter:108 Furnished: YES Parking: 1
-              Price:50000SAR Please don't hesitate to contact us for more
-              information, inquiries, and viewing arrangments by clicking on the
+              Price:50000SAR Please dont hesitate to contact us for more
+              information inquiries, and viewing arrangments by clicking on the
               Call or Email button
             </p>
             <a className="mt-5 underline hover:text-primary" href="">
@@ -624,12 +624,7 @@ function page() {
           </div>
 
 
-          <button
-        className="bg-primary text-white py-2 px-4 rounded-lg mb-5 w-2/3"
-      
-      >
-        Show on Map
-      </button>
+
 
       <div >
         <PropertyMap
