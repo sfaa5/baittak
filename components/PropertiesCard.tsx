@@ -11,17 +11,12 @@ import { PiBathtubLight } from "react-icons/pi";
 function PropertiesCard() {
 
   return (
-    <div className="relative max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[190%] border-[1px]"
+    <div className=" max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]"
     
     >
-      <div className="absolute text-white bg-primary text-sm px-6 py-1 top-3">
-        For Rent
-      </div>
-      <div className="absolute text-white bg-secondary text-sm px-6 py-1 top-12">
-        Apartment
-      </div>
 
-      <div className=" md:flex">
+
+      <div className=" md:flex flex-col md:flex-row">
         <div className="relative md:shrink-0 group">
           {/* Left Arrow */}
           <button className="absolute text-xl left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all duration-300">
@@ -37,13 +32,15 @@ function PropertiesCard() {
             <CiHeart />
           </div>
           <img
-            className="h-48 w-full object-cover md:h-72 md:w-80 "
+            className="w-full object-cover h-56 md:h-72 md:w-80 "
             src="/home/properties1.png"
             alt="Modern building architecture"
           />
         </div>
-        <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 w-[150%]">
-          <div className="flex gap-40 justify-between">
+        {/* details */}
+        <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 ">
+          <div className="flex flex-wrap  justify-between">
+            
             <div className=" flex items-end ">
               <div className="text-3xl text-secondary font-semibold">
                 $2,095
@@ -83,15 +80,15 @@ function PropertiesCard() {
             LUXURY|BRAND NEW|FITTED KITCHEN| VACANT |
           </p>
 
-          <ul className="flex gap-3 text-primary">
+          <ul className="flex gap-3  text-primary">
             <li className="border-r-[1px] border-primary pr-3">
-              Swimming Pool{" "}
+              Swimming Pool
             </li>
             <li className="border-r-[0.1px]  border-primary pr-3">balcony</li>
             <li className="border-r-[0.1px]  border-primary pr-3">Roof</li>
           </ul>
 
-          <div className="flex gap-44 mt-5">
+          <div className="flex gap-44 sm:mt-5 pb-3">
             <div className="flex gap-2">
               <button className="flex w-[85px] h-[45px] items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
                 <FiPhoneCall className="w-5 h-5" />
@@ -107,7 +104,7 @@ function PropertiesCard() {
               </button>
             </div>
 
-            <img src="/home/image 1.png" alt="" />
+            <img src="/home/image 1.png" alt="comoany"  className="hidden sm:flex"/>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ import { MdArrowForwardIos, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "re
 
 function page() {
   return (
-    <div className="container lg:px-[120px]  mx-auto pt-3">
+    <div className="container 2xl:px-[120px]  mx-auto pt-3">
       {/* Search */}
       <div className="flex flex-col px-3 py-5 bg-[#F5F5F5] rounded-t-[.7rem]">
         <div className="flex justify-start gap-4  overflow-x-auto flex-nowrap px-2 touch-pan-x hide-scrollbar">
@@ -26,7 +26,7 @@ function page() {
             <FiMapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary" />
             <input
               placeholder=" Enter locatuon Heare"
-              className="bg-[#F5F5F5] pl-8 flex w-[400px] h-[48px] font-normal items-center  text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
+              className="bg-[#F5F5F5] pl-8 flex  h-[48px] font-normal items-center w-[200px] lg:w-[400px] text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
             />
           </div>
 
@@ -120,11 +120,12 @@ function page() {
         </div>
       </div>
 
-      <div className="flex  mt-6 mb-28">
-        <div className="flex gap-4 flex-col w-[75%]">
+      
+        <div className="flex gap-4 flex-col xl:w-[75%]">
+
           <ul className="flex items-center gap-2 mb-5">
             <li className="flex gap-3">
-              <IoHomeSharp className="text-secondary" />{" "}
+              <IoHomeSharp className="text-secondary" />
               <MdArrowForwardIos className="text-[#707070]" />
             </li>
             <li className="text-[#707070]">Properties</li>
@@ -169,7 +170,7 @@ function page() {
     <a href="#" className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
   </div>
 
-  <div className="hidden sm:flex gap-96 sm:items-center sm:justify-between">
+  <div className="hidden sm:flex w-full sm:items-center sm:justify-between">
     
     <div>
       <p className="text-sm text-gray-700">
@@ -208,7 +209,7 @@ function page() {
 
         </div>
 
-      </div>
+      
 
 
 

@@ -19,7 +19,7 @@ function Header({ padding }: HeaderProps) {
       >
         {/* mobile button */}
         <div className=" xl:hidden  ">
-          <button className="bg-primary px-2 py-2 rounded-sm font-semibold text-xs">
+          <button className="bg-primary px-2 py-2 rounded-[0.3rem] font-semibold text-xs">
 
             Post Property
           </button>
