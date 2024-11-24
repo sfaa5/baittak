@@ -1,16 +1,15 @@
 import ProjectCard from "@/components/ProjectCard";
 import Search from "@/components/Search";
-import { Link } from "lucide-react";
+
 import React from "react";
-import { CiHeart } from "react-icons/ci";
+
 import { FaRegMap } from "react-icons/fa";
-import { FiMapPin } from "react-icons/fi";
+
 import { IoIosArrowDown, IoIosList } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
 import {
   MdArrowForwardIos,
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
+
 } from "react-icons/md";
 
 function page() {

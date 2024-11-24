@@ -3,8 +3,7 @@ import Serch from "@/components/Search";
 import React from "react";
 
 import { FaRegMap } from "react-icons/fa";
-import { FiMapPin } from "react-icons/fi";
-import { GoSearch } from "react-icons/go";
+
 
 import { IoIosArrowDown, IoIosList } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
