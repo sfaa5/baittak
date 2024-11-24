@@ -16,7 +16,7 @@ function page() {
     <div className="container lg:px-[120px]  mx-auto pt-3">
       {/* Search */}
       <div className="flex flex-col px-3 py-5 bg-[#F5F5F5] rounded-t-[.7rem]">
-        <div className="flex justify-start gap-4 overflow-hidden">
+        <div className="flex justify-start gap-4  overflow-x-auto flex-nowrap px-2 touch-pan-x hide-scrollbar">
           <button className="flex w-[100px] h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
             Buy
             <IoIosArrowDown className=" h-5 w-5 text-secondary" />
@@ -58,7 +58,7 @@ function page() {
       </div>
 
       {/* result of search */}
-      <div className="flex gap-32 bg-[#F5F5F5] justify-center border-t-[1px] py-8 rounded-b-[.7rem]">
+      <div className="flex lg:gap-32 bg-[#F5F5F5] justify-center border-t-[1px] py-8 rounded-b-[.7rem]  overflow-x-auto">
         <div className="flex flex-col gap-3">
           <div className="flex gap-2">
             <div className="text-secondary text-base font-medium ">Dubai</div>
