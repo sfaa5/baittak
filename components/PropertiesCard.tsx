@@ -32,14 +32,14 @@ function PropertiesCard() {
             <CiHeart />
           </div>
           <img
-            className="w-full object-cover h-56 md:h-72 md:w-80 "
+            className="w-full object-cover h-56 md:h-full md:w-80 "
             src="/home/properties1.png"
             alt="Modern building architecture"
           />
         </div>
         {/* details */}
         <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 ">
-          <div className="flex flex-wrap  justify-between">
+          <div className="flex flex-wrap gap-2 justify-between">
             
             <div className=" flex items-end ">
               <div className="text-3xl text-secondary font-semibold">
@@ -67,8 +67,8 @@ function PropertiesCard() {
             </div>
           </div>
 
-          <div className="flex gap-24 mt-5">
-            <p className=" mt-1 text-lg  font-medium text-secondary">
+          <div className="flex w-full justify-between mt-3 sm:mt-5">
+            <p className=" mt-1 text-base  font-medium text-secondary">
               Apertment
             </p>
             <div className="flex items-center gap-2 text-[#707070]">
@@ -88,19 +88,19 @@ function PropertiesCard() {
             <li className="border-r-[0.1px]  border-primary pr-3">Roof</li>
           </ul>
 
-          <div className="flex gap-44 sm:mt-5 pb-3">
+          <div className="flex w-full justify-between sm:mt-5 pb-3">
             <div className="flex gap-2">
-              <button className="flex w-[85px] h-[45px] items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
+              <button className="flex w-full h-[45px] gap-1 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
                 <FiPhoneCall className="w-5 h-5" />
                 Call
               </button>
-              <button className="flex w-[85px] h-[45px] items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
+              <button className="flex w-full gap-1 h-[45px] items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
                 <IoMailOutline className="w-5 h-5" />
                 Mail
               </button>
-              <button className="flex w-[130px] h-[45px] items-center font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3">
+              <button className="flex w-full h-[45px] items-center font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3">
                 <FaWhatsapp className="w-5 h-5" />
-                Whatsapp
+           
               </button>
             </div>
 
