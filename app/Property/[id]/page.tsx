@@ -1,5 +1,5 @@
 "use client"
-import PropertyMap from "@/components/propertyMao";
+
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiPhoneCall } from "react-icons/fi";
