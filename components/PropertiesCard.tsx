@@ -48,7 +48,7 @@ function PropertiesCard() {
               <span className="text-[#707070] text-lg">/month</span>
             </div>
 
-            <div className="flex gap-3 justify-center">
+            <div className="flex gap-3 justify-center mt-3">
               <div className="flex items-center gap-1">
                 <LiaBedSolid className="text-primary text-2xl" />
                 <span>5 rooms</span>
