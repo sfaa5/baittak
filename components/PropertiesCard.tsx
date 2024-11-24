@@ -6,7 +6,7 @@ import { IoMailOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
-import { useRouter } from "next/compat/router";
+
 import Link from "next/link";
 
 

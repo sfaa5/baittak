@@ -31,7 +31,8 @@ const PropertyMap = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <Marker position={[40.73061, -73.935242]}>
-          <Popup>{"Modern Apartment" }</Popup>
+        <Popup>{"Modern Apartment&apos;s"}</Popup>
+
         </Marker>
       </MapContainer>
 
