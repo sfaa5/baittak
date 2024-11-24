@@ -12,6 +12,8 @@ import { MdArrowForwardIos, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "re
 
 
 function page() {
+
+
   return (
     <div className="container 2xl:px-[120px]  mx-auto pt-3">
       {/* Search */}
@@ -122,7 +124,7 @@ function page() {
 
       
         <div className="flex gap-4 flex-col mt-5 xl:w-[75%]">
-
+             {/* path */}
           <ul className="flex items-center gap-2 mb-5">
             <li className="flex gap-3">
               <IoHomeSharp className="text-secondary" />
@@ -155,7 +157,7 @@ function page() {
           {/* Cards */}
           <div className="flex flex-col gap-8">
 
-         <PropertiesCard/>
+         <PropertiesCard  />
          <PropertiesCard/>
          <PropertiesCard/>
          <PropertiesCard/>

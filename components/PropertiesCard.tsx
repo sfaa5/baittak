@@ -1,5 +1,4 @@
 "use client"
-
 import { CiHeart } from "react-icons/ci";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiMapPin, FiPhoneCall } from "react-icons/fi";
@@ -7,16 +6,19 @@ import { IoMailOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
+import { useRouter } from "next/compat/router";
+import Link from "next/link";
+
 
 function PropertiesCard() {
+
 
   return (
     <div className=" max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]"
     
     >
 
-
-      <div className=" md:flex flex-col md:flex-row">
+<Link  href="/Property/id" >   <div className=" md:flex flex-col md:flex-row">
         <div className="relative md:shrink-0 group">
           {/* Left Arrow */}
           <button className="absolute text-xl left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all duration-300">
@@ -89,8 +91,12 @@ function PropertiesCard() {
           </ul>
 
           <div className="flex w-full justify-between sm:mt-5 pb-3">
+            {/* contact */}
             <div className="flex gap-2">
-              <button className="flex w-full h-[45px] gap-1 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
+              <button
+              
+              
+              className="flex w-full h-[45px] gap-1 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
                 <FiPhoneCall className="w-5 h-5" />
                 Call
               </button>
@@ -107,7 +113,9 @@ function PropertiesCard() {
             <img src="/home/image 1.png" alt="comoany"  className="hidden sm:flex"/>
           </div>
         </div>
-      </div>
+      </div></Link>
+
+   
     </div>
   );
 }
