@@ -14,13 +14,6 @@ import { SlSizeFullscreen } from "react-icons/sl";
 
 function page() {
 
-
-
-
-
-
-  
-
   return (
     <div className="py-10 sm:container mx-auto px-0 lg:px-[120px]">
                    {/* path */}
@@ -91,7 +84,8 @@ function page() {
         </div>
       </div>
       <div className="flex justify-between flex-col items-center w-full mt-8 gap-10">
-        <div className="w-full flex">
+
+        <div className="w-full flex flex-col md:flex-row ">
           {/* details */}
           <div className="flex justify-between items-center w-2/3">
             <h3 className="font-bold text-3xl text-secondary">SAR 630,000</h3>
@@ -106,7 +100,7 @@ function page() {
                 <span className="text-gray-600">5 bath</span>
               </div>
               <div className="flex items-center gap-2">
-                <SlSizeFullscreen className="text-primary text-3xl " />
+                <SlSizeFullscreen className="text-primary text-2xl " />
                 <span className="text-gray-600">
                   100m<sup>2</sup>
                 </span>
@@ -626,12 +620,12 @@ function page() {
 
 
 
-      <div >
+      {/* <div >
         <PropertyMap
      
       
         />
-      </div>
+      </div> */}
 
 
 
