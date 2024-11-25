@@ -12,10 +12,10 @@ interface HeaderProps {
 
 function Header({ padding }: HeaderProps) {
   return (
-    <header className="px-1 py-3  font-work-sans border-b-[1px]" >
+    <header className=" py-3  font-work-sans border-b-[1px]" >
       <div
-        className={`container mx-auto flex justify-between items-center lg:px-[${padding}] `}
-        // style={{ padding: `0px ${padding} ` }}
+        className={`container px-2 mx-auto flex justify-between items-center lg:px-[${padding}] `}
+     
       >
         {/* mobile button */}
         <div className=" xl:hidden  ">

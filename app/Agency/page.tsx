@@ -12,7 +12,7 @@ function page() {
     <>
       {/* // banner search */}
       <section className="bg-hero-Agency  bg-cover  w-full h-auto mb-10 py-14">
-        <div className="container 2xl:px-[120px]   pt-3">
+        <div className="container px-2 2xl:px-[120px]   pt-3">
           <div className="flex flex-col gap-8 items-center">
             <h1 className="text-4xl font-medium text-white ">
               Find Best Companies For Living
