@@ -21,10 +21,10 @@ function page() {
             <div className="flex justify-start gap-1 sm:gap-3  overflow-x-auto flex-nowrap px-2 touch-pan-x hide-scrollbar">
               <input
                 placeholder=" Enter locaion or Company name"
-                className="bg-white  flex  h-[48px] font-normal items-center w-[200px] lg:w-[400px]  rounded-[.8rem] justify-between px-4"
+                className="bg-white  flex  h-[48px] font-normal items-center w-[300px] lg:w-[400px]  rounded-[.8rem] justify-between px-1 md:px-4"
               />
 
-              <button className="flex bg-white w-auto h-[48px] gap-2 items-center font-normal text-gray-400 rounded-[.8rem] justify-between px-4">
+              <button className="hidden sm:flex bg-white w-auto h-[48px] gap-2 items-center font-normal text-gray-400 rounded-[.8rem] justify-between px-2 md:px-4">
                 Sercice neede
                 <IoIosArrowDown className=" h-5 w-5 " />
               </button>
