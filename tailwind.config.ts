@@ -88,7 +88,9 @@ const config: Config = {
     		},
     		backgroundImage: {
 				'hero-pattern': "url('/home/BannerImage.png')",
-    		}
+				'hero-Agency': "url('/Agency/Rectangle 24.png')",
+    		},
+		
     	}
     },
 	plugins: [

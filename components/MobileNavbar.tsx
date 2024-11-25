@@ -23,10 +23,7 @@ import {
       name: "Agency",
       path: "/Agency",
     },
-    {
-      name: "property",
-      path: "/Property",
-    },
+
   ];
 
 function MobileNavbar() {
