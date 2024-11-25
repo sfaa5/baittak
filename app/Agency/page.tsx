@@ -1,7 +1,7 @@
 import AgentCard from "@/components/AgentCard";
 import Link from "next/link";
 import React from "react";
-import { FiMapPin } from "react-icons/fi";
+
 import { GoSearch } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
