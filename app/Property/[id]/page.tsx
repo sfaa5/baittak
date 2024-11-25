@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
@@ -10,31 +10,24 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
 
-
-
 function page() {
-
   return (
-    <div className="py-10 sm:container mx-auto px-0 lg:px-[120px]">
-                   {/* path */}
-                   <ul className="flex items-center gap-2 mb-5">
-            <li className="flex gap-3">
-              <IoHomeSharp className="text-secondary" />
-              <MdArrowForwardIos className="text-[#707070]" />
-            </li>
-            <li className="text-[#707070] flex gap-3 items-center">
-         
-              Properties
-              <MdArrowForwardIos className="text-[#707070]" />
-              </li>
+    <div className="py-10 md:container mx-auto px-0 lg:px-[120px] ">
+      {/* path */}
+      <ul className="flex items-center gap-2 mb-5">
+        <li className="flex gap-3">
+          <IoHomeSharp className="text-secondary" />
+          <MdArrowForwardIos className="text-[#707070]" />
+        </li>
+        <li className="text-[#707070] flex gap-3 items-center">
+          Properties
+          <MdArrowForwardIos className="text-[#707070]" />
+        </li>
 
-              <li className="text-[#707070] flex gap-3 items-center">
-         
-              Appartment for sale in al wahah
-
-         </li>
-             
-          </ul>
+        <li className="text-[#707070] flex gap-3 items-center">
+          Appartment for sale in al wahah
+        </li>
+      </ul>
       {/* images */}
       <div>
         {/* Images for desktop */}
@@ -65,7 +58,7 @@ function page() {
         </div>
 
         {/* Mobile design */}
-        <div className="flex gap-4 overflow-x-auto mt-5 sm:hidden">
+        <div className="flex gap-4 overflow-x-auto hide-scrollbar  mt-5 sm:hidden">
           <img
             src="/properties/pro 1.png"
             alt="Property Large"
@@ -84,12 +77,12 @@ function page() {
         </div>
       </div>
       <div className="flex justify-between flex-col items-center w-full mt-8 gap-10">
-
         <div className="w-full flex flex-col md:flex-row ">
           {/* details */}
-          <div className="flex justify-between items-center w-2/3">
+          <div className="flex  md:justify-between md:flex-row flex-col items-center md:w-2/3">
             <h3 className="font-bold text-3xl text-secondary">SAR 630,000</h3>
-            <div className="flex gap-6 justify-center mt-3">
+
+            <div className="flex gap-6  mt-3">
               <div className="flex items-center gap-2">
                 <LiaBedSolid className="text-primary text-3xl" />
                 <span className="text-gray-600">5 rooms</span>
@@ -107,17 +100,34 @@ function page() {
               </div>
             </div>
           </div>
-          {/* contact */}
-          <div className="flex gap-2 w-1/3 justify-center items-center">
-            <button className="flex w-auto h-[45px] gap-2 items-center font-semibold  bg-red-500 text-white rounded-[.8rem]  justify-between px-3">
+
+          {/* contact Desktop */}
+          <div className="contact-buttons hidden md:flex gap-2 w-1/3 justify-center items-center">
+            <button className="flex w-auto h-[45px] gap-2 items-center font-semibold bg-red-500 text-white rounded-[.8rem] justify-between px-3">
               <FiPhoneCall className="w-5 h-5" />
               Call
             </button>
-            <button className="flex gap-2 w-auto  h-[45px] items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3">
+            <button className="flex gap-2 w-auto h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3">
               <IoMailOutline className="w-5 h-5" />
               Mail
             </button>
-            <button className="flex gap-2 w-auto h-[45px] items-center font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3">
+            <button className="flex gap-2 w-auto h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-between px-3">
+              <FaWhatsapp className="w-5 h-5" />
+              Whatsup
+            </button>
+          </div>
+
+     {/* contact Mobile */}
+          <div className="mobile-buttons md:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 ">
+            <button className="flex w-full h-[45px] gap-2 items-center font-semibold bg-red-500 text-white rounded-[.8rem] justify-between px-3">
+              <FiPhoneCall className="w-5 h-5" />
+              Call
+            </button>
+            <button className="flex gap-2 w-full h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3">
+              <IoMailOutline className="w-5 h-5" />
+              Mail
+            </button>
+            <button className="flex gap-5 w-ful h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-between px-3">
               <FaWhatsapp className="w-5 h-5" />
               Whatsup
             </button>
@@ -127,7 +137,7 @@ function page() {
         {/* deep details */}
         <div className="w-full flex flex-col gap-10 justify-start">
           {/* describtion */}
-          <div className="flex flex-col w-2/3">
+          <div className="flex flex-col md:w-2/3 px-3">
             <p className="text-lg text-gray-500">
               APARTMENTS FOR SALE IN AL WAHAH
             </p>
@@ -145,11 +155,12 @@ function page() {
               Read more
             </a>
           </div>
+
           {/* property details */}
-          <div className="w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
+          <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
             <h3 className="text-2xl mb-9 text-secondary">property details</h3>
 
-            <div className="flex gap-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
               <div className="flex gap-14">
                 {/* icons */}
                 <div className="flex flex-col gap-4">
@@ -439,7 +450,7 @@ function page() {
               </div>
 
               <div className="flex gap-14">
-                  {/* icons */}
+                {/* icons */}
                 <div className="flex flex-col gap-4">
                   <div className="flex gap-2">
                     <svg
@@ -608,35 +619,18 @@ function page() {
                   <span className="font-medium">Residential for sale</span>
                   <span className="font-medium">Makkah Al Mukarramah </span>
                   <span className="font-medium">Al Wahah</span>
-                 
                 </div>
-
               </div>
-
-              
             </div>
           </div>
 
-
-
-
-      {/* <div >
+          {/* <div >
         <PropertyMap
      
       
         />
       </div> */}
-
-
-
-
-
-
-
-
         </div>
-
-
       </div>
     </div>
   );
