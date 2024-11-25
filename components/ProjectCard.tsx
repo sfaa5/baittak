@@ -1,3 +1,5 @@
+"use client"
+import Link from "next/link";
 import React from 'react'
 import { CiHeart } from 'react-icons/ci'
 import { FiMapPin } from 'react-icons/fi'
@@ -8,6 +10,7 @@ function ProjectCard() {
     <div className=" max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]"
     
     >
+      <Link  href="/Projects/id" > 
     <div className=" md:flex flex-col md:flex-row">
     <div className="relative md:shrink-0 group">
       {/* Left Arrow */}
@@ -89,6 +92,7 @@ function ProjectCard() {
 
     </div>
   </div>
+  </Link>
   </div>
   )
 }

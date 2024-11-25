@@ -18,7 +18,8 @@ function PropertiesCard() {
     
     >
 
-<Link  href="/Property/id" >   <div className=" md:flex flex-col md:flex-row">
+<Link  href="/Property/id" > 
+  <div className=" md:flex flex-col md:flex-row">
         <div className="relative md:shrink-0 group">
           {/* Left Arrow */}
           <button className="absolute text-xl left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all duration-300">
