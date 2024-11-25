@@ -36,8 +36,8 @@ const tiers = [
   },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+function classNames(...classes: (string | undefined | false | null)[]): string {
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function PlanCard() {
