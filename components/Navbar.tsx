@@ -29,6 +29,8 @@ const Navbar = () => {
               <Link className="text-secondary font-medium text-lg" href="/Property">Properties</Link>
               <Link className="text-secondary font-medium text-lg" href="/Projects">Projects</Link>
               <Link className="text-secondary font-medium  text-lg" href="/Agency">Agency</Link>
+              <Link className="text-secondary font-medium  text-lg" href="/User/Posts">Profile</Link>
+
 
             </div>
             <button className="bg-primary px-5 py-1 rounded-[6px] font-medium text-lg"> Post Property</button>

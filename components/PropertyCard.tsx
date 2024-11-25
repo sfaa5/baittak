@@ -7,7 +7,7 @@ import { CiHeart } from "react-icons/ci";
 
 function PropertyCard() {
   return (
-    <div className="relative  max-w-md mx-auto bg-white rounded-[10px] shadow-md overflow-hidden md:max-w-[350px] group">
+    <div className="relative  max-w-md  bg-white rounded-[10px] shadow-md overflow-hidden md:max-w-[350px] group">
 
       <div className="absolute text-white bg-primary text-sm px-6 py-1 top-3">
         For Rent
