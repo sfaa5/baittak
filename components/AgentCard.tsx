@@ -1,9 +1,10 @@
+import Link from 'next/link'
 import React from 'react'
 
 function AgentCard() {
   return (
     <div className=" max-w-md mx-auto bg-white rounded-[.7rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]">
-
+<Link href={"Agency/id"}>
 <div className=" md:flex ">
 <div className=" md:shrink-0 "><img className=' w-full object-cover md:h-full ' src="/Agency/agent.png" alt="agent" /></div>
 <div className="p-5 md:p-7 flex flex-col justify-between lg:gap-0 gap-14" >
@@ -12,7 +13,7 @@ function AgentCard() {
   <div className="flex gap-1"><span >For Rent:</span> <p className="text-primary">200</p></div></div>
 </div>
 </div>
-
+</Link>
 
 </div>
   )
