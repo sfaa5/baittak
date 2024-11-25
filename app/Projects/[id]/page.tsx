@@ -18,14 +18,14 @@ function page() {
         </div>
       </div>
 
-      <div className="flex mt-9">
+      <div className="flex gap-10 mt-9">
         {/* images */}
-        <div className="grid grid-cols-7 gap-y-7  gap-x-10 items-center grid-rows-7 w-[70%]">
-          <div className="col-span-7 row-span-6">
+        <div className="grid grid-cols-6 gap-y-7  gap-x-10 items-center grid-rows-7 w-[62%]">
+          <div className="col-span-6 row-span-6">
             <img
               src="/project/Property House.png"
               alt="Property Large"
-              className="w-[90%] h-full object-cover rounded-xl"
+              className="w-full h-[10%] object-cover rounded-xl"
             />
           </div>
 
@@ -74,7 +74,7 @@ function page() {
         </div>
 
         {/* form */}
-        <div className="flex flex-col gap-5 w-[30%] p-5 shadow-lg rounded-[0.6rem]">
+        <div className="flex flex-col gap-5 w-[35%] p-5 shadow-lg rounded-[0.6rem]">
           <div className="w-full flex items-center bg-gray-200 p-3 rounded-[0.6rem]">
             <img src="/project/desktop (1) 2.png" alt="company" />
             <p className="text-secondary font-medium ml-5">
@@ -164,6 +164,141 @@ function page() {
 
     </p>
     
+</div>
+
+{/* Amenities */}
+<div className="w-2/3 mt-10 ">
+<h3 className="text-xl font-medium mb-5 ">AMENITIES</h3>
+
+<div className="flex gap-10" >
+
+  <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+ <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+
+ <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+
+
+ <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+</div>
+
+
+
+<div className="flex gap-10 mt-5" >
+
+  <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+ <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+
+ <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+
+
+ <div className="flex gap-2 items-center"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_40_659)">
+<path d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z" fill="#79B84E" stroke="black"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" fill="#79B84E"/>
+<path d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_40_659">
+<rect width="13" height="13" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+ <span className="text-lg">Balcony</span></div>
+
+</div>
+
+
 </div>
 
  
