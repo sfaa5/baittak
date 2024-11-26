@@ -28,32 +28,34 @@ function page() {
       </ul>
 
       {/* header */}
-      <div className="flex w-full justify-between items-end p-7 border-2 rounded-[0.6rem]  bg-gradient-to-r from-[#F7F7F7] from-[65%] to-secondary to-100% ">
-        <div className="flex flex-col gap-6 items-start ">
-          <div className="flex items-center gap-6">
-            <img src="/Agency/agent.png" alt="agent" />
+      <div className="flex w-full md:h-full h-[450px] flex-col md:flex-row  justify-between items-end p-2 md:p-5 border-2 rounded-[0.6rem]  bg-gradient-to-r from-[#F7F7F7] from-[65%] to-secondary to-100% ">
+      
+        <div className="flex flex-col gap-6 items-center md:items-start ">
+
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <img src="/Agency/agent.png" alt="agent"  className="w-32 h-32" />
 
             <div className="flex flex-col gap-5">
               <h1 className="text-2xl text-secondary font-medium">
                 شركة اسكان سلمان العقارية
               </h1>
               <div className="flex items-center gap-3">
-                <span className=" text-2xl">4631 </span>{" "}
+                <span className=" text-2xl">4631 </span>
                 <p className="text-lg text-gray-500">Active Listing</p>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center">
-            <span className="text-lg mr-3 text-gray-500">Address:</span>{" "}
+          <div className="md:flex ">
+            <span className="flex text-lg mr-3 text-gray-500">Address:</span>
             <p className="text-lg">
-              Office 3, building Burj Plus, Al Ulayys, King Abdullah road,
+              Office 3, building Burj Plus, Al Ulayys,
               Riyadh,
             </p>
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 ">
           <button className="flex w-auto h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4">
             <FiPhoneCall className="w-5 h-5" />
             Email Company
@@ -64,6 +66,13 @@ function page() {
           </button>
         </div>
       </div>
+
+
+
+
+
+
+      
       {/* filters btn */}
       <div className="flex flex-col gap-5 mb-5 mt-8">
         <div className="flex gap-3 ">
