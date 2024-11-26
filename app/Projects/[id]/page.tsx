@@ -5,6 +5,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
+import Map from "@/components/Map";
+
+
+
+
+
+
+
 
 function page() {
 
@@ -24,7 +32,7 @@ function page() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_40_659)">
+      <g clipPath="url(#clip0_40_659)">
         <path
           d="M6.49992 11.9167C9.49146 11.9167 11.9166 9.49154 11.9166 6.49999C11.9166 3.50845 9.49146 1.08333 6.49992 1.08333C3.50838 1.08333 1.08325 3.50845 1.08325 6.49999C1.08325 9.49154 3.50838 11.9167 6.49992 11.9167Z"
           fill="#79B84E"
@@ -37,8 +45,8 @@ function page() {
         <path
           d="M4.604 6.77083L5.68734 7.85416L8.39567 5.14583"
           stroke="black"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
@@ -171,7 +179,7 @@ function page() {
       </div>
 
       {/* Apout */}
-      <div className="flex flex-col w-full lg:w-2/3 mt-24 mb-10">
+      <div className="flex flex-col w-full lg:w-2/3 mt-12 lg:mt-24 mb-10">
         <h2 className="text-secondary text-2xl xs:text-3xl font-semibold mb-8">
           About Amjal AlYasmin Project
         </h2>
@@ -216,6 +224,10 @@ function page() {
       </div>
 
       {/* loccation */}
+
+
+<Map/>
+
 
       {/* description */}
       <div className="w-full lg:w-2/3 mt-10">
