@@ -17,7 +17,7 @@ import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 
-function page() {
+function Page() {
   const [count, setCount] = useState(0);
 
   const increment = () => setCount((prev) => prev + 1);
@@ -29,13 +29,13 @@ function page() {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const filesArray = Array.from(e.target.files); // تحويل الملفات إلى مصفوفة
-      setSelectedimages((prev) => [...prev, ...filesArray]); // إضافة الصور الجديدة إلى القائمة الحالية
+      const filesArray = Array.from(e.target.files); 
+      setSelectedimages((prev) => [...prev, ...filesArray]); 
     }
   };
 
   const handleRemoveImage = (index: number) => {
-    setSelectedimages((prev) => prev.filter((_, i) => i !== index)); // حذف صورة معينة
+    setSelectedimages((prev) => prev.filter((_, i) => i !== index)); //  delet image
   };
 
   return (
@@ -461,4 +461,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
