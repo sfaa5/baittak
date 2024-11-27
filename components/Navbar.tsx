@@ -33,7 +33,8 @@ const Navbar = () => {
 
 
             </div>
-            <button className="bg-primary px-5 py-1 rounded-[6px] font-medium text-lg"> Post Property</button>
+            <Link href={"/User/AddPost"}>
+            <button className="bg-primary px-5 py-1 rounded-[6px] font-medium text-lg"> Post Property</button></Link>
           </div>
 
 

@@ -2,7 +2,7 @@ import React from "react";
 
 function UserCard() {
   return (
-    <div className=" mx-auto w-1/3">
+    <div className=" mx-auto w-full xl:w-1/3">
       <div className="flex flex-col bg-gray-100 p-8  gap-8 rounded-[0.7rem]">
         <div className="flex items-center gap-5">
           <img src="/user/Rectangle 46.png" alt="user" />

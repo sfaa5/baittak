@@ -11,13 +11,10 @@ const config: Config = {
     ],
     theme: {
     	extend: {
-			container:{
-				center:true,
-				padding:"18px",
-				
-			},
-
-			
+    		container: {
+    			center: 'true',
+    			padding: '18px'
+    		},
     		screens: {
     			xs: '475px'
     		},
@@ -27,7 +24,7 @@ const config: Config = {
     				foreground: 'hsl(var(--primary-foreground))'
     			},
     			secondary: {
-    				DEFAULT: '#1F4454',
+    			DEFAULT: '#1F4454',
     				foreground: 'hsl(var(--secondary-foreground))'
     			},
     			black: {
@@ -87,10 +84,9 @@ const config: Config = {
     			'300': '2px 2px 0px 2px rgb(238, 43, 105)'
     		},
     		backgroundImage: {
-				'hero-pattern': "url('/home/BannerImage.png')",
+    			'hero-pattern': "url('/home/BannerImage.png')",
 				'hero-Agency': "url('/Agency/Rectangle 24.png')",
-    		},
-		
+    		}
     	}
     },
 	plugins: [

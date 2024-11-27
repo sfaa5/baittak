@@ -9,11 +9,11 @@ export default function Layout({children}:Readonly<{children:React.ReactNode}>){
         <main className="font-work-sans">
            <Header padding={'120px'}/>
 
-<div className='container flex 2xl:px-[120px] mt-8 gap-8'>
+<div className='container flex  flex-col xl:flex-row 2xl:px-[120px] mt-8 gap-8'>
     <UserCard/>
    
 
-    <div className='flex flex-col w-2/3 items-start gap-10'> <Buttons/>  {children}  </div>
+    <div className='flex flex-col w-full xl:w-2/3 items-start gap-10'> <Buttons/>  {children}  </div>
 </div>
 
            

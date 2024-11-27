@@ -23,6 +23,14 @@ import {
       name: "Agency",
       path: "/Agency",
     },
+    {
+      name: "Profile",
+      path: "/User/Posts",
+    },
+    
+
+
+    
 
   ];
 
@@ -55,9 +63,7 @@ function MobileNavbar() {
               </Link>
             );
           })}
-          <div className="border-t-2 border-indigo-500">
-            kbklfb
-          </div>
+      
         </nav>
       </SheetContent>
     </Sheet>
