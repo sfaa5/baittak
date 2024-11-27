@@ -43,7 +43,7 @@ function Page() {
       {/* add a listing */}
       <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
         <div className="bg-white absolute -top-4 left-5">
-          <h2 className="text-secondary   px-6 text-2xl font-medium">
+          <h2 className="text-secondary  px-6 text-2xl font-medium">
             Add A Listing
           </h2>
         </div>
@@ -53,7 +53,7 @@ function Page() {
             <p>Select the type of property</p>
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Button variant="outline">
+                <Button variant="outline" >
                   <span>Select</span>
                   <IoIosArrowDown className=" h-5 w-5 text-[#707070]" />
                 </Button>
