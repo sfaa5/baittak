@@ -18,7 +18,7 @@ const Navbar = () => {
             <Link href="/" > <div className="flex items-center  gap-2" ><TfiWorld />  <span>Enlish</span> </div></Link>
             <Link href="/" > <div className="flex items-center gap-2 " ><CiHeart />  <span>Favorites</span></div> </Link>
 
-            <Link href="/" > <div className="flex items-center  gap-2" ><FaCircleUser />  <span>Agent login</span></div> </Link>
+            <Link href="/Company/about" > <div className="flex items-center  gap-2" ><FaCircleUser />  <span>Agent login</span></div> </Link>
             <Link href="/" > <div className="flex items-center  gap-2 " ><FaSignInAlt /> <span>sign up</span></div>  </Link>
 
           </div>

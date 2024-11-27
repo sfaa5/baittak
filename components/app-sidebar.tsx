@@ -2,7 +2,7 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
+ 
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import { FaCircleUser } from "react-icons/fa6";
