@@ -30,12 +30,12 @@ function page() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files); // تحويل الملفات إلى مصفوفة
-      setSelectedImages((prev) => [...prev, ...filesArray]); // إضافة الصور الجديدة إلى القائمة الحالية
+      setSelectedimages((prev) => [...prev, ...filesArray]); // إضافة الصور الجديدة إلى القائمة الحالية
     }
   };
 
   const handleRemoveImage = (index: number) => {
-    setSelectedImages((prev) => prev.filter((_, i) => i !== index)); // حذف صورة معينة
+    setSelectedimages((prev) => prev.filter((_, i) => i !== index)); // حذف صورة معينة
   };
 
   return (
@@ -426,11 +426,11 @@ function page() {
         onChange={handleImageChange}
       />
 
-      {selectedImages.length > 0 && (
+      {selectedimages.length > 0 && (
         <div className="w-full  space-y-4">
           <p className="text-center text-gray-500 mb-2">Selected Images:</p>
           <div className="grid grid-cols-2 gap-4">
-            {selectedImages.map((image, index) => (
+            {selectedimages.map((image, index) => (
               <div key={index} className="relative">
                 <img
                   src={URL.createObjectURL(image)}
