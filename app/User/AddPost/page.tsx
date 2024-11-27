@@ -38,6 +38,25 @@ function Page() {
     setSelectedimages((prev) => prev.filter((_, i) => i !== index)); //  delet image
   };
 
+
+
+  // Define the amenities options
+  const amenitiesOptions = [
+    "Basement",
+    "Swimming Pool",
+    "Family Room",
+    "Air Conditioning",
+    "Fitted Wardrobes",
+    "Disability Access",
+    "Lift",
+    "Exterior",
+    "Garden",
+    "Terrace",
+    "Spa / Hot Tub",
+  ];
+
+
+
   return (
     <>
       {/* add a listing */}
@@ -97,10 +116,10 @@ function Page() {
             </label>
           </div>
           <div className="items-top flex space-x-2">
-            <Checkbox id="terms1" />
+            <Checkbox id="terms2" />
 
             <label
-              htmlFor="terms1"
+              htmlFor="terms2"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               Buy
@@ -219,174 +238,24 @@ function Page() {
           </h2>
         </div>
 
-  <div className="flex ">  
- 
-           
-    <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
+      {/* Render the checkboxes dynamically */}
+      <div className="grid grid-cols-2 gap-4">
+        {amenitiesOptions.map((amenity, index) => (
+          <div key={index} className="items-top flex space-x-2">
+            <Checkbox
+              id={`amenity-${index}`}
+            
+             
+            />
             <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor={`amenity-${index}`}
+              className="text-sm font-medium leading-none"
             >
-              Basement
+              {amenity}
             </label>
           </div>
-          
-          
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              
-              Swiming Poll
-            </label>
-          </div>
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Family Room
-            </label>
-          </div>
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Air Condition
-            </label>
-          </div>
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Fitted Wardrobes
-            </label>
-          </div>
-
-
-          
-      
-          
-          </div>
-
-
-
-
-  <div className="flex">
-
-  <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Disability 
-            </label>
-          </div>
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Lift
-            </label>
-          </div>
-
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Exterior
-            </label>
-          </div>
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Garden
-            </label>
-          </div>
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Terrace
-            </label>
-          </div>
-
-
-
-
-  </div>
-  <div className="flex gap-40 ">
-
-  <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Spa / Hot Tub
-            </label>
-          </div>
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Storage Room
-            </label>
-          </div>
-
-
-          <div className="items-top flex space-x-2 w-full">
-            <Checkbox id="terms1" />
-
-            <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Luxury
-            </label>
-          </div>
-
-
-  </div>
+        ))}
+      </div>
 
 
 </div>
