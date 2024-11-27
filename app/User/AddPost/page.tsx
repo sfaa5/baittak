@@ -25,7 +25,7 @@ function page() {
   
   const decrement = () => setCount((prev) => Math.max(prev - 1, 0));
 
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [selectedimages, setSelectedimages] = useState<File[]>([]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
