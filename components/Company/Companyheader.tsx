@@ -12,7 +12,7 @@ import {
 
 function Companyheader() {
   return (
-    <div className="flex justify-between items-center w-full border-b-2 py-4">
+    <div className="flex justify-between items-center w-full border-b-2 py-4 ">
       <SidebarTrigger />
 
       <nav className="flex items-center gap-5">

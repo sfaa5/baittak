@@ -79,7 +79,7 @@
 @layer base {
 
   .h1{
-    @apply text-[33px] xl:text-[43px] leading-[1.1] font-semibold text-secondary;
+    @apply text-[28px] xl:text-[35px] leading-[1.1] font-semibold text-secondary;
   }
   .h2{
     @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;
