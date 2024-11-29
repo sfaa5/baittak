@@ -17,7 +17,7 @@ async function getRandomMessage(count: number): Promise<Message[]> {
     ];
     
     const generateRandomTime = (): string => {
-      const now = new Date();
+    
       const hours = Math.floor(Math.random() * 24); // Random hour of the day.
       const minutes = Math.floor(Math.random() * 60); // Random minutes.
       return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
