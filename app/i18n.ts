@@ -4,10 +4,10 @@ import { initReactI18next } from "react-i18next";
 // Manually import translation files or use a dynamic loader.
 const resources = {
   en: {
-    common: import("../public/locales/en/common.json"),
+    common: require("../public/locales/en/common.json"),
   },
   ar: {
-    common: import("../public/locales/ar/common.json"),
+    common: require("../public/locales/ar/common.json"),
   },
 };
 
