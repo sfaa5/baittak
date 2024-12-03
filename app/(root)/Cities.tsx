@@ -1,5 +1,5 @@
-
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const cities = [
   {
@@ -25,31 +25,32 @@ const cities = [
 ];
 
 function Cities() {
+  const { t } = useTranslation("common"); // استدعاء مكتبة الترجمة مع المفاتيح من ملف "common.json"
   return (
     <section>
-      <div className="container mx-auto flex w-full justify-center  py-32 ">
-        <div className="flex flex-col  items-center gap-16">
-          <div className="flex flex-col  items-center">
-            <h1 className=" text-3xl  font-semibold  text-secondary ">
-              We are available in many <br />
+      <div className="container mx-auto flex w-full justify-center py-32">
+        <div className="flex flex-col items-center gap-16">
+          <div className="flex flex-col items-center">
+            <h1 className="text-3xl font-semibold text-secondary">
+              {t("cities.we are available in many cities & areas").split("<br />")[0]} <br />
             </h1>
-            <h1 className=" text-3xl font-semibold text-secondary ">
-              Cities & Areas
+            <h1 className="text-3xl font-semibold text-secondary">
+              {t("cities.we are available in many cities & areas").split("<br />")[1]}
             </h1>
           </div>
 
           <div className="grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {cities.map((city, index) => {
               return (
-                <div key={index}  className="relative ">
+                <div key={index} className="relative">
                   <h3
                     className={`absolute text-2xl font-medium left-1/2 -translate-x-1/2 top-5 ${
-                      index % 2 === 0 ? "text-[#DDDDDD]" : "text-secondry"
+                      index % 2 === 0 ? "text-[#DDDDDD]" : "text-secondary"
                     }`}
                   >
-                    {city.name}
+                    {t(`cities.${city.name.toLowerCase()}`, city.name)}
                   </h3>
-                  <img className=" w-full object-cover "  src={city.path} alt={city.name} />
+                  <img className="w-full object-cover" src={city.path} alt={city.name} />
                 </div>
               );
             })}

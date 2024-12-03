@@ -1,38 +1,53 @@
 "use client";
 
 import Link from "next/link";
-
+import { useTranslation } from "react-i18next";
 
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
+
+
+import BaittaklogoArabic from "./ArabicLogo";
+import EnglishLogo from "./EnglishLogo";
+
 
 interface HeaderProps {
   padding?: string; // Define the type of the padding prop
 }
 
 function Header({ padding }: HeaderProps) {
+
+
+  // const { currentLang, changeLanguage } = useLanguage();
+  
+  const { t, i18n } = useTranslation("common");
+
+
+
+
+
+
+
   return (
-    <header className=" py-3  font-work-sans border-b-[1px]" >
+    <header dir="ltr" className=" py-3  font-work-sans border-b-[1px]">
       <div
         className={`container px-2 mx-auto flex justify-between items-center lg:px-[${padding}] `}
-     
       >
+
+
+    
         {/* mobile button */}
         <div className=" xl:hidden  ">
           <Link href={"/User/AddPost"}>
-          <button className="bg-primary px-2 py-2 rounded-[0.3rem] font-semibold text-xs">
-
-            Post Property
-          </button></Link>
+            <button className="bg-primary px-2 py-2 rounded-[0.3rem] font-semibold text-xs">
+              {t("header.post property")}
+            </button>
+          </Link>
         </div>
 
         {/*logo */}
         <Link href="/">
-          <img
-            src="/BaittakLOGO1 2.png"
-            alt="logo"
-            className="w-2/3  sm:w-full h-auto max-w-full object-contain"
-          />
+          {i18n.language == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
         </Link>
 
         {/* desktop nav */}

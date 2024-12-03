@@ -1,15 +1,18 @@
 import React from "react";
-
 import PropertyCard from "@/components/PropertyCard";
+import { useTranslation } from "react-i18next";
+
+
 
 function Properties() {
+  const { t } = useTranslation("common");
   return (
     <section>
-      <div className="container mx-auto flex w-full justify-center  py-32 ">
-        <div className="flex flex-col  items-center gap-16">
-          <div className="flex flex-col  items-center">
-            <h1 className=" text-3xl font-semibold  text-secondary ">
-              Letest Properties of Rent
+      <div className="container mx-auto flex w-full justify-center py-32">
+        <div className="flex flex-col items-center gap-16">
+          <div className="flex flex-col items-center">
+            <h1 className="text-3xl font-semibold text-secondary">
+              {t("properties.letest properties of rent")}
             </h1>
           </div>
 

@@ -1,0 +1,174 @@
+{
+  "welcome": "مرحبًا بك في موقعنا!",
+  "header": {
+    "post property": "إضافة عقار",
+    "favorites": "المفضلة",
+    "agent login": "تسجيل دخول الوكيل",
+    "sign up": "إنشاء حساب",
+    "properties": "العقارات",
+    "projects": "المشاريع",
+    "agency": "الوكالات",
+    "profile": "الملف الشخصي"
+  },
+  "landing": {
+    "all properties on one place": "كل البيوت <br/> تحت سقف واحد",
+    "rent": "إيجار",
+    "buy": "شراء",
+    "projects": "المشاريع",
+    "enter location here": "أدخل الموقع هنا",
+    "type": "النوع",
+    "room & bath": "الغرف والحمامات",
+    "search": "بحث"
+  },
+  "cities": {
+    "we are available in many cities & areas": "نحن متاحون في العديد من المدن والمناطق"
+  },
+  "properties": {
+    "letest properties of rent": "أحدث العقارات للإيجار"
+  },
+  "footer": {
+    "contact": "اتصل بنا",
+    "email1": "Info@Baittak.com",
+    "email2": "sales@Baittak.com",
+    "email3": "agent@Baittak.com",
+    "links": "روابط",
+    "cities": "المدن",
+    "submit": "إرسال",
+    "contactUs": "اتصل بنا",
+    "aboutUs": "من نحن",
+    "career": "الوظائف",
+    "terms": "الشروط",
+    "citiesList": ["أبوظبي", "دبي", "الشارقة", "عجمان"],
+    "socialMedia": "تابعنا على",
+    "copyright": "©2024 Baittak.com. جميع الحقوق محفوظة"
+  },
+  "search": {
+    "buy": "شراء",
+    "enter_location": "أدخل الموقع هنا",
+    "apartment": "شقة",
+    "rooms_bath": "الغرف والحمام",
+    "price": "السعر",
+    "filters": "الفلاتر",
+    "search_button": "بحث",
+    "city": "دبي",
+    "result_count": "(١٢٠٠)"
+  },
+  "property": {
+    "search_placeholder": "ابحث عن العقارات...",
+    "properties_title": "العقارات للإيجار في السعودية",
+    "total_properties": "{{count}} عقار",
+    "sort_by": "ترتيب",
+    "map": "الخريطة",
+    "list": "القائمة",
+    "previous": "السابق",
+    "next": "التالي",
+    "results": "النتائج"
+  },
+  "project": {
+    "project_title": "مشاريع",
+    "projects": "{{count}} مشاريع جديدة في السعودية",
+    "sort_by": "ترتيب",
+    "map": "الخريطة",
+    "list": "القائمة"
+  },
+  "agency": {
+    "banner": {
+      "title": "ابحث عن أفضل الشركات للمعيشة",
+      "search_placeholder": "أدخل الموقع أو اسم الشركة",
+      "service_needed": "الخدمة المطلوبة"
+    },
+    "path": {
+      "current_page": "وكالة"
+    },
+    "results_section": {
+      "matching_companies_title": "الشركات المطابقة",
+      "sort_by": "ترتيب",
+      "total_results": "نتيجة"
+    },
+    "home": "الرئيسية",
+    "agency": "الوكالة",
+    "company_name": "شركة إسكان سلمان العقارية",
+    "active_listings": "قائمة نشطة",
+    "address_label": "العنوان:",
+    "address": "المكتب 3، برج بلس، العُليّس، الرياض",
+    "email_company": "إرسال بريد للشركة",
+    "call_company": "الاتصال بالشركة",
+    "buy": "شراء",
+    "features": "المميزات",
+    "results": "نتيجة"
+  },
+  "userCard": {
+    "PREMIUM": "مميز",
+    "Days Left": "{{count}} يوم متبقي",
+    "Rent": "إيجار",
+    "Buy": "بيع"
+  },
+  "userButton": {
+    "yourPosts": "منشوراتك",
+    "favorite": "المفضلة",
+    "selectPlan": "اختر الخطة",
+    "addingList": "إضافة عقار"
+  },
+  "contact":{
+    "Whatsup":"واتس اب",
+    "Mail":"ايميل",
+    "Call":"هاتف"
+  },
+  "propertyDetails": {
+    "property details":"تفاصيل العقار",
+    "Property Type":"نوع العقار",
+    "Bedrooms":"غرف النوم",
+    "Plot length":"طول القطعة",
+    "Street Width":"عرض الشارع",
+    "Property Age": "عمر العقار",
+    "City":"المدينة",
+    "Disrtict":"الحي",
+    "Land Number":"رقم الأرض",
+    "Apartment":"شقة",
+    "New":"جديد",
+    "Jeddah":"جدة",
+    "Al Wahah":"الواحة",
+    "Property Size":"حجم العقار",
+    "Bathrooms":"الحمامات",
+    "Plot width":"عرض القطعة",
+    "Facade":"الواجهة",
+    "Category":"الفئة",
+    "Area":"المساحة",
+    "plot Number":"رقم القطعة",
+    "sqr":"متر مربع",
+    "West":"غرب",
+    "Residential for sale":"سكني للبيع",
+    "Makkah Al Mukarramah":"مكة المكرمة",
+    "bath":"حمام",
+    "rooms":"غرف",
+    "SAR":"ريال",
+    "Read more":"اقراء المزيد " 
+  },
+   "Project": {
+    "By": "بواسطة",
+    "Completed": "مكتمل",
+    "form": "من",
+    "Name": "الاسم",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "hello i am": "مرحباً أنا...",
+    "request details": "تفاصيل الطلب",
+    "CALL NOW": "اتصل الآن",
+    "About Amjal AlYasmin Project": "عن مشروع أمجال الياسمين",
+    "Price From": "السعر من",
+    "Price To": "السعر إلى",
+    "Price per sqt": "السعر لكل متر مربع",
+    "Ask for price": "اطلب السعر",
+    "Total units": "إجمالي الوحدات",
+    "Status": "الحالة",
+    "Bedrooms": "غرف النوم",
+    "bedrooms": "غرف النوم",
+    "DESCRIPTION": "الوصف",
+    "AMENITIES": "المرافق",
+    "Balcony": "شرفة",
+    "Wi-Fi": "واي فاي",
+    "Parking": "موقف سيارات",
+    "Gym": "صالة رياضية",
+    "Pool": "مسبح"
+  }
+}

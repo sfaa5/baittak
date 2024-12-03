@@ -6,15 +6,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import Map from "@/components/Map";
+import { useTranslation } from "react-i18next";
 
-
-
-
-
-
-
-
-function page() {
+function Page() {
+  const { t, i18n } = useTranslation("common");
 
   const images = [
     "/project/house.png",
@@ -58,50 +53,50 @@ function page() {
   );
 
   const amenities = [
-    { id: 1, name: "Balcony", icon: amenityIcon },
-    { id: 2, name: "Wi-Fi", icon: amenityIcon },
-    { id: 3, name: "Parking", icon: amenityIcon },
-    { id: 4, name: "Gym", icon: amenityIcon },
-    { id: 5, name: "Pool", icon: amenityIcon },
+    { id: 1, name: t("Project.Balcony"), icon: amenityIcon },
+    { id: 2, name: t("Project.Wi-Fi"), icon: amenityIcon },
+    { id: 3, name: t("Project.Parking"), icon: amenityIcon },
+    { id: 4, name: t("Project.Gym"), icon: amenityIcon },
+    { id: 5, name: t("Project.Pool"), icon: amenityIcon },
   ];
-
 
   return (
     <div className="py-4 sm:container mx-auto px-2 lg:px-[120px]">
-      {/* head */}
-      <div className=" flex flex-col h-36 sm:h-auto justify-between p-3 sm:p-7 w-full   bg-gradient-to-r from-primary from-[34%] to-[#3C3D3C] to-100%  rounded-[0.7rem]">
+      {/* Project Header */}
+      <div
+        className={`flex flex-col h-36 sm:h-auto justify-between p-3 sm:p-7 w-full bg-gradient-to-r ${
+          i18n.language === "ar"
+            ? "to-primary from-[1%] from-[#3C3D3C]/90"
+            : "from-primary from-[33%] to-[#3C3D3C]"
+        } rounded-[0.7rem]`}
+      >
         <div className="flex items-center gap-3 sm:gap-8">
           <img
             src="/project/desktop (1) 1.png"
             alt="company"
-            className="  w-16  sm:w-24"
+            className="w-16 sm:w-24"
           />
-
-          <div className="flex flex-col  gap-3">
-            <div className="flex gap-3 sm:gap-4 items-center ">
-              <p className="text-xs sm:text-base">
-                By شركة امجال للتطوير العقاري
-              </p>
-              <p className="rounded-[0.6rem] text-xs sm:text-sm bg-white p-[1px] sm:px-1">
-                COMPLETED
+          <div className="flex flex-col gap-3">
+            <div className="flex gap-3 sm:gap-4 items-center">
+              <p className="text-xs sm:text-base">{t("Project.By")} شركة امجال للتطوير العقاري</p>
+              <p className="rounded-[0.6rem] text-xs sm:text-sm bg-white p-[1px] sm:px-2">
+                {t("Project.Completed")}
               </p>
             </div>
-
             <h3 className="text-xl sm:text-2xl sm:text-secondary text-white font-semibold">
-              Amajal AlYasmin project
+         Amajal AlYasmin project
             </h3>
           </div>
         </div>
-
-        <div className="flex  sm:flex-row w-full sm:justify-end ">
-          <p className="text-xl font-medium text-white">From 1,362,500 SAR</p>
+        <div className="flex sm:flex-row w-full sm:justify-end">
+          <p className="text-xl font-medium text-white">{t("Project.Price From")} 1,362,500 {t("propertyDetails.SAR")}</p>
         </div>
       </div>
 
-      {/* images & form */}
+      {/* Images & Form */}
       <div className="flex gap-10 mt-6">
-        <div className="grid grid-cols-6 gap-y-7  gap-x-10 items-center grid-rows-7 xl:w-[62%] w-full">
-          {/* big image */}
+        <div className="grid grid-cols-6 gap-y-7 gap-x-10 items-center grid-rows-7 xl:w-[62%] w-full">
+          {/* Large Image Swiper */}
           <div className="col-span-6 row-span-7">
             <Swiper
               slidesPerView={1}
@@ -122,89 +117,72 @@ function page() {
               ))}
             </Swiper>
           </div>
-
-          {/* Small images  */}
-          <div className="hidden lg:grid lg:grid-cols-5 lg:gap-3 lg:col-span-6 lg:row-span-1">
-            {images.map((src, index) => (
-              <div key={index} className="col-span-1">
-                <img
-                  src={src}
-                  alt={`Property Small ${index + 1}`}
-                  className="w-full h-full object-cover rounded-xl"
-                />
-              </div>
-            ))}
-          </div>
         </div>
 
-        {/* form */}
+        {/* Contact Form */}
         <div className="xl:flex flex-col gap-5 w-[35%] p-5 shadow-lg rounded-[0.6rem] hidden">
-          <div className="w-full flex items-center bg-gray-200 p-3 rounded-[0.6rem]">
+          <div className="w-full flex gap-2 items-center bg-gray-200 p-3 rounded-[0.6rem]">
             <img src="/project/desktop (1) 2.png" alt="company" />
-            <p className="text-secondary font-medium ml-5">
+            <p className="text-secondary font-medium ">
               Amjal AlYasmin ProJect
             </p>
           </div>
-
           <input
             type="text"
-            placeholder="Name"
+            placeholder={t("Project.Name")}
             className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
           />
-
           <input
             type="text"
-            placeholder="phone"
+            placeholder={t("Project.phone")}
             className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
           />
-
           <input
             type="text"
-            placeholder="Email"
+            placeholder={t("Project.email")}
             className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
           />
-
           <textarea
-            placeholder="Hello, Iam ..."
+            placeholder={t("Project.hello i am")}
             className="w-full border-gray-400 h-36 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
           />
-
           <button className="rounded-[0.6rem] p-5 bg-secondary text-white font-semibold">
-            REQUEST DETAILS
+            {t("Project.request details")}
           </button>
           <button className="rounded-[0.6rem] p-5 bg-primary text-white font-semibold">
-            CALL NOW
+            {t("Project.CALL NOW")}
           </button>
         </div>
       </div>
 
-      {/* Apout */}
+      {/* About Section */}
       <div className="flex flex-col w-full lg:w-2/3 mt-12 lg:mt-24 mb-10">
         <h2 className="text-secondary text-2xl xs:text-3xl font-semibold mb-8">
-          About Amjal AlYasmin Project
+          {t("Project.About Amjal AlYasmin Project")}
         </h2>
+
 
         <div className="grid grid-cols-2  gap-7 sm:grid-cols-3 md:gap-28 text-lg">
           {/* Column 1 */}
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
-              <p className="text-gray-600">Price From</p>
-              <p className="font-medium">1,362,500 SAR</p>
+              <p className="text-gray-600">{t("Project.Price From")}</p>
+              <p className="font-medium">1,362,500 {t("propertyDetails.SAR")}</p>
             </div>
             <div className="flex flex-col">
-              <p className="text-gray-600">Price To</p>
-              <p className="font-medium">1,362,500 SAR</p>
+              <p className="text-gray-600">{t("Project.Price To")}</p>
+              <p className="font-medium">1,362,500 {t("propertyDetails.SAR")}</p>
             </div>
           </div>
 
           {/* Column 2 */}
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
-              <p className="text-gray-600">Price per sqft</p>
-              <p className="font-medium">Ask for price</p>
+              <p className="text-gray-600">{t("Project.Price per sqt")}</p>
+              <p className="font-medium">{t("Project.Ask for price")}</p>
             </div>
             <div className="flex flex-col">
-              <p className="text-gray-600">Total units</p>
+              <p className="text-gray-600">{t("Project.Total units")}</p>
               <p className="font-medium">12</p>
             </div>
           </div>
@@ -212,41 +190,33 @@ function page() {
           {/* Column 3 */}
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
-              <p className="text-gray-600">Status</p>
-              <p className="font-medium">Completed</p>
+              <p className="text-gray-600">{t("Project.Status")}</p>
+              <p className="font-medium">{t("Project.Completed")}</p>
             </div>
             <div className="flex flex-col">
-              <p className="text-gray-600">Bedrooms</p>
-              <p className="font-medium">4 bedrooms</p>
+              <p className="text-gray-600">{t("Project.Bedrooms")}</p>
+              <p className="font-medium">4 {t("Project.Bedrooms")}</p>
             </div>
           </div>
         </div>
+
+
       </div>
 
-      {/* loccation */}
+      {/* Map */}
+      <Map />
 
-
-<Map/>
-
-
-      {/* description */}
+      {/* Description */}
       <div className="w-full lg:w-2/3 mt-10">
-        <h3 className="text-xl font-medium mb-3 ">DESCRIPTION</h3>
+        <h3 className="text-xl font-medium mb-3">{t("Project.DESCRIPTION")}</h3>
         <p className="text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint magni,
-          minus expedita pariatur quas voluptatem excepturi odio iste,
-          asperiores, dolorum quo? Sint provident nobis est repudiandae.
-          Architecto nostrum consequuntur corrupti. Lorem ipsum dolor sit amet
-          consectetur, adipisicing elit. Quaerat incidunt vel corrupti possimus,
-          quam consectetur odit quae accusamus in, esse totam! Dolorum cumque
-          pariatur itaque, at aut blanditiis ipsum animi?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate architecto, cupiditate delectus obcaecati at reprehenderit aspernatur quaerat minima sapiente officiis voluptas, laboriosam beatae eveniet laborum. Error omnis vero repudiandae cumque.
         </p>
       </div>
 
       {/* Amenities */}
-      <div className="w-full lg:w-2/3 mt-10 ">
-        <h3 className="text-xl font-medium mb-5 ">AMENITIES</h3>
-
+      <div className="w-full lg:w-2/3 mt-10 mb-20">
+        <h3 className="text-xl font-medium mb-5">{t("Project.AMENITIES")}</h3>
         <div className="grid grid-cols-4 gap-y-5 gap-x-3">
           {amenities.map((amenity) => (
             <div key={amenity.id} className="flex gap-2 items-center">
@@ -260,4 +230,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

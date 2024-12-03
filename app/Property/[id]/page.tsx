@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiPhoneCall } from "react-icons/fi";
 
@@ -11,21 +13,24 @@ import { PiBathtubLight } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
 
 function page() {
+  const { t } = useTranslation("common");
   return (
     <div className="py-10 md:container mx-auto px-0 lg:px-[120px] ">
       {/* path */}
       <ul className="flex items-center gap-2 mb-5">
         <li className="flex gap-3">
-          <IoHomeSharp className="text-secondary" />
+          <Link href={"/"}><IoHomeSharp className="text-secondary" /></Link>
+          
           <MdArrowForwardIos className="text-[#707070]" />
         </li>
+       
         <li className="text-[#707070] flex gap-3 items-center">
-          Properties
+           <Link href={"/Property"}>{t("header.properties")}</Link>
           <MdArrowForwardIos className="text-[#707070]" />
         </li>
 
         <li className="text-[#707070] flex gap-3 items-center">
-          Appartment for sale in al wahah
+        {t("property.properties_title")}
         </li>
       </ul>
       {/* images */}
@@ -80,17 +85,17 @@ function page() {
         <div className="w-full flex flex-col md:flex-row ">
           {/* details */}
           <div className="flex  md:justify-between md:flex-row flex-col items-center md:w-2/3">
-            <h3 className="font-bold text-3xl text-secondary">SAR 630,000</h3>
+            <h3 className="font-bold text-3xl text-secondary">{t("propertyDetails.SAR")} 630,000</h3>
 
             <div className="flex gap-6  mt-3">
               <div className="flex items-center gap-2">
                 <LiaBedSolid className="text-primary text-3xl" />
-                <span className="text-gray-600">5 rooms</span>
+                <span className="text-gray-600">5 {t("propertyDetails.rooms")}</span>
               </div>
 
               <div className="flex items-center gap-2">
                 <PiBathtubLight className="text-primary text-3xl" />
-                <span className="text-gray-600">5 bath</span>
+                <span className="text-gray-600">5 {t("propertyDetails.bath")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <SlSizeFullscreen className="text-primary text-2xl " />
@@ -105,15 +110,15 @@ function page() {
           <div className="contact-buttons hidden md:flex gap-2 w-1/3 justify-center items-center">
             <button className="flex w-auto h-[45px] gap-2 items-center font-semibold bg-red-500 text-white rounded-[.8rem] justify-between px-3">
               <FiPhoneCall className="w-5 h-5" />
-              Call
+              {t("contact.Call")}
             </button>
             <button className="flex gap-2 w-auto h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3">
               <IoMailOutline className="w-5 h-5" />
-              Mail
+              {t("contact.Mail")}
             </button>
             <button className="flex gap-2 w-auto h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-between px-3">
               <FaWhatsapp className="w-5 h-5" />
-              Whatsup
+              {t("contact.Whatsup")}
             </button>
           </div>
 
@@ -152,13 +157,13 @@ function page() {
               Call or Email button
             </p>
             <a className="mt-5 underline hover:text-primary" href="">
-              Read more
+              {t("propertyDetails.Read more")}
             </a>
           </div>
 
           {/* property details */}
           <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
-            <h3 className="text-2xl mb-9 text-secondary">property details</h3>
+            <h3 className="text-2xl mb-9 text-secondary">{t("propertyDetails.property details")}</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
               <div className="flex gap-14">
@@ -175,7 +180,7 @@ function page() {
                       />
                     </svg>
 
-                    <span className="text-gray-900">Property Type</span>
+                    <span className="text-gray-900">{t("propertyDetails.Property Type")}</span>
                   </div>
 
                   <div className="flex  gap-2">
@@ -192,7 +197,7 @@ function page() {
                       />
                     </svg>
 
-                    <span className="text-gray-900">Bedrooms</span>
+                    <span className="text-gray-900">{t("propertyDetails.Bedrooms")}</span>
                   </div>
 
                   <div className="flex  gap-2">
@@ -221,7 +226,7 @@ function page() {
                       </defs>
                     </svg>
 
-                    <span className="text-gray-900">Plot length</span>
+                    <span className="text-gray-900">{t("propertyDetails.Plot length")}</span>
                   </div>
 
                   <div className="flex  gap-2">
@@ -241,7 +246,7 @@ function page() {
                       />
                     </svg>
 
-                    <span className="text-gray-900">Street Width</span>
+                    <span className="text-gray-900">{t("propertyDetails.Street Width")}</span>
                   </div>
 
                   <div className="flex  gap-2">
@@ -258,7 +263,7 @@ function page() {
                       />
                     </svg>
 
-                    <span className="text-gray-900">Property Age</span>
+                    <span className="text-gray-900">{t("propertyDetails.Property Age")}</span>
                   </div>
 
                   <div className="flex  gap-2">
@@ -338,7 +343,7 @@ function page() {
                       </defs>
                     </svg>
 
-                    <span className="text-gray-900">City</span>
+                    <span className="text-gray-900">{t("propertyDetails.City")}</span>
                   </div>
                   <div className="flex  gap-2">
                     <svg
@@ -417,7 +422,7 @@ function page() {
                       </defs>
                     </svg>
 
-                    <span className="text-gray-900">Disrtict</span>
+                    <span className="text-gray-900">{t("propertyDetails.Disrtict")}</span>
                   </div>
 
                   <div className="flex gap-2">
@@ -433,20 +438,21 @@ function page() {
                         fill="#858F96"
                       />
                     </svg>
-                    <span className="text-gray-900">Land Number</span>
+                    <span className="text-gray-900">{t("propertyDetails.Land Number")}</span>
                   </div>
                 </div>
                 {/* info */}
                 <div className="flex  flex-col gap-4">
-                  <span className="font-medium">Apartment</span>
+                  <span className="font-medium">{t("propertyDetails.Apartment")}</span>
                   <span className="font-medium">5</span>
                   <span className="font-medium">-</span>
                   <span className="font-medium">-</span>
-                  <span className="font-medium">New</span>
-                  <span className="font-medium">Jeddah</span>
-                  <span className="font-medium">Al Wahah</span>
+                  <span className="font-medium">{t("propertyDetails.New")}</span>
+                  <span className="font-medium">{t("propertyDetails.Jeddah")}</span>
+                  <span className="font-medium">{t("propertyDetails.Al Wahah")}</span>
                   <span className="font-medium">-</span>
                 </div>
+
               </div>
 
               <div className="flex gap-14">
@@ -490,7 +496,7 @@ function page() {
                       />
                     </svg>
 
-                    <span className="text-gray-900">Property Size</span>
+                    <span className="text-gray-900">{t("propertyDetails.Property Size")}</span>
                   </div>
 
                   <div className="flex gap-2">
@@ -507,7 +513,7 @@ function page() {
                       />
                     </svg>
 
-                    <span className="text-gray-900">Bedrooms</span>
+                    <span className="text-gray-900">{t("propertyDetails.Bathrooms")}</span>
                   </div>
                   <div className="flex gap-2">
                     <svg
@@ -534,7 +540,7 @@ function page() {
                         </clipPath>
                       </defs>
                     </svg>
-                    <span className="text-gray-900">Plot width</span>
+                    <span className="text-gray-900">{t("propertyDetails.Plot width")}</span>
                   </div>
                   <div className="flex gap-2">
                     <svg
@@ -549,7 +555,7 @@ function page() {
                         fill="#858F96"
                       />
                     </svg>
-                    <span className="text-gray-900">Facade</span>
+                    <span className="text-gray-900">{t("propertyDetails.Facade")}</span>
                   </div>
                   <div className="flex gap-2">
                     <svg
@@ -567,7 +573,7 @@ function page() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className="text-gray-900">Category</span>
+                    <span className="text-gray-900">{t("propertyDetails.Category")}</span>
                   </div>
                   <div className="flex gap-2">
                     <svg
@@ -592,7 +598,7 @@ function page() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className="text-gray-900">Area</span>
+                    <span className="text-gray-900">{t("propertyDetails.Area")}</span>
                   </div>
                   <div className="flex gap-2">
                     <svg
@@ -607,18 +613,18 @@ function page() {
                         fill="#858F96"
                       />
                     </svg>
-                    <span className="text-gray-900">plot Number</span>
+                    <span className="text-gray-900">{t("propertyDetails.plot Number")}</span>
                   </div>
                 </div>
                 {/* info */}
                 <div className="flex  flex-col gap-4">
-                  <span className="font-medium">168 sqr</span>
+                  <span className="font-medium">168 {t("propertyDetails.sqr")}</span>
                   <span className="font-medium">3</span>
                   <span className="font-medium">-</span>
-                  <span className="font-medium">West</span>
-                  <span className="font-medium">Residential for sale</span>
-                  <span className="font-medium">Makkah Al Mukarramah </span>
-                  <span className="font-medium">Al Wahah</span>
+                  <span className="font-medium">{t("propertyDetails.West")}</span>
+                  <span className="font-medium">{t("propertyDetails.Residential for sale")}</span>
+                  <span className="font-medium">{t("propertyDetails.Makkah Al Mukarramah")} </span>
+                  <span className="font-medium">{t("propertyDetails.Al Wahah")}</span>
                 </div>
               </div>
             </div>

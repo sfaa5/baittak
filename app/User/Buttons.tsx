@@ -1,9 +1,11 @@
 "use client"
 import Link from "next/link";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function Buttons() {
   const [activeButton, setActiveButton] = useState("yourPosts");
+  const { t } = useTranslation("common");
 
   const buttonClasses = (buttonName: string) =>
     `flex w-auto h-[45px] items-center font-normal rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-4 transition-all duration-200 ${
@@ -17,7 +19,7 @@ function Buttons() {
         onClick={() => setActiveButton("yourPosts")}
         className={buttonClasses("yourPosts")}
       >
-        Your Posts
+        {t("userButton.yourPosts")}
       </button>
 
       <Link href={"/User/Favorit"}>
@@ -25,7 +27,7 @@ function Buttons() {
           onClick={() => setActiveButton("favorite")}
           className={buttonClasses("favorite")}
         >
-          Favorite
+          {t("userButton.favorite")}
         </button>
       </Link>
 
@@ -34,7 +36,7 @@ function Buttons() {
           onClick={() => setActiveButton("selectPlan")}
           className={buttonClasses("selectPlan")}
         >
-          Select Plan
+          {t("userButton.selectPlan")}
         </button>
       </Link>
 
@@ -43,7 +45,7 @@ function Buttons() {
           onClick={() => setActiveButton("addingList")}
           className={buttonClasses("addingList")}
         >
-          Adding List
+          {t("userButton.addingList")}
         </button>
       </Link>
     </div>

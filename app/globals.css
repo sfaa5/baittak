@@ -74,10 +74,15 @@
     @apply flex justify-between items-center;
   }
 
+  
+
 }
 
 @layer base {
 
+  .h{
+    @apply text-[28px] xl:text-[55px] leading-[1.1] font-semibold text-secondary;
+  }
   .h1{
     @apply text-[28px] xl:text-[35px] leading-[1.1] font-semibold text-secondary;
   }
