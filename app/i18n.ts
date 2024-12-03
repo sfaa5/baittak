@@ -1,14 +1,12 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-// Manually import translation files or use a dynamic loader.
+import enCommon from "../public/locales/en/common.json";
+import arCommon from "../public/locales/ar/common.json";
+
 const resources = {
-  en: {
-    common: require("../public/locales/en/common.json"),
-  },
-  ar: {
-    common: require("../public/locales/ar/common.json"),
-  },
+  en: { common: enCommon },
+  ar: { common: arCommon },
 };
 
 i18n
@@ -23,3 +21,4 @@ i18n
   });
 
 export default i18n;
+
