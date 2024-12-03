@@ -8,7 +8,7 @@ import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 
-function page() {
+function Page() {
   const { t } = useTranslation("common");
 
   return (
@@ -88,4 +88,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

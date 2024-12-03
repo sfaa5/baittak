@@ -1,5 +1,4 @@
 "use client";
-
 import { useTranslation } from "react-i18next";
 import PropertiesCard from "@/components/PropertiesCard";
 import Serch from "@/components/Search";

@@ -12,7 +12,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
 
-function page() {
+function Page() {
   const { t } = useTranslation("common");
   return (
     <div className="py-10 md:container mx-auto px-0 lg:px-[120px] ">
@@ -642,4 +642,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
