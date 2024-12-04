@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
 
   // Server-rendered defaults for `lang` and `dir` attributes
-  const defaultLanguage: string = "ar"; // You can replace this with a server-side value
+  const defaultLanguage: string = "en"; // You can replace this with a server-side value
   const dir = defaultLanguage === "ar" ? "rtl" : "ltr";
 
 
