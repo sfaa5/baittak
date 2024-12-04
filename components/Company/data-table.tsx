@@ -72,10 +72,7 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-        <p>
-    Selected IDs:
-    {Object.keys(table.getFilteredSelectedRowModel().rowsById).join(", ")}
-  </p>
+
 
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

@@ -1,5 +1,6 @@
 import { Project, columns } from "./Columns"
 import { DataTable } from "../../../components/Company/data-table"
+import Title from "@/components/Company/titile";
 
 async function getRandomData(count: number): Promise<Project[]> {
   const location = ["Gada", "City Center", "Downtown", "Uptown", "Seaside"];
@@ -31,7 +32,8 @@ export default async function DemoPage() {
 
   return (
     <div className=" mx-auto py-10">
-              <h1 className="h1 py-0">Projects</h1>
+           
+              <Title name="Project" />
       <DataTable columns={columns} data={data} columFilter="title" />
     </div>
   )

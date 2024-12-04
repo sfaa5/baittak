@@ -1,5 +1,5 @@
 import { Message } from './columns'
-import { DataTable } from '@/components/Company/data-table'
+import { DataTable } from '@/components/Company/data-table'; 
 import React from 'react'
 import { columns } from './columns'
 
@@ -47,7 +47,7 @@ const data = await getRandomMessage(10)
 
 
 
-<DataTable columns={columns} data={data} columFilter={"name"} />
+<DataTable columFilter='messages'  columns={columns} data={data}  />
 
 
 </div>

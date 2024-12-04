@@ -1,5 +1,9 @@
+
 import { Property, columns } from "./Columns"
 import { DataTable } from "../../../components/Company/data-table"
+import { useTranslation } from "react-i18next";
+import Title from "@/components/Company/titile";
+
 
 async function getRandomData(count: number): Promise<Property[]> {
   const areas = ["Gada", "City Center", "Downtown", "Uptown", "Seaside"];
@@ -26,9 +30,10 @@ export default async function DemoPage() {
   // Fetch data within the component
   const data = await getRandomData(10);
 
+
   return (
     <div className=" mx-auto py-10">
-      <h1 className="h1 py-0">Properties</h1>
+        <Title name="Properties" />
       <DataTable columns={columns} columFilter="title" data={data} />
     </div>
   )

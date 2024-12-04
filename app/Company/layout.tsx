@@ -4,7 +4,7 @@ import Companyheader from "@/components/Company/Companyheader"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <SidebarProvider>
+    <SidebarProvider >
       <AppSidebar />
       <main className="container px-[60px]">
         <Companyheader/>
