@@ -13,8 +13,8 @@ function Layout({ children }: { children: React.ReactNode }) {
     <main className="w-full mt-8">
       <h1 className="h1 py-0">{ t("company.inbox")}</h1>
 
-      <div className="flex mt-10">
-        <div className='w-1/4 p-10 bg-white flex flex-col items-center gap-5 rounded-[0.6rem] shadow-lg'>
+      <div className="flex flex-col md:flex-row mt-10">
+        <div className='w-full md:w-1/4 p-10 bg-white flex flex-col items-center gap-5 rounded-[0.6rem] shadow-lg'>
           <div className='w-full px-14'>
             <Button className='bg-primary text-white w-full' size={"lg"}>{ t("company.compose")}</Button>
           </div>
@@ -39,7 +39,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <div className="w-3/4">
+        <div className=" w-full md:w-3/4">
           {children}
         </div>
       </div>

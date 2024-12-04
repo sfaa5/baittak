@@ -135,7 +135,7 @@ function Page() {
           </h2>
         </div>
 
-        <div className="flex  gap-5">
+        <div className="grid  sm:grid-cols-3   gap-5">
           <div className="flex flex-col w-full gap-2">
             <label htmlFor="Bedroom">{t("addUser.bedrooms")}</label> {/* Counter */}
             <div className="flex w-full items-center justify-between border-[1px]">
