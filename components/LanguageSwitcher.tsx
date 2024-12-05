@@ -87,7 +87,7 @@ const LanguageSwitcher = () => {
 
     // Determine which font class to use
     let fontClass;
-    if (newLanguage === "en" && droidArabicKufi.variable) {
+    if (newLanguage === "ar" && droidArabicKufi.variable) {
       fontClass = droidArabicKufi.variable;
     } else if (newLanguage === "en" && helvetica.variable) {
       fontClass = helvetica.variable;
