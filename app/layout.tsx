@@ -24,7 +24,15 @@ const droidArabicKufi = localFont({
 });
 
 
-
+const helvetica = localFont({
+  src: [
+    { path: "../app/fonts/helvetica-black.otf", weight: "900", style: "normal" },
+    { path: "../app/fonts/Helvetica-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../app/fonts/helvetica-light.ttf", weight: "200", style: "normal" },
+    { path: "../app/fonts/Helvetica.ttf", weight: "400", style: "normal" },
+  ],
+  variable: "--font-helvetica",
+});
 
 export const metadata: Metadata = {
   title: "Home",
@@ -41,12 +49,12 @@ export default function RootLayout({
   const defaultLanguage: string = "ar"; // You can replace this with a server-side value
   const dir = defaultLanguage === "ar" ? "rtl" : "ltr";
 
-
+  const fontStyles = `${droidArabicKufi.variable} ${helvetica.variable} sans-serif`;
 
 
   return (
-    <html lang={defaultLanguage} dir={dir} >
-      <body className={`${droidArabicKufi.variable}  font-serif`}>
+    <html lang={defaultLanguage} dir={dir} className={fontStyles}>
+      <body >
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>

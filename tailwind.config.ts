@@ -81,7 +81,7 @@ const config: Config = {
     			}
     		},
     		fontFamily: {
-    			serif: ["var(--font-droid-kufi)"],
+    			sans: ['var(--font-droid-kufi)', 'Helvetica', 'system-ui', 'sans-serif'],
 				
     		},
     		borderRadius: {
