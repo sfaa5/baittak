@@ -5,6 +5,25 @@ import "./globals.css";
 import I18nProvider from "./i18nProvider";
 
 
+import localFont from "next/font/local";
+
+const droidArabicKufi = localFont({
+  src: [ 
+    { path: "./fonts/NotoKufiArabic-Black.ttf", weight: "900", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-ExtraBold.ttf", weight: "800", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-Bold.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-Medium.ttf", weight: "500", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-Light.ttf", weight: "300", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-Thin.ttf", weight: "200", style: "normal" },
+    { path: "./fonts/NotoKufiArabic-ExtraLight.ttf", weight: "100", style: "normal" },
+
+  ],
+  variable: "--font-droid-kufi",
+});
+
+
 
 
 export const metadata: Metadata = {
@@ -26,8 +45,8 @@ export default function RootLayout({
 
 
   return (
-    <html lang={defaultLanguage} dir={dir}>
-      <body >
+    <html lang={defaultLanguage} dir={dir} >
+      <body className={`${droidArabicKufi.variable}  font-serif`}>
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>

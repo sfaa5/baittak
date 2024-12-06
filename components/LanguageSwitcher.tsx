@@ -5,9 +5,17 @@ import { useTranslation } from "react-i18next";
 import localFont from "next/font/local";
 
 const droidArabicKufi = localFont({
-  src: [
-    { path: "../app/fonts/DroidKufi-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../app/fonts/DroidKufi-Bold.ttf", weight: "700", style: "normal" },
+  src: [ 
+    { path: "../app/fonts/NotoKufiArabic-Black.ttf", weight: "900", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-ExtraBold.ttf", weight: "800", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-Medium.ttf", weight: "500", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-Light.ttf", weight: "300", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-Thin.ttf", weight: "200", style: "normal" },
+    { path: "../app/fonts/NotoKufiArabic-ExtraLight.ttf", weight: "100", style: "normal" },
+
   ],
   variable: "--font-droid-kufi",
 });
@@ -19,7 +27,7 @@ const helvetica = localFont({
     { path: "../app/fonts/helvetica-light.ttf", weight: "200", style: "normal" },
     { path: "../app/fonts/Helvetica.ttf", weight: "400", style: "normal" },
   ],
-  variable: "--font-droid-kufi",
+  variable: "--font-helvetica",
 });
 
 
@@ -94,6 +102,8 @@ const LanguageSwitcher = () => {
     } else {
       fontClass = workSans.variable; // Default to WorkSans if neither is available
     }
+
+    
     i18n.changeLanguage(newLanguage);
 
 
@@ -103,7 +113,7 @@ const LanguageSwitcher = () => {
     document.documentElement.dir = newLanguage === "ar" ? "rtl" : "ltr";
 
      // Update the `body`'s class dynamically to apply the font
-     document.body.className = fontClass; // Apply the font class to the body
+     document.body.className = `${fontClass} font-serif`;// Apply the font class to the body
   };
 
   return (

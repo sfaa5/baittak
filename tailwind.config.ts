@@ -81,7 +81,8 @@ const config: Config = {
     			}
     		},
     		fontFamily: {
-    			'work-sans': ["var(--font-work-sans)"]
+    			serif: ["var(--font-droid-kufi)"],
+				
     		},
     		borderRadius: {
     			lg: 'var(--radius)',
