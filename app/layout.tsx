@@ -6,6 +6,8 @@ import I18nProvider from "./i18nProvider";
 
 
 import localFont from "next/font/local";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const droidArabicKufi = localFont({
   src: [ 
@@ -55,7 +57,11 @@ export default function RootLayout({
   return (
     <html lang={defaultLanguage} dir={dir} className={fontStyles}>
       <body >
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider>
+          <Header/>
+          {children}
+          <Footer/> 
+          </I18nProvider>
       </body>
     </html>
   );

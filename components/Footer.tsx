@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io";
 import FoterArabicLogo from "./foter-arabic-logo";
+import { usePathname } from 'next/navigation';
+
 import Link from "next/link";
 
 interface HeaderProps {
@@ -11,6 +13,7 @@ interface HeaderProps {
 }
 function Footer({ padding }: HeaderProps) {
   const { i18n, t } = useTranslation("common");
+    const router = usePathname();
   // Type cast the return value of t("footer.citiesList") to an array of strings
   const citiesList = t("footer.citiesList", {
     returnObjects: true,
@@ -19,7 +22,7 @@ function Footer({ padding }: HeaderProps) {
   return (
     <footer className={`bg-secondary mx-auto flex w-full   pt-10  bottom-0 `}>
       <div
-        className={`container mx-auto flex flex-col text-white lg:px-[${padding}]`}
+        className={`container mx-auto flex flex-col text-white ${router!=="/" && "lg:px-[120]"} `}
       >
         <div className="flex flex-col md:flex-row  items-center justify-between border-b-2  pb-10">
           {/*logo */}

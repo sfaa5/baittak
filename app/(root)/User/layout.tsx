@@ -9,7 +9,6 @@ export default function Layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <main className="font-work-sans">
-      <Header padding={"120px"} />
 
       <div className="container flex  flex-col xl:flex-row 2xl:px-[120px] mt-8 gap-8">
         <UserCard />
@@ -20,7 +19,7 @@ export default function Layout({
         </div>
       </div>
 
-      <Footer padding={"120px"} />
+
     </main>
   );
 }

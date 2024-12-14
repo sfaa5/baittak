@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-
+import { usePathname } from 'next/navigation';
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 
@@ -15,11 +15,14 @@ interface HeaderProps {
 
 function Header({ padding }: HeaderProps) {
   const { t, i18n } = useTranslation("common");
+  const router = usePathname();
+console.log(router)
+
 
   return (
     <header className=" py-3  font-work-sans border-b-[1px]">
       <div
-        className={`container px-2 mx-auto flex justify-between items-center lg:px-[${padding}] `}
+        className={`container px-2 mx-auto flex justify-between items-center ${router!=="/"&& "lg:px-[120px]"}  `}
       >
         {/* mobile button */}
         <div className=" xl:hidden  ">
