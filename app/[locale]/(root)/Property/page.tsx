@@ -46,9 +46,10 @@ async function Page( { searchParams }: PageProps) {
 
 
   // Ensure searchParams is awaited before using its properties
+  const resolvedSearchParams = await searchParams;
   const queryParams = new URLSearchParams();
-  for (const key in searchParams) {
-    const value = searchParams[key];
+  for (const key in resolvedSearchParams) {
+    const value = resolvedSearchParams[key];
     if (Array.isArray(value)) {
       value.forEach((v) => queryParams.append(key, v));
     } else if (value !== undefined) {
