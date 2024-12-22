@@ -167,10 +167,11 @@ function Page() {
       formData.append("plotLength", values.plotLength.toString());
       formData.append("landNumber", values.landNumber.toString());
       formData.append("city", values.city);
-      console.log(values.amenities)
+
       values.amenities?.forEach((amenity, index) => {
         formData.append(`amenities[${index}]`, amenity);
       });
+
       if (selectedImages) {   
         // Append all files to FormData
         selectedImages.forEach((file) => {
@@ -188,11 +189,6 @@ function Page() {
         setSelectedImages([]);
         toast({
           description: "the post add succussfuly",
-        });
-      }else{
-        console.log("faild to submit")
-        toast({
-          description: "There was a proplem with your request",
         });
       }
     } catch (err) {
