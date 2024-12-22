@@ -2,7 +2,8 @@
 import ProjectCard from "@/components/ProjectCard";
 import Search from "@/components/Search";
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+
 import { FaRegMap } from "react-icons/fa";
 import { IoIosArrowDown, IoIosList } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
@@ -10,7 +11,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 
 
 function Page() {
-  const { t } = useTranslation("common");
+  const  t  = useTranslations("");
 
   return (
     <div className="container 2xl:px-[120px]  mx-auto pt-3">  <Search />

@@ -6,10 +6,12 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import Map from "@/components/Map";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+import {useLocale} from "next-intl";
 
 function Page() {
-  const { t, i18n } = useTranslation("common");
+  const t = useTranslations();
+const locale = useLocale();
 
   const images = [
     "/project/house.png",
@@ -65,7 +67,7 @@ function Page() {
       {/* Project Header */}
       <div
         className={`flex flex-col h-36 sm:h-auto justify-between p-3 sm:p-7 w-full bg-gradient-to-r ${
-          i18n.language === "ar"
+          locale === "ar"
             ? "to-primary from-[1%] from-[#3C3D3C]/90"
             : "from-primary from-[33%] to-[#3C3D3C]"
         } rounded-[0.7rem]`}

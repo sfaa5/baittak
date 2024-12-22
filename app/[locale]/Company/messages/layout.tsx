@@ -4,10 +4,11 @@ import React from 'react';
 import { Mail } from 'lucide-react';
 import { Star } from 'lucide-react';
 import { Send } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from "next-intl";
+
 
 function Layout({ children }: { children: React.ReactNode }) {
-  const { t } = useTranslation("common"); // Load translations
+  const  t  = useTranslations(); // Load translations
 
   return (
     <main className="w-full mt-8">

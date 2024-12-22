@@ -10,17 +10,19 @@ import { House, Mail, Package2, LayoutDashboard, Building } from "lucide-react";
 import { FaSignInAlt } from "react-icons/fa";
 import Link from "next/link";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+import {useLocale} from "next-intl";
 import EnglishLogo from "../EnglishLogo";
 import BaittaklogoArabic from "../ArabicLogo";
 import { Button } from "../ui/button";
 
 export function AppSidebar() {
   const [activeItem, setActiveItem] = useState<string | null>(null);
-  const { i18n, t } = useTranslation("common");
+  const  t = useTranslations();
+  const locale = useLocale()
 
   // Determine sidebar alignment based on language direction.
-  const sidebarPosition = i18n.language === "ar" ? "right" : "left";
+  const sidebarPosition = locale === "ar" ? "right" : "left";
 
   // Menu items with translated titles.
   const items = [
@@ -71,7 +73,7 @@ export function AppSidebar() {
       <SidebarContent>
         <div className="flex justify-center mb-10">
           <Link href={"/"}>
-            {i18n.language === "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
+            {locale === "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
           </Link>
         </div>
 

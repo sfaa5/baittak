@@ -1,10 +1,11 @@
 "use client"
 import { Checkbox } from "@/components/ui/checkbox";
 import React from "react";
-import { useTranslation } from "react-i18next"; // Import the translation hook
+import { useTranslations } from "next-intl";
+
 
 function Page() {
-  const { t } = useTranslation("common"); // Load translations from the "common" namespace
+  const  t  = useTranslations(); // Load translations from the "common" namespace
 
   return (
     <div>

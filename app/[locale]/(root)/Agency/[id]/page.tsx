@@ -2,15 +2,16 @@
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { FiPhoneCall } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 
 function Page() {
-  const { t, i18n } = useTranslation("common");
-
+  const  t  = useTranslations();
+const locale = useLocale();
   return (
     <div className="container px-2 2xl:px-[120px]">
       {/* Path */}
@@ -34,7 +35,7 @@ function Page() {
       {/* Header */}
       <div
         className={`flex w-full md:h-full h-[450px] flex-col md:flex-row justify-between items-end p-2 md:p-5 border-2 rounded-[0.6rem] bg-gradient-to-r ${
-          i18n.language === "ar"
+          locale === "ar"
             ? "from-[5%] to-100% to-[#F7F7F7] from-secondary/70"
             : "from-[65%] to-100% from-[#F7F7F7] to-secondary"
         }`}

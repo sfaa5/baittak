@@ -35,9 +35,14 @@ export const routing = defineRouting({
         en: "/Property/:id",  
         ar: "/عقار/:id",      
       },
+      "/User/Favorit": {
+        en: "/User/Favorit",  
+        ar: "/المفضله",      
+      },"/User/plan":{
+        en:"/User/plan",
+        ar:"/خطه/مستخدم"
+      }
 
-
-      
 
 
   },

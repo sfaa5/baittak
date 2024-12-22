@@ -9,12 +9,14 @@ import EnglishLogo from "./EnglishLogo";
 import { CiHeart } from "react-icons/ci";
 import { FaSignInAlt } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
+import {useLocale} from "next-intl";
 
+import { useTranslations } from "next-intl";
 
-import { useTranslation } from "react-i18next";
 
 function MobileNavbar() {
-  const { t, i18n } = useTranslation("common");
+  const locale = useLocale();
+  const  t  = useTranslations();
   const pathname = usePathname();
 
   // Links are created dynamically with the `t` function.
@@ -45,7 +47,7 @@ function MobileNavbar() {
       <SheetContent className="flex flex-col">
         <div className="mt-5 mb-10 text-center text-2xl">
           <Link href="/">
-            {i18n.language == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
+            {locale == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
           </Link>
         </div>
         {/* nav */}

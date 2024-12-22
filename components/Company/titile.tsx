@@ -1,13 +1,13 @@
 "use client"
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 
 interface TitleProps {
   name: string;
 }
 
 function Title({ name }: TitleProps) {
-  const { t } = useTranslation("common");
+  const  t  = useTranslations();
   
   return (
     <h1 className="h1 py-0">{t(`company.${name}`)}</h1>

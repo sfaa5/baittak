@@ -6,10 +6,11 @@ import { IoIosArrowDown } from "react-icons/io";
 import { LuHome } from "react-icons/lu";
 import Cities from "./Cities";
 import Properties from "./Properties";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+
 
 export default function Home() {
-  const { t } = useTranslation("common");
+  const  t  = useTranslations();
   return (
     <>
       {/* // landing */}

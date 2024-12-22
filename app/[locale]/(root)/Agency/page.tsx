@@ -6,10 +6,11 @@ import { GoSearch } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+
 
 function Page() {
-  const { t } = useTranslation("common");
+  const t  = useTranslations();
 
   return (
     <>

@@ -1,11 +1,12 @@
 import React from "react";
 import PropertyCard from "@/components/PropertyCard";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+
 
 
 
 function Properties() {
-  const { t } = useTranslation("common");
+  const  t  = useTranslations();
   return (
     <section>
       <div className="container mx-auto flex w-full justify-center py-32">

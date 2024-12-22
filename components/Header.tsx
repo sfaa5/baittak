@@ -1,19 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { usePathname } from 'next/navigation';
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 
 import BaittaklogoArabic from "./ArabicLogo";
 import EnglishLogo from "./EnglishLogo";
-
+import {useLocale} from "next-intl";
 
 
 function Header() {
-  const { t, i18n } = useTranslation("common");
+  const  t  = useTranslations();
   const router = usePathname();
+  const locale = useLocale();
 console.log(router)
 
 
@@ -33,7 +34,7 @@ console.log(router)
 
         {/*logo */}
         <Link href="/">
-          {i18n.language == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
+          {locale == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
         </Link>
 
         {/* desktop nav */}

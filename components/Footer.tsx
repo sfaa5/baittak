@@ -1,16 +1,18 @@
 "use client";
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+
 import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io";
 import FoterArabicLogo from "./foter-arabic-logo";
 import { usePathname } from 'next/navigation';
-
+import {useLocale} from "next-intl";
 import Link from "next/link";
 
 
 function Footer() {
-  const { i18n, t } = useTranslation("common");
+  const locale = useLocale();
+  const  t  = useTranslations();
     const router = usePathname();
   // Type cast the return value of t("footer.citiesList") to an array of strings
   // const citiesList = t("footer.citiesList", {
@@ -25,7 +27,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row  items-center justify-between border-b-2  pb-10">
           {/*logo */}
           <Link href="/">
-            {i18n.language == "ar" ? (
+            {locale == "ar" ? (
               <FoterArabicLogo />
             ) : (
               <img

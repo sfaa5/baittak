@@ -1,5 +1,6 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+
 
 const cities = [
   {
@@ -25,7 +26,7 @@ const cities = [
 ];
 
 function Cities() {
-  const { t } = useTranslation("common"); // استدعاء مكتبة الترجمة مع المفاتيح من ملف "common.json"
+  const  t  = useTranslations(); // استدعاء مكتبة الترجمة مع المفاتيح من ملف "common.json"
   return (
     <section>
       <div className="container mx-auto flex w-full justify-center py-32">
