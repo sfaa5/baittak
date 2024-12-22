@@ -79,7 +79,8 @@ export function AppSidebar() {
           {items.map((item, key) => (
             <Link href={item.url} key={key} className="block">
               <Button
-                variant={"company"}
+                variant={"default"}
+              
                 size={"lg"}
                 className={`w-full flex items-center gap-5 ${
                   activeItem === item.title ? "bg-primary text-white" : ""
