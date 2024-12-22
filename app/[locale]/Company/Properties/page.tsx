@@ -1,6 +1,7 @@
 
+import { DataTable } from "@/components/Company/data-table";
 import { Property, columns } from "./Columns"
-import { DataTable } from "../../../components/Company/data-table"
+
 import Title from "@/components/Company/titile";
 
 

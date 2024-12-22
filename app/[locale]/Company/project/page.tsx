@@ -1,5 +1,6 @@
+import { DataTable } from "@/components/Company/data-table";
 import { Project, columns } from "./Columns"
-import { DataTable } from "../../../components/Company/data-table"
+
 import Title from "@/components/Company/titile";
 
 async function getRandomData(count: number): Promise<Project[]> {
