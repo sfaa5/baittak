@@ -10,7 +10,7 @@ import { CiHeart } from "react-icons/ci";
 import { FaSignInAlt } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { TfiWorld } from "react-icons/tfi";
-import LanguageSwitcher from "./LanguageSwitcher";
+
 import { useTranslation } from "react-i18next";
 
 function MobileNavbar() {
@@ -69,7 +69,7 @@ function MobileNavbar() {
             <Link href="">
      
               <div className="flex items-center  gap-2 ">
-                <TfiWorld /> <LanguageSwitcher />
+                {/* <TfiWorld /> <LanguageSwitcher /> */}
               </div>
             </Link>
             <Link href="/">

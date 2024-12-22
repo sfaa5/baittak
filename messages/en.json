@@ -1,0 +1,267 @@
+{
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ar {🇩🇪 Deutsch} en {🇺🇸 English} other {Unknown}}"
+  },
+    "welcome": "Welcome to our website!",
+    "header": {
+      "post property": "post property",
+      "favorites": "Favorites",
+      "agent login": "Agent Login",
+      "sign up": "Sign Up",
+      "properties": "Properties",
+      "projects": "Projects",
+      "agency": "Agency",
+      "profile": "Profile"
+    },
+    "Navigation": {
+      "home": "Home",
+      "pathnames": "Pathnames"
+    },
+    "landing": {
+      "all properties on one place": "All Properties <br/> on one Place",
+      "rent": "Rent",
+      "buy": "Buy",
+      "projects": "Projects",
+      "enter location here": "Enter location here",
+      "type": "Type",
+      "room & bath": "Room & Bath",
+      "search": "Serach"
+    },
+    "cities": {
+      "we are available in many cities & areas": "We are available in many Cities & Areas"
+    },
+    "properties": {
+      "letest properties of rent": "Letest Properties of Rent"
+    },
+    "footer": {
+      "contact": "Contact",
+      "email1": "Info@Baittak.com",
+      "email2": "sales@Baittak.com",
+      "email3": "agent@Baittak.com",
+      "links": "Links",
+      "cities": "Cities",
+      "submit": "Submit",
+      "contactUs": "CONTACT US",
+      "aboutUs": "ABOUT US",
+      "career": "CAREER",
+      "terms": "TERMS",
+      "citiesList": ["Abu Dhabi", "Dubai", "Sharjah", "Ajman"],
+      "socialMedia": "Follow us on",
+      "copyright": "©2024 Baittak.com. All rights reserved"
+    },
+    "search": {
+      "buy": "Buy",
+      "enter_location": "Enter location here",
+      "apartment": "Apartment",
+      "rooms_bath": "Rooms & Bath",
+      "price": "Price",
+      "filters": "Filters",
+      "search_button": "Search",
+      "city": "Dubai",
+      "result_count": "(1200)"
+    },
+    "property": {
+      "search_placeholder": "Search properties...",
+      "properties_title": "Properties for rent in Saudi",
+
+      "sort_by": "Sort By",
+      "map": "Map",
+      "list": "List",
+      "previous": "Previous",
+      "next": "Next",
+      "results": "results"
+    },
+    "project": {
+      "project_title": "Projects",
+      "projects": "{{count}} new Projects in Saudi",
+      "sort_by": "Sort By",
+      "map": "Map",
+      "list": "List"
+    },
+    "agency": {
+      "banner": {
+        "title": "Find Best Companies For Living",
+        "search_placeholder": "Enter location or Company name",
+        "service_needed": "Service needed",
+        "search_button": "Search"
+      },
+      "path": {
+        "home_icon_label": "Home",
+        "current_page": "Agency"
+      },
+      "results_section": {
+        "matching_companies_title": "Matching companies",
+        "sort_by": "Sort By",
+        "total_results": "{{count}} results"
+      },
+      "cards_section": {
+        "agent_cards_title": "Companies List"
+      },
+      "home": "Home",
+      "agency": "Agency",
+      "company_name": "Iskan Salman Real Estate Company",
+      "active_listings": "Active Listings",
+      "address_label": "Address:",
+      "address": "Office 3, building Burj Plus, Al Ulayys, Riyadh",
+      "email_company": "Email Company",
+      "call_company": "Call Company",
+      "buy": "Buy",
+      "features": "Features",
+      "results": "results"
+    },
+    "userCard": {
+      "PREMIUM": "PREMIUM",
+      "Days Left": "Days Left",
+      "Rent": "Rent",
+      "Buy": "Buy"
+    },
+    "userButton": {
+      "yourPosts": "Your Posts",
+      "favorite": "Favorite",
+      "selectPlan": "Select Plan",
+      "addingList": "Adding List"
+    },
+    "contact": {
+      "Whatsup": "Whatsup",
+      "Mail": "Mail",
+      "Call": "Call"
+    },
+    "propertyDetails": {
+      "property details": "property details",
+      "Property Type": "Property Type",
+      "Bedrooms": "Bedrooms",
+      "Plot length": "Plot length",
+      "Street Width": "Street Width",
+      "Property Age": "Property Age",
+      "City": "City",
+      "Disrtict": "Disrtict",
+      "Land Number": "Land Number",
+      "Apartment": "Apartment",
+      "New": "New",
+      "Jeddah": "Jeddah",
+      "Al Wahah": "Al Wahah",
+      "Property Size": "Property Size",
+      "Bathrooms": "Bathrooms",
+      "Plot width": "Plot width",
+      "Facade": "Facade",
+      "Category": "Category",
+      "Area": "Area",
+      "plot Number": "plot Number",
+      "sqr": "sqr",
+      "West": "West",
+      "Residential for sale": "Residential for sale",
+      "Makkah Al Mukarramah": "Makkah Al Mukarramah",
+      "bath": "bath",
+      "rooms": "rooms",
+      "SAR": "SAR",
+      "Read more": "Read more"
+    },
+    "Project":{
+      "By":"By",
+      "Completed":"Completed",
+      "form":"From",
+      "Name":"Name",
+      "phone":"Phone",
+      "email":"Email",
+      "hello i am":"Hell I am...",
+      "request details":"REQUEST DETAILS",
+      "CALL NOW":"CALL NOW",
+      "About Amjal AlYasmin Project":"About Amjal AlYasmin Project",
+      "Price From":"Price From",
+      "Price To":"Price To",
+      "Price per sqt":"Price per sqt",
+      "Ask for price":"Ask for price",
+      "Total units":"Total units",
+      "Status":"Status",
+      "Bedrooms":"Bedrooms",
+  
+      "DESCRIPTION":"DESCRIPTION",
+      "AMENITIES":"AMENITIES",
+      "Balcony":"Balcony",
+      "Wi-Fi":"Wi-Fi",
+      "Parking":"Parking",
+      "Gym":"Gym",
+      "Pool":"Pool"
+    },
+    "addUser":{
+      "the newest":"the newest",
+      "the oldest":"the oldest",
+      "the most price":"the most price",
+"the cheapest price":"the cheapest price",
+  "addCity": "Add City",
+      "addListing": "Add A Listing",
+      "selectPropertyType": "Select the type of property",
+      "sell": "Sell",
+      "selectPropertyTypee": "type of property",
+      "select":"select",
+      "title": "Title",
+      "price": "Price",
+      "description": "Description",
+      "buy": "Buy",
+      "rental":"Rental",
+      "details": "Details",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "numFloors": "Number of Floors",
+      "area": "Area",
+      "plotWidth": "Plot Width",
+      "plotLength": "Plot Length",
+      "landNumber": "Land Number",
+      "amenities": "Amenities",
+      "media": "Media",
+      "uploadImages": "Click to upload house images",
+      "selectedImages": "Selected Images:",
+      "remove": "Remove",
+      "basement": "Basement",
+      "swimmingPool": "Swimming Pool",
+      "familyRoom": "Family Room",
+      "airConditioning": "Air Conditioning",
+      "fittedWardrobes": "Fitted Wardrobes",
+      "disabilityAccess": "Disability Access",
+      "lift": "Lift",
+      "exterior": "Exterior",
+      "garden": "Garden",
+      "terrace": "Terrace",
+      "spaHotTub": "Spa / Hot Tub"
+    },
+    "company":{
+      "Information": "Information",
+      "Properties": "Properties",
+      "Agents": "Agents",
+      "Project": "Project",
+      "Messages": "Messages",
+      "Package": "Package",
+      "Logout": "Logout",
+      "agentInfo": {
+        "title": "Agent Information",
+        "companyName": "Salman Real Estate Company",
+        "activeListing": "Active Listing",
+        "address": "Address",
+        "phoneNumber": "Phone Number",
+        "email": "Email Address",
+        "edit": "Edit"
+      },
+      "compose": "+ Compose",
+      "my_email": "My Email",
+      "inbox": "Inbox",
+      "starred": "Starred",
+      "sent": "Sent",
+      "select_ad_packages": "Select your Ad Packages",
+      "current_subscription_part1": "You are currently subscribed to",
+      "premium": "PREMIUM",
+      "current_subscription_part2": "package",
+      "days_until_expiration": "Days Until Expiration",
+      "premium_duration": "60 days",
+      "discount": "21% off regular price",
+      "two_months": "2 Months",
+      "save_39": "Save 39%",
+      "months": "Months",
+      "month": "Month",
+      "standard": "Standard",
+      "base": "Base"
+      
+    }
+    
+  }
+  

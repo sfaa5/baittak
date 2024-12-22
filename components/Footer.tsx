@@ -77,11 +77,11 @@ function Footer({ padding }: HeaderProps) {
               {t("footer.cities")}
             </h2>
             <div className="grid grid-cols-3 gap-5 lg:gap-0 lg:grid-cols-[20%_20%_20%_20%] ">
-              {citiesList.map((city, index) => (
+              {/* {citiesList.map((city, index) => (
                 <ul key={index} className="list-disc ml-4 lg:ml-0">
                   <li>{city}</li>
                 </ul>
-              ))}
+              ))} */}
             </div>
           </div>
 
