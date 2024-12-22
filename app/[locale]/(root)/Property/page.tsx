@@ -77,7 +77,7 @@ async function Page( { searchParams }: PageProps) {
   // console.log('Query Parameters:', Object.fromEntries(queryParams.entries()));
 
 
-const response = await fetch(`http://localhost:5001/api/properties/get?sort=${sort}&city=${city}&purpose=${purpose}&propertyType=${propertyType}&bedrooms=${rooms}&bathrooms=${bathrooms}&page=${page}&per_page=${per_page}&price=${priceRange}`);
+const response = await fetch(`https://baittak-server.vercel.app/api/properties/get?sort=${sort}&city=${city}&purpose=${purpose}&propertyType=${propertyType}&bedrooms=${rooms}&bathrooms=${bathrooms}&page=${page}&per_page=${per_page}&price=${priceRange}`);
 
 const data =await response.json();
 

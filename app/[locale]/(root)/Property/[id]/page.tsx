@@ -31,7 +31,7 @@ type amenity ={
   console.log(
     "iam hereeeeeeeeeee",id);
 
-    const response = await fetch(`http://localhost:5001/api/properties/${id}`);
+    const response = await fetch(`https://baittak-server.vercel.app/api/properties/${id}`);
     const data = await response.json();
 
   const {
@@ -111,7 +111,7 @@ type amenity ={
           {img.map((im: string, key: React.Key ) => (
             <img
               key={key}
-              src={`http://localhost:5001${im}`}
+              src={`https://baittak-server.vercel.app${im}`}
               alt={`property image ${key}`}
               className="flex-shrink-0 w-full h-[300px] object-cover rounded-xl"
             />
@@ -717,7 +717,7 @@ type amenity ={
   {amenities.map((amenity:amenity, inx:number) => (
     <div key={inx} className="flex gap-2 items-center">
       <img
-        src={`http://localhost:5001${amenity.svg}`}
+        src={`https://baittak-server.vercel.app${amenity.svg}`}
         alt={`amenity image ${inx}`} // Fixed reference to `inx`
         className="w-6 h-6" // Optional: Add a size class for better control
       />

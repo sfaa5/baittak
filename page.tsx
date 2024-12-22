@@ -16,7 +16,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   console.log(
     "iam hereeeeeeeeeee",id);
 
-    const response = await fetch(`http://localhost:5001/api/properties/${id}`);
+    const response = await fetch(`https://baittak-server.vercel.app/api/properties/${id}`);
     const data = await response.json();
 
   const {

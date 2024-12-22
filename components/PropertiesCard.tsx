@@ -68,7 +68,7 @@ function PropertiesCard({ post }: { post: property }) {
                   className="flex-shrink-0 w-full snap-start " // Makes sure only one image shows up at a time
                 >
                   <img
-                    src={`http://localhost:5001${im}`}
+                    src={`https://baittak-server.vercel.app${im}`}
                     alt={`carousel image ${index + 1}`}
                     className="w-full h-auto object-cover  md:h-[280px] md:w-100"
                   />

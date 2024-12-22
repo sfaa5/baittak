@@ -32,7 +32,7 @@ function ImageModel({ img }: { img: string[] }) {
         {/* Big image */}
         <div className="col-span-2 row-span-2 ">
           <img
-            src={`http://localhost:5001${img[0]}`}
+            src={`https://baittak-server.vercel.app${img[0]}`}
             alt={`property image 0`}
             className="w-full h-[500px] object-cover rounded-xl"
             onClick={() => openModal(0)}
@@ -42,7 +42,7 @@ function ImageModel({ img }: { img: string[] }) {
         {img.slice(1, 3).map((im, index) => (
           <div key={index} className="h-full">
             <img
-              src={`http://localhost:5001${im}`}
+              src={`https://baittak-server.vercel.app${im}`}
               alt={`property image ${index + 1}`}
               className="w-full h-[240px] object-cover rounded-xl"
               onClick={() => openModal(index + 1)}
@@ -62,7 +62,7 @@ function ImageModel({ img }: { img: string[] }) {
         <div className="flex justify-between items-center">
           <button onClick={prevImage}><MdOutlineArrowForwardIos /></button>
           <img
-            src={`http://localhost:5001${img[currentImageIndex]}`}
+            src={`https://baittak-server.vercel.app${img[currentImageIndex]}`}
             alt={`property image ${currentImageIndex}`}
             className=" w-[1000px] h-auto object-cover rounded-xl"
           />

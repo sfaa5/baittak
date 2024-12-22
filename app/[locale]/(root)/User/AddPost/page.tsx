@@ -119,7 +119,7 @@ function Page() {
   useEffect(() => {
     async function fetchAmenities() {
       try {
-        const response = await fetch(`http://localhost:5001/api/amenity`);
+        const response = await fetch(`https://baittak-server.vercel.app/api/amenity`);
         const data = await response.json();
         setAmenities(data);
       } catch (err) {
@@ -132,7 +132,7 @@ function Page() {
   useEffect(() => {
     async function fetchCities() {
       try {
-        const response = await fetch(`http://localhost:5001/api/cities`);
+        const response = await fetch(`https://baittak-server.vercel.app/api/cities`);
         const data = await response.json();
         setCities(data);
       } catch (err) {
@@ -179,7 +179,7 @@ function Page() {
         });
       }
 
-      const response = await fetch("http://localhost:5001/api/properties/add", {
+      const response = await fetch("https://baittak-server.vercel.app/api/properties/add", {
         method: "POST",
         body: formData,
       });
