@@ -23,7 +23,7 @@ const SearchCity = ({ city, setCity }: { city: string; setCity: (city: string) =
 
         setCities(displayedCities);
       } catch (error) {
-        console.error("خطأ أثناء جلب المدن:", error);
+        console.error("cant fetch cities", error);
       }
     };
 

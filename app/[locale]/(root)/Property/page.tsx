@@ -5,7 +5,7 @@ import { FaRegMap } from "react-icons/fa";
 import { IoHomeSharp } from "react-icons/io5";
 import {
   MdArrowForwardIos,
-  MdKeyboardArrowLeft,
+
 } from "react-icons/md";
 import { getTranslations } from "next-intl/server";
 import PaginationControll from "@/components/PaginationControll";

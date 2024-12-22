@@ -45,7 +45,7 @@ const formSchema = z.object({
   bedrooms: z.number().nonnegative("Bedrooms cannot be negative"),
   bathrooms: z.number().nonnegative("Bathrooms cannot be negative"),
   floors: z.number().nonnegative("Floors cannot be negative"),
-  images: z.array(z.any()).optional(),
+  images: z.array(z.string()).optional(),
   numFloors: z.number().min(1, "floors is required"),
   plotWidth: z.number(),
   landNumber: z.number(),
@@ -662,7 +662,7 @@ function Page() {
           <FormField
             control={form.control}
             name="images"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormControl>
                   <div className="flex flex-col items-center space-y-4">

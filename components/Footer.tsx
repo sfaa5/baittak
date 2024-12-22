@@ -13,9 +13,9 @@ function Footer() {
   const { i18n, t } = useTranslation("common");
     const router = usePathname();
   // Type cast the return value of t("footer.citiesList") to an array of strings
-  const citiesList = t("footer.citiesList", {
-    returnObjects: true,
-  }) as string[];
+  // const citiesList = t("footer.citiesList", {
+  //   returnObjects: true,
+  // }) as string[];
 
   return (
     <footer className={`bg-secondary mx-auto flex w-full   pt-10  bottom-0 `}>

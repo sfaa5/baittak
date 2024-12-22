@@ -9,9 +9,7 @@ import MobileNavbar from "./MobileNavbar";
 import BaittaklogoArabic from "./ArabicLogo";
 import EnglishLogo from "./EnglishLogo";
 
-interface HeaderProps {
-  padding?: string; // Define the type of the padding prop
-}
+
 
 function Header() {
   const { t, i18n } = useTranslation("common");
