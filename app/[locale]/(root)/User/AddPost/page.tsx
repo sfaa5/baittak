@@ -58,7 +58,15 @@ function Page() {
   const locale = useLocale();
  
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const [Amenities, setAmenities] = useState<any[]>([]);
+  interface Amenity {
+    _id: string;
+    name: {
+      ar: string;
+      en: string;
+    };
+  }
+  
+  const [Amenities, setAmenities] = useState<Amenity[]>([]);
   interface City {
     name: {
       ar: string;

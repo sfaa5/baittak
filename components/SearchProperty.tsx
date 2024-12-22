@@ -71,7 +71,7 @@ const SearchCity = ({ city, setCity }: { city: string; setCity: (city: string) =
                   value={query}
                   className="search-city__option px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-200"
                 >
-                  أضف "{query}"
+                  أضف {query}
                 </Combobox.Option>
               ) : (
                 filteredCities.map((city) => (
