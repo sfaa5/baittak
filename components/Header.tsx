@@ -13,7 +13,7 @@ interface HeaderProps {
   padding?: string; // Define the type of the padding prop
 }
 
-function Header({ padding }: HeaderProps) {
+function Header() {
   const { t, i18n } = useTranslation("common");
   const router = usePathname();
 console.log(router)

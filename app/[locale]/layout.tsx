@@ -57,7 +57,7 @@ export default async function RootLayout({
   
       
     // Ensure that the incoming `locale` is valid
-    if (!routing.locales.includes(locale as any)) {
+    if (!routing.locales.includes(locale as "en" | "ar")) {
       notFound();
     }
 

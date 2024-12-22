@@ -4,7 +4,7 @@ import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
-import { ArrowLeft, ArrowLeftCircle, ArrowRight, ArrowRightCircle } from "lucide-react"
+import {  ArrowLeftCircle,  ArrowRightCircle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -248,7 +248,7 @@ const CarouselNext = React.forwardRef<
         className
       )}
       disabled={!canScrollNext}
-      onClick={(e) => {
+      onClick={() => {
       
         scrollNext(); // Call the scrollNext function
       }}

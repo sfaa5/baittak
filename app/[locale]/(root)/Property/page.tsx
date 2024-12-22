@@ -2,7 +2,6 @@
 import PropertiesCard from "@/components/PropertiesCard";
 import Serch from "@/components/Search";
 import { FaRegMap } from "react-icons/fa";
-import { IoIosArrowDown, IoIosList } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
 import {
   MdArrowForwardIos,
@@ -24,8 +23,8 @@ export type property = {
   amenities: [
     {
       name: {
-        en: String, // English name as string
-        ar: String  // Arabic name as string
+        en: string, // English name as string
+        ar: string  // Arabic name as string
       }
     }
   ]
@@ -78,7 +77,6 @@ async function Page( { searchParams }: PageProps) {
   // Log all query parameters for debugging
   // console.log('Query Parameters:', Object.fromEntries(queryParams.entries()));
 
-const query = Object.fromEntries(queryParams.entries())
 
 const response = await fetch(`http://localhost:5001/api/properties/get?sort=${sort}&city=${city}&purpose=${purpose}&propertyType=${propertyType}&bedrooms=${rooms}&bathrooms=${bathrooms}&page=${page}&per_page=${per_page}&price=${priceRange}`);
 
@@ -134,7 +132,7 @@ console.log("data heree",data.properties.length)
         <div className="flex flex-col gap-8">
 
           {data.properties?.length>0?(
-data.properties.map((post:property,key:any)=>(
+data.properties.map((post:property,key:number)=>(
     <PropertiesCard key={key} post={post} />
 ))
 

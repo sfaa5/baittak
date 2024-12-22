@@ -1,4 +1,3 @@
-import { type AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 // Type augmentation for NextAuth
@@ -29,8 +28,9 @@ export const authOptions = {
   },
 
   callbacks: {
-    async signIn({ user }:any) {
-      try {
+
+      async signIn({ user }: { user: { email?: string | null; name?: string | null; image?: string | null; id?: string } }) {
+        try {
         console.log("uaweeee",user);
 
         if (!user.email) {
@@ -68,7 +68,7 @@ export const authOptions = {
       }
     },
 
-    async jwt({ token, user }:any) {
+    async jwt({ token, user }: { token: { id: string }; user: { id: string } | null }) {
       // If the user is present (on sign in), add the user's ID to the token
       if (user) {
         token.id = user.id; // Store the user ID in the token
@@ -78,7 +78,7 @@ export const authOptions = {
       return token;
     },
 
-    async session({ session, token }:any) {
+    async session({ session, token }: { session:{user:{id:string}}; token: { id: string } }) {
       // Add the token's ID to the session's user object
       session.user.id = token.id;
       console.log("Session in session callback:", session);

@@ -10,13 +10,19 @@ import { LiaBedSolid } from "react-icons/lia";
 import { MdArrowForwardIos } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
-import Contact from "@/components/ContactDesk";
+
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
 
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
-
+type amenity ={
+  name:{
+    en:string,
+    ar:string
+  },
+  svg: string
+}
 
   const locale = await getLocale();
 
@@ -48,19 +54,19 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
   console.log(data)
 
-  interface PropertyData {
-    title: string;
-    price: number;
-    address: string;
-    img: string[];
-    bathrooms: number;
-    bedrooms: number;
-    amenities: Amenity[];
-    area: number;
-    des: string;
-    landNumber: string;
-    plotLength: number;
-  }
+  // interface PropertyData {
+  //   title: string;
+  //   price: number;
+  //   address: string;
+  //   img: string[];
+  //   bathrooms: number;
+  //   bedrooms: number;
+  //   amenities: Amenity[];
+  //   area: number;
+  //   des: string;
+  //   landNumber: string;
+  //   plotLength: number;
+  // }
 
   interface Amenity {
     name: {
@@ -102,7 +108,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
         {/* Mobile design */}
         <div className="flex gap-4 overflow-x-auto hide-scrollbar  mt-5 sm:hidden">
-          {img.map((im: any, key: React.Key ) => (
+          {img.map((im: string, key: React.Key ) => (
             <img
               key={key}
               src={`http://localhost:5001${im}`}
@@ -703,10 +709,12 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
 
 
+
+
           <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
           <h3 className="text-2xl mb-9 text-secondary">المزايا</h3>
           <div className="grid grid-cols-3 gap-y-8">
-  {amenities.map((amenity:any, inx:any) => (
+  {amenities.map((amenity:amenity, inx:number) => (
     <div key={inx} className="flex gap-2 items-center">
       <img
         src={`http://localhost:5001${amenity.svg}`}

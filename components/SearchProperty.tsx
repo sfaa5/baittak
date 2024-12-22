@@ -1,11 +1,10 @@
 "use client";
-import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FiMapPin } from "react-icons/fi";
 
-const SearchCity = ({ city, setCity}: any) => {
+const SearchCity = ({ city, setCity }: { city: string; setCity: (city: string) => void }) => {
   const [query, setQuery] = useState("");
   const [cities, setCities] = useState<string[]>([]);
   const locale = useLocale();
@@ -17,7 +16,7 @@ const SearchCity = ({ city, setCity}: any) => {
         const response = await fetch("http://localhost:5001/api/cities");
         const data = await response.json();
 
-        const displayedCities = data.map((item: any) =>
+        const displayedCities = data.map((item: { name: { ar: string; en: string } }) =>
           locale === "ar" ? item.name.ar : item.name.en
         );
         

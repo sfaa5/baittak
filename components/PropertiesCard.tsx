@@ -2,13 +2,11 @@
 import { CiHeart } from "react-icons/ci";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiMapPin, FiPhoneCall } from "react-icons/fi";
-import { IoMailOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
 import { Link } from "@/i18n/routing";
 import { property } from "@/app/[locale]/(root)/Property/page";
-import { Locale } from "@/i18n/routing";
 
 import React, { useRef, useState } from "react";
 import { useLocale } from "next-intl";
@@ -48,7 +46,7 @@ function PropertiesCard({ post }: { post: property }) {
     amenities,
     area,
     user,
-    phoneNumber,
+
     _id,
   } = post;
 

@@ -8,7 +8,7 @@ import {
   } from "@/components/ui/select";
 
 
-const onSelectChange = (value) => {
+const onSelectChange = () => {
 
     
 }

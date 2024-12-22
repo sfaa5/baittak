@@ -63,7 +63,7 @@ import { useSession } from "next-auth/react";
         email: "",
         message: "",
         phone: "",
-        ownerEmail: ownerEmail,
+        ownerEmail: "",
         title: title,
       },
     });

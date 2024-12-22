@@ -3,7 +3,6 @@ import {Link} from "@/i18n/routing";
 import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaCircleUser } from "react-icons/fa6";
-import { TfiWorld } from "react-icons/tfi";
 
 import SignInWithGoogle from "./SignInWithGoogle";
 import { useSession } from "next-auth/react";

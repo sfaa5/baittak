@@ -8,10 +8,8 @@ import { usePathname } from 'next/navigation';
 
 import Link from "next/link";
 
-interface HeaderProps {
-  padding?: string; // Define the type of the padding prop
-}
-function Footer({ padding }: HeaderProps) {
+
+function Footer() {
   const { i18n, t } = useTranslation("common");
     const router = usePathname();
   // Type cast the return value of t("footer.citiesList") to an array of strings

@@ -1,8 +1,6 @@
 "use client";
 import React, { use, useState } from "react";
-import { FiMapPin } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
-import { IoIosArrowDown } from "react-icons/io";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import SearchCity from "./SearchProperty";
@@ -16,18 +14,18 @@ import {
 import RoomSelect from "./RoomSelect";
 import { PriceFilter } from "./PriceSelector";
 
-const options = [
-  { value: "apartment", label: "شقة" },
-  { value: "villa", label: "فيلا" },
-  { value: "farm", label: "مزرعة" },
-  { value: "rest-house", label: "استراحة" },
-  { value: "residential-complex", label: "مجمع سكني" },
-  { value: "duplex", label: "دوبلكس" },
-  { value: "building", label: "عمارة بالكامل" },
-  { value: "hotel-apartments", label: "فندق/شقق فندقية" },
-  { value: "land", label: "ارض" },
-  { value: "full-floor", label: "طابق كامل" },
-];
+// const options = [
+//   { value: "apartment", label: "شقة" },
+//   { value: "villa", label: "فيلا" },
+//   { value: "farm", label: "مزرعة" },
+//   { value: "rest-house", label: "استراحة" },
+//   { value: "residential-complex", label: "مجمع سكني" },
+//   { value: "duplex", label: "دوبلكس" },
+//   { value: "building", label: "عمارة بالكامل" },
+//   { value: "hotel-apartments", label: "فندق/شقق فندقية" },
+//   { value: "land", label: "ارض" },
+//   { value: "full-floor", label: "طابق كامل" },
+// ];
 
 function Search() {
   const t = useTranslations();

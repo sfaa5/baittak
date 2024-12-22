@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 import Modal from "react-modal";
 

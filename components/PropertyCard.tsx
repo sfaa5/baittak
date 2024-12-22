@@ -4,7 +4,6 @@ import { PiBathtubLight } from "react-icons/pi";
 import { FiMapPin } from "react-icons/fi";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
-import { property } from "@/app/[locale]/(root)/Property/page";
 
 
 

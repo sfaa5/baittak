@@ -5,9 +5,9 @@ import { Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 function RoomSelect({
-  rooms,
+
   setRooms,
-  bathrooms,
+
   setBathrooms
 }: {
   rooms: string;

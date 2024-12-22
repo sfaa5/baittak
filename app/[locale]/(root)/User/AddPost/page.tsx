@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
-import { Locale } from "@/i18n/routing";
 
 import {
   Select,
@@ -16,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { set, z } from "zod";
+import {  z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
@@ -57,7 +56,7 @@ const formSchema = z.object({
 function Page() {
   const  t  = useTranslations();
   const locale = useLocale();
-  const [count, setCount] = useState(0);
+ 
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [Amenities, setAmenities] = useState<any[]>([]);
   interface City {
@@ -94,8 +93,7 @@ function Page() {
     },
   });
 
-  const increment = () => setCount((prev) => prev + 1);
-  const decrement = () => setCount((prev) => Math.max(prev - 1, 0));
+
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -136,11 +134,7 @@ function Page() {
     fetchCities();
   }, []);
 
-  const displayedAmenities = Amenities.map((item) =>
-    locale === "ar" ? item.name.ar : item.name.en
-  );
 
-  const displayedCities = cities.map((item) => locale === "ar" ? item.name.ar : item.name.en);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
