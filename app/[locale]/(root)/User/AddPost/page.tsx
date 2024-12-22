@@ -156,7 +156,7 @@ function Page() {
       formData.append("propertyType", values.propertyType);
       formData.append("title", values.title);
       formData.append("price", values.price.toString());
-      formData.append("address",values.address),
+      formData.append("address",values.address);
       formData.append("des", values.description);
       formData.append("for", values.for);
       formData.append("bedrooms", values.bedrooms.toString());
