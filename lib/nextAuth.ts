@@ -38,7 +38,7 @@ export const authOptions  = {
           return false;
         }
 
-        const response = await fetch(`${process.env.API_URL}/api/users`, {
+        const response = await fetch(`https://baittak-server.vercel.app/api/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
