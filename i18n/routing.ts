@@ -31,7 +31,7 @@ export const routing = defineRouting({
         en:"/User/AddPost",
         ar:"/اضافه/مستخدم"
       },
-      "/Property/${id}": {
+      "/Property/:id": {
         en: "/Property/:id",  
         ar: "/عقار/:id",      
       },

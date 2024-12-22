@@ -5,7 +5,7 @@ import { FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import { property } from "@/app/[locale]/(root)/Property/page";
 
 import React, { useRef, useState } from "react";
@@ -99,7 +99,7 @@ function PropertiesCard({ post }: { post: property }) {
           <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 lg:w-[650px]">
 
             
-          <Link href={`/Property/${_id}`} className="asChild flex flex-col pb-5 gap-3"> 
+          <Link href={`/${locale}/Property/${_id}`} className="asChild flex flex-col pb-5 gap-3"> 
 
 
            <div className="flex flex-wrap justify-between">   
