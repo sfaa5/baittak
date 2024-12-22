@@ -1,4 +1,4 @@
-
+import { type AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 // Type augmentation for NextAuth
@@ -17,7 +17,7 @@ declare module "next-auth" {
   }
 }
 
-export const authOptions = {
+export const authOptions  = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,

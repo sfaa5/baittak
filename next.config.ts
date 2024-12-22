@@ -10,10 +10,10 @@ const nextConfig:NextConfig = {};
 export default withNextIntl(nextConfig);
 
 
-// next.config.js
-module.exports = {
-    typescript: {
-      ignoreBuildErrors: true,
-    },
-  };
+// // next.config.js
+// module.exports = {
+//     typescript: {
+//       ignoreBuildErrors: true,
+//     },
+//   };
   
