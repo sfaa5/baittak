@@ -37,15 +37,13 @@ export type property = {
 }
 
 interface PageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 async function Page( { searchParams }: PageProps) {
   const t = await getTranslations();
 
 
-
-  // Ensure searchParams is awaited before using its properties
   const resolvedSearchParams = await searchParams;
   const queryParams = new URLSearchParams();
   for (const key in resolvedSearchParams) {
