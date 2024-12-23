@@ -49,7 +49,7 @@ function Cities() {
                       index % 2 === 0 ? "text-[#DDDDDD]" : "text-secondary"
                     }`}
                   >
-                    {t(`cities.${city.name.toLowerCase()}`, city.name)}
+                    {t(`cities.${city.name.toLowerCase()}`,)}{city.name }
                   </h3>
                   <img className="w-full object-cover" src={city.path} alt={city.name} />
                 </div>
