@@ -7,10 +7,35 @@ import { LuHome } from "react-icons/lu";
 import Cities from "./Cities";
 import Properties from "./Properties";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Sign from "@/components/Sign";
+import { useSearchParams, useRouter } from "next/navigation";
 
 
 export default function Home() {
+  const path = usePathname()
   const  t  = useTranslations();
+  const searchParams = new URLSearchParams(window.location.search);
+  const router = useRouter();
+  const parms = useSearchParams();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    if (parms.get('login') === 'true') {
+      setShowLoginModal(true);
+    }
+  }, [parms.toString()]);
+
+  const closeModal = () => {
+    setShowLoginModal(false);
+
+    // Remove the query parameter from the URL
+
+    searchParams.delete('login')
+    router.push('/');
+  };
+
   return (
     <>
       {/* // landing */}
@@ -88,6 +113,12 @@ export default function Home() {
       <Cities />
 
       <Properties />
+
+
+      {showLoginModal && (
+        <Sign onClose={closeModal} />
+      )}
+
     </>
   );
 }

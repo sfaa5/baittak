@@ -26,7 +26,7 @@ const cities = [
 ];
 
 function Cities() {
-  const  t  = useTranslations(); // استدعاء مكتبة الترجمة مع المفاتيح من ملف "common.json"
+  const  t  = useTranslations(); 
   return (
     <section>
       <div className="container mx-auto flex w-full justify-center py-32">

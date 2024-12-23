@@ -69,6 +69,7 @@ export default async function RootLayout({
 
   const fontStyles = `${droidArabicKufi.variable} ${helvetica.variable} sans-serif`;
 
+  console.log("jjjjj",locale)
 
   return (
     <html lang={locale} dir={dir} className={fontStyles}>

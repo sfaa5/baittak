@@ -15,7 +15,6 @@ import LocaleSwitcher from "./LocalSwitcher";
 const Navbar = () => {
 
   
-  
 
   const  t = useTranslations("header");
   const { data: session } = useSession();

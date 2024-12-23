@@ -9,7 +9,7 @@ function SignInWithGoogle() {
     const  t = useTranslations();
   return (
     <button type='button' onClick={()=>signIn('google')}>
-        <div className="flex items-center  gap-2 " ><FaSignInAlt /> <span>{t("header.sign up")}</span></div>
+        <div className="flex items-center  gap-2 " ><FaSignInAlt /> <span>{t("header.sign in")}</span></div>
     </button>
   )
 }

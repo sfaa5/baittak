@@ -5,17 +5,19 @@
   },
     "welcome": "Welcome to our website!",
     "header": {
+      "signTitle":"Welcome Back!",
+      "signDesc":" Sign in to explore your dream properties and manage your account.",
       "post property": "post property",
       "favorites": "Favorites",
       "agent login": "Agent Login",
-      "sign up": "Sign Up",
+      "sign in": "Sign in",
       "properties": "Properties",
       "projects": "Projects",
       "agency": "Agency",
       "profile": "Profile"
     },
     "Navigation": {
-      "home": "Home",
+      "home": "Home", 
       "pathnames": "Pathnames"
     },
     "landing": {

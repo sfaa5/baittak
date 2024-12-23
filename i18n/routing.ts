@@ -9,7 +9,7 @@ export const routing = defineRouting({
   pathnames:{
     "/User/Posts":{
       en:"/User/Posts",
-      ar:"/الملف الشخصي/مم",
+      ar:"/User/Posts",
     },
     "/Company":{
       en:"/Company",
@@ -29,7 +29,7 @@ export const routing = defineRouting({
       },
       "/User/AddPost":{
         en:"/User/AddPost",
-        ar:"/اضافه/مستخدم"
+        ar:"/User/AddPost"
       },
       "/Property/:id": {
         en: "/Property/:id",  
