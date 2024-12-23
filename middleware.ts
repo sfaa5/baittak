@@ -18,26 +18,43 @@ const withAuthMiddleware =  withAuth(
  
     const pathname = request.nextUrl.pathname;
     const isAuth = await getToken({req:request});
-    const protectedRoutes = ['/User/Posts'];
+   
+     // Define protected routes by role
+     const protectedRoutes = {
+      user: ['/User/Posts'],
+      agency: ['/Company'],
+    };
 
-    console.log(pathname)
-    
-    const isProtectedRoute = protectedRoutes.some((route) =>
-      pathname.includes(route)
+  
+    console.log("Pathname:", pathname);
+    console.log("Authenticated User Role:", isAuth?.role);
+   
+    // Determine if the current route is protected based on the user's role
+    const isProtectedRoute = Object.entries(protectedRoutes).some(([role, routes]) =>
+      routes.some((route) => pathname.includes(route) && isAuth?.role === role)
     );
 
-    console.log("auth",isAuth)
-    console.log("protectd",isProtectedRoute)
 
-    if (isAuth){
-      return  I18nMiddleware(request);
-    }
-    
-    if(!isAuth && isProtectedRoute){
-      return NextResponse.redirect(new URL(new URL('/?login=true', request.url)));
+ console.log("Is Protected Route:", isProtectedRoute);
+
+
+     // Redirect unauthenticated users trying to access protected routes
+     if (!isAuth && Object.values(protectedRoutes).flat().some((route) => pathname.includes(route))) {
+      return NextResponse.redirect(new URL('/?login=true', request.url));
     }
 
-    return  I18nMiddleware(request);
+
+  // Redirect users to their allowed routes based on their roles
+    if (isAuth?.role === 'agency' && pathname.includes('/Company')) {
+      return I18nMiddleware(request);
+    }
+
+    if (isAuth?.role === 'user' && pathname.includes('/User/Posts')) {
+      return I18nMiddleware(request);
+    }
+
+    // Handle other cases (e.g., authenticated users on unprotected routes)
+    return I18nMiddleware(request);
     
     },
      {

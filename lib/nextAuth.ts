@@ -9,6 +9,7 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      role:string|null;
     };
   }
 
@@ -29,7 +30,7 @@ export const authOptions  = {
   },
 
   callbacks: {
-    async signIn({ user,account }:any) {
+    async signIn({ user }:any) {
       try {
         console.log("uaweeee",user);
 
@@ -37,12 +38,6 @@ export const authOptions  = {
           console.error("User email is missing");
           return false;
         }
-
-        const source = account?.callbackUrl?.includes("source=agency") ? "agency" : "user";
-        console.log("Source:", source);
-
-        if(!source) return false
-
 
         const response = await fetch(`https://baittak-server.vercel.app/api/users`, {
           method: "POST",
@@ -64,6 +59,7 @@ export const authOptions  = {
         // Parse the response and assign the user ID
         const { data } = await response.json();
         user.id = data._id; // Safely assign the ID
+        user.role=data.role
         console.log(user);
         console.log(data);
 
@@ -78,15 +74,17 @@ export const authOptions  = {
       // If the user is present (on sign in), add the user's ID to the token
       if (user) {
         token.id = user.id; // Store the user Id in the token
+        token.role =user.role
       }
 
       console.log("Token in jwt callback:", token);
       return token;
     },
 
-    async session({ session, token }:any) { 
+    async session({ session, token }:any) {
       // Add the token's ID to the session's user object
       session.user.id = token.id;
+      session.user.role = token.role
       console.log("Session in session callback:", session);
       return session;
     },

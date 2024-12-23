@@ -90,7 +90,7 @@ function MobileNavbar() {
             <Link href="/">
            
               <div className="flex items-center  gap-2 ">
-                <FaSignInAlt /> <span>{t("header.sign up")}</span>
+                <FaSignInAlt /> <span>{t("header.sign in")}</span>
               </div>
             </Link>
           </div>

@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocalSwitcher";
-
+import { SignAgency } from "@/app/[locale]/auth/SignAgency";
 
 
 const Navbar = () => {
@@ -37,7 +37,7 @@ console.log(session)
              <div className="flex items-center gap-2 " ><CiHeart />  <span>{t("favorites")}</span></div>
              {session ? session.user?.name:<SignInWithGoogle/>} 
             
-           <Link href='/Company' > <div className="flex items-center  gap-2" ><FaCircleUser /> <span>{t("agent login")}</span></div> </Link>
+            <SignAgency/>
     
 
           </div>
