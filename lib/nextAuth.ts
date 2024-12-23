@@ -29,7 +29,7 @@ export const authOptions  = {
   },
 
   callbacks: {
-    async signIn({ user }:any) {
+    async signIn({ user,account }:any) {
       try {
         console.log("uaweeee",user);
 
@@ -37,6 +37,12 @@ export const authOptions  = {
           console.error("User email is missing");
           return false;
         }
+
+        const source = account?.callbackUrl?.includes("source=agency") ? "agency" : "user";
+        console.log("Source:", source);
+
+        if(!source) return false
+
 
         const response = await fetch(`https://baittak-server.vercel.app/api/users`, {
           method: "POST",
@@ -78,7 +84,7 @@ export const authOptions  = {
       return token;
     },
 
-    async session({ session, token }:any) {
+    async session({ session, token }:any) { 
       // Add the token's ID to the session's user object
       session.user.id = token.id;
       console.log("Session in session callback:", session);

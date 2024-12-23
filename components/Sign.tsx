@@ -52,7 +52,7 @@ function Sign({ onClose }) {
         <div className="space-y-4">
           <button
             onClick={() => {
-       signIn('google')
+       signIn('google',{ callbackUrl: "/dashboard?source=agency" })
             }}
             className="flex items-center justify-center w-full px-4 py-2 bg-blue-400 text-white rounded-md hover:bg-blue-600"
           >
