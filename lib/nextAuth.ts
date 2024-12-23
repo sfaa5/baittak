@@ -71,7 +71,7 @@ export const authOptions  = {
     async jwt({ token, user }:any) {
       // If the user is present (on sign in), add the user's ID to the token
       if (user) {
-        token.id = user.id; // Store the user ID in the token
+        token.id = user.id; // Store the user Id in the token
       }
 
       console.log("Token in jwt callback:", token);
