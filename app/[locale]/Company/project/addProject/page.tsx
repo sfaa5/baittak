@@ -120,19 +120,7 @@ const handelImage = (file) => {
   });
 };
 
-const handleFileChange = (e) => {
-  const files = Array.from(e.target.files); // Get all selected files as an array
-  if (files.length > 0) {
-    Promise.all(files.map((file) => handelImage(file))) // Process all files
-      .then((results) => {
-        console.log("Base64 Image Data:", results); // Log the array of results for debugging
-        setImageBuffers(results); // Store all image buffers in state as an array
-      })
-      .catch((error) => {
-        console.error("Error processing images:", error); // Log errors if any
-      });
-  }
-};
+
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
