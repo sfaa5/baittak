@@ -68,12 +68,13 @@ function page() {
   const [loadingButton, setLoadingButton] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imageBuffers, setImageBuffers] = useState<string | null>(null);
+
   const [agency, setAgency] = useState(null); // State to store agency data
   const [loading, setLoading] = useState(true); // Loading state
 const [city,setCity]=useState('')
 const [open, setOpen] = React.useState(false);
 const [errorr,setError] =React.useState("")
-const [imageBuffers, setImageBuffers] = useState<string>();
 
 
 const [message,setMessage] =React.useState(false)
@@ -85,27 +86,32 @@ const locale = useLocale();
 
 
 
-  const handelImage = (file) => {
+
+
+  const handelImage = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-  
+
       reader.readAsDataURL(file); // Convert the file to Base64
-  
+
       reader.onloadend = () => {
-        resolve(reader.result); // Resolve the Base64 string
+        if (reader.result && typeof reader.result === "string") {
+          resolve(reader.result); // Resolve the Base64 string
+        } else {
+          reject(new Error("FileReader failed to produce a valid Base64 string."));
+        }
       };
-  
+
       reader.onerror = (error) => {
         reject(error); // Reject on error
       };
     });
   };
 
-
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]; // Get the first file
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]; // Get the first file
     if (file) {
+      setSelectedImage(file); // Optionally store the selected file
       handelImage(file)
         .then((result) => {
           console.log("Base64 Image Data:", result); // Log the result for debugging
