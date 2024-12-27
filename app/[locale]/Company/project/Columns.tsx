@@ -11,21 +11,45 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteProject } from "@/lib/actions/project.action";
+import { Update } from "./update";
 
 // Define the shape of the data
 export type Project = {
-  id: string;
+  _id: string;
+  images: string[];
   title: string;
-  priceFrom: number;
-  location: string;
-  totalUnits: number;
-  Bedrooms: number;
+  price: number;
+  address: string;
+  units: number;
+  bedrooms: number;
   like: number;
-  status: "Completed" | "Not Completed";
+  status: string;
 };
 
 // Define columns
 export const columns: ColumnDef<Project>[] = [
+
+
+  {
+    accessorKey: "images",
+    header: "Image",
+    cell: ({ row }) => {
+      console.log(row.original);
+      const images = row.original.images; // Access the images array
+      const firstImage = images?.[0]; // Get the first image's URL
+
+      return (
+        <div className="flex items-center">
+          <img
+            src={firstImage} // Ensure there's no double slash
+            alt={`Image `}
+            className="w-14 h-14 rounded-lg object-cover"
+          />
+        </div>
+      );
+    },
+  },
   {
     accessorKey: "title",
     header: ({ column }) => (
@@ -37,20 +61,26 @@ export const columns: ColumnDef<Project>[] = [
       </Button>
     ),
   },
+
+
   {
-    accessorKey: "priceFrom",
+accessorKey:"status",
+header:"Status"
+  },
+  {
+    accessorKey: "price",
     header: "Price From",
   },
   {
-    accessorKey: "location",
+    accessorKey: "address",
     header: "Location",
   },
   {
-    accessorKey: "totalUnits",
+    accessorKey: "units",
     header: "Total Units",
   },
   {
-    accessorKey: "Bedrooms",
+    accessorKey: "bedrooms",
     header: "Bedrooms",
   },
   {
@@ -60,8 +90,8 @@ export const columns: ColumnDef<Project>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const propertyData: Project = row.original;
-
+      const project: Project = row.original;
+const id = project._id
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -75,7 +105,7 @@ export const columns: ColumnDef<Project>[] = [
             <DropdownMenuItem
               onClick={async () => {
                 try {
-                  await navigator.clipboard.writeText(propertyData.id);
+                  await navigator.clipboard.writeText(project._id);
                   alert("Property ID copied to clipboard!");
                 } catch (err) {
                   console.error("Failed to copy: ", err);
@@ -86,8 +116,8 @@ export const columns: ColumnDef<Project>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View project</DropdownMenuItem>
-            <DropdownMenuItem>Update</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <Update project={project}/>
+            <DropdownMenuItem onClick={()=>deleteProject({id})}>  Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

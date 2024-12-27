@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-
+import StateProvider from "../context/stateProvider";
 import "./globals.css";
 import {notFound} from 'next/navigation';
 import {NextIntlClientProvider} from 'next-intl';
@@ -77,10 +77,10 @@ export default async function RootLayout({
  
 
         <NextAuthProvider>        <NextIntlClientProvider messages={messages}>
-          <Header/>
-       {children}
+        <StateProvider>
+       {children}</StateProvider>
        <Toaster />
-          <Footer/>           </NextIntlClientProvider>
+         </NextIntlClientProvider>
           </NextAuthProvider>
 
 

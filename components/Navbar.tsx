@@ -10,6 +10,8 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocalSwitcher";
 import { SignAgency } from "@/app/[locale]/auth/SignAgency";
+import SignOut from "./SignOut";
+
 
 
 const Navbar = () => {
@@ -19,7 +21,7 @@ const Navbar = () => {
   const  t = useTranslations("header");
   const { data: session } = useSession();
 
-console.log(session)
+console.log('session',session)
 
   return (
 
@@ -34,11 +36,14 @@ console.log(session)
           <div className="flex gap-8 justify-end">
              <LocaleSwitcher/>
           
-             <div className="flex items-center gap-2 " ><CiHeart />  <span>{t("favorites")}</span></div>
-             {session ? session.user?.name:<SignInWithGoogle/>} 
+             <div className="flex items-center gap-2 cursor-pointer" ><CiHeart />  <span>{t("favorites")}</span></div>
+             {session ? <SignOut user={session?.user}/>  :<SignInWithGoogle/>}
+
+
+           
             
-            <SignAgency/>
-    
+      
+             {session?.user?.role=="agency"? <Link href='/Company/about'>الشركة</Link>  : <SignAgency/> } 
 
           </div>
 
@@ -48,7 +53,12 @@ console.log(session)
               <Link className="text-secondary font-medium text-lg" href='/Property'>{t("properties")}</Link>
               <Link className="text-secondary font-medium text-lg" href="/Projects">{t("projects")}</Link>
               <Link className="text-secondary font-medium  text-lg" href="/Agency">{t("agency")}</Link>
+              {session?.user.role!=="agency"&& 
               <Link href="/User/Posts" className="text-secondary font-medium  text-lg">{t("profile")}</Link>
+              
+              }
+
+
 
 
             </div>

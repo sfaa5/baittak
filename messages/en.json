@@ -57,6 +57,8 @@
       "enter_location": "Enter location here",
       "apartment": "Apartment",
       "rooms_bath": "Rooms & Bath",
+      "rooms": "Rooms ",
+
       "price": "Price",
       "filters": "Filters",
       "search_button": "Search",
@@ -75,6 +77,12 @@
       "results": "results"
     },
     "project": {
+      "address":"Address",
+"MONTHLY":"MONTHLY",
+"YEARS":"YEARS",
+
+"StartingFrom":"Start Form",
+"FIRSTPAYMENT":"FIRST PAYMENT",
       "project_title": "Projects",
       "projects": "{{count}} new Projects in Saudi",
       "sort_by": "Sort By",
@@ -96,7 +104,7 @@
       "results_section": {
         "matching_companies_title": "Matching companies",
         "sort_by": "Sort By",
-        "total_results": "{{count}} results"
+        "total_results": "results"
       },
       "cards_section": {
         "agent_cards_title": "Companies List"
@@ -188,6 +196,18 @@
       "Pool":"Pool"
     },
     "addUser":{
+      "units":"Number of Units",
+      "priceM":"Price for Meter",
+      "start":"Price From",
+      "Completed":"Completed",
+      "UnderDevelopment":"Under Development",
+      "status":"Status",
+      "Currency":"Currency",
+      "USD":"USD",
+      "SAR":"SAR",
+      "Monthly":"Monthly",
+      "Yearly":"Yearly",
+      "RentalType":"Rental Type",
       "the newest":"the newest",
       "the oldest":"the oldest",
       "the most price":"the most price",
@@ -195,6 +215,20 @@
   "addCity": "Add City",
       "addListing": "Add A Listing",
       "selectPropertyType": "Select the type of property",
+      "selectProjectType":"Project Type",
+      "apartment":"Apartment",
+      "villa":"Villa",
+      "farm":"Farm",
+      "rest-house":"Rest house",
+      "residential-complex":"Residential Complex",
+      "duplex":"Duplex",
+      "building":"Building",
+      "hotel-apartments":"Hotel Apartments",
+      "land":"Land",
+      "full-floor":"Full Floor",
+
+"all":"All",
+
       "sell": "Sell",
       "selectPropertyTypee": "type of property",
       "select":"select",
@@ -216,12 +250,18 @@
       "uploadImages": "Click to upload house images",
       "selectedImages": "Selected Images:",
       "remove": "Remove",
+"InstallmentSystem":"(optional) if you have Installment System",
+
+      "firstPayment":"First Payment",
       "basement": "Basement",
       "swimmingPool": "Swimming Pool",
+      "InstallmentPeriod":"Installment Period",
       "familyRoom": "Family Room",
       "airConditioning": "Air Conditioning",
       "fittedWardrobes": "Fitted Wardrobes",
       "disabilityAccess": "Disability Access",
+      "addProject":"Add Project",
+      "annualInterest":"Annual Interest Rate",
       "lift": "Lift",
       "exterior": "Exterior",
       "garden": "Garden",
@@ -237,12 +277,15 @@
       "Package": "Package",
       "Logout": "Logout",
       "agentInfo": {
+        "city":"City",
+
         "title": "Agent Information",
-        "companyName": "Salman Real Estate Company",
+        "companyName": " Company",
         "activeListing": "Active Listing",
         "address": "Address",
         "phoneNumber": "Phone Number",
         "email": "Email Address",
+        "owner":"Owner",
         "edit": "Edit"
       },
       "compose": "+ Compose",

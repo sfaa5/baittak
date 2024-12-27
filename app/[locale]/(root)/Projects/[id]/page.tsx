@@ -1,25 +1,57 @@
-"use client";
+
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
+
 import Map from "@/components/Map";
-import { useTranslations } from "next-intl";
-import {useLocale} from "next-intl";
 
-function Page() {
-  const t = useTranslations();
-const locale = useLocale();
 
-  const images = [
-    "/project/house.png",
-    "/project/house2.png",
-    "/project/house3.png",
-    "/project/house4.png",
-    "/project/house5.png",
-  ];
+import Image from "../Image";
+import FormReq from "../FormReq";
+import { getLocale, getTranslations } from "next-intl/server";
+import Description from "../Description";
+
+async function Page({ params }: { params: Promise<{ id: string }> }) {
+
+
+  const id = (await params).id;
+
+  console.log(id)
+  const t = await getTranslations();
+  const locale = await getLocale();
+
+  const response = await fetch(`http://localhost:5001/api/projects/${id}`)
+  const data = await response.json();
+
+
+
+  console.log("dddddddddddddddddddas",data)
+
+
+  const {
+    _id,
+    title,
+    city,
+
+    address,
+    des,
+    price,
+    firstPayment,
+    annualInterest,
+    installmentPeriod,
+    priceM,
+    bedrooms,
+    status,
+    amenities,
+    images,
+    units,
+    user:{
+      image:{url},
+      companyName,
+      phoneNumber,
+      _id: userId,
+
+    }
+  }=data;
+
 
   const amenityIcon = (
     <svg
@@ -54,7 +86,7 @@ const locale = useLocale();
     </svg>
   );
 
-  const amenities = [
+  const amenitiess = [
     { id: 1, name: t("Project.Balcony"), icon: amenityIcon },
     { id: 2, name: t("Project.Wi-Fi"), icon: amenityIcon },
     { id: 3, name: t("Project.Parking"), icon: amenityIcon },
@@ -80,82 +112,32 @@ const locale = useLocale();
           />
           <div className="flex flex-col gap-3">
             <div className="flex gap-3 sm:gap-4 items-center">
-              <p className="text-xs sm:text-base">{t("Project.By")} شركة امجال للتطوير العقاري</p>
+              <p className="text-xs sm:text-base">{t("Project.By")} {companyName}</p>
               <p className="rounded-[0.6rem] text-xs sm:text-sm bg-white p-[1px] sm:px-2">
-                {t("Project.Completed")}
+                {status}
               </p>
             </div>
             <h3 className="text-xl sm:text-2xl sm:text-secondary text-white font-semibold">
-         Amajal AlYasmin project
+        {title}
             </h3>
           </div>
         </div>
         <div className="flex sm:flex-row w-full sm:justify-end">
-          <p className="text-xl font-medium text-white">{t("Project.Price From")} 1,362,500 {t("propertyDetails.SAR")}</p>
+          <p className="text-xl font-medium text-white">{t("Project.Price From")} {price} {t("propertyDetails.SAR")}</p>
         </div>
       </div>
 
       {/* Images & Form */}
       <div className="flex gap-10 mt-6">
-        <div className="grid grid-cols-6 gap-y-7 gap-x-10 items-center grid-rows-7 xl:w-[62%] w-full">
-          {/* Large Image Swiper */}
-          <div className="col-span-6 row-span-7">
-            <Swiper
-              slidesPerView={1}
-              spaceBetween={10}
-              pagination={{ clickable: true }}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              className="w-full"
-            >
-              {images.map((src, index) => (
-                <SwiperSlide key={index}>
-                  <img
-                    src={src}
-                    alt={`Property Slide ${index + 1}`}
-                    className="w-full h-auto object-cover rounded-xl"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
+
+          <Image images={images} />
 
         {/* Contact Form */}
-        <div className="xl:flex flex-col gap-5 w-[35%] p-5 shadow-lg rounded-[0.6rem] hidden">
-          <div className="w-full flex gap-2 items-center bg-gray-200 p-3 rounded-[0.6rem]">
-            <img src="/project/desktop (1) 2.png" alt="company" />
-            <p className="text-secondary font-medium ">
-              Amjal AlYasmin ProJect
-            </p>
-          </div>
-          <input
-            type="text"
-            placeholder={t("Project.Name")}
-            className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
-          />
-          <input
-            type="text"
-            placeholder={t("Project.phone")}
-            className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
-          />
-          <input
-            type="text"
-            placeholder={t("Project.email")}
-            className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
-          />
-          <textarea
-            placeholder={t("Project.hello i am")}
-            className="w-full border-gray-400 h-36 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
-          />
-          <button className="rounded-[0.6rem] p-5 bg-secondary text-white font-semibold">
-            {t("Project.request details")}
-          </button>
-          <button className="rounded-[0.6rem] p-5 bg-primary text-white font-semibold">
-            {t("Project.CALL NOW")}
-          </button>
-        </div>
+        <FormReq agencyy={userId} _id={_id} title={title} phoneNumber={phoneNumber}/>
+
       </div>
+
+      
 
       {/* About Section */}
       <div className="flex flex-col w-full lg:w-2/3 mt-12 lg:mt-24 mb-10">
@@ -169,11 +151,11 @@ const locale = useLocale();
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Price From")}</p>
-              <p className="font-medium">1,362,500 {t("propertyDetails.SAR")}</p>
+              <p className="font-medium">{Number(price).toLocaleString()} {t("propertyDetails.SAR")}</p>
             </div>
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Price To")}</p>
-              <p className="font-medium">1,362,500 {t("propertyDetails.SAR")}</p>
+              <p className="font-medium">{Number(price).toLocaleString()} {t("propertyDetails.SAR")}</p>
             </div>
           </div>
 
@@ -185,7 +167,7 @@ const locale = useLocale();
             </div>
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Total units")}</p>
-              <p className="font-medium">12</p>
+              <p className="font-medium">{units}</p>
             </div>
           </div>
 
@@ -193,11 +175,11 @@ const locale = useLocale();
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Status")}</p>
-              <p className="font-medium">{t("Project.Completed")}</p>
+              <p className="font-medium">{status==="Completed"&&locale==="ar"&&"مكتمل"}</p>
             </div>
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Bedrooms")}</p>
-              <p className="font-medium">4 {t("Project.Bedrooms")}</p>
+              <p className="font-medium">{bedrooms} {t("Project.Bedrooms")}</p>
             </div>
           </div>
         </div>
@@ -206,26 +188,24 @@ const locale = useLocale();
       </div>
 
       {/* Map */}
-      <Map />
+      {/* <Map /> */}
 
       {/* Description */}
       <div className="w-full lg:w-2/3 mt-10">
         <h3 className="text-xl font-medium mb-3">{t("Project.DESCRIPTION")}</h3>
-        <p className="text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate architecto, cupiditate delectus obcaecati at reprehenderit aspernatur quaerat minima sapiente officiis voluptas, laboriosam beatae eveniet laborum. Error omnis vero repudiandae cumque.
-        </p>
+ <Description des={des}/>
       </div>
 
       {/* Amenities */}
       <div className="w-full lg:w-2/3 mt-10 mb-20">
         <h3 className="text-xl font-medium mb-5">{t("Project.AMENITIES")}</h3>
         <div className="grid grid-cols-4 gap-y-5 gap-x-3">
-          {amenities.map((amenity) => (
+          {/* {amenities.map((amenity) => (
             <div key={amenity.id} className="flex gap-2 items-center">
               {amenity.icon}
               <span className="text-lg">{amenity.name}</span>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

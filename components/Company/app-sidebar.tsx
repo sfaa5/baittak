@@ -8,13 +8,15 @@ import {
 import { FaCircleUser } from "react-icons/fa6";
 import { House, Mail, Package2, LayoutDashboard, Building } from "lucide-react";
 import { FaSignInAlt } from "react-icons/fa";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {useLocale} from "next-intl";
 import EnglishLogo from "../EnglishLogo";
 import BaittaklogoArabic from "../ArabicLogo";
 import { Button } from "../ui/button";
+import { IoIosLogOut } from "react-icons/io";
+import { signOut } from "next-auth/react";
 
 export function AppSidebar() {
   const [activeItem, setActiveItem] = useState<string | null>(null);
@@ -25,42 +27,34 @@ export function AppSidebar() {
   const sidebarPosition = locale === "ar" ? "right" : "left";
 
   // Menu items with translated titles.
-  const items = [
+  const items: { title: string; url: string; icon: JSX.Element }[] = [
     {
       title: t("company.Information"),
-      url: "about",
+      url: "/Company/about",
       icon: <LayoutDashboard />,
     },
     {
       title: t("company.Properties"),
-      url: "Properties",
+      url: "/Company/Properties",
       icon: <Building />,
     },
-    {
-      title: t("company.Agents"),
-      url: "#",
-      icon: <FaCircleUser />,
-    },
+
     {
       title: t("company.Project"),
-      url: "project",
+      url: "/Company/project",
       icon: <House />,
     },
     {
       title: t("company.Messages"),
-      url: "messages",
+      url: "/Company/messages",
       icon: <Mail />,
     },
     {
       title: t("company.Package"),
-      url: "Plan",
+      url: "/Company/Plan",
       icon: <Package2 />,
     },
-    {
-      title: t("company.Logout"),
-      url: "#",
-      icon: <FaSignInAlt />,
-    },
+
   ];
 
   const handleItemClick = (title: string) => {
@@ -72,14 +66,14 @@ export function AppSidebar() {
       <SidebarHeader />
       <SidebarContent>
         <div className="flex justify-center mb-10">
-          <Link href={"/"}>
+          <Link href="/">
             {locale === "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
           </Link>
         </div>
 
         <div className="flex flex-col gap-6">
           {items.map((item, key) => (
-            <Link href={item.url} key={key} className="block">
+            <Link href={item.url as any} key={key} className="block">
               <Button
                 variant={"default"}
               
@@ -95,7 +89,17 @@ export function AppSidebar() {
           ))}
         </div>
       </SidebarContent>
-      <SidebarFooter />
+      
+      <SidebarFooter >  <div className="flex  justify-start items-start   p-4 border-t border-gray-300">
+      <Button
+      onClick={ ()=>signOut()}
+       
+        className="flex items-center gap-2  text-secondary  hover:text-white bg-transparent hover:bg-secondary/80 px-4 py-2 rounded-lg transition-all duration-200 ease-in-out shadow-md"
+      >
+        <IoIosLogOut size={20} />
+        <span className="text-md font-medium">Log Out</span>
+      </Button>
+    </div> </SidebarFooter>
     </Sidebar>
   );
 }

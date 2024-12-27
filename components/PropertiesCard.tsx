@@ -35,12 +35,15 @@ function PropertiesCard({ post }: { post: property }) {
     }
   };
 
+console.log("post",post)
+
   const {
+    CompanyImage,
     propertyType,
     title,
     price,
     address,
-    img,
+    images,
     bathrooms,
     bedrooms,
     amenities,
@@ -50,25 +53,29 @@ function PropertiesCard({ post }: { post: property }) {
     _id,
   } = post;
 
+  console.log(post)
+
   console.log(amenities);
   const [showNumber, setShowNumber] = useState(false);
   return (
     <div className=" max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]">
       
         <div className=" md:flex flex-col md:flex-row">
+
+          
           <div className="relative group">
             <div
               ref={carouselRef}
               className="flex overflow-x-hidden gap-4 w-[320px]" // Hides overflow to only show one image
               style={{ scrollSnapType: "x mandatory" }}
             >
-              {img.map((im, index) => (
+              {images?.map((im, index) => (
                 <div
                   key={index}
                   className="flex-shrink-0 w-full snap-start " // Makes sure only one image shows up at a time
                 >
                   <img
-                    src={`https://baittak-server.vercel.app${im}`}
+                    src={im}
                     alt={`carousel image ${index + 1}`}
                     className="w-full h-auto object-cover  md:h-[280px] md:w-100"
                   />
@@ -183,12 +190,13 @@ function PropertiesCard({ post }: { post: property }) {
                   <FaWhatsapp className="w-5 h-5" />
                 </button>
               </div>
-
-              <img
-                src="/home/image 1.png"
+{CompanyImage&&             <img
+              
+              src={CompanyImage}
                 alt="comoany"
-                className="hidden sm:flex"
-              />
+                className="hidden sm:flex w-10"
+              />}
+ 
             </div>
 
 

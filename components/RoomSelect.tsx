@@ -1,3 +1,4 @@
+"use client"
 import { useTranslations } from "next-intl";
 import React, { useState, useEffect, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";

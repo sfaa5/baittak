@@ -22,11 +22,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
+import { useSharedState } from "@/app/context/stateProvider";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  columFilter:string;
+  columFilter: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -38,7 +39,9 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-   const table = useReactTable({
+        const { showDelte, setShowDelte } = useSharedState();
+  
+  const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -55,25 +58,28 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-              <div className="flex items-center py-4">
+      <div className="flex items-center py-4">
+        <div className="grid grid-cols-2  w-full">
+        
+          <Input
+            placeholder="Filter title..."
+            value={
+              (table.getColumn(columFilter)?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn(columFilter)?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
 
-                <div className="felx  justify-between w-full">  <Input
-          placeholder="Filter title..."
-          value={(table.getColumn(columFilter)?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn(columFilter)?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
 
-       
-</div>
-      
+          {showDelte&&(<Button className="w-20 ml-[405px]">delete</Button>)}
+
+
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
-
-
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -107,10 +113,8 @@ export function DataTable<TData, TValue>({
                       )}
                     </TableCell>
                   ))}
-
                 </TableRow>
               ))
-      
             ) : (
               <TableRow>
                 <TableCell

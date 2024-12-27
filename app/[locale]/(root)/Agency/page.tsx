@@ -1,4 +1,4 @@
-"use client"
+
 import AgentCard from "@/components/AgentCard";
 import Link from "next/link";
 import React from "react";
@@ -6,11 +6,53 @@ import { GoSearch } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
-import { useTranslations } from "next-intl";
+
+import { getTranslations } from "next-intl/server";
+import Search from "./Search";
+
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
 
-function Page() {
-  const t  = useTranslations();
+
+
+async function Page( { searchParams }: PageProps) {
+  const t  = await getTranslations();
+
+
+  const resolvedSearchParams = await searchParams;
+  const queryParams = new URLSearchParams();
+  for (const key in resolvedSearchParams) {
+    const value = resolvedSearchParams[key];
+    if (Array.isArray(value)) {
+      value.forEach((v) => queryParams.append(key, v));
+    } else if (value !== undefined) {
+      queryParams.append(key, value);
+    }
+  }
+
+
+  const page = queryParams.get('page') ?? '1';
+  const per_page = queryParams.get('per_page') ?? '5';
+  const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ...
+  const end = start + Number(per_page); // 5, 10, 15 ...
+
+  const city = queryParams.get('city') ?? '';
+  const service = queryParams.get('service') ?? '';
+
+
+  console.log("iii",city,service)
+
+
+  const response =await fetch(`http://localhost:5001/api/agency?city=${city}&service=${service}`)
+
+  const data = await response.json();
+
+    console.log("agency",data)
+
+    console.log("in",data)
+    console.log("properites",data.data)
 
   return (
     <>
@@ -21,22 +63,8 @@ function Page() {
             <h1 className="text-4xl font-medium text-white">
               {t("agency.banner.title")}
             </h1>
-
-            <div className="flex justify-start gap-1 sm:gap-3 overflow-x-auto flex-nowrap px-2 touch-pan-x hide-scrollbar">
-              <input
-                placeholder={t("agency.banner.search_placeholder")}
-                className="bg-white flex h-[48px] font-normal items-center w-[300px] lg:w-[400px] rounded-[.8rem] justify-between px-1 md:px-4"
-              />
-
-              <button className="hidden sm:flex bg-white w-auto h-[48px] gap-2 items-center font-normal text-gray-400 rounded-[.8rem] justify-between px-2 md:px-4">
-                {t("agency.banner.service_needed")}
-                <IoIosArrowDown className="h-5 w-5" />
-              </button>
-
-              <button className="flex w-auto h-[48px] items-center font-medium text-white bg-primary rounded-[.8rem] justify-between px-4">
-                <GoSearch className="font-bold text-white" />
-              </button>
-            </div>
+<Search/>
+  
           </div>
         </div>
       </section>
@@ -62,14 +90,12 @@ function Page() {
             <h3 className="text-xl font-medium">
               {t("agency.results_section.matching_companies_title")}
             </h3>
-            <button className="flex w-[125px] h-[45px] items-center font-normal text-[#707070] rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-4">
-              {t("agency.results_section.sort_by")}
-              <IoIosArrowDown className="h-5 w-5 text-[#707070]" />
-            </button>
+
           </div>
 
           <span className="text-[#707070]">
-            {t("agency.results_section.total_results")}
+       <span>{t("agency.results_section.total_results")}</span>  :   
+       {data && data.data ? data.data.length : 0}
           </span>
         </div>
       </section>
@@ -77,12 +103,16 @@ function Page() {
       {/* Cards Section */}
       <section className="container 2xl:px-[120px] mt-10 mb-36">
         <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-between gap-10 md:gap-14">
-          <AgentCard />
-          <AgentCard />
-          <AgentCard />
-          <AgentCard />
-          <AgentCard />
-          <AgentCard />
+{data.data?.length>0?(
+  data.data.map((post,key:number)=>(
+              <AgentCard post={post} key={key} />
+  ))
+
+):(<p className="no-results">No posts found</p>)}
+
+
+
+
         </div>
       </section>
     </>

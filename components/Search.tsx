@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { useLocale, useTranslations } from "next-intl";
@@ -36,7 +36,8 @@ function Search() {
   const [propertyType, setPropertyType] = useState("");
   const [rooms, setRooms] = useState("");
   const [bathrooms, setBarooms] = useState("");
-  const [purpose, setPurpose] = useState("");
+  const [purpose,setPurpose]=useState('')
+
 
   const [priceRange, setPriceRange] = React.useState<{
     min?: number;

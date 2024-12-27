@@ -1,5 +1,7 @@
 import { type AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { redirect } from "next/navigation";
+
 
 // Type augmentation for NextAuth
 declare module "next-auth" {
@@ -9,6 +11,7 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      phoneNumber?:string|null;
       role:string|null;
     };
   }
@@ -53,13 +56,14 @@ export const authOptions  = {
 
         if (!response.ok) {
           console.error("Failed to create or fetch user:", await response.text());
-          return false;
+          return '/?login=true';
         }
 
         // Parse the response and assign the user ID
         const { data } = await response.json();
         user.id = data._id; // Safely assign the ID
         user.role=data.role
+        user.phoneNumber=data.phoneNumber||""
         console.log(user);
         console.log(data);
 
@@ -75,6 +79,7 @@ export const authOptions  = {
       if (user) {
         token.id = user.id; // Store the user Id in the token
         token.role =user.role
+        token.phoneNumber=user.phoneNumber||""
       }
 
       console.log("Token in jwt callback:", token);
@@ -84,9 +89,18 @@ export const authOptions  = {
     async session({ session, token }:any) {
       // Add the token's ID to the session's user object
       session.user.id = token.id;
-      session.user.role = token.role
+      session.user.role = token.role;
+      session.user.phoneNumber=token.phoneNumber||"";
       console.log("Session in session callback:", session);
       return session;
+    },
+    async redirect({ url, baseUrl }: any) {
+      // Redirect to home with the query parameter if `signIn` returns `/?login=true`
+      if (url === '/?login=true') {
+        return `${baseUrl}/?login=true`; // Append `login=true` to the base URL
+      }
+
+      return url; // Allow other redirects to work as expected
     },
   },
 

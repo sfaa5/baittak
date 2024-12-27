@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/form";
 import { useSession } from "next-auth/react";
 import { useLocale } from "next-intl";
+import SignPhone from "@/components/SignPhoen";
 
 // Define Zod schema for form validation
 const formSchema = z.object({
@@ -54,6 +55,46 @@ const formSchema = z.object({
 });
 
 function Page() {
+
+  const { data: session } = useSession();
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+
+console.log("setionn",session)
+  useEffect(() => {
+    console.log("setionnINNN",session)
+    if (!session?.user?.phoneNumber) { // Ensure phone is undefined or falsy
+      setShowPhoneModal(true);
+    }
+  }, [session]);
+
+  const handlePhoneUpdate = async (newPhoneNumber) => {
+    try {
+      // Send the update request
+      const response = await fetch(`http://localhost:5001/api/users/${session?.user.id}`, {
+        method: "PUT", // Use PATCH for partial updates
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phoneNumber: newPhoneNumber }), // Pass the new phone number
+      });
+  
+      // Check if the response is successful
+      if (response.ok) {
+        // Optionally refetch the session or update it locally
+        session.user.phoneNumber = newPhoneNumber; // Simulating session update for now
+        setShowPhoneModal(false);
+      } else {
+        console.error("Failed to update phone number");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  console.log("phoneeeeeeeee",showPhoneModal)
+
+
+
   const  t  = useTranslations();
   const locale = useLocale();
  
@@ -76,7 +117,7 @@ function Page() {
   }
   
   const [cities, setCities] = useState<City[]>([]);
-  const { data: session } = useSession();
+
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -200,6 +241,8 @@ function Page() {
   };
 
   return (
+
+    <>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col gap-6 mb-20">
         {/* add a listing */}
@@ -571,22 +614,6 @@ function Page() {
             />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                  <FormField
             control={form.control}
             name="address"
@@ -726,6 +753,14 @@ function Page() {
         <Button  type="submit">Submit</Button>
       </form>
     </Form>
+    
+    {showPhoneModal && (
+        <SignPhone   onComplete={handlePhoneUpdate} // Pass handler to update phone
+        isOpen={showPhoneModal} 
+        />
+      )}
+    
+    </>
   );
 }
 

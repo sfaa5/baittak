@@ -7,6 +7,10 @@ export const routing = defineRouting({
   locales: ['en', 'ar'],
   defaultLocale: 'en',
   pathnames:{
+    "/":{
+      en:"/",
+      ar:"/"
+    },
     "/User/Posts":{
       en:"/User/Posts",
       ar:"/User/Posts",
@@ -15,6 +19,26 @@ export const routing = defineRouting({
       en:"/Company",
       ar:"/شركة"
     },
+    "/Company/about":{
+      en:"/Company/about",
+      ar:"/شركة/معلومات"
+    },
+    "/Company/Properties":{
+      en:"/Company/Properties",
+      ar:"/شركة/العقارات"
+    }, 
+       "/messages":{
+      en:"/messages",
+      ar:"/الرسال"
+    },
+    "/Plan":{
+      en:"/Plan",
+      ar:"/الخطط"
+    },
+
+    
+
+
     "/Property":{
       en:"/Property",
       ar:"/العقارات"

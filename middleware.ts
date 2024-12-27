@@ -13,58 +13,51 @@ import { t } from "i18next";
 
 
 
-const withAuthMiddleware =  withAuth(
-  async function middleware(request: NextRequest) {
- 
-    const pathname = request.nextUrl.pathname;
-    const isAuth = await getToken({req:request});
-   
-     // Define protected routes by role
-     const protectedRoutes = {
-      user: ['/User/Posts'],
-      agency: ['/Company'],
-    };
-
+  const withAuthMiddleware = withAuth(
+    async function middleware(request: NextRequest) {
+      const pathname = request.nextUrl.pathname;
+      const isAuth = await getToken({ req: request });
   
-    console.log("Pathname:", pathname);
-    console.log("Authenticated User Role:", isAuth?.role);
-   
-    // Determine if the current route is protected based on the user's role
-    const isProtectedRoute = Object.entries(protectedRoutes).some(([role, routes]) =>
-      routes.some((route) => pathname.includes(route) && isAuth?.role === role)
-    );
-
-
- console.log("Is Protected Route:", isProtectedRoute);
-
-
-     // Redirect unauthenticated users trying to access protected routes
-     if (!isAuth && Object.values(protectedRoutes).flat().some((route) => pathname.includes(route))) {
-      return NextResponse.redirect(new URL('/?login=true', request.url));
-    }
-
-
-  // Redirect users to their allowed routes based on their roles
-    if (isAuth?.role === 'agency' && pathname.includes('/Company')) {
-      return I18nMiddleware(request);
-    }
-
-    if (isAuth?.role === 'user' && pathname.includes('/User/Posts')) {
-      return I18nMiddleware(request);
-    }
-
-    // Handle other cases (e.g., authenticated users on unprotected routes)
-    return I18nMiddleware(request);
-    
-    },
-     {
-      callbacks:{
-        async authorized(){
-          return true;
-        },
+      // Define protected routes
+      const protectedRoutes = ['/User/Posts', '/Company'];
+  
+      console.log("Pathname:", pathname);
+      console.log("Authenticated User Role:", isAuth?.role);
+  
+      // Check if the current route is protected
+      const isProtectedRoute = protectedRoutes.some((route) => pathname.includes(route));
+  
+      console.log("Is Protected Route:", isProtectedRoute);
+  
+      // Redirect unauthenticated users trying to access protected routes
+      if (!isAuth && isProtectedRoute) {
+        return NextResponse.redirect(new URL('/?login=true', request.url));
       }
+  
+      // Handle role-based access
+      if (
+        (isAuth?.role === 'agency' && pathname.includes('/Company')) ||
+        (isAuth?.role === 'user' && pathname.includes('/User'))
+      ) {
+        return I18nMiddleware(request);
+      }
+  
+      // Redirect users with invalid roles accessing protected routes
+      if (isProtectedRoute) {
+        return NextResponse.redirect(new URL('/?unauthorized=true', request.url));
+      }
+  
+      // Allow other routes
+      return I18nMiddleware(request);
+    },
+    {
+      callbacks: {
+        async authorized() {
+          return true; // Always allow execution; handle authorization logic in middleware
+        },
+      },
     }
-     );
+  );
 
 
 

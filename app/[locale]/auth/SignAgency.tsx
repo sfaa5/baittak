@@ -116,14 +116,14 @@ const [message,setMessage] =React.useState(false)
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-      <div className="flex items-center  gap-2" ><FaCircleUser /> <span>{t("agent login")}</span></div> 
+      <div className="flex items-center  gap-2 cursor-pointer" ><FaCircleUser /> <span>{t("agent login")}</span></div> 
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-white">
         {message===false&&(        <DialogHeader>
-          <DialogTitle>Add Admin</DialogTitle>
-          <DialogDescription>
-            Enter the details of the new admin here. Click save when you are done.
-          </DialogDescription>
+          <DialogTitle>انضم إلى شبكة الوكلاء العقاريين المميزة</DialogTitle>
+<DialogDescription>
+  ابدأ رحلتك معنا اليوم! أدخل بياناتك للانضمام إلى مجتمع احترافي يفتح لك أبواب النجاح في سوق العقارات.  
+</DialogDescription>
         </DialogHeader>)}
 
 
