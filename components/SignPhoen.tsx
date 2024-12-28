@@ -12,7 +12,7 @@ function SignPhone({ onComplete, isOpen }) {
       }
     };
   
-    if (!isOpen) return null; // Render nothing if the modal is not open
+    if (!isOpen) return null; 
   
     return (
       <div className="modal">

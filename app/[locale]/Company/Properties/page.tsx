@@ -8,12 +8,13 @@ import Link from "next/link";
 
 
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 
 
 export default async function DemoPage() {
 
-const response = await fetch('http://localhost:5001/api/properties/get')
+const response = await fetch(`${URL_SERVER}/api/properties/get`)
 const data = await response.json()
 console.log(data)
 

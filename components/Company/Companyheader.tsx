@@ -15,6 +15,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuth";
 
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 
 async function Companyheader() {
@@ -23,7 +24,7 @@ async function Companyheader() {
   const id = session?.user.id
   console.log(id)
   
-  const response = await fetch(`http://localhost:5001/api/agency/${id}`)
+  const response = await fetch(`${URL_SERVER}/api/agency/${id}`)
   const data = await response.json()
 
   return (

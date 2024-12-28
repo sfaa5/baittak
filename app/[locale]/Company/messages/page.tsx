@@ -5,6 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { columns } from './columns';
 import { useSession } from "next-auth/react";
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 export default function Page() {
   const [data, setData] = useState([]); // State to store fetched data
   const [loading, setLoading] = useState(true); // State to handle loading state
@@ -21,7 +24,7 @@ export default function Page() {
 
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:5001/api/requests/${id}`);
+          const response = await fetch(`${URL_SERVER}/api/requests/${id}`);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }

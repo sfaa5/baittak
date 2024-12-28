@@ -1,15 +1,18 @@
 import { toast } from "@/hooks/use-toast";
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 export async function deleteProperty({id}: { id: string }){
 
 
     const confirmDelete = window.confirm(
-        "Are you sure you want to delete this user? This action cannot be undone."
+        "Are you sure you want to delete this user?."
       );
       if (!confirmDelete) return;
 
       try {
-        const response = await fetch(`http://localhost:5001/api/properties/${id}`, { 
+        const response = await fetch(`${URL_SERVER}/api/properties/${id}`, { 
           method: "DELETE",
         });
     
@@ -25,7 +28,7 @@ export async function deleteProperty({id}: { id: string }){
     
     
       } catch (error) {
-        console.error("Failed to delete property:", error);
+        console.error("Failed to delete property", error);
         alert("An error occurred while trying to delete the property.");
       }
 

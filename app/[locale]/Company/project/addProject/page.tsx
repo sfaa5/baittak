@@ -52,6 +52,9 @@ const formSchema = z.object({
   installmentPeriod:z.number().optional(),
 });
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 function Page() {
   const t = useTranslations();
   const locale = useLocale();
@@ -203,7 +206,7 @@ const handelImage = (file) => {
 
 
 
-      const response = await fetch("http://localhost:5001/api/projects/add", {
+      const response = await fetch(`${URL_SERVER}/api/projects/add`, {
         method: "POST",
         body: formData,
       });

@@ -12,6 +12,9 @@ import { getTranslations } from "next-intl/server";
 import SearchProject from "./SearachProject";
 import Sort from "@/components/Sort";
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
@@ -49,7 +52,7 @@ async function Page({ searchParams }: PageProps) {
   console.log("iiii",city, projectType, rooms, purpose, priceRange, start, end);
 
 
-const response = await fetch(`http://localhost:5001/api/projects/get?sort=${sort}&city=${city}&purpose=${purpose}&projectType=${projectType}&bedrooms=${rooms}&page=${page}&per_page=${per_page}&price=${priceRange}`)
+const response = await fetch(`${URL_SERVER}/api/projects/get?sort=${sort}&city=${city}&purpose=${purpose}&projectType=${projectType}&bedrooms=${rooms}&page=${page}&per_page=${per_page}&price=${priceRange}`)
 
 
 const data =await response.json();

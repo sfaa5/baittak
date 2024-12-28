@@ -53,6 +53,7 @@ const formSchema = z.object({
   plotLength: z.number(),
   city:z.string().min(1,"city is required")
 });
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function Page() {
 
@@ -70,7 +71,7 @@ console.log("setionn",session)
   const handlePhoneUpdate = async (newPhoneNumber) => {
     try {
       // Send the update request
-      const response = await fetch(`http://localhost:5001/api/users/${session?.user.id}`, {
+      const response = await fetch(`${URL_SERVER}/api/users/${session?.user.id}`, {
         method: "PUT", // Use PATCH for partial updates
         headers: {
           "Content-Type": "application/json",

@@ -9,6 +9,9 @@ import FormReq from "../FormReq";
 import { getLocale, getTranslations } from "next-intl/server";
 import Description from "../Description";
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 async function Page({ params }: { params: Promise<{ id: string }> }) {
 
 
@@ -18,7 +21,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const t = await getTranslations();
   const locale = await getLocale();
 
-  const response = await fetch(`http://localhost:5001/api/projects/${id}`)
+  const response = await fetch(`${URL_SERVER}/api/projects/${id}`)
   const data = await response.json();
 
 

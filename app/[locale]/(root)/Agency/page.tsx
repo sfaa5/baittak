@@ -15,7 +15,7 @@ interface PageProps {
 }
 
 
-
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Page( { searchParams }: PageProps) {
   const t  = await getTranslations();
@@ -45,7 +45,7 @@ async function Page( { searchParams }: PageProps) {
   console.log("iii",city,service)
 
 
-  const response =await fetch(`http://localhost:5001/api/agency?city=${city}&service=${service}`)
+  const response =await fetch(`${URL_SERVER}/api/agency?city=${city}&service=${service}`)
 
   const data = await response.json();
 

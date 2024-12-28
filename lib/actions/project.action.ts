@@ -1,6 +1,9 @@
 import { useSharedState } from "@/app/context/stateProvider";
 import { toast } from "@/hooks/use-toast";
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 export async function deleteProject({id}: { id: string }){
 
 
@@ -10,7 +13,7 @@ export async function deleteProject({id}: { id: string }){
       if (!confirmDelete) return;
 
       try {
-        const response = await fetch(`http://localhost:5001/api/projects/${id}`, { 
+        const response = await fetch(`${URL_SERVER}/api/projects/${id}`, { 
           method: "DELETE",
         });
     
