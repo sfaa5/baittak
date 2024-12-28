@@ -49,7 +49,7 @@ const formSchema = z.object({
 
 
 
-
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 const FormReq: React.FC<FormProps> = ({agencyy, _id, phoneNumber,title, }) => {
   const [loading, setLoading] = useState(false);
@@ -76,7 +76,7 @@ const FormReq: React.FC<FormProps> = ({agencyy, _id, phoneNumber,title, }) => {
 
         values.project=_id
         values.agency=agencyy
-        const response = await fetch("http://localhost:5001/api/requests", {
+        const response = await fetch(`${URL_SERVER}/api/requests`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

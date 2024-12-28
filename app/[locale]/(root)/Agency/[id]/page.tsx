@@ -12,6 +12,7 @@ import Sort from "@/components/Sort";
 import Fllter from "../Fllter";
 import ShowCards from "../ShowCards";
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
@@ -22,7 +23,7 @@ const locale = await getLocale();
 
 
 
-const response = await fetch(`http://localhost:5001/api/agency/${id}`)
+const response = await fetch(`${URL_SERVER}/api/agency/${id}`)
 
 
 const data = await response.json()

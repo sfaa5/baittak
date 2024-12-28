@@ -52,6 +52,9 @@ const formSchema = z.object({
     }),
 });
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 export function SignAgency() {
   const [open, setOpen] = React.useState(false);
   const [errorr,setError] =React.useState("")
@@ -76,7 +79,7 @@ const [message,setMessage] =React.useState(false)
     console.log("Form Values:", values);
   
     try {
-      const response = await fetch("http://localhost:5001/api/users/register/agency", {
+      const response = await fetch(`${URL_SERVER}/api/users/register/agency`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

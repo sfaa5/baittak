@@ -55,6 +55,9 @@ const formSchema = z.object({
   user: z.string().optional(),
 });
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 function Page() {
   const t = useTranslations();
   const locale = useLocale();
@@ -193,7 +196,7 @@ function Page() {
 }
 
 
-      const response = await fetch("http://localhost:5001/api/properties/add", {
+      const response = await fetch(`${URL_SERVER}/api/properties/add`, {
         method: "POST",
 
         body: formData,

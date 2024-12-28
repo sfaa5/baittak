@@ -62,6 +62,7 @@ const formSchema = z.object({
   });
   
 
+  const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 
 function page() {
@@ -130,7 +131,7 @@ const locale = useLocale();
       setLoading(true); // Start loading
   
       try {
-        const response = await fetch(`http://localhost:5001/api/agency/${id}`); // Fetch the data
+        const response = await fetch(`${URL_SERVER}/api/agency/${id}`); // Fetch the data
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`); // Handle HTTP errors
         }
@@ -215,7 +216,7 @@ values.city = city
 
 console.log("lllllllllllllllllllllllllll",values)
   try {
-    const response = await fetch(`http://localhost:5001/api/agency/update/${id}`, {
+    const response = await fetch(`${URL_SERVER}/api/agency/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

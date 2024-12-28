@@ -42,6 +42,9 @@ interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 async function Page( { searchParams }: PageProps) {
   const t = await getTranslations();
 
@@ -79,7 +82,7 @@ async function Page( { searchParams }: PageProps) {
   // console.log('Query Parameters:', Object.fromEntries(queryParams.entries()));
 
 
-const response = await fetch(`http://localhost:5001/api/properties/get?sort=${sort}&city=${city}&purpose=${purpose}&propertyType=${propertyType}&bedrooms=${rooms}&bathrooms=${bathrooms}&page=${page}&per_page=${per_page}&price=${priceRange}`);
+const response = await fetch(`${URL_SERVER}/api/properties/get?sort=${sort}&city=${city}&purpose=${purpose}&propertyType=${propertyType}&bedrooms=${rooms}&bathrooms=${bathrooms}&page=${page}&per_page=${per_page}&price=${priceRange}`);
 
 const data =await response.json();
 

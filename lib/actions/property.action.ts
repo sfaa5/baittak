@@ -1,5 +1,8 @@
 import { toast } from "@/hooks/use-toast";
 
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+
 export async function deleteProperty({id}: { id: string }){
 
 
@@ -9,7 +12,7 @@ export async function deleteProperty({id}: { id: string }){
       if (!confirmDelete) return;
 
       try {
-        const response = await fetch(`http://localhost:5001/api/properties/${id}`, { 
+        const response = await fetch(`${URL_SERVER}/api/properties/${id}`, { 
           method: "DELETE",
         });
     

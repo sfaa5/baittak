@@ -45,6 +45,7 @@ const formSchema = z.object({
   
   
 })
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 
 
@@ -76,7 +77,7 @@ export function Update({project}) {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
 
-    const response = await fetch(`http://localhost:5001/api/projects/${project._id}`, {
+    const response = await fetch(`${URL_SERVER}/api/projects/${project._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
