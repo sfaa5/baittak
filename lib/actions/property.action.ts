@@ -7,7 +7,7 @@ export async function deleteProperty({id}: { id: string }){
 
 
     const confirmDelete = window.confirm(
-        "Are you sure you want to delete this user? This action cannot be undone."
+        "Are you sure you want to delete this user? ."
       );
       if (!confirmDelete) return;
 
