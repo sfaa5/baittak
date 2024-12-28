@@ -28,7 +28,7 @@ export async function deleteProperty({id}: { id: string }){
     
     
       } catch (error) {
-        console.error("Failed to delete property:", error);
+        console.error("Failed to delete property", error);
         alert("An error occurred while trying to delete the property.");
       }
 
