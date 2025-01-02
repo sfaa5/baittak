@@ -36,7 +36,7 @@ async function Page( { searchParams }: PageProps) {
   const page = queryParams.get('page') ?? '1';
   const per_page = queryParams.get('per_page') ?? '5';
   const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ..
-  const end = start + Number(per_page); // 5, 10, 15 ...
+  const end = start + Number(per_page); // 5, 10, 15 ..
 
   const city = queryParams.get('city') ?? '';
   const service = queryParams.get('service') ?? '';
