@@ -4,15 +4,35 @@
   import BaittaklogoArabic from "./ArabicLogo";
   import EnglishLogo from "./EnglishLogo";
 import {signIn} from 'next-auth/react'
+import { useEffect, useRef } from "react";
 
 function Sign({ onClose }) {
     const locale = useLocale();
       const  t = useTranslations();
+
+      const modalRef = useRef(null);
+
+      useEffect(() => {
+        // Event listener to close modal when clicking outside
+        const handleClickOutside = (event) => {
+          if (modalRef.current && !modalRef.current.contains(event.target)) {
+            onClose();
+          }
+        };
+    
+        // Attach the event listener to the document
+        document.addEventListener("mousedown", handleClickOutside);
+    
+        // Clean up the event listener when the component is unmounted
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [onClose]);
     
   return (
 
 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
+      <div   ref={modalRef} className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
         {/* Close Icon */}
         <button
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"

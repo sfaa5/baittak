@@ -99,9 +99,21 @@
     @apply flex justify-between items-center;
   }
 
+  /* Hide the spinner for all number input fields */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
   
 
 }
+
+
 
 @layer base {
 
@@ -109,7 +121,7 @@
     @apply text-[28px] xl:text-[55px] leading-[1.1] font-semibold text-secondary;
   }
   .h1{
-    @apply text-[28px] xl:text-[35px] leading-[1.1] font-semibold text-secondary;
+    @apply text-[24px] xl:text-[28px] leading-[1.1] font-semibold text-secondary;
   }
   .h2{
     @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;

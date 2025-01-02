@@ -93,7 +93,7 @@ console.log("Company Name:", companyName);
 
    
     <div className="flex items-center gap-2 text-[#707070]">
-      {/* <FiMapPin className="text-primary" /> { locale==="ar"?city[0].name.ar:city[0].name.en} */}
+      <FiMapPin className="text-primary" /> { locale==="ar"?city[0].name.ar:city[0].name.en}
     </div>
 
     <p className="text-secondary font-semibold text-lg">

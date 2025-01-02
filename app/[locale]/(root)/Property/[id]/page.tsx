@@ -13,6 +13,7 @@ import { SlSizeFullscreen } from "react-icons/sl";
 
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
+import Map from "../Map";
 
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
@@ -25,6 +26,7 @@ type amenity ={
 }
 
   const locale = await getLocale();
+
 
   const t = await getTranslations();
   const id = (await params).id;
@@ -39,34 +41,23 @@ type amenity ={
     title,
     price,
     address,
-    img,
+    images,
     bathrooms,
     bedrooms,
     amenities,
     area,
     des,
     landNumber,
-
+location,
     plotLength,
 
 
   } = data;
 
+
   console.log(data)
 
-  // interface PropertyData {
-  //   title: string;
-  //   price: number;
-  //   address: string;
-  //   img: string[];
-  //   bathrooms: number;
-  //   bedrooms: number;
-  //   amenities: Amenity[];
-  //   area: number;
-  //   des: string;
-  //   landNumber: string;
-  //   plotLength: number;
-  // }
+
 
   interface Amenity {
     name: {
@@ -104,14 +95,14 @@ type amenity ={
       {/* images */}
       <div>
         {/* Images for desktop */}
-<ImageModel img={img} />
+<ImageModel img={images} />
 
         {/* Mobile design */}
         <div className="flex gap-4 overflow-x-auto hide-scrollbar  mt-5 sm:hidden">
-          {img.map((im: string, key: React.Key ) => (
+          {images.map((im: string, key: React.Key ) => (
             <img
               key={key}
-              src={`https://baittak-server.vercel.app${im}`}
+              src={`${im}`}
               alt={`property image ${key}`}
               className="flex-shrink-0 w-full h-[300px] object-cover rounded-xl"
             />
@@ -708,6 +699,8 @@ type amenity ={
             </div>
           </div>
 
+
+<Map location={location}/>
 
 
 

@@ -203,12 +203,12 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       <div className="w-full lg:w-2/3 mt-10 mb-20">
         <h3 className="text-xl font-medium mb-5">{t("Project.AMENITIES")}</h3>
         <div className="grid grid-cols-4 gap-y-5 gap-x-3">
-          {/* {amenities.map((amenity) => (
+          {amenities.map((amenity) => (
             <div key={amenity.id} className="flex gap-2 items-center">
-              {amenity.icon}
+              {amenityIcon}
               <span className="text-lg">{amenity.name}</span>
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { toast } from "@/hooks/use-toast";
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 
-export async function deleteProperty({id}: { id: string }){
+export async function deleteProperty({id,property,setProperty}:any){
 
 
     const confirmDelete = window.confirm(
@@ -26,6 +26,7 @@ export async function deleteProperty({id}: { id: string }){
       description: "the user deleted succussfuly",
     })
     
+    setProperty((prevData)=>prevData.filter((property)=>property._id!==id))
     
       } catch (error) {
         console.error("Failed to delete property", error);

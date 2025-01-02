@@ -1,6 +1,6 @@
 import { type AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { redirect } from "next/navigation";
+
 
 
 // Type augmentation for NextAuth
@@ -66,6 +66,11 @@ export const authOptions  = {
         user.phoneNumber=data.phoneNumber||""
         console.log(user);
         console.log(data);
+
+
+        
+
+   
 
         return true;
       } catch (error) {

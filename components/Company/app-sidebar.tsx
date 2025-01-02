@@ -78,7 +78,7 @@ export function AppSidebar() {
                 variant={"default"}
               
                 size={"lg"}
-                className={`w-full flex items-center gap-5 ${
+                className={`w-full flex items-center bg-primary/90 hover:bg-primary/100  justify-start gap-4 ${
                   activeItem === item.title ? "bg-primary text-white" : ""
                 }`}
                 onClick={() => handleItemClick(item.title)}

@@ -10,6 +10,11 @@ import {
 import { getTranslations } from "next-intl/server";
 import PaginationControll from "@/components/PaginationControll";
 import Sort from "@/components/Sort";
+import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/nextAuth";
+import { UserFavoritesProvider } from "@/app/context/UserFavoritesContext";
+import OnMap from "./OnMap";
 
 
 
@@ -47,7 +52,13 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Page( { searchParams }: PageProps) {
   const t = await getTranslations();
+  const session  = await getServerSession(authOptions);
 
+const userId =session?.user?.id
+
+
+
+console.log("ididdddd",userId)
 
   const resolvedSearchParams = await searchParams;
   const queryParams = new URLSearchParams();
@@ -82,15 +93,23 @@ async function Page( { searchParams }: PageProps) {
   // console.log('Query Parameters:', Object.fromEntries(queryParams.entries()));
 
 
-const response = await fetch(`${URL_SERVER}/api/properties/get?sort=${sort}&city=${city}&purpose=${purpose}&propertyType=${propertyType}&bedrooms=${rooms}&bathrooms=${bathrooms}&page=${page}&per_page=${per_page}&price=${priceRange}`);
+const response = await fetch(`${URL_SERVER}/api/properties/get?userId=${userId}&sort=${sort}&city=${city}&purpose=${purpose}&propertyType=${propertyType}&bedrooms=${rooms}&bathrooms=${bathrooms}&page=${page}&per_page=${per_page}&price=${priceRange}`);
 
 const data =await response.json();
 
+
+
+
 // console.log("data heree",data)
 console.log("data heree",data.properties)
-console.log("data heree",data.properties.length)
+console.log("data heree",data.userFavorites)
+
+const properties = data.properties || [];
+const userFavorites = data.userFavorites || [];
+
 
   return (
+    <UserFavoritesProvider initialFavorites={userFavorites}>
     <div className="container 2xl:px-[120px] mx-auto pt-3">
       <Serch />
 
@@ -113,10 +132,7 @@ console.log("data heree",data.properties.length)
       <Sort/>
 
         
-            <button className="flex w-[160px]  gap-2 h-[40px] items-center font-normal text-[#707070] rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-4">
-              <FaRegMap className="h-4 w-4 text-[#707070]" />
-              {t("property.map")}
-            </button>
+<OnMap properties={properties} />
 
 
 
@@ -135,8 +151,8 @@ console.log("data heree",data.properties.length)
         {/* Cards */}
         <div className="flex flex-col gap-8">
 
-          {data.properties?.length>0?(
-data.properties.map((post:property,key:number)=>(
+          {properties?.length>0?(
+properties.map((post:property,key:number)=>(
     <PropertiesCard key={key} post={post} />
 ))
 
@@ -156,6 +172,7 @@ data.properties.map((post:property,key:number)=>(
 
       </div>
     </div>
+    </UserFavoritesProvider>
   );
 }
 

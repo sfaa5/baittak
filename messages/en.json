@@ -5,6 +5,7 @@
   },
     "welcome": "Welcome to our website!",
     "header": {
+      "company":"Company",
       "signTitle":"Welcome Back!",
       "signDesc":" Sign in to explore your dream properties and manage your account.",
       "post property": "post property",
@@ -122,6 +123,7 @@
       "results": "results"
     },
     "userCard": {
+      "Phone":"Phone",
       "PREMIUM": "PREMIUM",
       "Days Left": "Days Left",
       "Rent": "Rent",
@@ -196,6 +198,11 @@
       "Pool":"Pool"
     },
     "addUser":{
+      "yearly":"Yearly",
+"monthly":"Monthly",
+      "rentalType":"Rental Type",
+      "currency":"Currency",
+      "address":"Address",
       "units":"Number of Units",
       "priceM":"Price for Meter",
       "start":"Price From",

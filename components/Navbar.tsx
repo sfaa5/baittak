@@ -43,7 +43,7 @@ console.log('session',session)
            
             
       
-             {session?.user?.role=="agency"? <Link href='/Company/about'>الشركة</Link>  : <SignAgency/> } 
+             {session?.user?.role=="agency"? <Link className="mt-2" href='/Company/about'>{t("company")}</Link>  : <SignAgency/> } 
 
           </div>
 

@@ -4,32 +4,43 @@ import { DataTable } from '@/components/Company/data-table';
 import React, { useEffect, useState } from 'react';
 import { columns } from './columns';
 import { useSession } from "next-auth/react";
+import TableSkelton from '@/components/TableSkelton';
+import { useSharedState } from '@/app/context/stateProvider';
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 
 export default function Page() {
-  const [data, setData] = useState([]); // State to store fetched data
-  const [loading, setLoading] = useState(true); // State to handle loading state
-  const { data: session, status } = useSession(); // Get session and status
+  const {dataRequest, setDataRequest} = useSharedState();
+  const {starRequest,setStarRequest}=useSharedState();
+  const {allRequest,setAllRequest}=useSharedState();
 
-  console.log("Session:", session);
-  console.log("Status:", status); // Status will show "loading", "authenticated", or "unauthenticated"
+  const [loading, setLoading] = useState(true); 
+
+  const { data: session, status } = useSession(); 
+
+  // console.log("Session:", session);
+  // console.log("Status:", status); 
 
   // Only proceed when session is authenticated
   useEffect(() => {
     if (status === "authenticated") {
       const id = session?.user.id;
-      console.log("User ID:", id);
+      // console.log("User ID:", id);
 
       const fetchData = async () => {
+        setLoading(true);
         try {
           const response = await fetch(`${URL_SERVER}/api/requests/${id}`);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           const result = await response.json();
-          setData(result); // Set the fetched data in the state
+          setDataRequest(result); 
+          // setStarRequest(result.filter(request => request.isStarred === true))
+          // setAllRequest(result)
+          console.log("Data fetched:", result);
+
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
@@ -39,14 +50,16 @@ export default function Page() {
 
       fetchData();
     }
-  }, [status, session]); // Re-run the effect when session or status changes
-console.log("ddddddddddd",data)
+  }, [status, session]);
+  
+
+  console.log("Updated dataRequest:", dataRequest);
   return (
     <div className="w-full px-10">
       {loading ? (
-        <p>Loading...</p> // Show loading state
+       <TableSkelton/>
       ) : (
-        <DataTable columFilter="messages" columns={columns} data={data} />
+        <DataTable columFilter="messages" columns={columns} data={dataRequest} />
       )}
     </div>
   );

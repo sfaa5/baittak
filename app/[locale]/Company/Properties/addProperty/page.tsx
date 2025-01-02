@@ -36,7 +36,7 @@ import { useLocale } from "next-intl";
 const formSchema = z.object({
   address: z.string().min(1, "plese inser for what"),
   amenities: z.array(z.string()),
-  for: z.string().min(1, "plese inser address"),
+  for: z.string().min(1, "plese complete"),
   title: z.string().min(1, "Title is required"),
   des: z.string().min(1, "Description is required"),
   price: z.number().positive("Price must be a positive number"),
@@ -64,8 +64,7 @@ function Page() {
 
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
 
-  const [previewSource, setPreviewSource] = useState<string[]>([]);
-  const [imageBuffers, setImageBuffers] = useState<string[]>([]);
+
   const [loading, setLoading] = useState(false);
 
 
@@ -159,7 +158,7 @@ function Page() {
   }, []);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(666666666)
+
     setLoading(true)
     try {
  const  formData = new FormData();
@@ -191,7 +190,7 @@ function Page() {
 
          if(selectedImages.length > 0){
         Array.from(selectedImages).forEach((files) => {
-  formData.append("images", files);  // "images" is the key for each file in the array
+  formData.append("files", files);  // "images" is the key for each file in the array
 });
 }
 

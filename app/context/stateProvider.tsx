@@ -11,6 +11,18 @@ type SharedStateContextType = {
   setShowDelte:any;
   req:any;
   setReq:any;
+  property:any;
+  setProperty:any;
+  favorite:any;
+  seFavorite:any;
+  setDataRequest:any;
+  dataRequest:any;
+  starRequest:any;
+  setStarRequest:any;
+  allRequest:any;
+  setAllRequest:any;
+  activeButton:any;
+  setActiveButton:any;
 };
 
 // Create the context with proper type
@@ -25,19 +37,37 @@ export default function StateProvider({ children }: StateProviderProps) {
   // States with specific types
   const [showDelte, setShowDelte] = useState(false);
   const [req, setReq] = useState([]);
-
+  const [property, setProperty] = useState([]);
+  const [favorite,seFavorite]=useState([]);
+  const [dataRequest,setDataRequest]=useState([]);
+  const [starRequest,setStarRequest]=useState([]);
+  const [allRequest,setAllRequest]=useState([]);
+  const [activeButton, setActiveButton] = useState<string | null>("inbox");
 
 
   return (
     <stateContext.Provider
       value={{
+        dataRequest,
+        setDataRequest,
+        favorite,
+        seFavorite,
         showDelte,
         setShowDelte,
         req,
-        setReq
+        setReq,
+        property,
+        setProperty,
+        starRequest,
+        setStarRequest, 
+        allRequest,
+        setAllRequest,
+        activeButton,
+        setActiveButton
       }}
     >
       {children}
+      
     </stateContext.Provider>
   );
 }

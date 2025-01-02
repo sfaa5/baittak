@@ -1,6 +1,6 @@
 "use client";
 import { CiHeart } from "react-icons/ci";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaHeart, FaWhatsapp } from "react-icons/fa";
 import { FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
@@ -11,9 +11,18 @@ import { property } from "@/app/[locale]/(root)/Property/page";
 import React, { useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import { Mail } from "./Mail";
+import { like } from "@/lib/actions/user.action";
+import LikeButton from "./LikeButton";
+
+
 
 function PropertiesCard({ post }: { post: property }) {
   const locale = useLocale();
+  const [isLoading, setIsLoading] = useState(false);
+
+
+
+      const [showNumber, setShowNumber] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,8 +64,14 @@ console.log("post",post)
 
   console.log(post)
 
-  console.log(amenities);
-  const [showNumber, setShowNumber] = useState(false);
+  console.log("idPro:", _id);
+
+
+
+
+
+
+
   return (
     <div className=" max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]">
       
@@ -81,11 +96,18 @@ console.log("post",post)
                   />
                 </div>
               ))}
+
             </div>
 
-            <div className="absolute text-secondary bg-white text-2xl rounded-full p-1 top-60 right-4 hover:scale-110 transition-transform duration-200">
-              <CiHeart />
-            </div>
+
+
+
+
+               <LikeButton propertyId={_id} />
+
+
+
+
 
             <button
               onClick={scrollPrev}
@@ -101,6 +123,7 @@ console.log("post",post)
               <MdKeyboardArrowRight className="w-6 h-6" />
             </button>
           </div>
+
 
           {/* details */}
           <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 lg:w-[650px]">
