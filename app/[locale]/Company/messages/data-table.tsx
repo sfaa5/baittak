@@ -20,10 +20,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSharedState } from "@/app/context/stateProvider";
 import { deleteSelectedRequests, } from "@/lib/actions/project.action";
+import Modal from "./Modal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -45,12 +46,24 @@ export function DataTable<TData, TValue>({
   const { dataRequest, setDataRequest } = useSharedState();
   const {activeButton, setActiveButton} = useSharedState();
   const{starRequest,setStarRequest}=useSharedState();
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState(null);
 
   // const handleUnstarClick = async () => {
   //   await unstarSelectedRequests(req, setDataRequest, setStarRequest, starRequest, table);
   //   setDataRequest(starRequest)
 
   // };
+
+  const handleRowClick = (row) => {
+    setSelectedRow(row.original);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedRow(null);
+  };
 
 
   const table = useReactTable({
@@ -139,7 +152,7 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  
+                  onClick={() => handleRowClick(row)}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
@@ -183,6 +196,16 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
+      {isModalOpen && selectedRow && (
+        <Modal
+          onClose={closeModal}
+          title={selectedRow.name}
+          message={selectedRow.message}
+          phone={selectedRow.phone}
+          email={selectedRow.email}
+          time={selectedRow.createdAt}
+        />
+      )}
     </div>
   );
 }

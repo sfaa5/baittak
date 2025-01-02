@@ -29,6 +29,7 @@ if (!response.ok) {
 const data = await response.json()
 
 console.log(data)
+console.log("gggggggggggggggg",data.properties)
 
   return (
     <div>
@@ -45,7 +46,9 @@ console.log(data)
            {data.companyName}       {t("company.agentInfo.companyName")}
               </h1>
               <div className="flex items-center gap-3">
-                <span className=" text-2xl">{data.Properties?.length | 0 } </span>
+              <span className="text-2xl">
+  {((data.properties?.length || 0) + (data.projects?.length || 0))} 
+</span>
                 <p className="text-lg text-gray-500">
                   {t("company.agentInfo.activeListing")}
                 </p>
@@ -53,7 +56,7 @@ console.log(data)
             </div>
           </div>
 
-        <Link href={`about/${id}`}> <Button variant={"outline"} className="text-green-500 hover:bg-green-500 hover:text-white">
+        <Link href={`about/${id}`}> <Button variant={"outline"} className="text-primary hover:bg-primary hover:text-white">
             {t("company.agentInfo.edit")}
           </Button></Link> 
         </div>

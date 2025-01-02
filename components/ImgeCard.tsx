@@ -49,9 +49,7 @@ function ImgeCard({img}) {
               ))}
             </div>
 
-            <div className="absolute text-secondary bg-white text-2xl rounded-full p-1 top-60 right-4 hover:scale-110 transition-transform duration-200">
-              <CiHeart />
-            </div>
+    
 
             <button
               onClick={scrollPrev}

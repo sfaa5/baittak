@@ -9,15 +9,23 @@ import { usePathname } from "next/navigation";
 import Sign from "@/components/Sign";
 import { useSearchParams, useRouter } from "next/navigation";
 import SearchHome from "../../../components/SearchHome";
+import { useSession } from "next-auth/react";
 
 
 export default function Home() {
+  const { data: session,status  } = useSession();
+
   const path = usePathname()
   const  t  = useTranslations();
   const searchParams = new URLSearchParams(window.location.search);
   const router = useRouter();
   const parms = useSearchParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
+
+  if(status==="authenticated"&&parms.get('login')==='true'){
+    searchParams.delete('login')
+  }
+
 
   useEffect(() => {
     if (parms.get('login') === 'true') {
