@@ -30,7 +30,7 @@ function PayButton({ id }: PayButtonProps) {
           const userId = session?.user?.id;
 
         try {
-          const response = await fetch("http://localhost:5001/api/plans/create", {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/plans/create`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
