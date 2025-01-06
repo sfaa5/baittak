@@ -25,6 +25,7 @@ const [loading, setLoading] = useState(true);
         }
         const data = await response.json();
         setUser(data);
+        
         setLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -47,9 +48,14 @@ const [loading, setLoading] = useState(true);
   const limit = activePlan.limit;
   const freeLimit = user.freePlanLimit;
   const postsLeft = limit - propertiesPosted;
-  const progressPercentage = (propertiesPosted / limit) * 100;
-  const expiresAt = new Date(activePlan.expiresAt);
-  const timeUntilExpiration = formatDistanceToNow(expiresAt, { addSuffix: true });
+  const totalLimit = limit + freeLimit 
+  const progressPercentage = (propertiesPosted / totalLimit) * 100;
+  const expiresAt = activePlan?.expiresAt ? new Date(activePlan.expiresAt):null;
+  const timeUntilExpiration = expiresAt? formatDistanceToNow(expiresAt, { addSuffix: true }):null;
+
+
+  
+
 
 console.log(user.phoneNumber)
 console.log(user)
@@ -76,20 +82,20 @@ console.log(user)
 
 
 
-        <div className="flex  text-lg gap-3"><p className="text-primary font-medium">{activePlan.name}</p> <span> ({timeUntilExpiration}) </span> </div>
+        <div className="flex  text-lg gap-3"><p className="text-primary font-medium">{activePlan.name || t("company.free")} </p> <span> {timeUntilExpiration? timeUntilExpiration:''} </span> </div>
 
         </div>
 
         <div className="text-lg">
-            <div className="flex gap-2"><p className="text-secondary font-medium">{t("userCard.Rent")}:</p><span>5</span></div>
-            <div className="flex gap-2 mt-2"><p className="text-secondary font-medium ">{t("userCard.Buy")}:</p><span>2</span></div>
+            <div className="flex gap-2"><p className="text-secondary font-medium">Posted:</p><span>{user.properties.length}</span></div>
+
             
         </div>
 
         <div className="p-6 bg-white rounded-lg shadow-lg">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">{activePlan.name}</h2>
+          <h2 className="text-xl font-semibold text-gray-800">{activePlan.name || t("company.free")} </h2>
           <p className="text-sm text-gray-500">Plan Limit: {limit} posts</p>
         </div>
         <div className="text-right">
