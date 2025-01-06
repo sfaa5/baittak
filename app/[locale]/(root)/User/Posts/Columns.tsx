@@ -26,8 +26,6 @@ export type Property = {
   like: number;
   images: string[];
   propertyType: string;
-
-
   _id:string
 };
 
