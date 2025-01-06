@@ -82,7 +82,7 @@ console.log(user)
 
 
 
-        <div className="flex  text-lg gap-3"><p className="text-primary font-medium">{activePlan.name || t("company.free")} </p> <span> {timeUntilExpiration? timeUntilExpiration:''} </span> </div>
+        <div className="flex  text-lg gap-3"><p className="text-primary font-medium">{activePlan.name || t("company.free")}</p> <span> {timeUntilExpiration? timeUntilExpiration:''} </span> </div>
 
         </div>
 
