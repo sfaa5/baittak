@@ -51,7 +51,7 @@ import { usePathname } from "next/navigation";
   
   interface MailProps {
     title?: string;
-    ownerEmail:string;
+    ownerEmail?:string;
   
   }
   
