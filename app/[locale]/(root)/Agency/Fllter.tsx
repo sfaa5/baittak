@@ -39,7 +39,7 @@ function Fllter({ originalProperties, setFilteredProperties }) {
     </SelectTrigger>
 
     <SelectContent>
-    <SelectItem value="all">{t("search.all")}</SelectItem>
+    {/* <SelectItem value="all">{t("search.all")}</SelectItem> */}
       <SelectItem value="rent">{t("addUser.rental")}</SelectItem>
       <SelectItem value="sell">{t("addUser.sell")}</SelectItem>
 

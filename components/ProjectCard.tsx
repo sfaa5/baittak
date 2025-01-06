@@ -20,7 +20,6 @@ async function ProjectCard({post}) {
     city,
     user,
     address,
-
     price,
     firstPayment,
     annualInterest,
@@ -31,6 +30,7 @@ async function ProjectCard({post}) {
     amenities,
     images,
     units,
+    currency,
 
   }=post;
 
@@ -48,7 +48,7 @@ console.log("User Image URL:", userImageUrl);
 console.log("Company Name:", companyName);
 
   return (
-    <div className=" max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]"
+    <div className=" max-w-md mx-auto relative bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] md:max-h-[300px] border-[1px]"
     
     >
       <Link  href={`/Projects/${_id}`} > 
@@ -70,13 +70,13 @@ console.log("Company Name:", companyName);
     {/* details */}
     <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 lg:w-[650px]">
 
-      <h3 className="text-xl text-secondary font-medium">{t("project.address")}:{address} </h3>
+      <h3 className="text-xl text-secondary font-medium">{t("project.address")}: {address} </h3>
       <div className="flex w-full justify-between">
         <p className="text-gray-400 font-medium text-lg">By {companyName}</p>
         <div className="flex gap-2 items-center">
           
           <p className="text-gray-400 text-lg font-medium">{t("project.StartingFrom")} </p>
-          <p className="text-secondary text-lg font-medium"> {Number(price).toLocaleString()}</p>
+          <p className="text-secondary text-lg font-medium"> {Number(price).toLocaleString()} {currency}</p>
         </div>
       </div>
 
@@ -116,12 +116,12 @@ console.log("Company Name:", companyName);
               <div className=""></div>
             )}
 
-<div className="flex w-auto justify-end">
+<div className="absolute bottom-5 right-5 w-auto justify-end">
 {userImageUrl ? (
                 <img
                   src={userImageUrl}
                   alt="company"
-                  className="w-20 mb-4 sm:flex"
+                  className="w-20  sm:flex"
                 />
               ) : (
                 <div className="text-gray-400">No image available</div>

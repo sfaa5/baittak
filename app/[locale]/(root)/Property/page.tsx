@@ -19,6 +19,8 @@ import OnMap from "./OnMap";
 
 
 export type property = {
+  currency:string,
+  rentaltype:string,
   CompanyImage:string
   propertyType:string,
   title:string,
@@ -120,10 +122,17 @@ const userFavorites = data.userFavorites || [];
             <IoHomeSharp className="text-secondary" />
             <MdArrowForwardIos className="text-[#707070]" />
           </li>
-          <li className="text-[#707070]">{t("property.properties_title")}</li>
+          <li className="text-[#707070]"> {t("property.properties")}</li>
         </ul>
 
-        <h3 className="text-xl font-medium">{t("property.properties_title")}</h3>
+        {city && purpose ? (
+  <h3 className="text-xl font-medium">{t("property.properties_for")} {purpose=="rent"?t("property.rent"):t("property.sell")} {t("property.in")} {city}</h3>
+) : city ? (
+  <h3 className="text-xl font-medium">{t("property.properties")} {t("property.in")} {city} </h3>
+) : purpose?(<h3 className="text-xl font-medium">{t("property.properties_for")} {purpose=="rent"?t("property.rent"):t("property.sell")}</h3>):null}
+
+
+        
 
 
         {/* button of cards */}

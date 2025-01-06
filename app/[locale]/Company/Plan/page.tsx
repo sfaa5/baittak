@@ -1,122 +1,82 @@
-"use client"
+
 import { Checkbox } from "@/components/ui/checkbox";
 import React from "react";
-import { useTranslations } from "next-intl";
+
+import { getTranslations } from "next-intl/server";
+import PlanCard from "@/components/PlanCard";
+import { getServerSession } from "next-auth"; 
+import { authOptions } from "@/lib/nextAuth";
+import { formatDistanceToNow } from "date-fns";
+
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 
-function Page() {
-  const  t  = useTranslations(); // Load translations from the "common" namespace
+async function Page() {
+  const  t  = await getTranslations();
+    const session  = await getServerSession(authOptions); // Load translations from the "common" namespace
+  const id = session?.user.id
+  const response = await fetch(`${URL_SERVER}/api/plans`)
+
+  const responseUser = await fetch(`${URL_SERVER}/api/agency/${id}`)
+  const dataUserr =await responseUser.json();
+const data = await response.json();
+
+const limit = dataUserr.activePlan?.limit|0;
+const freeLimit = dataUserr.freePlanLimit;
+
+console.log("freeLimit",freeLimit)
+
+const postsLeft = limit + freeLimit - dataUserr.propertiesPosted 
+const totalLimit = freeLimit + limit 
+const progressPercentage =(dataUserr.propertiesPosted/ totalLimit)*100
+console.log("progressPercentage",progressPercentage)
+const expiresAt = dataUserr.activePlan?.expiresAt 
+  ? new Date(dataUserr.activePlan.expiresAt) 
+  : null;
+
+const timeUntilExpiration = expiresAt 
+  ? formatDistanceToNow(expiresAt, { addSuffix: true }) 
+  : "";
 
   return (
     <div>
       <h1 className="h1 py-0 mt-5">{ t("company.select_ad_packages")}</h1>
 
-      <div className="flex border-2 mt-5 p-4 rounded-[0.5rem] justify-between">
-        <div className="text-2xl">
-          <h1 className="mb-28">
-            { t("company.current_subscription_part1")} <br />
-            <span className="text-primary font-medium">{ t("company.premium")}</span> { t("company.current_subscription_part2")}
-          </h1>
-          <div className="text-gray-500">
-            <span className="text-primary font-medium">20:</span> { t("company.days_until_expiration")}
-          </div>
-        </div>
+      <div className="border mt-3 p-4 rounded-md bg-white shadow-sm">
+  <h1 className="text-xl font-semibold mb-4">
+    {t("company.current_subscription_part1")} 
+    <span className="text-primary font-medium ml-2">{dataUserr.activePlan?.name || t("company.free")}</span>
+  </h1>
 
-        <div className="flex flex-col shadow-md text-xl items-center gap-7 p-5 rounded-[0.5rem]">
-          <div>
-            <h2 className="text-primary">{ t("company.premium")}</h2>
-            <p className="text-lg">{ t("company.premium_duration")}</p>
-          </div>
+  <p className="text-gray-700 text-sm mb-2">
+  Posts Left:
+    <span className="text-primary font-medium ml-1">{postsLeft}</span>
+  </p>
 
-          <div className="flex flex-col items-center">
-            <span className="text-primary text-2xl font-medium">$55</span>
-            <p className="text-red-500">{ t("company.discount")}</p>
-            <span className="text-base">{ t("company.two_months")}</span>
-          </div>
-        </div>
+  <div className="relative mb-4">
+  <div className="relative w-full bg-gray-200 rounded-full h-4">
+        <div
+          className="absolute top-0 left-0 bg-primary h-4 rounded-full"
+          style={{ width: `${progressPercentage}%` }}
+        ></div>
       </div>
 
-      <div className="flex mt-10">
-        <div className="flex flex-col w-2/3 gap-7">
-          <div className="flex shadow-lg p-6 rounded-[0.4rem] justify-between">
-            <div className="flex items-center gap-5">
-              <Checkbox id="terms2" />
-              <div className="flex flex-col">
-                <label
-                  htmlFor="terms2"
-                  className="text-2xl text-primary leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  { t("company.premium")}
-                </label>
+    <p className="text-xs text-gray-500 mt-1">
+      {t("company.progress")}: {Math.round(progressPercentage)}%
+    </p>
+  </div>
 
-                <span className="text-red-400 text-base mt-1">{ t("company.save_39")}</span>
-              </div>
-            </div>
+{timeUntilExpiration&&  <p className="text-gray-500 text-sm">
+    <span className="text-primary font-medium">{timeUntilExpiration}</span> until expiration
+  </p>}
 
-            <div className="flex flex-col items-end text-lg">
-              <div className="flex items-center">
-                <p className="text-primary text-2xl font-medium">$180</p>
-                <span className="text-lg text-gray-600"> - 6 { t("company.months")}</span>
-              </div>
-              <p>
-                $30/ <span className="text-gray-600">{ t("company.month")}</span>
-              </p>
-            </div>
-          </div>
+</div>
 
-          <div className="flex shadow-lg p-6 rounded-[0.4rem] justify-between">
-            <div className="flex items-center gap-5">
-              <Checkbox id="terms2" />
-              <div className="flex flex-col">
-                <label
-                  htmlFor="terms2"
-                  className="text-2xl text-secondary leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  { t("company.standard")}
-                </label>
 
-                <span className="text-red-400 text-base mt-1">{ t("company.save_39")}</span>
-              </div>
-            </div>
 
-            <div className="flex flex-col items-end text-lg">
-              <div className="flex items-center">
-                <p className="text-secondary text-2xl font-medium">$180</p>
-                <span className="text-lg text-gray-600"> - 6 { t("company.months")}</span>
-              </div>
-              <p>
-                $30/ <span className="text-gray-600">{ t("company.month")}</span>
-              </p>
-            </div>
-          </div>
+      <div className="w-full flex items-center justify-center mt-10">
 
-          <div className="flex shadow-lg p-6 rounded-[0.4rem] justify-between">
-            <div className="flex items-center gap-5">
-              <Checkbox id="terms2" />
-              <div className="flex flex-col">
-                <label
-                  htmlFor="terms2"
-                  className="text-2xl text-black-100 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  { t("company.base")}
-                </label>
-
-                <span className="text-red-400 text-base mt-1">{ t("company.save_39")}</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-end text-lg">
-              <div className="flex items-center">
-                <p className="text-black-100 text-2xl font-medium">$180</p>
-                <span className="text-lg text-gray-600"> - 6 { t("company.months")}</span>
-              </div>
-              <p>
-                $30/ <span className="text-gray-600">{ t("company.month")}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PlanCard plan={data} /></div>
     </div>
   );
 }

@@ -42,17 +42,17 @@ const formSchema = z.object({
 
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
-  price: z.number().positive("Price must be a positive number"),
-  area: z.number().positive("Area must be a positive number"),
+  price: z.string().min(1,"Price is required"),
+  area: z.string().min(1, "Area is required"),
   propertyType: z.string().min(1, "Property type is required"),
   bedrooms: z.number().nonnegative("Bedrooms cannot be negative"),
   bathrooms: z.number().nonnegative("Bathrooms cannot be negative"),
   floors: z.number().nonnegative("Floors cannot be negative"),
   images: z.array(z.string()).optional(),
   numFloors: z.number().min(1, "floors is required"),
-  plotWidth: z.number(),
-  landNumber: z.number(),
-  plotLength: z.number(),
+  plotWidth: z.string().optional(),
+  landNumber: z.string().optional(),
+  plotLength:z.string().optional(),
   city: z.string().min(1, "city is required"),
   rentalType:z.string().optional(),
   currency:z.string().min(1, "currency is required"),
@@ -168,16 +168,16 @@ function Page() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       amenities: [] as string[],
-      plotWidth: 0,
-      plotLength: 0,
-      landNumber: 0,
+      plotWidth: "",
+      plotLength: "",
+      landNumber: "",
       numFloors: 0,
       title: "",
       description: "",
       for: "",
       address: "",
-      price: 0,
-      area: 0,
+      price: "",
+      area: "",
       propertyType: "",
       bedrooms: 0,
       bathrooms: 0,
@@ -275,17 +275,26 @@ function Page() {
         method: "POST",
         body: formData,
       });
-
+const data = await response.json();
       if (response.ok) {
-        setSelectedImages([]);
+
         toast({
           description: "the post add succussfuly",
+          className: 'bg-green-500 text-white p-4 rounded shadow-lg',
         });
+
+      }  else {
+        toast({
+          description: data.message,
+          className: 'bg-red-500 text-white p-4 rounded shadow-lg',
+        });
+ 
       }
     } catch (err) {
-      console.error("An unexpected error occurred:", err);
+
       toast({
-        description: "There was a proplem with your request",
+        description: err.message,
+        className: 'bg-red-500 text-white p-4 rounded shadow-lg',
       });
     } finally {
       setLoading(false);
@@ -381,9 +390,7 @@ function Page() {
           <Input
             type="number"
             {...field}
-            onChange={(e) =>
-              field.onChange(parseFloat(e.target.value))
-            }
+ 
             placeholder={`${t("addUser.price")}..`}
        
           />
@@ -727,9 +734,7 @@ function Page() {
                         <Input
                           type="number"
                           {...field}
-                          onChange={(e) =>
-                            field.onChange(parseFloat(e.target.value))
-                          }
+                    
                           className="pr-24" // Add padding to the right side of the input
                         />
                         <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
@@ -802,9 +807,7 @@ function Page() {
                   <FormControl>
                     <Input
                       {...field} // Spread field to bind the input value and onChange
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value) || 0)
-                      }
+        
                       placeholder="0000"
                     />
                   </FormControl>

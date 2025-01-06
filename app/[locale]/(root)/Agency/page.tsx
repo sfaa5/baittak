@@ -81,7 +81,7 @@ async function Page( { searchParams }: PageProps) {
             </li>
             <li className="text-[#707070] flex gap-3 items-center">
               {t("agency.path.current_page")}
-              <MdArrowForwardIos className="text-[#707070]" />
+           
             </li>
           </ul>
 

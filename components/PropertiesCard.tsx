@@ -48,6 +48,7 @@ console.log("post",post)
 
   const {
     CompanyImage,
+    rentaltype,
     propertyType,
     title,
     price,
@@ -58,8 +59,9 @@ console.log("post",post)
     amenities,
     area,
     user,
-
+    currency,
     _id,
+    email
   } = post;
 
   console.log(post)
@@ -136,9 +138,9 @@ console.log("post",post)
               <div className=" flex items-end ">
                 <div className="text-3xl text-secondary font-semibold">
                   {price}
-                  <span className="text-2xl">$</span>
+                  <span className="text-2xl text-secondary/80">{currency}</span>
                 </div>
-                <span className="text-[#707070] text-lg">/month</span>
+                <span className="text-[#707070] text-lg">/{rentaltype}</span>
               </div>
 
               <div className="flex gap-3 justify-center mt-3">
@@ -200,7 +202,7 @@ console.log("post",post)
                   {showNumber ? user.phoneNumber : "Call"}
                 </button>
 
-            <Mail title={title}/>
+            <Mail ownerEmail={email} title={title}/>
 
                 <button
                   onClick={(e) => {

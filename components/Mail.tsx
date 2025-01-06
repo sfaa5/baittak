@@ -1,3 +1,4 @@
+"use client"
 import {
     Dialog,
     DialogContent,
@@ -24,6 +25,10 @@ import {
   import { useState } from "react";
   import { IoMailOutline } from "react-icons/io5";
 import { useSession } from "next-auth/react";
+import { Description } from "@radix-ui/react-toast";
+import { toast } from "@/hooks/use-toast";
+
+import { usePathname } from "next/navigation";
 
   
   // Schema for form validation
@@ -45,14 +50,16 @@ import { useSession } from "next-auth/react";
   });
   
   interface MailProps {
-    title: string;
+    title?: string;
+    ownerEmail:string;
   
   }
   
-  export function Mail({ title }: MailProps) {
+  export function Mail({ title,ownerEmail }: MailProps) {
     const [open, setOpen] = useState(false);
 
       const { data: session } = useSession();
+      const pathname = usePathname();
     
   
     // Define the form
@@ -70,27 +77,41 @@ import { useSession } from "next-auth/react";
   
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
       console.log("Form Values:", values);
-
-   values.ownerEmail = session?.user.email ?? "";
+console.log(ownerEmail)
+   values.ownerEmail = ownerEmail ;
    values.title = title;
 
-   const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("email", values.email);
-    formData.append("message", values.message);
-    formData.append("phone", values.phone);
-    formData.append("ownerEmail", values.ownerEmail);
-    formData.append("title", values.title);
-    
         
 
+    try {
+      const response = await fetch("http://localhost:5001/api/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-
-
-  
+      const data = await response.json();
+      console.log("Success:", data);
+      toast({
+        description: "Email sent succussfuly",
+        className: 'bg-green-500 text-white p-4 rounded shadow-lg',
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      toast({
+        description: "faild to send email",
+        className: 'bg-red-500 text-white p-4 rounded shadow-lg',
+      });
+    } finally {
       setOpen(false);
-    };
+    }
+  };
   
     return (
       <Dialog open={open} onOpenChange={setOpen}>
@@ -98,7 +119,7 @@ import { useSession } from "next-auth/react";
         <DialogTrigger asChild>
           <Button
             type="button"
-            className="flex w-full gap-1 h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3"
+            className={`${pathname.includes('Agency')? " hover:bg-gray-100 flex w-auto h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px]  justify-between px-4":"flex hover:bg-gray-100 gap-2 h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3"}`}
           >
             <IoMailOutline className="w-5 h-5" />
             Mail

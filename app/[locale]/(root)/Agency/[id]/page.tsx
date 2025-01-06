@@ -11,6 +11,10 @@ import PropertiesCard from "@/components/PropertiesCard";
 import Sort from "@/components/Sort";
 import Fllter from "../Fllter";
 import ShowCards from "../ShowCards";
+import { UserFavoritesProvider } from "@/app/context/UserFavoritesContext";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/nextAuth";
+import Mail from "@/components/Mail";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -20,21 +24,25 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 const locale = await getLocale();
 
 
+  const session  = await getServerSession(authOptions);
+
+const userId =session?.user?.id
 
 
-
-const response = await fetch(`${URL_SERVER}/api/agency/${id}`)
+const response = await fetch(`${URL_SERVER}/api/agency/${id}?userId=${userId}`)
 
 
 const data = await response.json()
 
 
+const userFavorites = data.userFavorites || [];
 
 
 
 
-console.log(data)
+console.log("afencyyyy",data)
   return (
+        <UserFavoritesProvider initialFavorites={userFavorites}>
     <div className="container px-2 2xl:px-[120px]">
       {/* Path */}
       <ul className="flex items-center gap-2 mt-5 mb-5">
@@ -45,12 +53,14 @@ console.log(data)
           <MdArrowForwardIos className="text-[#707070]" />
         </li>
         <li className="text-[#707070] flex gap-3 items-center">
+        <Link href={"/Agency"}>
           {t("agency.path.current_page")}
+          </Link>
           <MdArrowForwardIos className="text-[#707070]" />
         </li>
         <li className="text-[#707070] flex gap-3 items-center">
-          {t("agency.company_name")}
-          <MdArrowForwardIos className="text-[#707070]" />
+          {data.companyName}
+          
         </li>
       </ul>
 
@@ -91,10 +101,9 @@ console.log(data)
             <FiPhoneCall className="w-5 h-5" />
   {data.phoneNumber}
           </button>
-          <button className="flex w-auto gap-2 bg-white h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4">
-            <IoMailOutline className="w-5 h-5" />
-            {t("agency.email_company")}
-          </button>
+
+        <Mail ownerEmail={data.email} />
+
         </div>
       </div>
 
@@ -102,6 +111,7 @@ console.log(data)
 
 
     </div>
+    </UserFavoritesProvider>
   );
 }
 

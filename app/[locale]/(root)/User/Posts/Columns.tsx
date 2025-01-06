@@ -104,7 +104,11 @@ export const columns: ColumnDef<Property>[] = [
   
       return (
         <button
-          onClick={() => deleteProperty({ id,property,setProperty })}
+        
+          onClick={(event) => {
+            event.stopPropagation();
+            deleteProperty({ id,property,setProperty });
+          }}
           className="text-red-500 hover:text-red-700 ml-5"
         >
        <TiDeleteOutline size={22} />

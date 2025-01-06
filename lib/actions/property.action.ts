@@ -6,10 +6,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 export async function deleteProperty({id,property,setProperty}:any){
 
 
-    const confirmDelete = window.confirm(
-        "Are you sure you want to delete this user?."
-      );
-      if (!confirmDelete) return;
+
 
       try {
         const response = await fetch(`${URL_SERVER}/api/properties/${id}`, { 
