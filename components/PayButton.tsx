@@ -23,7 +23,7 @@ function PayButton({ id }: PayButtonProps) {
 
     const handleSubscribe = async (planId) => {
         if (status !== 'authenticated') {
-            alert('You must be logged in to subscribe.');
+            alert('You must be logged in to subscribe');
             return;
           }
 
