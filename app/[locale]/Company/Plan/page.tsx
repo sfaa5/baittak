@@ -67,7 +67,7 @@ const timeUntilExpiration = expiresAt
   </div>
 
 {timeUntilExpiration&&  <p className="text-gray-500 text-sm">
-    <span className="text-primary font-medium">{timeUntilExpiration}</span> until expiration
+    <span className="text-primary font-medium">{timeUntilExpiration}</span>until expiration
   </p>}
 
 </div>
