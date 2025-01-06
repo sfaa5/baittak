@@ -1,13 +1,13 @@
 
 import React from "react";
 
-import Map from "@/components/Map";
 
 
 import Image from "../Image";
 import FormReq from "../FormReq";
 import { getLocale, getTranslations } from "next-intl/server";
 import Description from "../Description";
+import Map from "../../Property/Map";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -40,6 +40,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     firstPayment,
     annualInterest,
     installmentPeriod,
+    location,
     priceM,
     bedrooms,
     status,
@@ -98,7 +99,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   ];
 
   return (
-    <div className="py-4 sm:container mx-auto px-2 lg:px-[120px]">
+    <div className="py-4 sm:container mx-auto px-2 lg:px-[120px] mb-32">
       {/* Project Header */}
       <div
         className={`flex flex-col h-36 sm:h-auto justify-between p-3 sm:p-7 w-full bg-gradient-to-r ${
@@ -190,8 +191,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
       </div>
 
-      {/* Map */}
-      {/* <Map /> */}
+
 
       {/* Description */}
       <div className="w-full lg:w-2/3 mt-10">
@@ -206,11 +206,15 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           {amenities.map((amenity) => (
             <div key={amenity.id} className="flex gap-2 items-center">
               {amenityIcon}
-              <span className="text-lg">{amenity.name}</span>
+              <span className="text-lg">{locale==="ar"?amenity.name.ar:amenity.name.en}</span>
             </div>
           ))}
         </div>
       </div>
+
+
+      {location?.latitude && <Map location={location}/>}
+
     </div>
   );
 }

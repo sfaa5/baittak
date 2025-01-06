@@ -106,8 +106,8 @@ export function Update({project}) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen} >
-      <DialogTrigger asChild>
-        <Button variant="secondary" size="sm">Update Property</Button>
+      <DialogTrigger  asChild>
+        <button onClick={(e) => e.stopPropagation()} className="relative  flex cursor-default  select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 w-full hover:bg-gray-100" >Update</button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[925px] bg-white">
         <DialogHeader>

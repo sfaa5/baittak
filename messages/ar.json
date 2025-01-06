@@ -68,8 +68,11 @@
     },
     "property": {
       "search_placeholder": "ابحث عن العقارات...",
-      "properties_title": "العقارات للإيجار في السعودية",
-
+ "properties_for": "العقارات ",
+ "in":"في",
+"rent":"للايجار",
+"sell":"للشراء",
+"properties":"عقارات",
       "sort_by": "ترتيب",
       "map": "الخريطة",
       "list": "القائمة",

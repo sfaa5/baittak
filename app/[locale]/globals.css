@@ -99,7 +99,7 @@
     @apply flex justify-between items-center;
   }
 
-  /* Hide the spinner for all number input fields */
+  Hide the spinner for all number input fields
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

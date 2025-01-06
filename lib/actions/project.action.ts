@@ -1,13 +1,12 @@
+import { Project } from "@/app/[locale]/Company/project/Columns";
 import { useSharedState } from "@/app/context/stateProvider";
 import { toast } from "@/hooks/use-toast";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-export async function deleteProject({ id }: { id: string }) {
-  const confirmDelete = window.confirm(
-    "Are you sure you want to delete this projecc? This action cannot be undone."
-  );
-  if (!confirmDelete) return;
+export async function deleteProject({ id,setProjects }: { id: string,setProjects:React.Dispatch<React.SetStateAction<Project[]>>; } ) {
+
+  
 
   try {
     const response = await fetch(`${URL_SERVER}/api/projects/${id}`, {
@@ -19,6 +18,9 @@ export async function deleteProject({ id }: { id: string }) {
     if (!response.ok) {
       throw new Error("Failed to delete project");
     }
+
+    setProjects((prevData)=>
+    prevData.filter((item)=>id!==item._id))
 
     toast({
       description: "the project deleted succussfuly",

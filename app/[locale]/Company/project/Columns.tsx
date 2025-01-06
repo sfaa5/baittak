@@ -13,6 +13,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { deleteProject } from "@/lib/actions/project.action";
 import { Update } from "./update";
+import { useSharedState } from "@/app/context/stateProvider";
+import { useRouter } from "next/navigation";
+import { TiDeleteOutline } from "react-icons/ti";
 
 // Define the shape of the data
 export type Project = {
@@ -92,35 +95,25 @@ header:"Status"
     cell: ({ row }) => {
       const project: Project = row.original;
 const id = project._id
+const {projects,setProjects}=useSharedState()
+const router = useRouter()
+
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(project._id);
-                  alert("Property ID copied to clipboard!");
-                } catch (err) {
-                  console.error("Failed to copy: ", err);
-                }
-              }}
-            >
-              Copy project ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View project</DropdownMenuItem>
-            <Update project={project}/>
-            <DropdownMenuItem onClick={()=>deleteProject({id})}>  Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      
+                <button
+                
+                onClick={(e)=>{
+                  e.stopPropagation();
+                 deleteProject({id,setProjects})}}
+                  className="text-red-500 hover:text-red-700 ml-5"
+                >
+               <TiDeleteOutline size={22} />
+                </button>
+
+
+    
       );
     },
   },
 ];
+

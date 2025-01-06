@@ -10,7 +10,7 @@ import { LiaBedSolid } from "react-icons/lia";
 import { MdArrowForwardIos } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
-
+import Description from "../../Projects/Description";
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
 import Map from "../Map";
@@ -143,7 +143,7 @@ location,
           </div>
 
           {/* contact Desktop */}
-<ContactDesk user={user}/>
+<ContactDesk user={user} title={title}/>
 
           {/* contact Mobile */}
           <div className="mobile-buttons md:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 ">
@@ -172,13 +172,12 @@ location,
             <h3 className="text-2xl font-medium mb-7">
               {title}
             </h3>
-            <p style={{ whiteSpace: "pre-line" }}>
-            {des}
-            </p>
 
-            <a className="mt-5 underline hover:text-primary" href="">
-              {t("propertyDetails.Read more")}
-            </a>
+
+            <Description des={des}/>
+
+
+   
           </div>
 
           {/* property details */}
@@ -699,8 +698,8 @@ location,
             </div>
           </div>
 
+{location.latitude && <Map location={location}/>}
 
-<Map location={location}/>
 
 
 
@@ -709,11 +708,7 @@ location,
           <div className="grid grid-cols-3 gap-y-8">
   {amenities.map((amenity:amenity, inx:number) => (
     <div key={inx} className="flex gap-2 items-center">
-      <img
-        src={`https://baittak-server.vercel.app${amenity.svg}`}
-        alt={`amenity image ${inx}`} // Fixed reference to `inx`
-        className="w-6 h-6" // Optional: Add a size class for better control
-      />
+
       <span className="text-gray-900">
         {locale == "ar" ? amenity.name.ar : amenity.name.en} 
       </span>

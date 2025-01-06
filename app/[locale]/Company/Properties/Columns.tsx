@@ -14,6 +14,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Span } from "next/dist/trace";
 import { deleteProperty } from "@/lib/actions/property.action";
+import { useSharedState } from "@/app/context/stateProvider";
+import { useLocale } from "next-intl";
+import { TiDeleteOutline } from "react-icons/ti";
 
 // This type is used to define the shape of our data.
 export type Property = {
@@ -26,7 +29,10 @@ export type Property = {
   images: string[];
   propertyType: string;
   address: string;
-  city: string;
+  city: {name:{
+    ar:string,
+    en:string,
+  }};
   _id:string
 };
 
@@ -51,12 +57,19 @@ export const columns: ColumnDef<Property>[] = [
     },
   },
   {
-    accessorKey: "address",
-    header: "address",
+    accessorKey: "title",
+    header: "title",
   },
   {
     accessorKey: "city",
     header: "city",
+    cell:({row})=>{
+      const locale = useLocale()
+const city = locale==="ar"? row.original.city.name.ar :row.original.city.name.en
+      return(
+<span>{city}</span>
+      )
+    }
   },
   {
     accessorKey: "title",
@@ -97,27 +110,20 @@ export const columns: ColumnDef<Property>[] = [
     cell: ({ row }) => {
       const Property = row.original;
 const id =Property._id
+const {setProperty}=useSharedState()
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(Property._id)}
-            >
-              Copy property ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View property</DropdownMenuItem>
-            <DropdownMenuItem>Update</DropdownMenuItem>
-            <DropdownMenuItem onClick={()=>deleteProperty({ id })}>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+
+        <button
+        
+        onClick={(e)=>{
+          e.stopPropagation();deleteProperty({ id,setProperty })}}
+          className="text-red-500 hover:text-red-700 ml-5"
+        >
+       <TiDeleteOutline size={22} />
+        </button>
+
+          
+
       );
     },
   },

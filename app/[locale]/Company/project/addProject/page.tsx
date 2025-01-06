@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/form";
 import { useSession } from "next-auth/react";
 import { useLocale } from "next-intl";
+import Map from "@/app/[locale]/(root)/User/AddPost/Map";
 
 // Define Zod schema for form validation
 const formSchema = z.object({
@@ -39,17 +40,19 @@ const formSchema = z.object({
   amenities: z.array(z.string()),
   title: z.string().min(1, "Title is required"),
   des: z.string().min(1, "Description is required"),
-  price: z.number().positive("Price must be a positive number"),
+  price: z.string().min(1,"Price is required"),
   bedrooms: z.number().nonnegative("Bedrooms cannot be negative"),
   images: z.array(z.string()).optional(),
   city: z.string().min(1, "city is required"),
   file: z.array(z.string()).optional(),
   user: z.string().optional(),
-  priceM: z.number().positive("Price must be a positive number"),
-  units: z.number().min(1, "units is required"),
-  firstPayment:z.number().optional(),
-  annualInterest:z.number().max(100,"max 100").optional(),
-  installmentPeriod:z.number().optional(),
+  priceM: z.string().min(1,"Price is required").optional(),
+  units: z.string().min(1, "units is required"),
+  firstPayment:z.string().optional(),
+  annualInterest:z.string().max(100,"max 100").optional(),
+  installmentPeriod:z.string().optional(),
+  currency:z.string().min(1, "currency is required"),
+
 });
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
@@ -61,7 +64,7 @@ function Page() {
 
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [previewSource, setPreviewSource] = useState<string[]>([]);
   const [imageBuffers, setImageBuffers] = useState<string[]>([]);
 
@@ -84,25 +87,28 @@ function Page() {
 
   const [cities, setCities] = useState<City[]>([]);
   const { data: session } = useSession();
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const [address, setAddress] = useState('');
+
 const [errorr,setErrorr]= useState("");
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstPayment:0,
-      annualInterest:0,
-      installmentPeriod:0,
+      firstPayment:'',
+      annualInterest:'',
+      installmentPeriod:'',
       amenities: [] as string[],
       status: "",
       title: "",
       des: "",
       address: "",
-      price: 0,
+      price: "",
       bedrooms: 0,
-      priceM: 0,
+      priceM: '',
       file: [],
       city: "",
-      units: 0,
-
+      units: '',
+      currency:""
     },
   });
 
@@ -123,6 +129,28 @@ const handelImage = (file) => {
   });
 };
 
+const handleLocationSelect = async (selectedLocation) => {
+  setLocation(selectedLocation);
+
+  try {
+    // Reverse geocode to get the address
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${selectedLocation.latitude}&lon=${selectedLocation.longitude}`);
+    const data = await response.json();
+    const addressComponents = data.address;
+    if (addressComponents) {
+      // Construct the address excluding city, postcode, and country
+      const { road, house_number, suburb, neighbourhood,city } = addressComponents;
+      const address = [house_number, road, suburb, neighbourhood,city].filter(Boolean).join(', ');
+      setAddress(address);
+      form.setValue('address', address); // Update the form value
+      console.log("Selected Address:", address);
+    } else {
+      console.error("No address found for the selected location.");
+    }
+  } catch (error) {
+    console.error("Error fetching address:", error);
+  }
+};
 
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -198,6 +226,9 @@ const handelImage = (file) => {
       formData.append("priceM", values.priceM.toString());
       formData.append("city", values.city);
       formData.append("units", values.units.toString());
+      formData.append("currency", values.currency);
+
+      formData.append("location", JSON.stringify(location))
       
       values.amenities?.forEach((amenity, index) => {
         formData.append(`amenities[${index}]`, amenity);
@@ -212,7 +243,7 @@ const handelImage = (file) => {
       });
 
       if (response.ok) {
-        form.reset();
+
         setSelectedImages([]);
         toast({
           description: "the post add succussfuly",
@@ -297,9 +328,7 @@ const handelImage = (file) => {
                     <Input
                       type="number"
                       {...field}
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value))
-                      }
+              
                       placeholder="Units"
                     />
                   </FormControl>
@@ -367,52 +396,107 @@ const handelImage = (file) => {
 
 
 
-              <FormField
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("addUser.addCity")}</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                        dir={locale === "ar" ? "rtl" : "ltr"}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("addUser.select")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {cities.map((city, index) => (
-                            <SelectItem key={index} value={city._id}>
-                              {locale === "ar" ? city.name.ar : city.name.en}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />       
+     
 
 
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>العنوان</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="address" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
   
           </div>
         </div>
+
+
+          {/* Address */}
+          <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
+            <div className="bg-white absolute -top-4 left-5">
+              <h2 className="text-secondary  px-6 text-2xl font-medium">
+                {t("addUser.address")}
+              </h2>
+            </div>
+
+            <div className="grid  sm:grid-cols-3  gap-14 ">
+
+            <div className="relative w-full col-span-1">
+  <img
+    src="/map.png" // Replace with an actual static map URL
+    alt="Static Map"
+    className="w-full h-40 rounded-lg" // Adjust the width and height as needed
+  />
+
+  {/* Overlay Button */}
+  <button
+    onClick={() => setIsModalOpen(true)}
+    type="button"
+    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-primary text-white text-sm border-none rounded cursor-pointer"
+  >
+    Select on Map
+  </button>
+</div>
+
+
+              <div className="col-span-2 flex flex-col gap-5">
+
+                <FormField
+                  control={form.control}
+                  name="city"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("addUser.addCity")}</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                          dir={locale === "ar" ? "rtl" : "ltr"}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={t("addUser.select")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {cities.map((city, index) => (
+                              <SelectItem key={index} value={city._id}>
+                                {locale === "ar" ? city.name.ar : city.name.en}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>العنوان</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="address" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            {isModalOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white p-6 rounded-lg shadow-lg w-[1400px]">
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                  >
+                    Close
+                  </button>
+                  <Map
+                    initialLatitude={37.7749} // Example latitude
+                    initialLongitude={-122.4194} // Example longitude
+                    onLocationSelect={handleLocationSelect}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
 
         {/* details */}
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
@@ -434,9 +518,7 @@ const handelImage = (file) => {
                     <Input
               type="number"
                       {...field}
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value))
-                      }
+            
                       placeholder={t("addUser.InstallmentPeriod")}
                     />
                     </FormControl>
@@ -456,9 +538,7 @@ const handelImage = (file) => {
                     <Input
                   type="number"
                       {...field}
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value))
-                      }
+             
                       placeholder={t("addUser.firstPayment")}
                     />
                   </FormControl>
@@ -478,9 +558,7 @@ const handelImage = (file) => {
                     <Input
                    type="number"
                       {...field}
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value))
-                      }
+                
                       placeholder={` ${t("addUser.annualInterest")} %`}
                     />
                   </FormControl>
@@ -489,7 +567,7 @@ const handelImage = (file) => {
               )}
             />
 
-<div className="grid grid-cols-2 gap-5"><FormField
+<div className="grid grid-cols-3 gap-5"><FormField
               control={form.control}
               name="priceM"
               render={({ field }) => (
@@ -499,9 +577,7 @@ const handelImage = (file) => {
                     <Input
                       type="number"
                       {...field}
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value))
-                      }
+                
                       placeholder="priceM"
                     />
                   </FormControl>
@@ -520,9 +596,7 @@ const handelImage = (file) => {
                     <Input
                       type="number"
                       {...field}
-                      onChange={(e) =>
-                        field.onChange(parseFloat(e.target.value))
-                      }
+                 
                       placeholder={`${t("addUser.start")}..`}
                     />
                   </FormControl>
@@ -530,6 +604,40 @@ const handelImage = (file) => {
                 </FormItem>
               )}
             />
+
+<FormField
+                control={form.control}
+                name="currency"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("addUser.currency")}</FormLabel>
+                    <FormControl>
+                    <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                          dir={locale === "ar" ? "rtl" : "ltr"}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={t("addUser.select")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="USD">USD</SelectItem>
+                            <SelectItem value="IQD">IQD</SelectItem>
+                            <SelectItem value="EUR">EUR</SelectItem>
+                            <SelectItem value="SAR">SAR</SelectItem>
+                            <SelectItem value="AED">AED</SelectItem>
+                            <SelectItem value="KWD">KWD</SelectItem>
+                            <SelectItem value="QAR">QAR</SelectItem>
+                            <SelectItem value="OMR">OMR</SelectItem>
+                            <SelectItem value="BHD">BHD</SelectItem>
+                            <SelectItem value="JOD">JOD</SelectItem>
+                          </SelectContent>
+                        </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 </div>
 
 

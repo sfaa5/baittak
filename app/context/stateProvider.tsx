@@ -23,6 +23,12 @@ type SharedStateContextType = {
   setAllRequest:any;
   activeButton:any;
   setActiveButton:any;
+  user:any;
+  setUser:any;
+  projects:any;
+  setProjects:any;
+  properties:any;
+  setProperties:any;
 };
 
 // Create the context with proper type
@@ -43,6 +49,11 @@ export default function StateProvider({ children }: StateProviderProps) {
   const [starRequest,setStarRequest]=useState([]);
   const [allRequest,setAllRequest]=useState([]);
   const [activeButton, setActiveButton] = useState<string | null>("inbox");
+  const [user,setUser]=useState([]);
+  const [projects,setProjects]=useState([]);
+  const [properties,setProperties]=useState([]);
+
+
 
 
   return (
@@ -63,7 +74,14 @@ export default function StateProvider({ children }: StateProviderProps) {
         allRequest,
         setAllRequest,
         activeButton,
-        setActiveButton
+        setActiveButton,
+        user,
+        setUser,
+        projects,
+        setProjects,
+        properties,
+        setProperties
+
       }}
     >
       {children}

@@ -26,6 +26,8 @@ import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useSharedState } from "@/app/context/stateProvider";
+import { set } from "date-fns";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -40,7 +42,13 @@ const formSchema = z.object({
   }),
 });
 
-function UpdateUser() {
+interface Props {
+  phoneNumber: string;
+  username: string;
+}
+
+function UpdateUser({ phoneNumber, username }: Props) {
+  const {user,setUser}=useSharedState()
   const { data: session, status } = useSession();
   const [errorr, setError] = React.useState("");
 
@@ -48,8 +56,8 @@ function UpdateUser() {
 
   useEffect(() => {
     form.reset({
-      username: session?.user.name || "",
-      phoneNumber: session?.user.phoneNumber || "",
+      username:username  || "",
+      phoneNumber: phoneNumber || "",
     });
   }, [session]);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -100,6 +108,8 @@ function UpdateUser() {
       // Parse the response if needed
       const result = await response.json();
       console.log("Response from API:", result);
+
+setUser((prevUser)=>({...prevUser,username:values.username,phoneNumber:values.phoneNumber}))
 
       setLoadingButton(false);
 

@@ -11,6 +11,8 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { getTranslations } from "next-intl/server";
 import SearchProject from "./SearachProject";
 import Sort from "@/components/Sort";
+import OnMap from "../Property/OnMap";
+import PaginationControll from "@/components/PaginationControll";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -59,12 +61,12 @@ const data =await response.json();
 
 
 
-// console.log('data',data);
+console.log('data',data);
 
 
 
   return (
-    <div className="container 2xl:px-[120px]  mx-auto pt-3">  
+    <div className="container 2xl:px-[120px]  mx-auto pt-3 mb-28">  
     <SearchProject />
       <div className="flex gap-4 flex-col mt-5 xl:w-[75%]">
         {/* path */}
@@ -86,14 +88,11 @@ const data =await response.json();
         <Sort/>
 
 
-          <button className="flex w-[160px]  gap-2 h-[40px] items-center font-normal text-[#707070] rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-4">
-              <FaRegMap className="h-4 w-4 text-[#707070]" />
-              {t("property.map")}
-            </button>
+        <OnMap properties={data.projects||[]} />
    
         </div>
 
-        <div className="flex flex-col gap-8 mb-28">
+        <div className="flex flex-col gap-8 ">
 {data?.projects.length>0?(
 
   data.projects.map((post,key:number)=>(
@@ -103,6 +102,12 @@ const data =await response.json();
 ):(<p className="no-results">No startups found</p>)}
         
        </div>
+       <div className="flex items-center justify-center mb-10 mt-5 px-4 py-3 sm:px-6">
+
+
+<PaginationControll length={data.projects.length} hasNextPage={data.isNext}
+        hasPrevPage={start > 0} />
+        </div>
       </div>
     </div>
   );

@@ -68,7 +68,12 @@
     },
     "property": {
       "search_placeholder": "Search properties...",
-      "properties_title": "Properties for rent in Saudi",
+ "properties_for": "Properties for",
+"in":"in",
+"rent":"Rent",
+"sell":"Sell",
+"properties":"Properties",
+
 
       "sort_by": "Sort By",
       "map": "Map",

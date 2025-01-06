@@ -24,18 +24,24 @@ import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { useSharedState } from "@/app/context/stateProvider";
 import { deleteSelectedRequests, } from "@/lib/actions/project.action";
+import { useRouter,usePathname } from "next/navigation";
 
-interface DataTableProps<TData, TValue> {
+interface RowData {
+  _id?: string;  
+
+}
+
+interface DataTableProps<TData , TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   columFilter: string;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends RowData, TValue>({
   columns,
   data,
   columFilter,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData , TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -45,6 +51,9 @@ export function DataTable<TData, TValue>({
   const { dataRequest, setDataRequest } = useSharedState();
   const {activeButton, setActiveButton} = useSharedState();
   const{starRequest,setStarRequest}=useSharedState();
+  const pathnaem = usePathname()
+  const router = useRouter(); 
+
 
   // const handleUnstarClick = async () => {
   //   await unstarSelectedRequests(req, setDataRequest, setStarRequest, starRequest, table);
@@ -67,6 +76,17 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
+
+
+  const handleRowClick = (id: string) => {
+    console.log(pathnaem)
+   if (pathnaem.includes("/Company/properties"))router.push(`/Property/${id}`);
+   if(pathnaem.includes("/User/posts"))router.push(`/Property/${id}`)
+    if(pathnaem.includes("/Company/project"))router.push(`/Projects/${id}`)
+
+  };
+
+
 
   return (
     <div>
@@ -139,8 +159,9 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  
+                  onClick={() => handleRowClick(row.original._id )}
                   data-state={row.getIsSelected() && "selected"}
+                 className={"cursor-pointer"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -157,6 +178,7 @@ export function DataTable<TData, TValue>({
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center"
+
                 >
                   No results.
                 </TableCell>
