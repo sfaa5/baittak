@@ -31,6 +31,7 @@ export default function Home() {
     if (parms.get('login') === 'true') {
       setShowLoginModal(true);
     }
+    
   }, [parms.toString()]);
 
   const closeModal = () => {

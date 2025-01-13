@@ -74,7 +74,7 @@ console.log("afencyyyy",data)
       >
         <div className="flex flex-col gap-6 items-center md:items-start">
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <img src={data.image.url} alt="agent" className="w-32 h-32" />
+            <img src={data.image?.url?data.image?.url:"/company/unknown.png"} alt="agent" className="w-32 h-32" />
             <div className="flex flex-col gap-5">
               <h1 className="text-2xl text-secondary font-medium">
                 {data.companyName}

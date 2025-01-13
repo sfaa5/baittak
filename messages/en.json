@@ -6,7 +6,7 @@
     "welcome": "Welcome to our website!",
     "header": {
       "company":"Company",
-      "signTitle":"Welcome Back!",
+      "signTitle":"Create a new account",
       "signDesc":" Sign in to explore your dream properties and manage your account.",
       "post property": "post property",
       "favorites": "Favorites",
@@ -38,6 +38,14 @@
       "letest properties of rent": "Letest Properties of Rent"
     },
     "footer": {
+
+        "unauthorized": "You are not authorized to perform this action.",
+        "emptyMessageError": "Message cannot be empty.",
+        "success": "Your request was added successfully.",
+        "error": "An error occurred. Please try again.",
+        "submitting": "Submitting...",
+ 
+      
       "contact": "Contact",
       "email1": "Info@Baittak.com",
       "email2": "sales@Baittak.com",
@@ -138,7 +146,8 @@
       "yourPosts": "Your Posts",
       "favorite": "Favorite",
       "selectPlan": "Select Plan",
-      "addingList": "Adding List"
+      "addingList": "Adding List",
+      "editUser":"Edit "
     },
     "contact": {
       "Whatsup": "Whatsup",
@@ -227,6 +236,7 @@
   "addCity": "Add City",
       "addListing": "Add A Listing",
       "selectPropertyType": "Select the type of property",
+
       "selectProjectType":"Project Type",
       "apartment":"Apartment",
       "villa":"Villa",
@@ -284,7 +294,7 @@
       "Information": "Information",
       "Properties": "Properties",
       "Agents": "Agents",
-      "Project": "Project",
+      "Project": "Projects",
       "Messages": "Messages",
       "Package": "Package",
       "Logout": "Logout",

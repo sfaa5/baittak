@@ -99,7 +99,7 @@ console.log('data',data);
     <ProjectCard key={key} post={post} />
 ))
 
-):(<p className="no-results">No startups found</p>)}
+):(<p className="no-results">No Projects found</p>)}
         
        </div>
        <div className="flex items-center justify-center mb-10 mt-5 px-4 py-3 sm:px-6">

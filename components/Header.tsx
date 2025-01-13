@@ -15,13 +15,14 @@ function Header() {
   const  t  = useTranslations();
   const router = usePathname();
   const locale = useLocale();
-console.log(router)
+  console.log("headerrrr",router)
+
 
 
   return (
     <header className=" py-3  font-work-sans border-b-[1px]">
       <div
-        className={`container px-2 mx-auto flex justify-between items-center ${router!=="/"&& "lg:px-[120px]"}  `}
+        className={`container px-2 mx-auto flex justify-between items-center ${router!=="/en"&& router!=="/ar"? "lg:px-[120px]":""}`}
       >
         {/* mobile button */}
         <div className=" xl:hidden  ">

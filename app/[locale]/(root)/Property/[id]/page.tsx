@@ -33,7 +33,7 @@ type amenity ={
   console.log(
     "iam hereeeeeeeeeee",id);
 
-    const response = await fetch(`https://baittak-server.vercel.app/api/properties/${id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/properties/${id}`);
     const data = await response.json();
 
   const {
@@ -48,7 +48,7 @@ type amenity ={
     area,
     des,
     landNumber,
-location,
+    location,
     plotLength,
 
 
@@ -99,10 +99,10 @@ location,
 
         {/* Mobile design */}
         <div className="flex gap-4 overflow-x-auto hide-scrollbar  mt-5 sm:hidden">
-          {images.map((im: string, key: React.Key ) => (
+          {images.map((im, key: React.Key ) => (
             <img
               key={key}
-              src={`${im}`}
+              src={`${im.url}`}
               alt={`property image ${key}`}
               className="flex-shrink-0 w-full h-[300px] object-cover rounded-xl"
             />

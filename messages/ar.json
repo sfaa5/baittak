@@ -7,7 +7,7 @@
     "welcome": "مرحبًا بك في موقعنا!",
     "header": {
       "company":"الشركة",
-      "signTitle":"مرحباً بك في بيتك",
+      "signTitle":"إنشاء حساب جديد",
       "signDesc":"قم بتسجيل الدخول للوصول إلى أفضل العقارات بسهولة",
       "post property": "إضافة عقار",
       "favorites": "المفضلة",
@@ -43,6 +43,14 @@
       "email1": "Info@Baittak.com",
       "email2": "sales@Baittak.com",
       "email3": "agent@Baittak.com",
+      
+        "unauthorized": "ليس لديك الصلاحية لتنفيذ هذا الإجراء.",
+        "emptyMessageError": "لا يمكن أن تكون الرسالة فارغة.",
+        "success": "تمت إضافة طلبك بنجاح.",
+        "error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+        "submitting": "جاري إرسال...",
+      
+
       "links": "روابط",
       "cities": "المدن",
       "submit": "إرسال",
@@ -130,7 +138,9 @@
       "yourPosts": "منشوراتك",
       "favorite": "المفضلة",
       "selectPlan": "اختر الخطة",
-      "addingList": "إضافة عقار"
+      "addingList": "إضافة عقار",
+      "editUser":"تعديل"
+
     },
     "contact":{
       "Whatsup":"واتس اب",

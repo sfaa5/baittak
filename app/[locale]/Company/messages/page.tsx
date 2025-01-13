@@ -19,8 +19,7 @@ export default function Page() {
 
   const { data: session, status } = useSession(); 
 
-  // console.log("Session:", session);
-  // console.log("Status:", status); 
+ 
 
   // Only proceed when session is authenticated
   useEffect(() => {

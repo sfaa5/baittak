@@ -26,7 +26,7 @@ export type property = {
   title:string,
   price:string, 
   address:string,
-  images:[string],
+  images:{url:string}[],
   bathrooms:string,
   bedrooms:string,
   amenities: [
@@ -166,7 +166,7 @@ properties.map((post:property,key:number)=>(
 ))
 
 
-          ):(<p className="no-results">No startups found</p>)}
+          ):(<p className="no-results">No Properties found</p>)}
         
   
         </div>

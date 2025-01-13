@@ -1,6 +1,7 @@
 import { type AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
+import CredentialsProvider from "next-auth/providers/credentials"
+import { redirect } from "next/dist/server/api-utils";
 
 
 // Type augmentation for NextAuth
@@ -27,6 +28,52 @@ export const authOptions  = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
+
+    // Credentials Provider
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const { email, password } = credentials || {};
+        console.log("hereeeeeeee")
+
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_URL_SERVER}/api/users/login`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Invalid email or password");
+          }
+
+          const user = await response.json();
+
+          console.log("userrrrr",user)
+
+          return {
+            id: user.data._id,
+            name: user.data.username,
+            email: user.data.email,
+            image: user.data.image || null,
+            role: user.data.role || null,
+            phoneNumber: user.data.phoneNumber || null,
+          };
+        } catch (error) {
+          console.error("Error in credentials login:", error);
+          return null;
+        }
+      },
+    }),
   ],
   pages: {
     signIn: '/',
@@ -42,7 +89,7 @@ export const authOptions  = {
           return false;
         }
 
-        const response = await fetch(`https://baittak-server.vercel.app/api/users`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -68,9 +115,8 @@ export const authOptions  = {
         console.log(data);
 
 
-        
 
-   
+
 
         return true;
       } catch (error) {

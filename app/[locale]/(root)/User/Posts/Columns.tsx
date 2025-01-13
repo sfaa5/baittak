@@ -24,7 +24,7 @@ export type Property = {
   price: number;
   area: string;
   like: number;
-  images: string[];
+  images: {url:string};
   propertyType: string;
   _id:string
 };
@@ -36,7 +36,7 @@ export const columns: ColumnDef<Property>[] = [
     cell: ({ row }) => {
       console.log(row.original);
       const images = row.original.images; // Access the images array
-      const firstImage = images?.[0]; // Get the first image's URL
+      const firstImage = images?.[0].url; // Get the first image's URL
 
       return (
         <div className="flex items-center">
@@ -89,7 +89,6 @@ export const columns: ColumnDef<Property>[] = [
     accessorKey: "like",
     header: "like",
   },
-
   {
     id: "actions",
     header: "",

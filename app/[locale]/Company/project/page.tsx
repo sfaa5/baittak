@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { DataTable } from "@/components/Company/data-table";
 import { Project, columns } from "./Columns";
-
+import { useSession } from "next-auth/react";
 import Title from "@/components/Company/titile";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -13,17 +13,17 @@ import { useSharedState } from "@/app/context/stateProvider";
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 export default function DemoPage() {
-  const [data, setData] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const {projects,setProjects}=useSharedState()
-
+  const { data: session,status  } = useSession();
+ const id = session?.user?.id
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${URL_SERVER}/api/projects/get`);
+        const response = await fetch(`${URL_SERVER}/api/agency/${id}`);
         const result = await response.json();
-        setData(result.projects || []);
-        setProjects(result.projects);
+        setProjects(result.projects || []);
       } catch (error) {
         console.error("Error fetching projects:", error);
       } finally {
@@ -31,8 +31,9 @@ export default function DemoPage() {
       }
     };
 
-    fetchProjects();
-  }, []);
+    if(status==="authenticated") fetchProjects();
+
+ }, [status, session]);
 
   return (
     <div className="mx-auto py-10">

@@ -71,8 +71,7 @@ function Page() {
   const [address, setAddress] = useState('');
 
 
-  
-  console.log("setionn", session);
+
 
   const router = useRouter();
 
@@ -116,6 +115,7 @@ function Page() {
     }
   };
 
+  
 
   const handleLocationSelect = async (selectedLocation) => {
     setLocation(selectedLocation);
@@ -205,7 +205,7 @@ function Page() {
     async function fetchAmenities() {
       try {
         const response = await fetch(
-          `https://baittak-server.vercel.app/api/amenity`
+         `${URL_SERVER}/api/amenity`
         );
         const data = await response.json();
         setAmenities(data);
@@ -220,7 +220,7 @@ function Page() {
     async function fetchCities() {
       try {
         const response = await fetch(
-          `https://baittak-server.vercel.app/api/cities`
+          `${URL_SERVER}/api/cities`
         );
         const data = await response.json();
         setCities(data);

@@ -25,7 +25,7 @@ function Image({images}) {
         {images.map((src, index) => (
           <SwiperSlide key={index}>
             <img
-              src={src}
+              src={src?.url}
               alt={`Property Slide ${index + 1}`}
               className="w-full h-auto object-cover rounded-xl"
             />
