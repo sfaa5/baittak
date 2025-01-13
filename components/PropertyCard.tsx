@@ -67,6 +67,10 @@ function PropertyCard({ property }) {
     }
   };
 
+  if(status==="loading"){
+    return <h1>loading...</h1>
+  }
+
   return (
     <>
     <div className="relative">
@@ -158,20 +162,20 @@ function PropertyCard({ property }) {
           <div className="flex items-center gap-1">
             <PiBathtubLight className="text-primary text-2xl" />
             <span>
-              {property.bathrooms} m<sup>2</sup>
+              {property?.bathrooms} m<sup>2</sup>
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-2 text-[#707070]">
-          <FiMapPin /> {property.address}
+          <FiMapPin /> {property?.address}
         </div>
 
         {property.amenities ? (
           <ul className="flex gap-3 text-primary">
             {property.amenities.slice(0, 3).map((amenity, index) => (
               <li key={index} className="border-r-[1px] border-primary pr-3">
-                {locale === "ar" ? amenity.name.ar : amenity.name.en}
+                {locale === "ar" ? amenity?.name?.ar : amenity?.name?.en}
               </li>
             ))}
           </ul>
