@@ -52,6 +52,7 @@ const formSchema = z.object({
   annualInterest:z.string().max(100,"max 100").optional(),
   installmentPeriod:z.string().optional(),
   currency:z.string().min(1, "currency is required"),
+  projectType:z.string().min(1,"project type is required")
 
 });
 
@@ -108,7 +109,8 @@ const [errorr,setErrorr]= useState("");
       file: [],
       city: "",
       units: '',
-      currency:""
+      currency:"",
+      projectType:""
     },
   });
 
@@ -169,7 +171,7 @@ const handleLocationSelect = async (selectedLocation) => {
     async function fetchAmenities() {
       try {
         const response = await fetch(
-          `https://baittak-server.vercel.app/api/amenity`
+          `${URL_SERVER}/api/amenity`
         );
         const data = await response.json();
         setAmenities(data);
@@ -184,7 +186,7 @@ const handleLocationSelect = async (selectedLocation) => {
     async function fetchCities() {
       try {
         const response = await fetch(
-          `https://baittak-server.vercel.app/api/cities`
+          `${URL_SERVER}/api/cities`
         );
         const data = await response.json();
         setCities(data);
@@ -227,7 +229,7 @@ const handleLocationSelect = async (selectedLocation) => {
       formData.append("city", values.city);
       formData.append("units", values.units.toString());
       formData.append("currency", values.currency);
-
+formData.append("projectType",values.projectType)
       formData.append("location", JSON.stringify(location))
       
       values.amenities?.forEach((amenity, index) => {
@@ -263,7 +265,7 @@ const handleLocationSelect = async (selectedLocation) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 flex flex-col gap-6 mb-20"
+        className="space-y-4 flex flex-col gap-6 mb-20 mt-8"
       >
         {/* addProject */}
          <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
@@ -318,24 +320,52 @@ const handleLocationSelect = async (selectedLocation) => {
               )}
             />
 
-<FormField
-              control={form.control}
-              name="units"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("addUser.units")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      {...field}
-              
-                      placeholder="Units"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
+
+              <div className="">
+              <FormField
+                control={form.control}
+                name="projectType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("addUser.selectProjectType")}</FormLabel>
+                    <FormControl>
+                      <Select
+                        dir={locale === "ar" ? "rtl" : "ltr"}
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder={t("addUser.select")} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="apartment">شقة</SelectItem>
+                          <SelectItem value="villa">فيلا</SelectItem>
+                          <SelectItem value="farm">مزرعة</SelectItem>
+                          <SelectItem value="rest-house">استراحة</SelectItem>
+                          <SelectItem value="residential-complex">
+                            مجمع سكني
+                          </SelectItem>
+                          <SelectItem value="duplex">دوبلكس</SelectItem>
+                          <SelectItem value="building">
+                            عمارة بالكامل
+                          </SelectItem>
+                          <SelectItem value="hotel-apartments">
+                            فندق/شقق فندقية
+                          </SelectItem>
+                          <SelectItem value="land">ارض</SelectItem>
+                          <SelectItem value="full-floor">طابق كامل</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              /></div>
+
+
+
+
 
 
 
@@ -357,7 +387,24 @@ const handleLocationSelect = async (selectedLocation) => {
 
 
 
-
+            <FormField
+              control={form.control}
+              name="units"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("addUser.units")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      {...field}
+              
+                      placeholder="Units"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
@@ -393,6 +440,8 @@ const handleLocationSelect = async (selectedLocation) => {
                 </FormItem>
               )}
             />
+
+
 
 
 

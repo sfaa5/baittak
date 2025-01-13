@@ -42,7 +42,7 @@ const formSchema = z.object({
 
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
-  price: z.string().min(1,"Price is required"),
+  price: z.string().min(1, "Price is required"),
   area: z.string().min(1, "Area is required"),
   propertyType: z.string().min(1, "Property type is required"),
   bedrooms: z.number().nonnegative("Bedrooms cannot be negative"),
@@ -52,12 +52,11 @@ const formSchema = z.object({
   numFloors: z.number().min(1, "floors is required"),
   plotWidth: z.string().optional(),
   landNumber: z.string().optional(),
-  plotLength:z.string().optional(),
+  plotLength: z.string().optional(),
   city: z.string().min(1, "city is required"),
-  rentalType:z.string().optional(),
-  currency:z.string().min(1, "currency is required"),
+  rentalType: z.string().optional(),
+  currency: z.string().min(1, "currency is required"),
   for: z.string().min(1, "plese complete"),
-
 });
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -68,10 +67,8 @@ function Page() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cities, setCities] = useState<City[]>([]);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
 
-
-  
   console.log("setionn", session);
 
   const router = useRouter();
@@ -116,21 +113,25 @@ function Page() {
     }
   };
 
-
   const handleLocationSelect = async (selectedLocation) => {
     setLocation(selectedLocation);
 
     try {
       // Reverse geocode to get the address
-      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${selectedLocation.latitude}&lon=${selectedLocation.longitude}`);
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${selectedLocation.latitude}&lon=${selectedLocation.longitude}`
+      );
       const data = await response.json();
       const addressComponents = data.address;
       if (addressComponents) {
         // Construct the address excluding city, postcode, and country
-        const { road, house_number, suburb, neighbourhood,city } = addressComponents;
-        const address = [house_number, road, suburb, neighbourhood,city].filter(Boolean).join(', ');
+        const { road, house_number, suburb, neighbourhood, city } =
+          addressComponents;
+        const address = [house_number, road, suburb, neighbourhood, city]
+          .filter(Boolean)
+          .join(", ");
         setAddress(address);
-        form.setValue('address', address); // Update the form value
+        form.setValue("address", address); // Update the form value
         console.log("Selected Address:", address);
       } else {
         console.error("No address found for the selected location.");
@@ -163,7 +164,6 @@ function Page() {
     _id: string;
   }
 
-
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -184,8 +184,8 @@ function Page() {
       floors: 0,
       images: [],
       city: "",
-      currency:"",
-      rentalType:"",
+      currency: "",
+      rentalType: "",
     },
   });
 
@@ -204,9 +204,7 @@ function Page() {
   useEffect(() => {
     async function fetchAmenities() {
       try {
-        const response = await fetch(
-          `https://baittak-server.vercel.app/api/amenity`
-        );
+        const response = await fetch(`${URL_SERVER}/api/amenity`);
         const data = await response.json();
         setAmenities(data);
       } catch (err) {
@@ -219,9 +217,7 @@ function Page() {
   useEffect(() => {
     async function fetchCities() {
       try {
-        const response = await fetch(
-          `https://baittak-server.vercel.app/api/cities`
-        );
+        const response = await fetch(`${URL_SERVER}/api/cities`);
         const data = await response.json();
         setCities(data);
       } catch (err) {
@@ -230,7 +226,6 @@ function Page() {
     }
     fetchCities();
   }, []);
-
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
@@ -256,7 +251,7 @@ function Page() {
       formData.append("plotLength", values.plotLength.toString());
       formData.append("landNumber", values.landNumber.toString());
       formData.append("city", values.city);
-      formData.append("location", JSON.stringify(location))
+      formData.append("location", JSON.stringify(location));
       formData.append("currency", values.currency);
       formData.append("rentalType", values.rentalType);
 
@@ -275,26 +270,22 @@ function Page() {
         method: "POST",
         body: formData,
       });
-const data = await response.json();
+      const data = await response.json();
       if (response.ok) {
-
         toast({
           description: "the post add succussfuly",
-          className: 'bg-green-500 text-white p-4 rounded shadow-lg',
+          className: "bg-green-500 text-white p-4 rounded shadow-lg",
         });
-
-      }  else {
+      } else {
         toast({
           description: data.message,
-          className: 'bg-red-500 text-white p-4 rounded shadow-lg',
+          className: "bg-red-500 text-white p-4 rounded shadow-lg",
         });
- 
       }
     } catch (err) {
-
       toast({
         description: err.message,
-        className: 'bg-red-500 text-white p-4 rounded shadow-lg',
+        className: "bg-red-500 text-white p-4 rounded shadow-lg",
       });
     } finally {
       setLoading(false);
@@ -306,7 +297,7 @@ const data = await response.json();
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 flex flex-col gap-6 mb-20"
+          className="space-y-4 flex flex-col gap-6 mt-8 mb-20"
         >
           {/* add a listing */}
           <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
@@ -318,160 +309,157 @@ const data = await response.json();
 
             <div className="grid gap-3 grid-cols-8">
               <div className="col-span-2">
-              <FormField
-                control={form.control}
-                name="propertyType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("addUser.selectPropertyType")}</FormLabel>
-                    <FormControl>
-                      <Select
-                        dir={locale === "ar" ? "rtl" : "ltr"}
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("addUser.select")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="apartment">شقة</SelectItem>
-                          <SelectItem value="villa">فيلا</SelectItem>
-                          <SelectItem value="farm">مزرعة</SelectItem>
-                          <SelectItem value="rest-house">استراحة</SelectItem>
-                          <SelectItem value="residential-complex">
-                            مجمع سكني
-                          </SelectItem>
-                          <SelectItem value="duplex">دوبلكس</SelectItem>
-                          <SelectItem value="building">
-                            عمارة بالكامل
-                          </SelectItem>
-                          <SelectItem value="hotel-apartments">
-                            فندق/شقق فندقية
-                          </SelectItem>
-                          <SelectItem value="land">ارض</SelectItem>
-                          <SelectItem value="full-floor">طابق كامل</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /></div>
+                <FormField
+                  control={form.control}
+                  name="propertyType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("addUser.selectPropertyType")}</FormLabel>
+                      <FormControl>
+                        <Select
+                          dir={locale === "ar" ? "rtl" : "ltr"}
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={t("addUser.select")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="apartment">شقة</SelectItem>
+                            <SelectItem value="villa">فيلا</SelectItem>
+                            <SelectItem value="farm">مزرعة</SelectItem>
+                            <SelectItem value="rest-house">استراحة</SelectItem>
+                            <SelectItem value="residential-complex">
+                              مجمع سكني
+                            </SelectItem>
+                            <SelectItem value="duplex">دوبلكس</SelectItem>
+                            <SelectItem value="building">
+                              عمارة بالكامل
+                            </SelectItem>
+                            <SelectItem value="hotel-apartments">
+                              فندق/شقق فندقية
+                            </SelectItem>
+                            <SelectItem value="land">ارض</SelectItem>
+                            <SelectItem value="full-floor">
+                              طابق كامل
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <div className="col-span-2">
-
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("addUser.title")}</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder={`${t("addUser.title")}..`}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /></div>
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("addUser.title")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder={`${t("addUser.title")}..`}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <div className="col-span-4 grid grid-cols-7 gap-2">
-              
-              <div className="col-span-3">
-  <FormField
-    control={form.control}
-    name="price"
-    render={({ field }) => (
-      <FormItem>
-        <FormLabel>{t("addUser.price")}</FormLabel>
-        <FormControl>
-          <Input
-            type="number"
-            {...field}
- 
-            placeholder={`${t("addUser.price")}..`}
-       
-          />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-</div>
+                <div className="col-span-3">
+                  <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("addUser.price")}</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...field}
+                            placeholder={`${t("addUser.price")}..`}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
+                <div className="col-span-2">
+                  <FormField
+                    control={form.control}
+                    name="currency"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("addUser.currency")}</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            dir={locale === "ar" ? "rtl" : "ltr"}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder={t("addUser.select")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="USD">USD</SelectItem>
+                              <SelectItem value="IQD">IQD</SelectItem>
+                              <SelectItem value="EUR">EUR</SelectItem>
+                              <SelectItem value="SAR">SAR</SelectItem>
+                              <SelectItem value="AED">AED</SelectItem>
+                              <SelectItem value="KWD">KWD</SelectItem>
+                              <SelectItem value="QAR">QAR</SelectItem>
+                              <SelectItem value="OMR">OMR</SelectItem>
+                              <SelectItem value="BHD">BHD</SelectItem>
+                              <SelectItem value="JOD">JOD</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-
-<div className="col-span-2">
-
-<FormField
-                control={form.control}
-                name="currency"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("addUser.currency")}</FormLabel>
-                    <FormControl>
-                    <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                          dir={locale === "ar" ? "rtl" : "ltr"}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={t("addUser.select")} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="USD">USD</SelectItem>
-                            <SelectItem value="IQD">IQD</SelectItem>
-                            <SelectItem value="EUR">EUR</SelectItem>
-                            <SelectItem value="SAR">SAR</SelectItem>
-                            <SelectItem value="AED">AED</SelectItem>
-                            <SelectItem value="KWD">KWD</SelectItem>
-                            <SelectItem value="QAR">QAR</SelectItem>
-                            <SelectItem value="OMR">OMR</SelectItem>
-                            <SelectItem value="BHD">BHD</SelectItem>
-                            <SelectItem value="JOD">JOD</SelectItem>
-                          </SelectContent>
-                        </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-</div>
-
-<div className="col-span-2">
-<FormField
-                control={form.control}
-                name="rentalType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("addUser.rentalType")}</FormLabel>
-                    <FormControl>
-                    <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                          dir={locale === "ar" ? "rtl" : "ltr"}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={t("addUser.select")} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Monthly">{t("addUser.monthly")}</SelectItem>
-                            <SelectItem value="Yearly">{t("addUser.yearly")}</SelectItem>
-                          </SelectContent>
-                        </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /></div>
-
-</div>
-
-
-
+                <div className="col-span-2">
+                  <FormField
+                    control={form.control}
+                    name="rentalType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("addUser.rentalType")}</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            dir={locale === "ar" ? "rtl" : "ltr"}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder={t("addUser.select")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Monthly">
+                                {t("addUser.monthly")}
+                              </SelectItem>
+                              <SelectItem value="Yearly">
+                                {t("addUser.yearly")}
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
             </div>
 
             <FormField
@@ -513,7 +501,6 @@ const data = await response.json();
                 </FormItem>
               )}
             />
-
           </div>
 
           {/* Address */}
@@ -524,26 +511,25 @@ const data = await response.json();
               </h2>
             </div>
 
-            <div className="grid  sm:grid-cols-3   ">
+            <div className="grid  sm:grid-cols-3  gap-14">
               <div className="relative w-full col-span-1">
                 <img
                   src="/map.png" // Replace with an actual static map URL
                   alt="Static Map"
-                  className="w-56 h-40 rounded-lg" // Adjust the width and height as needed
+                  className="w-full h-40 rounded-lg" // Adjust the width and height as needed
                 />
 
                 {/* Overlay Button */}
                 <button
                   onClick={() => setIsModalOpen(true)}
                   type="button"
-                  className="absolute left-[23%] top-[40%] m-auto w-max h-max px-2 py-1 bg-primary text-white text-sm border-none rounded cursor-pointer"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-primary text-white text-sm border-none rounded cursor-pointer"
                 >
                   Select on Map
                 </button>
               </div>
 
               <div className="col-span-2 flex flex-col gap-5">
-
                 <FormField
                   control={form.control}
                   name="city"
@@ -734,7 +720,6 @@ const data = await response.json();
                         <Input
                           type="number"
                           {...field}
-                    
                           className="pr-24" // Add padding to the right side of the input
                         />
                         <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
@@ -757,7 +742,6 @@ const data = await response.json();
                       <div className="flex relative">
                         <Input
                           {...field} // spread field to bind the input value and onChange
-                  
                           className="pr-24" // Add padding to the right side of the input
                         />
                         <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
@@ -780,7 +764,6 @@ const data = await response.json();
                       <div className="flex relative">
                         <Input
                           {...field} // Spread field to bind the input value and onChange
-                  
                           className="pr-24" // Add padding to the right side of the input
                         />
                         <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
@@ -803,7 +786,6 @@ const data = await response.json();
                   <FormControl>
                     <Input
                       {...field} // Spread field to bind the input value and onChange
-        
                       placeholder="0000"
                     />
                   </FormControl>
@@ -812,48 +794,7 @@ const data = await response.json();
               )}
             />
 
-            {/* <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("addUser.addCity")}</FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      dir={locale === "ar" ? "rtl" : "ltr"}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t("addUser.select")} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {cities.map((city, index) => (
-                          <SelectItem key={index} value={city._id}>
-                            {locale === "ar" ? city.name.ar : city.name.en}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>العنوان</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="address" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
+           
           </div>
 
           {/* Amenities */}

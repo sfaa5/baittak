@@ -50,7 +50,7 @@ const formSchema = z.object({
     email: z.string().email({
       message: "Please enter a valid email address.",
     }),
-    phone: z
+    phoneNumber: z
       .string()
       .regex(/^\d{10,15}$/, {
         message: "Please enter a valid phone number (10-15 digits)",
@@ -73,6 +73,7 @@ function page() {
 
   const [agency, setAgency] = useState(null); // State to store agency data
   const [loading, setLoading] = useState(true); // Loading state
+
 const [city,setCity]=useState('')
 const [open, setOpen] = React.useState(false);
 const [errorr,setError] =React.useState("")
@@ -167,7 +168,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           jobTitle: "",
           username: "",
           email: "",
-          phone: "",
+          phoneNumber: "",
           image: "",
         },
       });
@@ -182,7 +183,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         jobTitle: agency.jobTitle || '',
         username: agency.username || '',
         email: agency.email || '',
-        phone: agency.phoneNumber || '',
+        phoneNumber: agency.phoneNumber || '',
         image: agency.image || '',
         address:agency.address||'',
       });
@@ -417,7 +418,7 @@ console.log(agency?.image)
             {/* Phone Field */}
             <FormField
               control={form.control}
-              name="phone"
+              name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Phone Number</FormLabel>
@@ -439,9 +440,9 @@ console.log(agency?.image)
   {errorr && <p style={{ color: "red" }}>{errorr}</p>}
   <Button 
   type="submit" 
-  disabled={loading} // Disable the button while loading
+  disabled={loadingButton} // Disable the button while loading
 >
-  {loading ? 'Submitting...' : 'Submit'} {/* Change text while loading */}
+  {loadingButton ? 'saving...' : 'Save'} {/* Change text while loading */}
 </Button>
           </form>)}
      

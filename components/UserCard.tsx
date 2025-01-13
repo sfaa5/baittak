@@ -5,6 +5,7 @@ import { useSharedState } from "@/app/context/stateProvider";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "./ui/skeleton";
 
  function UserCard() {
 const {user,setUser}=useSharedState()
@@ -15,6 +16,7 @@ const [loading, setLoading] = useState(true);
     const  t =  useTranslations();
 
 
+console.log("sessionnnn",session)
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -40,7 +42,16 @@ const [loading, setLoading] = useState(true);
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="relative mx-auto w-full xl:w-1/3">
+    <div className="flex flex-col justify-center items-center bg-gray-100 p-8 gap-8 rounded-[0.7rem] h-[400px]">
+      {/* Centered Skeleton Loader */}
+      <div className="animate-pulse flex flex-col items-center">
+        <div className="w-16 h-16 bg-gray-300 rounded-full"></div>
+        <div className="mt-4 h-4 bg-gray-300 rounded w-24"></div>
+        <div className="mt-2 h-4 bg-gray-300 rounded w-32"></div>
+      </div>
+    </div>
+  </div>
   }
 
 
@@ -64,12 +75,11 @@ console.log(user)
     <div className="relative mx-auto w-full xl:w-1/3">
       <div className=" flex flex-col bg-gray-100 p-8  gap-8 rounded-[0.7rem]">
 
-      
-<UpdateUser phoneNumber={user.phoneNumber} username={user.username}/>
+
 
 
         <div className="flex items-center gap-5">
-          <img src={session?.user?.image || "/fallback-image.png"} alt="user" className="rounded-full"/>
+          <img src={user?.image?.url? user.image?.url : user.image || "/company/unknown.png"} alt="user" className="rounded-full h-20"/>
           <div className="flex flex-col gap-2 text-lg">
             <p>{user.username}</p>
             <p>{session?.user.email}</p>
@@ -113,6 +123,8 @@ console.log(user)
         {propertiesPosted} of {limit} posts used
       </p>
     </div>
+
+
       </div>
     </div>
   );

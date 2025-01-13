@@ -38,7 +38,7 @@ console.log("gggggggggggggggg",data.properties)
       <div className="w-full p-8 rounded-lg bg-gray-50">
         <div className="flex justify-between">
           <div className="flex flex-col md:flex-row items-center gap-6">
-            {data.image.url?   <img src={data.image.url} alt="agent" className="w-48 h-48" />:     <img src="/company/unknown.png" alt="agent" className="w-48 h-48" />}
+            {data.image?.url?   <img src={data.image.url} alt="agent" className="w-48 h-48" />:     <img src="/company/unknown.png" alt="agent" className="w-48 h-48" />}
         
 
             <div className="flex flex-col gap-5">

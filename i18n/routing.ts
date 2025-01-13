@@ -65,6 +65,9 @@ export const routing = defineRouting({
       },"/User/plan":{
         en:"/User/plan",
         ar:"/خطه/مستخدم"
+      },"/User/Edit":{
+        en:"/User/Edit",
+        ar:"/تعديل/مستخدم"
       }
 
 

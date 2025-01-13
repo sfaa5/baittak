@@ -23,8 +23,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaCircleUser } from "react-icons/fa6";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 // Schema for form validation
@@ -45,11 +48,14 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  phone: z
+  phoneNumber: z
     .string()
     .regex(/^\d{10,15}$/, {
       message: "Please enter a valid phone number (10-15 digits)",
     }),
+     password: z.string().min(6, {
+            message: "Password must be at least 6 characters long.",
+          }),
 });
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
@@ -58,9 +64,13 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 export function SignAgency() {
   const [open, setOpen] = React.useState(false);
   const [errorr,setError] =React.useState("")
-
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
 const [message,setMessage] =React.useState(false)
-  const  t = useTranslations("header");
+  const [cities, setCities] = React.useState([]);
+  const [loading,setLoading]=React.useState(false)
+const router = useRouter()
+const locale =useLocale()
+  const  t = useTranslations();
   // Define the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -70,13 +80,33 @@ const [message,setMessage] =React.useState(false)
       jobTitle: "",
       username:"",
       email: "",
-      phone: "",
+      phoneNumber: "",
+      password:"",
     },
   });
+
+
+  React.useEffect(() => {
+    async function fetchCities() {
+      try {
+        const response = await fetch(
+          `${URL_SERVER}/api/cities`
+        );
+        const data = await response.json();
+        setCities(data);
+      } catch (err) {
+        console.error("Failed to fetch cities:", err);
+      }
+    }
+    fetchCities();
+  }, []);
+
 
   // Submit handler
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log("Form Values:", values);
+    setError("")
+    setLoading(true)
   
     try {
       const response = await fetch(`${URL_SERVER}/api/users/register/agency`, {
@@ -95,16 +125,12 @@ const [message,setMessage] =React.useState(false)
         throw new Error("Failed to send data to the server"); 
       }
   
-  
-      // Parse the response if needed
-      const result = await response.json();
-      console.log("Response from API:", result);
-  
-    toast({
-      description: "Your request was added successfully.",
-    }); 
+  router.push("/?login=true")
+form.reset()
+setOpen(false)
 
-    setMessage(true)
+
+
 
     } catch (error) {
       console.error("Error during form submission:", error);
@@ -112,6 +138,8 @@ const [message,setMessage] =React.useState(false)
         description: "Your request was not received.",
       });
       setError(error.message)
+    }finally{
+      setLoading(false)
     }
   };
   
@@ -131,13 +159,7 @@ const [message,setMessage] =React.useState(false)
 
 
 
-{message==true?(
 
-
-<div className="mt-10">
-    Your data has been submitted successfully. Someone will confirm the data and email you shortly.
-</div>
-) : (
     <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* Company Name Field */}
@@ -148,7 +170,7 @@ const [message,setMessage] =React.useState(false)
                 <FormItem>
                   <FormLabel>Company Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter company name" {...field} />
+                    <Input placeholder="company name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -157,18 +179,34 @@ const [message,setMessage] =React.useState(false)
 
             {/* City Field */}
             <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter city" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                  control={form.control}
+                  name="city"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("addUser.addCity")}</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                          dir={locale === "ar" ? "rtl" : "ltr"}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={t("addUser.select")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {cities.map((city, index) => (
+                              <SelectItem key={index} value={city._id}>
+                                {locale === "ar" ? city.name.ar : city.name.en}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
 
             {/* Job Title Field */}
             <FormField
@@ -178,7 +216,7 @@ const [message,setMessage] =React.useState(false)
                 <FormItem>
                   <FormLabel>Job Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter job title" {...field} />
+                    <Input placeholder="job title" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -191,9 +229,9 @@ const [message,setMessage] =React.useState(false)
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel> Name</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter name" {...field} />
+                    <Input placeholder="name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -209,7 +247,7 @@ const [message,setMessage] =React.useState(false)
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="Enter email" {...field} />
+                    <Input type="email" placeholder="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -219,14 +257,14 @@ const [message,setMessage] =React.useState(false)
             {/* Phone Field */}
             <FormField
               control={form.control}
-              name="phone"
+              name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Enter phone number"
+                      placeholder="phone number"
                       {...field}
                     />
                   </FormControl>
@@ -234,11 +272,42 @@ const [message,setMessage] =React.useState(false)
                 </FormItem>
               )}
             />
+
+<FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                  <div className="relative">
+          {/* Password Input */}
+          <Input
+            type={passwordVisible ? "text" : "password"} // Toggle between "text" and "password"
+            placeholder="password"
+            {...field}
+          />
+          {/* Toggle Button */}
+          <button
+            type="button"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+            onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility
+          >
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
   {errorr && <p style={{ color: "red" }}>{errorr}</p>}
-            <Button type="submit">Submit</Button>
+              <Button disabled={loading} className="w-full py-3" type="submit">
+                {loading ? "Sending..." : "Register"}
+              </Button>
           </form>
         </Form>
-)    }
+  
     
       </DialogContent>
     </Dialog>

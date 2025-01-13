@@ -41,7 +41,7 @@ function ImgeCard({img}) {
                   className="flex-shrink-0 w-full  snap-start " // Makes sure only one image shows up at a time
                 >
                   <img
-                    src={im}
+                    src={im?.url}
                     alt={`carousel image ${index + 1}`}
                     className="w-full object-cover  md:h-[300px] md:w-100"
                   />

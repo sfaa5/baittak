@@ -64,6 +64,15 @@ function Buttons() {
           {t("userButton.addingList")}
         </button>
       </Link>
+
+      <Link href={"/User/Edit"}>
+      <button
+          onClick={() => setActiveButton("edit")}
+          className={buttonClasses("edit")}
+        >
+          {t("userButton.editUser")}
+        </button>
+      </Link>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-
+"use client"
 import {Link} from "@/i18n/routing";
 import React from "react";
 import { CiHeart } from "react-icons/ci";
@@ -11,15 +11,17 @@ import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocalSwitcher";
 import { SignAgency } from "@/app/[locale]/auth/SignAgency";
 import SignOut from "./SignOut";
+import { useRouter } from "next/navigation";
 
 
 
 const Navbar = () => {
 
-  
+  const router = useRouter()
 
   const  t = useTranslations("header");
   const { data: session } = useSession();
+
 
 console.log('session',session)
 
