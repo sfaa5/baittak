@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import React from "react";
 import { getTranslations } from "next-intl/server";
@@ -8,36 +7,37 @@ import { getLocale } from "next-intl/server";
 import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdArrowForwardIos } from "react-icons/md";
-import { PiBathtubLight } from "react-icons/pi";
+import { PiBathtubLight, PiShareFatThin } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
 import Description from "../../Projects/Description";
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
 import Map from "../Map";
-
+import { RiShareForwardLine } from "react-icons/ri";
+import { CiHeart } from "react-icons/ci";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
-type amenity ={
-  name:{
-    en:string,
-    ar:string
-  },
-  svg: string
-}
+  type amenity = {
+    name: {
+      en: string;
+      ar: string;
+    };
+    svg: string;
+  };
 
   const locale = await getLocale();
 
-
   const t = await getTranslations();
   const id = (await params).id;
-  console.log(
-    "iam hereeeeeeeeeee",id);
+  console.log("iam hereeeeeeeeeee", id);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/properties/${id}`);
-    const data = await response.json();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_URL_SERVER}/api/properties/${id}`
+  );
+  const data = await response.json();
 
   const {
- user,
+    user,
     title,
     price,
     address,
@@ -50,14 +50,9 @@ type amenity ={
     landNumber,
     location,
     plotLength,
-
-
   } = data;
 
-
-  console.log(data)
-
-
+  console.log(data);
 
   interface Amenity {
     name: {
@@ -69,37 +64,44 @@ type amenity ={
 
   console.log(amenities?.map((item: Amenity) => item.name.en));
 
-
   return (
-    <div className="py-10 md:container mx-auto px-0 lg:px-[120px] ">
-      {/* path */}
-      <ul className="flex items-center gap-2 mb-5">
-        <li className="flex gap-3">
-          <Link href={"/"}>
-            <IoHomeSharp className="text-secondary" />
-          </Link>
+    <div className="mt-5 md:container mx-auto px-0 lg:px-[120px] ">
+      <div className="flex w-full justify-between items-center">
+        {/* path */}
+        <ul className="flex items-center gap-2 mb-5">
+          <li className="flex gap-3">
+            <Link href={"/"}>
+              <IoHomeSharp className="text-secondary" />
+            </Link>
 
-          <MdArrowForwardIos className="text-[#707070]" />
-        </li>
+            <MdArrowForwardIos className="text-[#707070]" />
+          </li>
 
-        <li className="text-[#707070] flex gap-3 items-center">
-          <Link href={"/Property"}>{t("header.properties")}</Link>
-          <MdArrowForwardIos className="text-[#707070]" />
-        </li>
+          <li className="text-[#707070] flex gap-3 items-center">
+            <Link href={"/Property"}>{t("header.properties")}</Link>
+            <MdArrowForwardIos className="text-[#707070]" />
+          </li>
 
-        <li className="text-[#707070] flex gap-3 items-center">
-          {t("property.properties_title")}
-        </li>
-      </ul>
+          <li className="text-[#707070] flex gap-3 items-center">{title}</li>
+        </ul>
 
+        <div className="flex gap-4 items-start mb-5">
+          <div  className="flex  items-center gap-2">
+            <CiHeart /> <span className="text-sm">{t("propertyDetails.save")}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <PiShareFatThin /> <span className="text-sm">{t("propertyDetails.share")}</span>
+          </div>
+        </div>
+      </div>
       {/* images */}
       <div>
         {/* Images for desktop */}
-<ImageModel img={images} />
+        <ImageModel img={images} />
 
         {/* Mobile design */}
         <div className="flex gap-4 overflow-x-auto hide-scrollbar  mt-5 sm:hidden">
-          {images.map((im, key: React.Key ) => (
+          {images.map((im, key: React.Key) => (
             <img
               key={key}
               src={`${im.url}`}
@@ -108,7 +110,6 @@ type amenity ={
             />
           ))}
         </div>
-
       </div>
 
       <div className="flex justify-between flex-col items-center w-full mt-8 gap-10">
@@ -143,7 +144,7 @@ type amenity ={
           </div>
 
           {/* contact Desktop */}
-<ContactDesk user={user} title={title}/>
+          <ContactDesk user={user} title={title} />
 
           {/* contact Mobile */}
           <div className="mobile-buttons md:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 ">
@@ -166,18 +167,10 @@ type amenity ={
         <div className="w-full flex flex-col gap-10 justify-start">
           {/* describtion */}
           <div className="flex flex-col md:w-2/3 px-3">
-            <p className="text-lg text-gray-500">
-             {address}
-            </p>
-            <h3 className="text-2xl font-medium mb-7">
-              {title}
-            </h3>
+            <p className="text-lg text-gray-500">{address}</p>
+            <h3 className="text-2xl font-medium mb-7">{title}</h3>
 
-
-            <Description des={des}/>
-
-
-   
+            <Description des={des} />
           </div>
 
           {/* property details */}
@@ -483,7 +476,7 @@ type amenity ={
                   <span className="font-medium">
                     {t("propertyDetails.Apartment")}
                   </span>
-                  <span className="font-medium">{bedrooms||"-"}</span>
+                  <span className="font-medium">{bedrooms || "-"}</span>
                   <span className="font-medium">-</span>
                   <span className="font-medium">-</span>
                   <span className="font-medium">
@@ -495,7 +488,7 @@ type amenity ={
                   <span className="font-medium">
                     {t("propertyDetails.Al Wahah")}
                   </span>
-                  <span className="font-medium">{landNumber||"-"}</span>
+                  <span className="font-medium">{landNumber || "-"}</span>
                 </div>
               </div>
 
@@ -677,7 +670,7 @@ type amenity ={
                 {/* info */}
                 <div className="flex  flex-col gap-4">
                   <span className="font-medium">
-                  {area || "-"} {t("propertyDetails.sqr")}
+                    {area || "-"} {t("propertyDetails.sqr")}
                   </span>
                   <span className="font-medium">{bathrooms || "-"}</span>
                   <span className="font-medium">{plotLength || "-"}</span>
@@ -698,27 +691,20 @@ type amenity ={
             </div>
           </div>
 
-{location.latitude && <Map location={location}/>}
-
-
-
+          {location.latitude && <Map location={location} />}
 
           <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
-          <h3 className="text-2xl mb-9 text-secondary">المزايا</h3>
-          <div className="grid grid-cols-3 gap-y-8">
-  {amenities.map((amenity:amenity, inx:number) => (
-    <div key={inx} className="flex gap-2 items-center">
-
-      <span className="text-gray-900">
-        {locale == "ar" ? amenity.name.ar : amenity.name.en} 
-      </span>
-    </div>
-  ))}
-</div>
-
-</div>
-
-
+            <h3 className="text-2xl mb-9 text-secondary">المزايا</h3>
+            <div className="grid grid-cols-3 gap-y-8">
+              {amenities.map((amenity: amenity, inx: number) => (
+                <div key={inx} className="flex gap-2 items-center">
+                  <span className="text-gray-900">
+                    {locale == "ar" ? amenity.name.ar : amenity.name.en}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* <div >
         <PropertyMap

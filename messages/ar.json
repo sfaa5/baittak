@@ -148,6 +148,8 @@
       "Call":"هاتف"
     },
     "propertyDetails": {
+      "save":"حفظ",
+      "share":"مشاركة",
       "property details":"تفاصيل العقار",
       "Property Type":"نوع العقار",
       "Bedrooms":"غرف النوم",

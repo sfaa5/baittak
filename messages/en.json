@@ -155,6 +155,8 @@
       "Call": "Call"
     },
     "propertyDetails": {
+      "save":"Save",
+      "share":"Share",
       "property details": "property details",
       "Property Type": "Property Type",
       "Bedrooms": "Bedrooms",

@@ -13,6 +13,9 @@ import { useLocale } from "next-intl";
 import { Mail } from "./Mail";
 import { like } from "@/lib/actions/user.action";
 import LikeButton from "./LikeButton";
+import { Button } from "./ui/button";
+import { IoMdShareAlt } from "react-icons/io";
+import ShareButton from "./Share";
 
 
 
@@ -58,7 +61,7 @@ console.log("post",post)
     bedrooms,
     amenities,
     area,
-    user,
+    userDetails,
     currency,
     _id,
     email
@@ -189,31 +192,41 @@ console.log("post",post)
    </Link>
             <div className="flex w-full justify-between  pb-3">
               {/* contact */}
-              <div className="flex gap-2">
-                <button
+              <div className="flex gap-2 ">
+
+                <Button
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent the click from bubbling up to the Link
                     e.preventDefault();
                     setShowNumber(!showNumber);
                   }}
-                  className="flex w-full h-[45px] gap-1 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3"
+                  className="flex w-full  h-[45px] gap-2   hover:bg-gray-100 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3"
                 >
                   <FiPhoneCall className="w-5 h-5" />
-                  {showNumber ? user.phoneNumber : "Call"}
-                </button>
+                  {showNumber ? userDetails[0]?.phoneNumber : "Call"}
+                </Button>
+                
 
             <Mail ownerEmail={email} title={title}/>
 
-                <button
+                <Button
+
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent the click from bubbling up to the Link
                     e.preventDefault();
-                    window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
+                    
+                    {userDetails[0]?.phoneNumber && window.open(`https://wa.me/${userDetails[0]?.phoneNumber}`, "_blank");}
                   }}
-                  className="flex w-full h-[45px] items-center font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3"
+                  className="flex w-full h-[45px] items-center  font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3"
                 >
                   <FaWhatsapp className="w-5 h-5" />
-                </button>
+                </Button>
+
+
+        
+        <ShareButton propertyUrl={`https://baittak.vercel.app/Property/${_id}`} propertyTitle={title} />
+
+
               </div>
 {CompanyImage&&             <img
               
