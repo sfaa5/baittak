@@ -412,6 +412,7 @@
     "Phone": "رقم الهاتف",
     "Enter phone number": "أدخل رقم الهاتف",
     "Send": "إرسال",
+    "sending":"ارسال...",
     "address": "العنوان",
     "units": "الوحدات",
     "Filter_title": "ابحث في العنوان...",
@@ -573,7 +574,7 @@
       "phone_placeholder": "رقم الهاتف",
       "password_placeholder": "كلمة المرور",
       "register_button": "تسجيل",
-      "register_button...": "تسجيل...."
+      "register_buttonn": "تسجيل...."
     }
   }
 }
