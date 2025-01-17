@@ -289,7 +289,7 @@ const formSchema = z.object({
 
         {errorr && <p style={{ color: "red" }}>{errorr}</p>}
         <Button disabled={loading} className="w-full py-3" type="submit">
-          {loading ? t("signAgency.register_button...") : t("signAgency.dialog.register_button")}
+          {loading ? t("signAgency.register_buttonn") : t("signAgency.dialog.register_button")}
         </Button>
       </form>
     </Form>

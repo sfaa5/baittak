@@ -416,6 +416,7 @@
   },
 
   "inputs": {
+   
       "Read Less": "Read Less",
   "Read More": "Read More",
   "See on Map":"See on Map",
@@ -431,6 +432,7 @@
     "Phone": "Phone",
     "Enter phone number": "Enter phone number",
     "Send": "Send",
+    "sending":"Sending...",
     "address":"Address",
     "units":"Units",
     "Filter_title":"Filter Title...",
@@ -572,6 +574,7 @@
     "description": "To reset password, please enter your email",
     "email": "Email",
     "send_button": "Send"
+
   },
   "reset_password": {
     "title": "Reset Password",
@@ -598,7 +601,8 @@
       "email_placeholder": "Email",
       "phone_placeholder": "Phone Number",
       "password_placeholder": "Password",
-      "register_button": "Register"
+      "register_button": "Register",
+      "register_buttonn": "Register..."
     }
   }
 

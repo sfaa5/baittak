@@ -17,6 +17,7 @@ import { Button } from "./ui/button";
 import { IoMdShareAlt } from "react-icons/io";
 import ShareButton from "./Share";
 import { SlSizeFullscreen } from "react-icons/sl";
+import { usePathname } from "next/navigation";
 
 const RentalTypeTranslation = {
   Monthly: "شهريًّا",
@@ -54,8 +55,10 @@ function PropertiesCard({ post }: { post: property }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const [showNumber, setShowNumber] = useState(false);
+  const pathname =usePathname()
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
+
   const t = useTranslations();
 
   const scrollNext = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -95,6 +98,7 @@ function PropertiesCard({ post }: { post: property }) {
     currency,
     _id,
     email,
+    
   } = post;
 
   return (
@@ -232,7 +236,8 @@ function PropertiesCard({ post }: { post: property }) {
                 {showNumber ? userDetails[0]?.phoneNumber : "Call"}
               </Button>
 
-              <Mail ownerEmail={email} title={title} />
+{!pathname.includes("Agency")&&<Mail ownerEmail={userDetails[0]?.email} title={title} />}
+              
 
               <Button
                 onClick={(e) => {

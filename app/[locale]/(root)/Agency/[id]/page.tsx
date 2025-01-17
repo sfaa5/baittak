@@ -97,7 +97,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
               {data.phoneNumber}
             </button>
 
-            <Mail ownerEmail={data.email} />
+            <Mail ownerEmail={data.email} title={data.companyName} />
           </div>
         </div>
 

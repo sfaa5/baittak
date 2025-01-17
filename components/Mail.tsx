@@ -22,7 +22,7 @@ import {
   } from "@/components/ui/form";
   import { Textarea } from "./ui/textarea";
   import { Input } from "./ui/input";
-  import { useState } from "react";
+  import React, { useState } from "react";
   import { IoMailOutline } from "react-icons/io5";
 import { useSession } from "next-auth/react";
 import { Description } from "@radix-ui/react-toast";
@@ -40,13 +40,17 @@ import { useTranslations } from "next-intl";
   
   }
   
-  export function Mail({ title,ownerEmail }: MailProps) {
+  export function Mail({ownerEmail ,title }: MailProps) {
     const [open, setOpen] = useState(false);
+  const [loading, setLoading] = React.useState(false);
 
       const { data: session } = useSession();
       const pathname = usePathname();
     const t = useTranslations("inputs");
     const tE = useTranslations("erorr");
+
+    console.log("emailll",ownerEmail)
+    console.log("titele",title)
 
 
       // Schema for form validation
@@ -81,6 +85,7 @@ import { useTranslations } from "next-intl";
     });
   
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+      setLoading(true);
       console.log("Form Values:", values);
 console.log(ownerEmail)
    values.ownerEmail = ownerEmail ;
@@ -194,7 +199,7 @@ console.log(ownerEmail)
                 )}
               />
               <DialogFooter>
-                <Button type="submit">{t("Send")}</Button>
+              <Button disabled={loading} type="submit">  {loading ? t("sending"): t("Send")}</Button>
               </DialogFooter>
             </form>
           </Form>
