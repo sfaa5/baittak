@@ -1,11 +1,12 @@
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { IoIosLogOut } from "react-icons/io";
 import { RiUserFill } from "react-icons/ri";
 
-function SignOut({ user }) {
-  console.log(user)
-  console.log("imgageeeeeee",user.image)
+ function SignOut({ user }) {
+const t = useTranslations()
+
   return (
     <div className="relative inline-block">
       <DropdownMenu>
@@ -24,10 +25,10 @@ function SignOut({ user }) {
         <DropdownMenuContent className="bg-white shadow-lg rounded-md py-1">
           <DropdownMenuItem
             onClick={() => signOut()}
-            className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            className="flex w-full items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
           >
             <IoIosLogOut size={20} />
-            <span className="text-sm font-medium">Log Out</span>
+            <span className="text-sm font-medium">{t("table.Log_Out")}</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

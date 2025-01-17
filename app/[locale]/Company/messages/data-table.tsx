@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { useSharedState } from "@/app/context/stateProvider";
 import { deleteSelectedRequests, } from "@/lib/actions/project.action";
 import Modal from "./Modal";
+import { useLocale, useTranslations } from "next-intl";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -48,6 +49,8 @@ export function DataTable<TData, TValue>({
   const{starRequest,setStarRequest}=useSharedState();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(null);
+    const locale = useLocale();
+    const t =useTranslations()
 
   // const handleUnstarClick = async () => {
   //   await unstarSelectedRequests(req, setDataRequest, setStarRequest, starRequest, table);
@@ -83,49 +86,38 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
-        <div className="grid grid-cols-2 gap-[65%]  w-full">
+
+
+                <div className="flex justify-between  py-4    w-full">
           <Input
-            placeholder="Filter title..."
+            placeholder={t("inputs.Filter_by_name")}
             value={
-              (table.getColumn(columFilter)?.getFilterValue() as string) ?? ""
+              (table.getColumn("name")?.getFilterValue() as string) ?? ""
             }
             onChange={(event) =>
-              table.getColumn(columFilter)?.setFilterValue(event.target.value)
+              table.getColumn("name")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />
 
-{activeButton === "inbox" && showDelte && (
-      <div className="flex gap-5">
-        {/* <Button
-          onClick={() =>
-            starrSelectedRequests(req, setDataRequest, setStarRequest,starRequest, table)
-          }
-        >
-          Star
-        </Button> */}
-        <Button
-          onClick={() =>
-            deleteSelectedRequests(req, setDataRequest, setReq, table)
-          }
-          className="bg-red-600 hover:bg-red-400"
-        >
-          Delete
-        </Button>
-      </div>
-    )}
-    {/* {activeButton === "starred" && showDelte && (
-      <div className="flex gap-5">
-        <Button
-          onClick={handleUnstarClick
-          }
-        >
-          Unstar
-        </Button>
-      </div>
-    )} */}
-        </div>
+          {showDelte && (
+            <div className="">
+              <Button
+                onClick={() =>
+                  deleteSelectedRequests(req, setDataRequest, setReq, table)
+                }
+                variant={"secondary"}
+                size="sm"
+                className="bg-red-600 hover:bg-red-400 text-white"
+              >
+                {t("inputs.Delete")}
+              </Button>
+            </div>
+          )}
+
+    
+        
+
       </div>
       <div className="rounded-md border">
         <Table>
@@ -134,7 +126,7 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}  >
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className={`${locale==="ar"?"text-right":"text-left"} `} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -171,21 +163,22 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {("No_results")}
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end gap-2 py-4">
         <Button
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+                    {t("table.Previous")}
+
         </Button>
         <Button
           variant="outline"
@@ -193,7 +186,8 @@ export function DataTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+                    {t("table.Next")}
+
         </Button>
       </div>
       {isModalOpen && selectedRow && (

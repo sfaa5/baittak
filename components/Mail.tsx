@@ -29,25 +29,10 @@ import { Description } from "@radix-ui/react-toast";
 import { toast } from "@/hooks/use-toast";
 
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
   
-  // Schema for form validation
-  const formSchema = z.object({
-    name: z.string().min(2, {
-      message: "Name must be at least 2 characters long.",
-    }),
-    email: z.string().email({
-      message: "Please enter a valid email address.",
-    }),
-    message: z.string().min(10, {
-      message: "Message must be at least 10 characters long.",
-    }),
-    phone: z.string().regex(/^\d{10,15}$/, {
-      message: "Please enter a valid phone number (10-15 digits)",
-    }),
-    ownerEmail: z.string().optional(),
-    title: z.string(),
-  });
+
   
   interface MailProps {
     title?: string;
@@ -60,7 +45,27 @@ import { usePathname } from "next/navigation";
 
       const { data: session } = useSession();
       const pathname = usePathname();
-    
+    const t = useTranslations("inputs");
+    const tE = useTranslations("erorr");
+
+
+      // Schema for form validation
+  const formSchema = z.object({
+    name: z.string().min(2, {
+      message: tE("First_Name_must_be_at_least_2_characters long"),
+    }),
+    email: z.string().email({
+      message: tE("Please_enter_a_valid_email_address"),
+    }),
+    message: z.string().min(10, {
+      message: tE("Message_must_be_at_least_10 _haracters_long"),
+    }),
+    phone: z.string().regex(/^\d{10,15}$/, {
+      message: tE("Please_enter_a_valid_phone_number_(10-15_digits)"),
+    }),
+    ownerEmail: z.string().optional(),
+    title: z.string(),
+  });
   
     // Define the form
     const form = useForm<z.infer<typeof formSchema>>({
@@ -122,16 +127,16 @@ console.log(ownerEmail)
             className={`${pathname.includes('Agency')? " hover:bg-gray-100 flex w-auto h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px]  justify-between px-4":"flex hover:bg-gray-100 gap-2 h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3"}`}
           >
             <IoMailOutline className="w-5 h-5" />
-            Mail
+            {t("Mail")}
           </Button>
         </DialogTrigger>
   
         {/* Dialog Content */}
         <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Send Mail</DialogTitle>
+          <DialogHeader dir="rtl">
+            <DialogTitle>{t("Send Mail")}</DialogTitle>
             <DialogDescription>
-              Enter the details below to send an email.
+            {t("Enter_the_details_below_to_send_an_email")}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -142,9 +147,8 @@ console.log(ownerEmail)
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter name" {...field} />
+                      <Input placeholder={t("Enter name")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -156,9 +160,8 @@ console.log(ownerEmail)
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter email" {...field} />
+                      <Input placeholder={t("Enter email")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -170,9 +173,8 @@ console.log(ownerEmail)
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Message</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Enter message" {...field} />
+                      <Textarea placeholder={t("Enter message")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -184,16 +186,15 @@ console.log(ownerEmail)
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter phone number" {...field} />
+                      <Input placeholder={t("Enter phone number")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <DialogFooter>
-                <Button type="submit">Send</Button>
+                <Button type="submit">{t("Send")}</Button>
               </DialogFooter>
             </form>
           </Form>

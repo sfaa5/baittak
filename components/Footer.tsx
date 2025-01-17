@@ -35,7 +35,7 @@ function Footer() {
   }, []); // Empty dependency array ensures this runs only once
 
   return (
-    <footer className={`bg-secondary mx-auto flex w-full pt-10 bottom-0`}>
+    <footer className={`bg-secondary mx-auto flex w-full pt-10 bottom-0 mt-24`}>
       <div
         className={`container mx-auto flex flex-col text-white ${
           path !== "/en" && path !== "/ar" ? "lg:px-[120px]" : ""
@@ -84,7 +84,7 @@ function Footer() {
             <h2 className="text-2xl font-semibold lg:-ml-5 mb-3">
               {t("footer.cities")}
             </h2>
-            <div className="grid grid-cols-3 gap-5 lg:gap-0 lg:grid-cols-[20%_20%_20%_20%]">
+            <div className="grid grid-cols-3 gap-5  lg:grid-cols-[20%_20%_20%_20%]">
               {isFetching ? (
                 <p>Loading cities...</p>
               ) : cities.length === 0 ? (

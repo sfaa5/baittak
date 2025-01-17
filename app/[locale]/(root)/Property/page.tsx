@@ -17,6 +17,7 @@ export type property = {
   rentaltype: string;
   CompanyImage: string;
   propertyType: string;
+  for:string,
   title: string;
   price: string;
   address: string;
@@ -122,6 +123,8 @@ async function Page({ searchParams }: PageProps) {
             <li className="text-[#707070]"> {t("property.properties")}</li>
           </ul>
 
+          <p className="text-[#707070]" > {data.filterLength} {t("property.properties")}</p>
+
           {city && purpose ? (
             <h3 className="text-xl font-medium">
               {t("property.properties_for")}{" "}
@@ -138,6 +141,8 @@ async function Page({ searchParams }: PageProps) {
               {purpose == "rent" ? t("property.rent") : t("property.sell")}
             </h3>
           ) : null}
+
+
 
           {/* button of cards */}
           <div className="flex justify-between">
@@ -159,7 +164,7 @@ async function Page({ searchParams }: PageProps) {
 
           <div className="flex items-center justify-center mb-10 mt-5 px-4 py-3 sm:px-6">
             <PaginationControll
-              length={data.properties.length}
+              length={data.totalProperties}
               hasNextPage={data.isNext}
               hasPrevPage={start > 0}
             />

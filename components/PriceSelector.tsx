@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
 import { IoIosArrowDown } from "react-icons/io";
+import { ChevronDown } from "lucide-react";
 
 interface PriceRangePopoverProps {
   onPriceChange: (range: { min: number | undefined; max: number | undefined }) => void;
@@ -27,10 +28,11 @@ export function PriceFilter({ onPriceChange }: PriceRangePopoverProps) {
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
-        <button   onClick={togglePopover} type="button" className="flex w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+        <button   onClick={togglePopover} type="button" className="hover:bg-gray-50  duration-200 flex gap-10 h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
 
                 {minPrice || maxPrice ? `${minPrice ?? ''} - ${maxPrice ?? ''}` : t("search.price")}
-            <IoIosArrowDown className="h-5 w-5 text-secondary" />  
+                <ChevronDown className="h-4 w-4 opacity-50"/>
+           
         </button>
 
       </PopoverTrigger>

@@ -75,7 +75,7 @@ export default async function RootLayout({
 
 
           <NextAuthProvider>        <NextIntlClientProvider messages={messages}>
-          <Header/>
+          <Header />
        {children}
        <Toaster />
           <Footer/>           </NextIntlClientProvider>

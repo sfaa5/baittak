@@ -50,9 +50,9 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
          <Combobox value={city} onChange={setCity}>
            <div className="relative w-full max-w-lg">
              {/* Button with icon */}
-             <Combobox.Button className="absolute inset-y-0 left-3 flex items-center z-20">
+             <Combobox.Button className="absolute inset-y-0 left-1 flex items-center z-20">
                <FiMapPin className=" absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <BsSearchHeartFill className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-primary rounded-full p-2 md:hidden" />
+                <BsSearchHeartFill className="absolute left-1 top-1/2 -translate-y-1/2 text-white text-3xl bg-primary rounded-full p-2 md:hidden" />
              </Combobox.Button>
    
              {/* Input field */}

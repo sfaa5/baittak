@@ -1,51 +1,52 @@
 import { CheckIcon } from '@heroicons/react/20/solid';
 import PayButton from './PayButton';
+import { useTranslations } from 'next-intl';
 
 function classNames(...classes: (string | undefined | false | null)[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function PlanCard({ plan }) {
+  const t = useTranslations('plan'); // Use 'plans' as the namespace, you can change this to match your JSON key
+
   const tiers = [
     {
-      name: 'الخطة المجانية',
+      name: t('freePlan.name'),  // Translation key for "Free Plan"
       id: '1',
       href: '#',
-      priceMonthly: `$ ${plan[0]?.price }`,
-      description: `ابدأ الآن مجانًا واستمتع بنشر حتى ${plan[0]?.limit } إعلانات بسهولة وسرعة.`,
+      priceMonthly: `$ ${plan[0]?.price}`,
+      description: t('freePlan.description', { limit: plan[0]?.limit }), // Dynamically pass limit
       features: [
-        `نشر ${plan[0]?.limit || 5} إعلانات`,
-        'دعم محدود',
+        t('freePlan.feature1', { limit: plan[0]?.limit || 5 }), // Translation for "Publish {limit} ads"
+        t('freePlan.feature2'), // "Limited support"
       ],
       featured: false,
     },
     {
-      name: 'الخطة الأساسية',
+      name: t('basicPlan.name'),
       id: '2',
       href: '#',
       priceMonthly: `$ ${plan[1]?.price || 15}`,
-      description: `الخيار المثالي للنمو، نشر حتى ${plan[1]?.limit || 25} إعلان بـ ${plan[1]?.price || 15}$ فقط شهريًا.`,
+      description: t('basicPlan.description', { limit: plan[1]?.limit || 25, price: plan[1]?.price || 15 }),
       features: [
-        `نشر ${plan[1]?.limit || 20} إعلانًا`,
-        'دعم أسرع',
+        t('basicPlan.feature1', { limit: plan[1]?.limit || 20 }), // "Publish {limit} ads"
+        t('basicPlan.feature2'), // "Faster support"
       ],
       featured: false,
     },
     {
-      name: 'الخطة المميزة',
+      name: t('premiumPlan.name'),
       id: '3',
       href: '#',
       priceMonthly: `$ ${plan[2]?.price || 30}`,
-      description: `تميز بإعلاناتك مع نشر حتى ${plan[2]?.limit || 25} إعلان وأولوية في العرض.`,
+      description: t('premiumPlan.description', { limit: plan[2]?.limit || 25 }),
       features: [
-        `نشر ${plan[2]?.limit || 25} إعلانًا`,
-        'دعم مميز',
+        t('premiumPlan.feature1', { limit: plan[2]?.limit || 25 }), // "Publish {limit} ads"
+        t('premiumPlan.feature2'), // "Premium support"
       ],
       featured: true,
     },
   ];
-
-
 
   return (
     <div className="bg-white">
@@ -74,7 +75,7 @@ export default function PlanCard({ plan }) {
                 {tier.priceMonthly}
               </span>
               <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>
-                /month
+                / a{t('month')}
               </span>
             </p>
             <p className={classNames(tier.featured ? 'text-gray-300' : 'text-gray-600', 'mt-6 text-base/7')}>
@@ -97,7 +98,6 @@ export default function PlanCard({ plan }) {
                 </li>
               ))}
             </ul>
-
 
             {tier.id !== "1" && <PayButton id={tier.id} />}
           </div>

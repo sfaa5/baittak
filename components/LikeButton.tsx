@@ -63,7 +63,7 @@ function LikeButton({propertyId}) {
     <button
       onClick={handleLikeToggle}
       disabled={isLoading} // Disable the button while loading
-      className={`absolute text-secondary bg-white text-2xl rounded-full p-1 top-60 right-4 hover:scale-110 transition-transform duration-200 ${
+      className={`absolute text-secondary bg-white text-2xl rounded-full p-1 bottom-1 right-4 hover:scale-110 transition-transform duration-200 ${
         isLoading ? 'opacity-50 cursor-not-allowed' : ''
       }`}
     >

@@ -35,7 +35,7 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <main className="w-full mt-8">
-      <h1 className="h1 py-0">{ t("company.inbox")}</h1>
+
 
       <div className="flex flex-col md:flex-row mt-10">
         <div className='w-full md:w-1/4 h-[50%] p-10 bg-white flex flex-col items-center gap-5 rounded-[0.6rem] shadow-lg'>
@@ -50,15 +50,7 @@ function Layout({ children }: LayoutProps) {
                 <Mail /> {t("company.inbox")} <span className="ml-20 font-normal">{allRequest.length}</span>
               </Button>
             </div>
-            {/* <div>
-              <Button
-                size={"lg"}
-                className={`bg-white text-black-100 w-full ${activeButton === "starred" ? "bg-primary bg-opacity-70 text-white" : "hover:bg-primary hover:bg-opacity-70"} active:bg-opacity-90 transition-all duration-150`}
-                onClick={handleStarClick}
-              >
-                <Star /> {t("company.starred")} <span className="ml-20 font-normal">{starRequest.length}</span>
-              </Button>
-            </div> */}
+
           </div>
         </div>
 

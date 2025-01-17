@@ -55,7 +55,7 @@ function RoomSelectHome({
           <button
             type="button"
             onClick={toggleDropdown}
-            className="items-center justify-between w-64  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2  w-full max-w-60 hidden 2xl:flex"
+            className="items-center justify-between gap-4  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2   max-w-60 hidden 2xl:flex"
           >
             {t("search.rooms_bath")}
             <ChevronDown className="h-4 w-4 opacity-50" />

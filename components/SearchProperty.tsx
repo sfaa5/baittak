@@ -3,12 +3,14 @@ import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FiMapPin } from "react-icons/fi";
+import { usePathname } from "next/navigation";
 
 const SearchCity = ({ city, setCity }: { city: string; setCity: (city: string) => void }) => {
   const [query, setQuery] = useState("");
   const [cities, setCities] = useState<string[]>([]);
   const locale = useLocale();
   const t = useTranslations();
+  const pathname = usePathname()
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -41,21 +43,23 @@ const SearchCity = ({ city, setCity }: { city: string; setCity: (city: string) =
         );
 
   return (
-    <div className="relative">
+    <div className="">
       <Combobox value={city} onChange={setCity}>
-        <div className="relative w-full">
+
+        <div className=" w-full">
+          <div className="relative">
           {/* Button with icon */}
-          <Combobox.Button className="absolute inset-y-0 left-3 flex items-center z-20">
+          <Combobox.Button className=" absolute inset-y-0 left-3 flex items-center z-20">
             <FiMapPin className="text-secondary" />
           </Combobox.Button>
 
           {/* Input field */}
           <Combobox.Input
             placeholder={t("search.enter_location")}
-            className="bg-[#F5F5F5] pl-10 flex h-[48px] font-normal items-center w-[200px] lg:w-[400px] text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
+            className= {`${pathname.includes("Agency") ? 'bg-white ' : 'bg-[#F5F5F5]'}  hover:bg-gray-50 duration-200 pl-10 flex h-[48px] font-normal items-center w-[200px] lg:w-[400px] text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4`}
             displayValue={(item: string) => item}
             onChange={(event) => setQuery(event.target.value)} // Update query on input change
-          />
+          /></div>
 
           {/* Dropdown list */}
           <Transition
@@ -65,7 +69,7 @@ const SearchCity = ({ city, setCity }: { city: string; setCity: (city: string) =
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options className="absolute z-10 mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Combobox.Options className="absolute z-10 mt-2 max-h-60 w-[30%] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {filteredCities.length === 0 && query !== "" ? (
                 <Combobox.Option
                   value={query}

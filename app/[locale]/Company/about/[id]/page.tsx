@@ -1,7 +1,7 @@
-'use client'
-import React, { useEffect, useState } from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
 
-import {  useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -26,44 +26,13 @@ import {
 import { FaCircleUser } from "react-icons/fa6";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "@/hooks/use-toast";
-import { FiUpload } from 'react-icons/fi';
-import SearchCity from '@/components/SearchProperty';
-import SelectCity from '@/components/Company/selectCity';
+import { FiUpload } from "react-icons/fi";
+import SearchCity from "@/components/SearchProperty";
+import SelectCity from "@/components/Company/selectCity";
 
 
-// Schema for form validation
-const formSchema = z.object({
-    address: z.string().min(5, {
-        message: "Address must be at least 5 characters long.",
-    }),
-    companyName: z.string().min(2, {
-      message: "Company Name must be at least 2 characters long.",
-    }),
 
-    jobTitle: z.string().min(2, {
-      message: "Job Title must be at least 2 characters long.",
-    }),
-    username: z.string().min(2, {
-      message: "First Name must be at least 2 characters long.",
-    }),
-   
-    email: z.string().email({
-      message: "Please enter a valid email address.",
-    }),
-    phoneNumber: z
-      .string()
-      .regex(/^\d{10,15}$/, {
-        message: "Please enter a valid phone number (10-15 digits)",
-      }),
-  image: z.any().optional(),
-  file:z.string().optional(),
-  city:z.string().optional(),
-
-  });
-  
-
-  const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
-
+const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function page() {
   const [loadingButton, setLoadingButton] = useState(false);
@@ -74,20 +43,44 @@ function page() {
   const [agency, setAgency] = useState(null); // State to store agency data
   const [loading, setLoading] = useState(true); // Loading state
 
-const [city,setCity]=useState('')
-const [open, setOpen] = React.useState(false);
-const [errorr,setError] =React.useState("")
+  const [city, setCity] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const [errorr, setError] = React.useState("");
+  const [citySend, setCitySend] = React.useState("");
+  const [message, setMessage] = React.useState(false);
+  const t = useTranslations("company.agentInfo");
+  const tE = useTranslations("erorr");
+  const tI =useTranslations("inputs")
+  const params = useParams();
+  const locale = useLocale();
+  const id = params.id;
 
+  // Schema for form validation
+const formSchema = z.object({
+  address: z.string().min(5, {
+    message: tE("Addressmustbeatleast5characterslong"),
+  }),
+  companyName: z.string().min(2, {
+    message: tE("Company_Name_must_be_at_least_2_characters_long"),
+  }),
 
-const [message,setMessage] =React.useState(false)
-const  t = useTranslations();
-const params= useParams();
-const locale = useLocale();
- 
-  const id = params.id
+  jobTitle: z.string().min(2, {
+    message: tE("Job_Title_must_be_at_least_2_characters_long"),
+  }),
+  username: z.string().min(2, {
+    message: tE("First_Name_must_be_at_least_2_characters long"),
+  }),
 
-
-
+  email: z.string().email({
+    message: tE("Please_enter_a_valid_email_address"),
+  }),
+  phoneNumber: z.string().regex(/^\d{10,15}$/, {
+    message: tE("Please_enter_a_valid_phone_number_(10-15_digits)"),
+  }),
+  image: z.any().optional(),
+  file: z.string().optional(),
+  city: z.string().optional(),
+});
 
 
   const handelImage = (file: File): Promise<string> => {
@@ -100,7 +93,9 @@ const locale = useLocale();
         if (reader.result && typeof reader.result === "string") {
           resolve(reader.result); // Resolve the Base64 string
         } else {
-          reject(new Error("FileReader failed to produce a valid Base64 string."));
+          reject(
+            new Error("FileReader failed to produce a valid Base64 string.")
+          );
         }
       };
 
@@ -125,12 +120,10 @@ const locale = useLocale();
     }
   };
 
-
-
   useEffect(() => {
     const fetchAgency = async () => {
       setLoading(true); // Start loading
-  
+
       try {
         const response = await fetch(`${URL_SERVER}/api/agency/${id}`); // Fetch the data
         if (!response.ok) {
@@ -139,40 +132,29 @@ const locale = useLocale();
         const data = await response.json(); // Parse the JSON
         setAgency(data); // Update state with the fetched data
       } catch (error) {
-        console.error('Failed to fetch agency:', error); // Log errors
+        console.error("Failed to fetch agency:", error); // Log errors
       } finally {
         setLoading(false); // Stop loading
       }
     };
-  
+
     fetchAgency(); // Call the function
   }, [id]);
 
-console.log("AGENCYYYYY",agency)
+  console.log("AGENCYYYYY", agency);
 
-const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files[0];
-    if (files) {
-
-      setSelectedImage(files);
-   
-    }
-  };
-
-    // Define the form
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          companyName: "",
-           
-          jobTitle: "",
-          username: "",
-          email: "",
-          phoneNumber: "",
-          image: "",
-        },
-      });
-
+  // Define the form
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      companyName: "",
+      jobTitle: "",
+      username: "",
+      email: "",
+      phoneNumber: "",
+      image: "",
+    },
+  });
 
   // Reset form values once agency data is available
   useEffect(() => {
@@ -180,274 +162,252 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       form.reset({
         companyName: agency.companyName || "",
 
-        jobTitle: agency.jobTitle || '',
-        username: agency.username || '',
-        email: agency.email || '',
-        phoneNumber: agency.phoneNumber || '',
-        image: agency.image || '',
-        address:agency.address||'',
+        jobTitle: agency.jobTitle || "",
+        username: agency.username || "",
+        email: agency.email || "",
+        phoneNumber: agency.phoneNumber || "",
+        image: agency.image || "",
+        address: agency.address || "",
       });
-if(locale==='ar'){
-   setCity(agency.city.name.ar)  
-}else{
-  setCity(agency.city.name.en)
-}
-   
-
+      if (locale === "ar") {
+        setCitySend(agency.city.name.en);
+        setCity(agency.city.name.ar);
+      } else {
+        setCitySend(agency.city.name.en);
+        setCity(agency.city.name.en);
+      }
     }
   }, [agency, form]);
 
+  // Submit handler
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoadingButton(true);
+    console.log("Form Values:", values);
 
-// Submit handler
-const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  setLoadingButton(true)
-  console.log("Form Values:", values);
-
-
-if(imageBuffers){values.file = imageBuffers}
-
-
-
-
-console.log("vvvvvvv",values.file)
-
-values.city = city
-
-
-
-console.log("lllllllllllllllllllllllllll",values)
-  try {
-    const response = await fetch(`${URL_SERVER}/api/agency/update/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json(); 
-      if (errorData.message) {
-        throw new Error(errorData.message); 
-      }
-      throw new Error("Failed to send data to the server"); 
+    if (imageBuffers) {
+      values.file = imageBuffers;
     }
 
+    console.log("vvvvvvv", values.file);
 
-    // Parse the response if needed
-    const result = await response.json();
-    console.log("Response from API:", result);
+    values.city = citySend;
 
-  toast({
-    description: "Your request was added successfully.",
-  }); 
+    console.log("lllllllllllllllllllllllllll", values);
+    try {
+      const response = await fetch(`${URL_SERVER}/api/agency/update/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
-  setMessage(true)
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.message) {
+          throw new Error(errorData.message);
+        }
+        throw new Error("Failed to send data to the server");
+      }
 
-  } catch (error) {
-    console.error("Error during form submission:", error);
-    toast({
-      description: "Your request was not received.",
-    });
-    setError(error.message)
-  }finally{
-    setLoadingButton(false)
-  }
-};
+      // Parse the response if needed
+      const result = await response.json();
+      console.log("Response from API:", result);
 
+      toast({
+        description: "Your request was added successfully.",
+      });
 
-console.log(agency?.image)
+      setMessage(true);
+    } catch (error) {
+      console.error("Error during form submission:", error);
+      toast({
+        description: "Your request was not received.",
+      });
+      setError(error.message);
+    } finally {
+      setLoadingButton(false);
+    }
+  };
+
+  console.log(agency?.image);
 
   return (
-
-
     <Form {...form}>
+      {loading ? (
+        <span>loading</span>
+      ) : (
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6 bg-gray-50 p-8  grid grid-cols-2 gap-x-6"
+        >
+          <div className="col-span-2 w-40">
+            {" "}
+            <FormField
+              control={form.control}
+              name="image"
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <div className="  ">
+                      <input
+                        id="imageUpload"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        className="hidden"
+                        onChange={handleFileChange}
+                      />
 
-          {loading?( <span>loading</span> ):(     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-gray-50 p-10 mt-5 grid grid-cols-2 gap-x-6">
+                      {imageBuffers ? (
+                        <label
+                          htmlFor="imageUpload"
+                          className="w-full space-y-4 cursor-pointer"
+                        >
+                          <div className="relative">
+                            <img
+                              src={imageBuffers}
+                              alt={`Uploaded image`}
+                              className="rounded-md shadow-md w-full h-40 object-cover"
+                            />
+                          </div>
+                        </label>
+                      ) : agency?.image ? (
+                        <label
+                          htmlFor="imageUpload"
+                          className="w-full space-y-4 cursor-pointer"
+                        >
+                          <div className="relative">
+                            <img
+                              src={agency.image.url}
+                              alt={`Uploaded image`}
+                              className="rounded-md shadow-md w-full h-40 object-cover"
+                            />
+                          </div>
+                        </label>
+                      ) : (
+                        <label
+                          htmlFor="imageUpload"
+                          className="flex items-center justify-start border-2 border-dashed border-gray-400 rounded-2xl p-5 w-full hover:shadow-md cursor-pointer text-center"
+                        >
+                          <div className="flex text-md flex-col items-center px-[25%] justify-center space-y-2">
+                            <FiUpload className="text-gray-600 text-xl" />
+                            <p className="text-gray-600 font-medium">
+                              {t("UploadImages")}
+                       -
+                            </p>
+                          </div>
+                        </label>
+                      )}
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-
-<div className='col-span-2 w-40'>   <FormField
-
+          {/* Company Name Field */}
+          <FormField
             control={form.control}
-            name="image"
-            render={() => (
+            name="companyName"
+            render={({ field }) => (
               <FormItem>
+                <FormLabel>{t("companyNameA")}</FormLabel>
                 <FormControl>
-                  <div className=" space-y-4 ">
-
-  
-
-
-                    <input
-                    
-                      id="imageUpload"
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      className="hidden"
-                      onChange={handleFileChange}
-                     
-                    />
-
-
-
-            { imageBuffers?(
-                <label htmlFor="imageUpload" className="w-full space-y-4 cursor-pointer">
-                <div className="relative">
-                  <img
-                    src={imageBuffers}
-                    alt={`Uploaded image`}
-                    className="rounded-md shadow-md w-full h-40 object-cover"
-                  />
-                </div>
-                </label>
-            ):agency?.image ? (
-                <label htmlFor="imageUpload" className="w-full space-y-4 cursor-pointer">
-              <div className="relative">
-                <img
-                  src={agency.image.url}
-                  alt={`Uploaded image`}
-                  className="rounded-md shadow-md w-full h-40 object-cover"
-                />
-              </div>
-              </label>
-            ) : (
-              <label
-                htmlFor="imageUpload"
-                className="flex items-center justify-start border-2 border-dashed border-gray-400 rounded-2xl p-5 w-full hover:shadow-md cursor-pointer text-center"
-              >
-                <div className="flex text-md flex-col items-center space-y-2">
-                  <FiUpload className="text-gray-600 text-xl" />
-                  <p className="text-gray-600 font-medium">
-                    Upload Images
-                  </p>
-                </div>
-              </label>
-            )}
-                  </div>
+                  <Input placeholder={tI("EnterCompanyName")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
-          /></div>
+          />
 
- 
+          {/* City Field */}
 
+          <FormItem>
+            <FormLabel>{t("city")}</FormLabel>
+            <FormControl>
+              <SelectCity city={city} setCity={setCity} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
 
+          {/* address Field */}
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("address")}</FormLabel>
+                <FormControl>
+                  <Input placeholder={tI("EnterAddress")}  {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* Company Name Field */}
-            <FormField
-              control={form.control}
-              name="companyName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Company Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter company name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          {/* Job Title Field */}
+          <FormField
+            control={form.control}
+            name="jobTitle"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("jobTitle")}</FormLabel>
+                <FormControl>
+                  <Input placeholder={tI("EnterJobTitle")} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* City Field */}
+          {/*  Name Field */}
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("owner")}</FormLabel>
+                <FormControl>
+                  <Input placeholder={tI("EnterName")}  {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
+          {/* Phone Field */}
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("phoneNumber")}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    placeholder={tI("EnterPhoneNumber")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-                <FormItem>
-                  <FormLabel>City</FormLabel>
-                  <FormControl>
-                       <SelectCity city={city} setCity={setCity} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-          
-            
-           
-  
-     
-
-            {/* address Field */}
-                      <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Address</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter address" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-
-
-            {/* Job Title Field */}
-            <FormField
-              control={form.control}
-              name="jobTitle"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Job Title</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter job title" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/*  Name Field */}
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel> Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-
-
-            {/* Phone Field */}
-            <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Enter phone number"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-
-
-
-  {errorr && <p style={{ color: "red" }}>{errorr}</p>}
-  <Button 
-  type="submit" 
-  disabled={loadingButton} // Disable the button while loading
->
-  {loadingButton ? 'saving...' : 'Save'} {/* Change text while loading */}
-</Button>
-          </form>)}
-     
-        </Form>
-  )
+          {errorr && <p style={{ color: "red" }}>{errorr}</p>}
+          <Button
+            type="submit"
+            disabled={loadingButton} // Disable the button while loading
+          >
+            {loadingButton ? t("saving") : t("save")}
+            {/* Change text while loading */}
+          </Button>
+        </form>
+      )}
+    </Form>
+  );
 }
 
-export default page
+export default page;

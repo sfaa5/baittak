@@ -28,7 +28,7 @@ function Buttons() {
     }`;
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 flex-nowrap  overflow-x-auto w-[100%]">
       <Link href={"/User/Posts"}>
         <button
           onClick={() => setActiveButton("yourPosts")}

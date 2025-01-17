@@ -32,7 +32,7 @@ function ImgeCard({img}) {
           <div className="relative group">
             <div
               ref={carouselRef}
-              className="flex overflow-x-hidden gap-4  w-[320px]" // Hides overflow to only show one image
+              className="flex overflow-x-hidden gap-4   md:max-w-[340px]" // Hides overflow to only show one image
               style={{ scrollSnapType: "x mandatory" }}
             >
               {img.map((im, index) => (
@@ -43,7 +43,7 @@ function ImgeCard({img}) {
                   <img
                     src={im?.url}
                     alt={`carousel image ${index + 1}`}
-                    className="w-full object-cover  md:h-[300px] md:w-100"
+                    className="w-full object-cover h-[300px]  md:h-[300px] md:w-100"
                   />
                 </div>
               ))}

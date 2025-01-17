@@ -11,6 +11,11 @@ import Map from "../../Property/Map";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
+const statusTranslation ={
+  "Completed":"مكتمل",
+  "UnderDevelopment":"تحت الانشاء"
+}
+
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
 
@@ -37,9 +42,11 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     address,
     des,
     price,
+    priceTo,
     firstPayment,
     annualInterest,
     installmentPeriod,
+    currency,
     location,
     priceM,
     bedrooms,
@@ -48,7 +55,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     images,
     units,
     user:{
-      image:{url},
+      image:{url}={},
       companyName,
       phoneNumber,
       _id: userId,
@@ -109,16 +116,21 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         } rounded-[0.7rem]`}
       >
         <div className="flex items-center gap-3 sm:gap-8">
-          <img
-            src="/project/desktop (1) 1.png"
+          {url?  <img
+            src={url}
             alt="company"
-            className="w-16 sm:w-24"
-          />
+            className="w-16 sm:w-24 rounded-sm"
+          />:     <img
+          src="/company/unknown.png"
+          alt="company"
+          className="w-16 sm:w-24 rounded-sm"
+        />}
+
           <div className="flex flex-col gap-3">
             <div className="flex gap-3 sm:gap-4 items-center">
               <p className="text-xs sm:text-base">{t("Project.By")} {companyName}</p>
               <p className="rounded-[0.6rem] text-xs sm:text-sm bg-white p-[1px] sm:px-2">
-                {status}
+              {locale==="ar"?statusTranslation[status]:status}
               </p>
             </div>
             <h3 className="text-xl sm:text-2xl sm:text-secondary text-white font-semibold">
@@ -127,7 +139,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
         </div>
         <div className="flex sm:flex-row w-full sm:justify-end">
-          <p className="text-xl font-medium text-white">{t("Project.Price From")} {price} {t("propertyDetails.SAR")}</p>
+          <p className="text-xl font-medium text-white">{t("Project.Price From")} {price} {currency}</p>
         </div>
       </div>
 
@@ -137,15 +149,15 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           <Image images={images} />
 
         {/* Contact Form */}
-        <FormReq agencyy={userId} _id={_id} title={title} phoneNumber={phoneNumber}/>
+        <FormReq url={url} agencyy={userId} _id={_id} title={title} phoneNumber={phoneNumber}/>
 
       </div>
 
       
 
       {/* About Section */}
-      <div className="flex flex-col w-full lg:w-2/3 mt-12 lg:mt-24 mb-10">
-        <h2 className="text-secondary text-2xl xs:text-3xl font-semibold mb-8">
+      <div className="flex flex-col w-full lg:w-2/3 mt-12 lg:mt-18 mb-10">
+        <h2 className="text-secondary text-2xl xs:text-2xl font-semibold mb-8">
           {t("Project.About Amjal AlYasmin Project")}
         </h2>
 
@@ -155,19 +167,19 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Price From")}</p>
-              <p className="font-medium">{Number(price).toLocaleString()} {t("propertyDetails.SAR")}</p>
+              <p className="font-medium">{Number(price).toLocaleString()} {currency} </p>
             </div>
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Price To")}</p>
-              <p className="font-medium">{Number(price).toLocaleString()} {t("propertyDetails.SAR")}</p>
+              <p className="font-medium">{Number(priceTo).toLocaleString()} {currency} </p>
             </div>
           </div>
 
           {/* Column 2 */}
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
-              <p className="text-gray-600">{t("Project.Price per sqt")}</p>
-              <p className="font-medium">{t("Project.Ask for price")}</p>
+              <p className="text-gray-600">   {t("Project.Price per sqt")}</p>
+              <p className="font-medium">{priceM?` ${priceM} ${currency} `:t("Project.Ask for price")} </p>
             </div>
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Total units")}</p>
@@ -179,7 +191,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           <div className="flex flex-col gap-7">
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Status")}</p>
-              <p className="font-medium">{status==="Completed"&&locale==="ar"&&"مكتمل"}</p>
+              <p className="font-medium">{locale==="ar"?statusTranslation[status]:status}</p>
             </div>
             <div className="flex flex-col">
               <p className="text-gray-600">{t("Project.Bedrooms")}</p>

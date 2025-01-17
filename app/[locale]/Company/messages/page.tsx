@@ -1,8 +1,8 @@
 "use client";
 
-import { DataTable } from '@/components/Company/data-table'; 
+import { DataTable } from './data-table';
 import React, { useEffect, useState } from 'react';
-import { columns } from './columns';
+import { useColumns } from './columns';
 import { useSession } from "next-auth/react";
 import TableSkelton from '@/components/TableSkelton';
 import { useSharedState } from '@/app/context/stateProvider';
@@ -14,6 +14,7 @@ export default function Page() {
   const {dataRequest, setDataRequest} = useSharedState();
   const {starRequest,setStarRequest}=useSharedState();
   const {allRequest,setAllRequest}=useSharedState();
+   const columns = useColumns();
 
   const [loading, setLoading] = useState(true); 
 
@@ -49,7 +50,7 @@ export default function Page() {
 
       fetchData();
     }
-  }, [status, session]);
+  }, [status]);
   
 
   console.log("Updated dataRequest:", dataRequest);
