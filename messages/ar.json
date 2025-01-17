@@ -20,10 +20,8 @@
   "Navigation": {
     "home": "Home",
     "pathnames": "Pathnames"
-
-  },"Pagination":{"next":"التالي",
-"Prev":"السابق"
-},
+  },
+  "Pagination": { "next": "التالي", "Prev": "السابق" },
 
   "landing": {
     "all properties on one place": "كل البيوت <br/> تحت سقف واحد",
@@ -77,20 +75,20 @@
     "result_count": "(١٢٠٠)"
   },
   "property": {
-   "More_Details":"تفاصيلل اكثر",
-    "rooms":"غرف",
-    "bath":"حمام",
-    "Submit":"ارسال",
-    "Submitting":"ارسال...",
-    "Image":"صور",
-    "City":"المدينة",
-    "Title":"العنوان",
-    "propertyType":"نوع العقار",
-    "Price":"السعر",
-"Area":"المساحة",
-"Likes":"الاعجابات",
-"Actions":"الإجراء",
-    "add_Property":"اضافة عقار",
+    "More_Details": "تفاصيلل اكثر",
+    "rooms": "غرف",
+    "bath": "حمام",
+    "Submit": "ارسال",
+    "Submitting": "ارسال...",
+    "Image": "صور",
+    "City": "المدينة",
+    "Title": "العنوان",
+    "propertyType": "نوع العقار",
+    "Price": "السعر",
+    "Area": "المساحة",
+    "Likes": "الاعجابات",
+    "Actions": "الإجراء",
+    "add_Property": "اضافة عقار",
     "search_placeholder": "ابحث عن العقارات...",
     "properties_for": "العقارات ",
     "in": "في",
@@ -105,18 +103,17 @@
     "results": "النتائج"
   },
   "project": {
-    "add_Project":"اضافة مشروع",
+    "add_Project": "اضافة مشروع",
 
-      "Image": "صورة",
-      "Title": "عنوان",
-      "Status": "حالة",
-      "Price From": "السعر من",
-      "Location": "الموقع",
-      "Total Units": "إجمالي الوحدات",
-      "Bedrooms": "غرف النوم",
-      "Actions": "إجراءات",
- 
-    
+    "Image": "صورة",
+    "Title": "عنوان",
+    "Status": "حالة",
+    "Price From": "السعر من",
+    "Location": "الموقع",
+    "Total Units": "إجمالي الوحدات",
+    "Bedrooms": "غرف النوم",
+    "Actions": "إجراءات",
+
     "address": "العنوان",
     "StartingFrom": "يبدا من",
     "FIRSTPAYMENT": "الدفعه الاولي",
@@ -129,8 +126,8 @@
     "list": "القائمة"
   },
   "agency": {
-    "for_rent":"للإيجار:",
-    "for_sale":"للبيع:",
+    "for_rent": "للإيجار:",
+    "for_sale": "للبيع:",
     "banner": {
       "title": "ابحث عن أفضل الشركات للمعيشة",
       "search_placeholder": "أدخل الموقع أو اسم الشركة",
@@ -363,13 +360,13 @@
     "close": "إغلاق"
   },
   "erorr": {
-   "Message_must_be_at_least_6_characters_long":"الرسالة يجب انت تكون علي الاقل 6 احرف",
-   "Message_must_be_at_least_10 _haracters_long":"الرسالة يجب انت تكون علي الاقل 10 احرف",
-    "First_Name_must_be_at_least_2_characters_longg":"يجب أن يكون الاسم الأول مكوناً من حرفين على الأقل.",
-    "Last_Name_must_be_at_least_2_characters_long":"يجب أن يكون الاسم الأخير مكوناً من حرفين على الأقل.",
-    "You_must_accept_the_policy_to_proceed":"يجب عليك قبول السياسة للمتابعة.",
-    "Password_must_be_at_least_6_characters_long":"يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل.",
-    "City_is_rquired":"المدينة مطلوبة.",
+    "Message_must_be_at_least_6_characters_long": "الرسالة يجب انت تكون علي الاقل 6 احرف",
+    "Message_must_be_at_least_10 _haracters_long": "الرسالة يجب انت تكون علي الاقل 10 احرف",
+    "First_Name_must_be_at_least_2_characters_longg": "يجب أن يكون الاسم الأول مكوناً من حرفين على الأقل.",
+    "Last_Name_must_be_at_least_2_characters_long": "يجب أن يكون الاسم الأخير مكوناً من حرفين على الأقل.",
+    "You_must_accept_the_policy_to_proceed": "يجب عليك قبول السياسة للمتابعة.",
+    "Password_must_be_at_least_6_characters_long": "يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل.",
+    "City_is_rquired": "المدينة مطلوبة.",
     "Addressmustbeatleast5characterslong": "يجب أن يكون العنوان مكونًا من 5 أحرف على الأقل.",
     "Company_Name_must_be_at_least_2_characters_long": "يجب أن يكون اسم الشركة مكونًا من حرفين على الأقل.",
     "Job_Title_must_be_at_least_2_characters_long": "يجب أن يكون المسمى الوظيفي مكونًا من حرفين على الأقل.",
@@ -396,14 +393,12 @@
     "city": "المدينة مطلوبة",
     "currency": "العملة مطلوبة",
     "for": "الغرض مطلوب",
-    "project_type":"نوع العقار مطلوب"
-
+    "project_type": "نوع العقار مطلوب"
   },
   "inputs": {
-    
-"See on Map":"شاهد في الخريطة",
-  "Read Less": "عرض أقل",
-  "Read More": "عرض المزيد",
+    "See on Map": "شاهد في الخريطة",
+    "Read Less": "عرض أقل",
+    "Read More": "عرض المزيد",
 
     "Mail": "البريد",
     "Send Mail": "إرسال البريد",
@@ -417,9 +412,9 @@
     "Phone": "رقم الهاتف",
     "Enter phone number": "أدخل رقم الهاتف",
     "Send": "إرسال",
-    "address":"العنوان",
-    "units":"الوحدات",
-    "Filter_title":"ابحث في العنوان...",
+    "address": "العنوان",
+    "units": "الوحدات",
+    "Filter_title": "ابحث في العنوان...",
     "EnterCompanyName": "أدخل اسم الشركة",
     "SelectCity": "اختر المدينة",
     "EnterAddress": "أدخل العنوان",
@@ -435,62 +430,57 @@
     "building": "عمارة بالكامل",
     "hotel-apartments": "فندق/شقق فندقية",
     "land": "ارض",
-    "Remove":"مسح",
-    "Filter_by_name":"ابحث في الاسم...",
-  
-    "Delete":"مسح",
+    "Remove": "مسح",
+    "Filter_by_name": "ابحث في الاسم...",
+
+    "Delete": "مسح",
     "full-floor": "طابق كامل",
-      "Select on Map":"حدد علي الخريطة",
-      "SelectedImages":"الصور المختارة",
-      "priceM": {
-        "label": "السعر للمتر²",
-        "placeholder": "السعر للمتر"
-      },
-      "price": {
-        "label": "السعر من",
-        "placeholder": "ابدأ..."
-      },
-      "priceTo": {
-        "label": "السعر إلى",
-        "placeholder": "نهاية..."
-      },
-      "currency": {
-        "label": "العملة",
-        "placeholder": "اختر",
-        "options": {
-          "USD": "دولار أمريكي",
-          "IQD": "دينار عراقي",
-          "EUR": "يورو",
-          "SAR": "ريال سعودي",
-          "AED": "درهم إماراتي",
-          "KWD": "دينار كويتي",
-          "QAR": "ريال قطري",
-          "OMR": "ريال عماني",
-          "BHD": "دينار بحريني",
-          "JOD": "دينار أردني"
-        }
+    "Select on Map": "حدد علي الخريطة",
+    "SelectedImages": "الصور المختارة",
+    "priceM": {
+      "label": "السعر للمتر²",
+      "placeholder": "السعر للمتر"
+    },
+    "price": {
+      "label": "السعر من",
+      "placeholder": "ابدأ..."
+    },
+    "priceTo": {
+      "label": "السعر إلى",
+      "placeholder": "نهاية..."
+    },
+    "currency": {
+      "label": "العملة",
+      "placeholder": "اختر",
+      "options": {
+        "USD": "دولار أمريكي",
+        "IQD": "دينار عراقي",
+        "EUR": "يورو",
+        "SAR": "ريال سعودي",
+        "AED": "درهم إماراتي",
+        "KWD": "دينار كويتي",
+        "QAR": "ريال قطري",
+        "OMR": "ريال عماني",
+        "BHD": "دينار بحريني",
+        "JOD": "دينار أردني"
       }
-  }
-  ,"table":{
-    "Next":"التالي",
-    "Previous":"السابق",
-    "No_results":"لايوجد نتائج",
-    "Title":"الاسم",
-    "message":"الرسالة",
-    "phone":"الهاتف",
-    "time":"الوقت",
-    "Log_Out":"تسجيل الخروج"
-
-  }
-  ,
-  "plan":{
-
-    
+    }
+  },
+  "table": {
+    "Next": "التالي",
+    "Previous": "السابق",
+    "No_results": "لايوجد نتائج",
+    "Title": "الاسم",
+    "message": "الرسالة",
+    "phone": "الهاتف",
+    "time": "الوقت",
+    "Log_Out": "تسجيل الخروج"
+  },
+  "plan": {
     "planLimit": "حد الخطة: {limit} منشور",
     "postsLeft": "المنشورات المتبقية",
-    "postsUsed": "{propertiesPosted} من {limit} منشور تم استخدامه"
-  ,
-    "posts":"منشورات:",
+    "postsUsed": "{propertiesPosted} من {limit} منشور تم استخدامه",
+    "posts": "منشورات:",
     "select_ad_packages": "اختر باقات الإعلانات",
     "current_subscription_part1": "الاشتراك الحالي:",
     "free": "مجاني",
@@ -517,56 +507,55 @@
     },
     "month": "شهريًا"
   },
-  "sign":{
+  "sign": {
     "header": {
-    "signTitle": "أنشئ حسابًا",
-    "signDesc": "قم بالتسجيل للوصول إلى الميزات الحصرية."
-  },
-  "form": {
-    "firstName": "الاسم الأول",
-    "lastName": "الاسم الأخير",
+      "signTitle": "أنشئ حسابًا",
+      "signDesc": "قم بالتسجيل للوصول إلى الميزات الحصرية."
+    },
+    "form": {
+      "firstName": "الاسم الأول",
+      "lastName": "الاسم الأخير",
+      "email": "البريد الإلكتروني",
+      "phoneNumber": "رقم الهاتف",
+      "address": "العنوان",
+      "password": "كلمة المرور",
+      "acceptPolicy": "أوافق على"
+    },
+    "buttons": {
+      "createAccount": "إنشاء حساب جديد",
+      "googleSignIn": "تسجيل الدخول باستخدام جوجل"
+    },
+    "links": {
+      "policy": "السياسة",
+      "signIn": "تسجيل الدخول",
+      "alreadyHaveAccount": "لديك حساب بالفعل"
+    },
+    "title": "تسجيل الدخول",
+    "description": "مرحبًا بعودتك! موقع بيتك",
     "email": "البريد الإلكتروني",
-    "phoneNumber": "رقم الهاتف",
-    "address": "العنوان",
     "password": "كلمة المرور",
-    "acceptPolicy": "أوافق على"
+    "forget_password": "نسيت كلمة المرور",
+    "reset_here": "إعادة تعيين هنا",
+    "sign_in_button": "تسجيل الدخول",
+    "google_sign_in": "تسجيل الدخول باستخدام جوجل",
+    "no_account": "لا تملك حسابًا؟",
+    "register": "تسجيل",
+    "forgot_password": {
+      "for": "نسيت كلمة المرور",
+      "description": "لإعادة تعيين كلمة المرور، يرجى إدخال بريدك الإلكتروني",
+      "email": "البريد الإلكتروني",
+      "send_button": "إرسال"
+    },
+    "reset_password": {
+      "title": "إعادة تعيين كلمة المرور",
+      "description": "أدخل كلمة مرورك الجديدة أدناه لإعادة تعيينها.",
+      "password_placeholder": "أدخل كلمة المرور الجديدة",
+      "reset_button": "إعادة تعيين كلمة المرور",
+      "error_message": "حدث خطأ أثناء إعادة تعيين كلمة المرور. يرجى المحاولة مرة أخرى.",
+      "success_message": "تم إعادة تعيين كلمة المرور بنجاح!"
+    }
   },
-  "buttons": {
-    "createAccount": "إنشاء حساب جديد",
-    "googleSignIn": "تسجيل الدخول باستخدام جوجل"
-  },
-  "links": {
-    "policy": "السياسة",
-    "signIn": "تسجيل الدخول",
-    "alreadyHaveAccount":"لديك حساب بالفعل"
-  },
-  "title": "تسجيل الدخول",
-  "description": "مرحبًا بعودتك! موقع بيتك",
-  "email": "البريد الإلكتروني",
-  "password": "كلمة المرور",
-  "forget_password": "نسيت كلمة المرور",
-  "reset_here": "إعادة تعيين هنا",
-  "sign_in_button": "تسجيل الدخول",
-  "google_sign_in": "تسجيل الدخول باستخدام جوجل",
-  "no_account": "لا تملك حسابًا؟",
-  "register": "تسجيل",
-  "forgot_password": {
-    "for": "نسيت كلمة المرور",
-    "description": "لإعادة تعيين كلمة المرور، يرجى إدخال بريدك الإلكتروني",
-    "email": "البريد الإلكتروني",
-    "send_button": "إرسال"
-  },
-  "reset_password": {
-    "title": "إعادة تعيين كلمة المرور",
-    "description": "أدخل كلمة مرورك الجديدة أدناه لإعادة تعيينها.",
-    "password_placeholder": "أدخل كلمة المرور الجديدة",
-    "reset_button": "إعادة تعيين كلمة المرور",
-    "error_message": "حدث خطأ أثناء إعادة تعيين كلمة المرور. يرجى المحاولة مرة أخرى.",
-    "success_message": "تم إعادة تعيين كلمة المرور بنجاح!"
-  }
-
-  },
-  "signAgency":{
+  "signAgency": {
     "header": {
       "agentLogin": "تسجيل دخول الوكيل"
     },

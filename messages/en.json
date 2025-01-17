@@ -21,6 +21,7 @@
     "home": "Home",
     "pathnames": "Pathnames"
   },
+  "Pagination": { "next": "Next", "Prev": "Prev" },
   "landing": {
     "all properties on one place": "All Properties <br/> on one Place",
     "rent": "Rent",
@@ -331,6 +332,8 @@
     "Package": "Package",
     "Logout": "Logout",
     "agentInfo": {
+      "save":"Save",
+    
       "companyNameA": "Company Name",
 
       "UploadImages": "Upload  Images",
@@ -494,6 +497,7 @@
 
   },
   "plan":{
+    "posts": "posted:",
 
 
       "free": "Free",
