@@ -28,82 +28,74 @@ function SearchHome() {
 
   const router = useRouter();
 
-    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-  
-      // if (
-      //   purpose.length === 0 &&
-      //   priceRange.min === undefined &&
-      //   city.length === 0 &&
-      //   propertyType.length === 0 &&
-      //   rooms.length === 0 &&
-      //   bathrooms.length === 0
-      // ) {
-      //   return alert("Please provide some input");
-      // }
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-      console.log("city", city);
-      console.log("propertyType", propertyType);
-      console.log("rooms", rooms);
-      console.log("bathrooms", bathrooms);
-      console.log("purpose", purpose);
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-  
-      updateSearchParams(
-        city, propertyType, rooms, bathrooms, purpose, 
-      );
+    // if (
+    //   purpose.length === 0 &&
+    //   priceRange.min === undefined &&
+    //   city.length === 0 &&
+    //   propertyType.length === 0 &&
+    //   rooms.length === 0 &&
+    //   bathrooms.length === 0
+    // ) {
+    //   return alert("Please provide some input");
+    // }
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log("city", city);
+    console.log("propertyType", propertyType);
+    console.log("rooms", rooms);
+    console.log("bathrooms", bathrooms);
+    console.log("purpose", purpose);
+
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+    updateSearchParams(city, propertyType, rooms, bathrooms, purpose);
+  };
+
+  const updateSearchParams = (
+    city: string,
+    propertyType: string,
+    rooms: string,
+    bathrooms: string,
+    purpose: string
+  ) => {
+    // Create a new URLSearchParams object using the current URL search parameters
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const filters = {
+      city,
+      purpose,
+      propertyType,
+      rooms,
+      bathrooms,
     };
 
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) {
+        searchParams.set(key, value.toString());
+      } else {
+        searchParams.delete(key);
+      }
+    });
 
-    const updateSearchParams = (
-        city: string,
-        propertyType: string,
-        rooms: string,
-        bathrooms: string,
-        purpose: string,
-       
-      ) => {
-        // Create a new URLSearchParams object using the current URL search parameters
-        const searchParams = new URLSearchParams(window.location.search);
-    
-    
-      const filters = {
-        city,
-        purpose,
-        propertyType,
-        rooms,
-        bathrooms,
-     
-      };
-    
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value) {
-          searchParams.set(key, value.toString());
-        } else {
-          searchParams.delete(key);
-        }
-      });
-    
-      const newPathname = `${window.location.pathname}/Property?${searchParams.toString()}`;
-    
-      console.log("newPathname", newPathname);
-      router.push(newPathname); // Navigate to the updated URL
-      };
+    const newPathname = `${
+      window.location.pathname
+    }/Property?${searchParams.toString()}`;
 
-
+    console.log("newPathname", newPathname);
+    router.push(newPathname); // Navigate to the updated URL
+  };
 
   return (
     <form
-    onSubmit={handleSearch}
-    className="realtive flex justify-around items-center w-full pt-7 flex-wrap">
-
-<button className="items-center gap-2 bg-primary px-8 py-3 rounded-[6px] font-medium text-base hidden md:flex">
+      onSubmit={handleSearch}
+      className="realtive flex justify-around items-center w-full pt-7 flex-wrap"
+    >
+      <button className="items-center gap-2 hover:bg-primary/80 duration-200 bg-primary px-8 py-3 rounded-[6px] font-medium text-base hidden md:flex">
         <span>{t("landing.search")}</span>
         <GoSearch className=" font-bold" />
       </button>
-
-
 
       <SerchCityHome city={city} setCity={setCity} />
 
@@ -116,21 +108,21 @@ function SearchHome() {
           }}
         >
           <SelectTrigger className="items-center gap-5 justify-between px-4 h-full py-3 border rounded-[6px] border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2  w-full max-w-48 hidden xl:flex">
-            <SelectValue placeholder={t("addUser.selectPropertyTypee")} />
+            <SelectValue placeholder={t("addUser.selectPropertyType")} />
           </SelectTrigger>
 
           <SelectContent>
-            <SelectItem value="apartment">شقة</SelectItem>
-            <SelectItem value="villa">فيلا</SelectItem>
-            <SelectItem value="farm">مزرعة</SelectItem>
-            <SelectItem value="rest-house">استراحة</SelectItem>
-            <SelectItem value="residential-complex">مجمع سكني</SelectItem>
-            <SelectItem value="duplex">دوبلكس</SelectItem>
-            <SelectItem value="building">عمارة بالكامل</SelectItem>
-            <SelectItem value="hotel-apartments">فندق/شقق فندقية</SelectItem>
-            <SelectItem value="land">ارض</SelectItem>
-            <SelectItem value="full-floor">طابق كامل</SelectItem>
-          </SelectContent>
+      <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
+      <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
+      <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
+      <SelectItem value="Rest-House">{t("inputs.rest-house")}</SelectItem>
+      <SelectItem value="Residential-Complex">{t("inputs.residential-complex")}</SelectItem>
+      <SelectItem value="Duplex">{t("inputs.duplex")}</SelectItem>
+      <SelectItem value="Building">{t("inputs.building")}</SelectItem>
+      <SelectItem value="Hotel-Apartments">{t("inputs.hotel-apartments")}</SelectItem>
+      <SelectItem value="Land">{t("inputs.land")}</SelectItem>
+      <SelectItem value="Full-Floor">{t("inputs.full-floor")}</SelectItem>
+    </SelectContent>
         </Select>
       </div>
 
@@ -141,7 +133,7 @@ function SearchHome() {
         setBathrooms={setBarooms}
       />
 
-<div>
+      <div>
         <Select
           dir={locale === "ar" ? "rtl" : "ltr"}
           value={purpose}
@@ -149,7 +141,7 @@ function SearchHome() {
             setPurpose(value); // Update the state with the selected value
           }}
         >
-          <SelectTrigger className="bg-secondary/90 text-white h-full w-44 px-8 py-3 rounded-[6px] font-medium text-base hidden lg:flex">
+          <SelectTrigger className="bg-secondary/90 hover:bg-secondary/80 duration-200 text-white h-full gap-3 px-8 py-3 rounded-[6px] font-medium text-base hidden lg:flex">
             <SelectValue placeholder={t("search.buy")} />
           </SelectTrigger>
 
@@ -159,9 +151,6 @@ function SearchHome() {
           </SelectContent>
         </Select>
       </div>
-
-
-    
     </form>
   );
 }

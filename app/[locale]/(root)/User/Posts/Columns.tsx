@@ -5,17 +5,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Span } from "next/dist/trace";
+
 import { deleteProperty } from "@/lib/actions/property.action";
 import { useSharedState } from "@/app/context/stateProvider";
+import { useLocale, useTranslations } from "next-intl";
 
 // This type is used to define the shape of our data.
 export type Property = {
@@ -23,16 +16,20 @@ export type Property = {
   type: "Rent" | "Buy";
   price: number;
   area: string;
-  like: number;
+  likes: string[];
   images: {url:string};
   propertyType: string;
-  _id:string
+  _id:string,
+  currency:string
 };
 
-export const columns: ColumnDef<Property>[] = [
+export const useColumns = (): ColumnDef<Property>[] => {
+  const t = useTranslations("property"); // Call the hook inside the function
+  const locale = useLocale();
+return[
   {
     accessorKey: "images",
-    header: "Image",
+    header: t("Image"),
     cell: ({ row }) => {
       console.log(row.original);
       const images = row.original.images; // Access the images array
@@ -53,7 +50,7 @@ export const columns: ColumnDef<Property>[] = [
 
   {
     accessorKey: "title",
-    header: "Title",
+    header: t("Title"),
     cell: ({ getValue }) => {
       const title:any = getValue();
       const words = title.split(" ").slice(0, 6).join(" "); // Take only the first 5 words
@@ -62,7 +59,7 @@ export const columns: ColumnDef<Property>[] = [
   },
   {
     accessorKey: "propertyType",
-    header: "propertyType",
+    header: t("propertyType"),
   },
   {
     accessorKey: "price",
@@ -76,22 +73,32 @@ export const columns: ColumnDef<Property>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },  
+        cell: ({ row }) => {
+      const price = row.original.price;
+      const currency = row.original.currency;
+      return (
+        <span>
+          {price.toLocaleString().replace(/,/g, '.')} {currency}
+        </span>
+      );
     },
   },
   {
     accessorKey: "area",
-    header: "area",
+    header: t("Area"),
     cell:({row})=>(
  <span>{row.original.area}m<sup>2</sup></span>
     )
   },
   {
     accessorKey: "like",
-    header: "like",
+    header: t("Likes"),
+    cell: ({ row }) => <span>{row.original.likes?.length || 0}</span>,
   },
   {
     id: "actions",
-    header: "",
+
     cell: ({ row }) => 
         
         {
@@ -113,5 +120,5 @@ export const columns: ColumnDef<Property>[] = [
       );
     },
   },
-  
 ];
+};

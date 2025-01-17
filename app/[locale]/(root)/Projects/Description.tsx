@@ -1,10 +1,11 @@
 "use client"
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react'
 
 function Description({des}) {
 const text =des
 const [isExpanded, setIsExpanded] = useState(false);
-
+const t = useTranslations("inputs")
 const toggleReadMore = () => {
   setIsExpanded(!isExpanded);
 };
@@ -24,7 +25,7 @@ const toggleReadMore = () => {
       onClick={toggleReadMore}
       className="mt-2 text-blue-500 underline"
     >
-      {isExpanded ? "Read Less" : "Read More"}
+      {isExpanded ? t("Read Less") : t("Read More")}
     </button>
   </div>
   )

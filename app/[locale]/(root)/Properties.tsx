@@ -38,15 +38,15 @@ function Properties() {
 
   return (
     <section>
-      <div className="container mx-auto flex w-full justify-center py-32">
+      <div className="container mx-auto flex w-full justify-center pb-20">
         <div className="flex flex-col items-center gap-16">
           <div className="flex flex-col items-center">
             <h1 className="text-3xl font-semibold text-secondary">
-              {t("properties.latest_properties_for_rent")}
+              {t("properties.latest_properties")}
             </h1>
           </div>
 
-          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
             {loading ? (
               <div>Loading...</div>
             ) : (

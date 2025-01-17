@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import React from "react";
 import { getTranslations } from "next-intl/server";
@@ -8,36 +7,69 @@ import { getLocale } from "next-intl/server";
 import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdArrowForwardIos } from "react-icons/md";
-import { PiBathtubLight } from "react-icons/pi";
+import { PiBathtubLight, PiShareFatThin, PiStairsThin } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
 import Description from "../../Projects/Description";
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
 import Map from "../Map";
+import { RiShareForwardLine } from "react-icons/ri";
+import { CiHeart } from "react-icons/ci";
+import Like from "../Like";
+import Share from "../Share";
 
+
+const propertyTypeTranslations = {
+  "Apartment": "شقة",
+  "villa": "فيلا",
+  "Farm": "مزرعة",
+  "Rest-House": "استراحة",
+  "Residential-Complex": "مجمع سكني",
+  "Duplex": "دوبلكس",
+  "Building": "عمارة بالكامل",
+  "Hotel-Apartments": "فندق/شقق فندقية",
+  "Land": "ارض",
+  "Full-Floor": "طابق كامل",
+};
+const CurrencyTranslation = {
+  USD: "دولار",
+  IQD: "دينار عراقي",
+  EUR: "يورو",
+  SAR: "ريال سعودي",
+  AED: "درهم",
+  KWD: "دينار كويتي",
+  QAR: "ريال قطري",
+  OMR: "ريال عماني",
+  BHD: "دينار بحريني",
+  JOD: "دينار أردني",
+};
+const RentalTypeTranslation = {
+  Monthly: "شهريًّا",
+  Yearly: "سنوياً",
+};
+
+type amenity = {
+  name: {
+    en: string;
+    ar: string;
+  };
+  svg: string;
+};
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
-type amenity ={
-  name:{
-    en:string,
-    ar:string
-  },
-  svg: string
-}
-
   const locale = await getLocale();
-
 
   const t = await getTranslations();
   const id = (await params).id;
-  console.log(
-    "iam hereeeeeeeeeee",id);
+  console.log("iam hereeeeeeeeeee", id);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/properties/${id}`);
-    const data = await response.json();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_URL_SERVER}/api/properties/${id}`
+  );
+  const data = await response.json();
 
   const {
- user,
+    user,
     title,
     price,
     address,
@@ -49,15 +81,41 @@ type amenity ={
     des,
     landNumber,
     location,
+    numFloors,
+    rentaltype,
+    purponse,
+    propertyType,
     plotLength,
-
-
+    likes,
+    currency,
+    city,
+    for: purpose,
+    _id,
   } = data;
 
+  let district = "-";
+  if (location) {
+    await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${location.latitude}&lon=${location.longitude}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const address = data.address;
 
-  console.log(data)
+        const city =
+          address.city || address.town || address.village || "Unknown City";
+        district =
+          address.city_district || address.suburb || "Unknown District";
+        const area = address.county || address.state_district || "Unknown Area";
 
+        console.log("City:", city);
+        console.log("District:", district);
+        console.log("Area:", area);
+      })
+      .catch((error) => console.error("Error fetching address:", error));
+  }
 
+  console.log(data);
 
   interface Amenity {
     name: {
@@ -69,37 +127,43 @@ type amenity ={
 
   console.log(amenities?.map((item: Amenity) => item.name.en));
 
-
   return (
-    <div className="py-10 md:container mx-auto px-0 lg:px-[120px] ">
-      {/* path */}
-      <ul className="flex items-center gap-2 mb-5">
-        <li className="flex gap-3">
-          <Link href={"/"}>
-            <IoHomeSharp className="text-secondary" />
-          </Link>
+    <div className="mt-5 md:container mx-auto px-0 lg:px-[120px] ">
+      <div className="flex w-full justify-between items-center">
+        {/* path */}
+        <ul className="hidden  md:flex items-center gap-2 mb-5">
+          <li className="flex gap-3">
+            <Link href={"/"}>
+              <IoHomeSharp className="text-secondary" />
+            </Link>
 
-          <MdArrowForwardIos className="text-[#707070]" />
-        </li>
+            <MdArrowForwardIos className="text-[#707070]" />
+          </li>
 
-        <li className="text-[#707070] flex gap-3 items-center">
-          <Link href={"/Property"}>{t("header.properties")}</Link>
-          <MdArrowForwardIos className="text-[#707070]" />
-        </li>
+          <li className="text-[#707070] flex gap-3 items-center">
+            <Link href={"/Property"}>{t("header.properties")}</Link>
+            <MdArrowForwardIos className="text-[#707070]" />
+          </li>
 
-        <li className="text-[#707070] flex gap-3 items-center">
-          {t("property.properties_title")}
-        </li>
-      </ul>
+          <li className="text-[#707070] flex gap-3 items-center">{title}</li>
+        </ul>
 
+        <div className="flex gap-4 items-start mb-5">
+          <Like propertyId={_id} likes={likes} />
+          <Share
+            propertyUrl={`https://baittak.vercel.app/Property/${_id}`}
+            propertyTitle={title}
+          />
+        </div>
+      </div>
       {/* images */}
       <div>
         {/* Images for desktop */}
-<ImageModel img={images} />
+        <ImageModel img={images} />
 
         {/* Mobile design */}
         <div className="flex gap-4 overflow-x-auto hide-scrollbar  mt-5 sm:hidden">
-          {images.map((im, key: React.Key ) => (
+          {images.map((im, key: React.Key) => (
             <img
               key={key}
               src={`${im.url}`}
@@ -108,7 +172,6 @@ type amenity ={
             />
           ))}
         </div>
-
       </div>
 
       <div className="flex justify-between flex-col items-center w-full mt-8 gap-10">
@@ -116,7 +179,12 @@ type amenity ={
           {/* details */}
           <div className="flex  md:justify-between md:flex-row flex-col items-center md:w-2/3">
             <h3 className="font-bold text-3xl text-secondary">
-              {t("propertyDetails.SAR")} {price}
+            <div className="text-3xl text-secondary font-semibold">
+                  {price.toLocaleString().replace(/,/g, '.')}  <span className="text-[16px] md:text-2xl text-secondary/80">{locale==="ar"?CurrencyTranslation[currency]:currency}</span>
+                </div>
+                {purpose === "rent" && (
+                  <span className="text-[#707070] text-lg"> / {locale==="ar" ? RentalTypeTranslation[rentaltype]:rentaltype }</span>
+                )}
             </h3>
 
             <div className="flex gap-6  mt-3">
@@ -143,10 +211,10 @@ type amenity ={
           </div>
 
           {/* contact Desktop */}
-<ContactDesk user={user} title={title}/>
+          <ContactDesk user={user} title={title} />
 
           {/* contact Mobile */}
-          <div className="mobile-buttons md:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 ">
+          <div className="mobile-buttons md:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 z-50">
             <button className="flex w-full h-[45px] gap-2 items-center font-semibold bg-red-500 text-white rounded-[.8rem] justify-between px-3">
               <FiPhoneCall className="w-5 h-5" />
               Call
@@ -166,18 +234,10 @@ type amenity ={
         <div className="w-full flex flex-col gap-10 justify-start">
           {/* describtion */}
           <div className="flex flex-col md:w-2/3 px-3">
-            <p className="text-lg text-gray-500">
-             {address}
-            </p>
-            <h3 className="text-2xl font-medium mb-7">
-              {title}
-            </h3>
+            <p className="text-lg text-gray-500">{address}</p>
+            <h3 className="text-2xl font-medium mb-7">{title}</h3>
 
-
-            <Description des={des}/>
-
-
-   
+            <Description des={des} />
           </div>
 
           {/* property details */}
@@ -253,47 +313,6 @@ type amenity ={
 
                     <span className="text-gray-900">
                       {t("propertyDetails.Plot length")}
-                    </span>
-                  </div>
-
-                  <div className="flex  gap-2">
-                    <svg
-                      width="24"
-                      height="25"
-                      viewBox="0 0 24 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7 9.1101L7.01 9.0991M11 9.1101L11.01 9.0991M7 13.1101L7.01 13.0991M11 13.1101L11.01 13.0991M7 17.1101L7.01 17.0991M11 17.1101L11.01 17.0991M15 21.1001H3.6C3.44087 21.1001 3.28826 21.0369 3.17574 20.9244C3.06321 20.8118 3 20.6592 3 20.5001V5.7001C3 5.54097 3.06321 5.38836 3.17574 5.27583C3.28826 5.16331 3.44087 5.1001 3.6 5.1001H9V3.7001C9 3.54097 9.06321 3.38836 9.17574 3.27583C9.28826 3.16331 9.44087 3.1001 9.6 3.1001H14.4C14.5591 3.1001 14.7117 3.16331 14.8243 3.27583C14.9368 3.38836 15 3.54097 15 3.7001V9.1001M15 21.1001H20.4C20.5591 21.1001 20.7117 21.0369 20.8243 20.9244C20.9368 20.8118 21 20.6592 21 20.5001V9.7001C21 9.54097 20.9368 9.38835 20.8243 9.27583C20.7117 9.16331 20.5591 9.1001 20.4 9.1001H15M15 21.1001V17.1001M15 9.1001V13.1001M15 17.1001V13.1001M15 17.1001H17M15 13.1001H17"
-                        stroke="#858F96"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-
-                    <span className="text-gray-900">
-                      {t("propertyDetails.Street Width")}
-                    </span>
-                  </div>
-
-                  <div className="flex  gap-2">
-                    <svg
-                      width="20"
-                      height="22"
-                      viewBox="0 0 20 22"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 0.850098L8 4.1831V9.3501H20V21.3501H0V0.850098ZM8 11.3501V19.3501H10V14.3501H16V19.3501H18V11.3501H8ZM14 19.3501V16.3501H12V19.3501H14ZM6 19.3501V5.5171L2 3.8501V19.3501H6Z"
-                        fill="#858F96"
-                      />
-                    </svg>
-
-                    <span className="text-gray-900">
-                      {t("propertyDetails.Property Age")}
                     </span>
                   </div>
 
@@ -481,21 +500,18 @@ type amenity ={
                 {/* info */}
                 <div className="flex  flex-col gap-4">
                   <span className="font-medium">
-                    {t("propertyDetails.Apartment")}
+                    {locale === "en"
+                      ? propertyType
+                      : propertyTypeTranslations[propertyType] || propertyType}
                   </span>
-                  <span className="font-medium">{bedrooms||"-"}</span>
-                  <span className="font-medium">-</span>
-                  <span className="font-medium">-</span>
+                  <span className="font-medium">{bedrooms || "-"}</span>
+                  <span className="font-medium">{plotLength || "-"}</span>
+
                   <span className="font-medium">
-                    {t("propertyDetails.New")}
+                    {locale === "en" ? city.name.en : city.name.ar}
                   </span>
-                  <span className="font-medium">
-                    {t("propertyDetails.Jeddah")}
-                  </span>
-                  <span className="font-medium">
-                    {t("propertyDetails.Al Wahah")}
-                  </span>
-                  <span className="font-medium">{landNumber||"-"}</span>
+                  <span className="font-medium">{district}</span>
+                  <span className="font-medium">{landNumber || "-"}</span>
                 </div>
               </div>
 
@@ -629,55 +645,18 @@ type amenity ={
                       {t("propertyDetails.Category")}
                     </span>
                   </div>
+        
                   <div className="flex gap-2">
-                    <svg
-                      width="24"
-                      height="25"
-                      viewBox="0 0 24 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13.7968 2.89746C12.5989 2.89746 11.4501 3.37331 10.6031 4.22031C9.75612 5.06732 9.28027 6.21611 9.28027 7.41396C9.28027 10.949 12.7288 15.202 13.6323 16.2465C13.6809 16.3017 13.7494 16.3356 13.8229 16.3408C13.8963 16.3459 13.9689 16.3219 14.0248 16.274L14.0523 16.2465C14.9438 15.198 18.3138 10.9485 18.3138 7.41396C18.3138 6.8208 18.1969 6.23346 17.9699 5.68546C17.7429 5.13746 17.4102 4.63954 16.9907 4.22014C16.5713 3.80073 16.0733 3.46806 15.5253 3.24112C14.9773 3.01417 14.3899 2.8974 13.7968 2.89746ZM13.7968 9.32496C13.3583 9.32486 12.9298 9.19477 12.5653 8.95112C12.2008 8.70748 11.9167 8.36122 11.7489 7.95614C11.5812 7.55106 11.5373 7.10533 11.6229 6.67532C11.7085 6.24531 11.9196 5.85033 12.2296 5.54031C12.5396 5.23028 12.9346 5.01914 13.3646 4.93358C13.7946 4.84803 14.2404 4.89189 14.6455 5.05962C15.0505 5.22736 15.3968 5.51144 15.6404 5.87595C15.8841 6.24046 16.0142 6.66902 16.0143 7.10746V7.11296C16.0129 7.70017 15.7787 8.26286 15.363 8.67756C14.9473 9.09226 14.384 9.3251 13.7968 9.32496Z"
-                        stroke="black"
-                        strokeWidth="0.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M18.227 8.43893L18.8145 8.39893L21.25 20.4034L16.188 21.3024M16.188 21.3024L8.2305 20.4614L2.75 21.3024L4.229 8.97893L8.7235 8.39893M16.188 21.3024L15.333 14.5909M8.7235 8.39893L9.368 8.43093M8.7235 8.39893L8.4025 20.4799"
-                        stroke="black"
-                        strokeWidth="0.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <PiStairsThin  size={20}/>
                     <span className="text-gray-900">
-                      {t("propertyDetails.Area")}
-                    </span>
-                  </div>
-                  <div className="flex gap-2">
-                    <svg
-                      width="24"
-                      height="25"
-                      viewBox="0 0 24 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M14 2.1001H6C5.46957 2.1001 4.96086 2.31081 4.58579 2.68588C4.21071 3.06096 4 3.56966 4 4.1001V20.1001C4 20.6305 4.21071 21.1392 4.58579 21.5143C4.96086 21.8894 5.46957 22.1001 6 22.1001H18C18.5304 22.1001 19.0391 21.8894 19.4142 21.5143C19.7893 21.1392 20 20.6305 20 20.1001V8.1001L14 2.1001ZM18 20.1001H6V4.1001H13V9.1001H18V20.1001Z"
-                        fill="#858F96"
-                      />
-                    </svg>
-                    <span className="text-gray-900">
-                      {t("propertyDetails.plot Number")}
+                      {t("propertyDetails.floors")}
                     </span>
                   </div>
                 </div>
                 {/* info */}
                 <div className="flex  flex-col gap-4">
                   <span className="font-medium">
-                  {area || "-"} {t("propertyDetails.sqr")}
+                    {area || "-"} {t("propertyDetails.sqr")}
                   </span>
                   <span className="font-medium">{bathrooms || "-"}</span>
                   <span className="font-medium">{plotLength || "-"}</span>
@@ -685,40 +664,31 @@ type amenity ={
                     {t("propertyDetails.West")}
                   </span>
                   <span className="font-medium">
-                    {t("propertyDetails.Residential for sale")}
+                    {purpose === "rent"
+                      ? t("Residential for rent")
+                      : t("propertyDetails.Residential for sale")}
                   </span>
-                  <span className="font-medium">
-                    {t("propertyDetails.Makkah Al Mukarramah")}
-                  </span>
-                  <span className="font-medium">
-                    {t("propertyDetails.Al Wahah")}
-                  </span>
+
+                  <span className="font-medium">{numFloors}</span>
                 </div>
               </div>
             </div>
           </div>
 
-{location.latitude && <Map location={location}/>}
-
-
-
+          {location.latitude && <Map location={location} />}
 
           <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
-          <h3 className="text-2xl mb-9 text-secondary">المزايا</h3>
-          <div className="grid grid-cols-3 gap-y-8">
-  {amenities.map((amenity:amenity, inx:number) => (
-    <div key={inx} className="flex gap-2 items-center">
-
-      <span className="text-gray-900">
-        {locale == "ar" ? amenity.name.ar : amenity.name.en} 
-      </span>
-    </div>
-  ))}
-</div>
-
-</div>
-
-
+            <h3 className="text-2xl mb-9 text-secondary">المزايا</h3>
+            <div className="grid grid-cols-3 gap-y-8">
+              {amenities.map((amenity: amenity, inx: number) => (
+                <div key={inx} className="flex gap-2 items-center">
+                  <span className="text-gray-900">
+                    {locale == "ar" ? amenity.name.ar : amenity.name.en}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* <div >
         <PropertyMap

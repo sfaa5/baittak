@@ -5,6 +5,7 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSharedState } from "@/app/context/stateProvider";
+import { useLocale, useTranslations } from "next-intl";
 
 
 // Define the shape of the data
@@ -16,8 +17,10 @@ export type Message = {
   createdAt: Date;
 };
 
-// Define columns
-export const columns: ColumnDef<Message>[] = [
+export const useColumns = (): ColumnDef<Message>[] => {
+  const t = useTranslations(""); // Call the hook inside the function
+  const locale = useLocale();
+return[
   {
     id: "select",
     header: ({ table }) => {
@@ -33,6 +36,7 @@ export const columns: ColumnDef<Message>[] = [
       }
       return (
         <Checkbox
+        className="mx-2"
           checked={
             table.getIsAllPageRowsSelected() ||
             (table.getIsSomePageRowsSelected() && "indeterminate") ||
@@ -50,6 +54,8 @@ export const columns: ColumnDef<Message>[] = [
 
       return (
         <Checkbox
+        className="mx-2"
+
         onClick={(e) => e.stopPropagation()}
           checked={row.getIsSelected()}
 
@@ -78,27 +84,28 @@ export const columns: ColumnDef<Message>[] = [
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Title <ArrowUpDown className="ml-2 h-4 w-4" />
+        {t("table.Title")} <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
   },
 
   {
     accessorKey: "message",
-    header: "message",
+    header: t("table.message"),
     cell: ({ row }) => {
       return row.original.message.split(" ").slice(0, 5).join(" ") + (row.original.message.split(" ").length > 5 ? "..." : "");
     }
   },
   {
     accessorKey: "phone",
-    header: "Phone",
+    header: t("table.phone"),
   },
   {
     accessorKey: "createdAt",
-    header: "time",
+    header: ("table.time"),
     cell: ({ row }) => {
       return format(new Date(row.original.createdAt), "MMM dd, hh:mm a");
     },
   },
 ];
+}

@@ -11,27 +11,24 @@ import { useSearchParams, useRouter } from "next/navigation";
 import SearchHome from "../../../components/SearchHome";
 import { useSession } from "next-auth/react";
 
-
 export default function Home() {
-  const { data: session,status  } = useSession();
+  const { data: session, status } = useSession();
 
-  const path = usePathname()
-  const  t  = useTranslations();
+  const path = usePathname();
+  const t = useTranslations();
   const searchParams = new URLSearchParams(window.location.search);
   const router = useRouter();
   const parms = useSearchParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  if(status==="authenticated"&&parms.get('login')==='true'){
-    searchParams.delete('login')
+  if (status === "authenticated" && parms.get("login") === "true") {
+    searchParams.delete("login");
   }
 
-
   useEffect(() => {
-    if (parms.get('login') === 'true') {
+    if (parms.get("login") === "true") {
       setShowLoginModal(true);
     }
-    
   }, [parms.toString()]);
 
   const closeModal = () => {
@@ -39,8 +36,8 @@ export default function Home() {
 
     // Remove the query parameter from the URL
 
-    searchParams.delete('login')
-    router.push('/');
+    searchParams.delete("login");
+    router.push("/");
   };
 
   return (
@@ -60,27 +57,35 @@ export default function Home() {
             </h1>
           </div>
 
-          <div className="w-full flex justify-center px-0 xl:px-36">
-            <div className="relative w-full h-36 bg-[#F5F5F5] bg-opacity-80 flex items-center px-2 sm:px-8 rounded-[8px] justify-center flex-wrap">
+          <div className="w-full flex justify-center px-0 xl:px-56">
+            <div className="relative w-full h-36 bg-[#F5F5F5] bg-opacity-80 flex items-center px-2 sm: rounded-[8px] justify-center flex-wrap">
               {/* top search */}
               <div className="absolute -top-7 left-1/5 lg:left-1/3 bg-secondary text-white flex justify-between items-center w-4/5 md:w-4/5 lg:w-1/3 px-3 sm:px-6 py-4 rounded-[8px]">
-                <div className="inline-flex gap-2 text-base font-medium hover:text-primary">
+                <a
+                  href="/Property?purpose=rent"
+                  className="inline-flex gap-2 text-base font-medium hover:text-primary duration-200"
+                >
                   <LuHome className="size-5 xs:size-6" />
                   <span>{t("landing.rent")}</span>
-                </div>
-                <div className="inline-flex text-base gap-2 font-medium hover:text-primary">
+                </a>
+                <a
+                  href="/Property?purpose=sell"
+                  className="inline-flex text-base gap-2 duration-200 font-medium hover:text-primary"
+                >
                   <LuHome className="size-5 xs:size-6" />
                   <span>{t("landing.buy")}</span>
-                </div>
-                <div className="inline-flex text-base gap-2 font-medium hover:text-primary">
+                </a>
+                <a
+                  href="/Projects"
+                  className="inline-flex text-base gap-2 duration-200 font-medium hover:text-primary"
+                >
                   <LuHome className="size-5 xs:size-6 items-center" />
                   <span>{t("landing.projects")}</span>
-                </div>
+                </a>
               </div>
-              
-              {/* search */}
-        <SearchHome/>
 
+              {/* search */}
+              <SearchHome />
             </div>
           </div>
         </div>
@@ -91,11 +96,7 @@ export default function Home() {
 
       <Properties />
 
-
-      {showLoginModal && (
-        <Sign onClose={closeModal} />
-      )}
-
+      {showLoginModal && <Sign onClose={closeModal} />}
     </>
   );
 }

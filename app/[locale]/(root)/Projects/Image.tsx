@@ -27,7 +27,7 @@ function Image({images}) {
             <img
               src={src?.url}
               alt={`Property Slide ${index + 1}`}
-              className="w-full h-auto object-cover rounded-xl"
+              className="w-full h-[500px] md:h-[640px] object-cover rounded-xl"
             />
           </SwiperSlide>
         ))}

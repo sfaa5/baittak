@@ -15,58 +15,51 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { FaCircleUser } from "react-icons/fa6";
+
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "@/hooks/use-toast";
 import { FiUpload } from "react-icons/fi";
 import { useSession } from "next-auth/react";
-
-// Schema for form validation
-const formSchema = z.object({
-  username: z.string().min(5, {
-    message: "First Name must be at least 5 characters long.",
-  }),
-
-  phoneNumber: z.string().regex(/^\d{10,15}$/, {
-    message: "Please enter a valid phone number (10-15 digits)",
-  }),
-  address: z.string().min(10, {
-    message: "Address must be at least 10 characters long.",
-  }),
-  email:z.string().email(),
-  image: z.string().optional(),
-  file: z.string().optional(),
-});
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 function page() {
   const { user, setUser } = useSharedState();
 
   const [loadingButton, setLoadingButton] = useState(false);
-const { data: session,status } = useSession();
+  const { data: session, status } = useSession();
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imageBuffers, setImageBuffers] = useState<string | null>(null);
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
 
   console.log("uuuuuuuuuuuu", user);
   console.log("uuuuuuuuuuuu", user.phoneNumber);
 
   const [errorr, setError] = React.useState("");
 
-  const t = useTranslations();
+  const t = useTranslations("company.agentInfo");
+  const tE = useTranslations("erorr");
+  const tI = useTranslations("inputs");
+
   const params = useParams();
   const locale = useLocale();
 
+  // Schema for form validation
+  const formSchema = z.object({
+    username: z.string().min(5, {
+      message: tE("First_Name_must_be_at_least_2_characters long"),
+    }),
 
+    phoneNumber: z.string().regex(/^\d{10,15}$/, {
+      message: tE("Please_enter_a_valid_phone_number_(10-15_digits)"),
+    }),
+    address: z.string().min(10, {
+      message: tE("Addressmustbeatleast5characterslong"),
+    }),
+    email: z.string().email(),
+    image: z.string().optional(),
+    file: z.string().optional(),
+  });
 
   const handelImage = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -104,40 +97,38 @@ const { data: session,status } = useSession();
     }
   };
 
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      phoneNumber:"",
+      phoneNumber: "",
       address: "",
-      email:"",
+      email: "",
     },
   });
-
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/users/${session?.user?.id}`);
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL_SERVER}/api/users/${session?.user?.id}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
         const data = await response.json();
         setUser(data);
-        
+
         setLoading(false);
-      // Update form values after fetching user data
-      form.reset({
-        username: data.username || "",
-        phoneNumber: data.phoneNumber || "",
-        address: data.address || "",
-        email:data.email||'',
-      });
-        
+        // Update form values after fetching user data
+        form.reset({
+          username: data.username || "",
+          phoneNumber: data.phoneNumber || "",
+          address: data.address || "",
+          email: data.email || "",
+        });
       } catch (error) {
         console.error("Error fetching user data:", error);
-  
       }
     };
 
@@ -145,10 +136,6 @@ const { data: session,status } = useSession();
       fetchUserData();
     }
   }, [session?.user?.id, form.reset]);
-
-
-
-
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoadingButton(true);
@@ -159,13 +146,16 @@ const { data: session,status } = useSession();
     }
 
     try {
-      const response = await fetch(`${URL_SERVER}/api/users/${session?.user?.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        `${URL_SERVER}/api/users/${session?.user?.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -174,8 +164,7 @@ const { data: session,status } = useSession();
         }
         throw new Error("Failed to send data to the server");
       }
-const data = response.json()
-
+      const data = response.json();
 
       toast({
         description: "Your request was added successfully.",
@@ -191,10 +180,9 @@ const data = response.json()
     }
   };
 
-  if(status==="loading"){
-    return <p>loading</p> 
+  if (status === "loading") {
+    return <p>loading</p>;
   }
-
 
   return (
     <Form {...form}>
@@ -247,30 +235,32 @@ const data = response.json()
                             />
                           </div>
                         </label>
-                      ) :user?.image? (
+                      ) : user?.image ? (
                         <label
-                        htmlFor="imageUpload"
-                        className="w-full space-y-4 cursor-pointer"
-                      >
-                        <div className="relative">
-                          <img
-                            src={user.image}
-                            alt={`Uploaded image`}
-                            className="rounded-md shadow-md w-full h-32 object-cover"
-                          />
-                        </div>
-                      </label>
-                      ):                      <label
-                      htmlFor="imageUpload"
-                      className="flex items-center justify-start border-2 border-dashed border-gray-400 rounded-2xl p-5 w-full hover:shadow-md cursor-pointer text-center"
-                    >
-                      <div className="flex text-md flex-col items-center space-y-2">
-                        <FiUpload className="text-gray-600 text-xl" />
-                        <p className="text-gray-600 font-medium">
-                          Upload Images
-                        </p>
-                      </div>
-                    </label>}
+                          htmlFor="imageUpload"
+                          className="w-full space-y-4 cursor-pointer"
+                        >
+                          <div className="relative">
+                            <img
+                              src={user.image}
+                              alt={`Uploaded image`}
+                              className="rounded-md shadow-md w-full h-32 object-cover"
+                            />
+                          </div>
+                        </label>
+                      ) : (
+                        <label
+                          htmlFor="imageUpload"
+                          className="flex items-center justify-start border-2 border-dashed border-gray-400 rounded-2xl p-5 w-full hover:shadow-md cursor-pointer text-center"
+                        >
+                          <div className="flex text-md flex-col items-center space-y-2">
+                            <FiUpload className="text-gray-600 text-xl" />
+                            <p className="text-gray-600 font-medium">
+                              {t("UploadImages")}
+                            </p>
+                          </div>
+                        </label>
+                      )}
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -285,9 +275,9 @@ const data = response.json()
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Name</FormLabel>
+                <FormLabel>{tI("Name")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter name" {...field} />
+                  <Input placeholder={tI("Enter name")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -300,10 +290,14 @@ const data = response.json()
             name="phoneNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Phone</FormLabel>
+                <FormLabel>{t("phoneNumber")}</FormLabel>
 
                 <FormControl>
-                  <Input type="text" placeholder=" phone number" {...field} />
+                  <Input
+                    type="text"
+                    placeholder={tI("EnterPhoneNumber")}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -316,25 +310,36 @@ const data = response.json()
             name="address"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Address</FormLabel>
+                <FormLabel>{t("address")}</FormLabel>
 
                 <FormControl>
-                  <Input type="text" placeholder="Address" {...field} />
+                  <Input
+                    type="text"
+                    placeholder={tI("EnterAddress")}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-<FormField
+          <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Email</FormLabel>
+                <FormLabel> {tI("Email")}</FormLabel>
 
                 <FormControl>
-                  <Input type="text"  onFocus={(e) => e.target.blur()} disabled  readOnly {...field} className="bg-gray-200 cursor-not-allowed focus:none"  />
+                  <Input
+                    type="text"
+                    onFocus={(e) => e.target.blur()}
+                    disabled
+                    readOnly
+                    {...field}
+                    className="bg-gray-200 cursor-not-allowed focus:none"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -346,7 +351,7 @@ const data = response.json()
             type="submit"
             disabled={loadingButton} // Disable the button while loading
           >
-            {loadingButton ? "saving..." : "Save"}{" "}
+            {loadingButton ? t("saving") : t("save")}
             {/* Change text while loading */}
           </Button>
         </form>

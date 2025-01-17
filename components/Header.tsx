@@ -20,7 +20,7 @@ function Header() {
 
 
   return (
-    <header className=" py-3  font-work-sans border-b-[1px]">
+    <header className=" pt-3 pb-  font-work-sans border-b-[1px]">
       <div
         className={`container px-2 mx-auto flex justify-between items-center ${router!=="/en"&& router!=="/ar"? "lg:px-[120px]":""}`}
       >

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { useLocale, useTranslations } from "next-intl";
@@ -31,36 +31,23 @@ function Search() {
   const t = useTranslations();
   const locale = useLocale();
 
-
   const [city, setCity] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [rooms, setRooms] = useState("");
   const [bathrooms, setBarooms] = useState("");
-  const [purpose,setPurpose]=useState('')
-
+  const [purpose, setPurpose] = useState("");
 
   const [priceRange, setPriceRange] = React.useState<{
     min?: number;
     max?: number;
   }>({});
 
-  
   const router = useRouter();
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if (
-    //   purpose.length === 0 &&
-    //   priceRange.min === undefined &&
-    //   city.length === 0 &&
-    //   propertyType.length === 0 &&
-    //   rooms.length === 0 &&
-    //   bathrooms.length === 0
-    // ) {
-    //   return alert("Please provide some input");
-    // }
-console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     console.log("city", city);
     console.log("propertyType", propertyType);
     console.log("rooms", rooms);
@@ -70,11 +57,14 @@ console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
     updateSearchParams(
-      city, propertyType, rooms, bathrooms, purpose, priceRange
+      city,
+      propertyType,
+      rooms,
+      bathrooms,
+      purpose,
+      priceRange
     );
   };
-
-
 
   const updateSearchParams = (
     city: string,
@@ -87,28 +77,34 @@ console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     // Create a new URLSearchParams object using the current URL search parameters
     const searchParams = new URLSearchParams(window.location.search);
 
+    const filters = {
+      city,
+      purpose,
+      propertyType,
+      rooms,
+      bathrooms,
+      price:
+        priceRange.min || priceRange.max
+          ? `${priceRange.min || ""}-${priceRange.max || ""}`
+          : null,
+    };
 
-  const filters = {
-    city,
-    purpose,
-    propertyType,
-    rooms,
-    bathrooms,
-    price: priceRange.min || priceRange.max ? `${priceRange.min || ''}-${priceRange.max || ''}` : null,
-  };
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value === "all") {
+        searchParams.delete(key);
+      } else if (value) {
+        searchParams.set(key, value.toString());
+      } else {
+        searchParams.delete(key);
+      }
+    });
 
-  Object.entries(filters).forEach(([key, value]) => {
-    if (value) {
-      searchParams.set(key, value.toString());
-    } else {
-      searchParams.delete(key);
-    }
-  });
+    const newPathname = `${
+      window.location.pathname
+    }?${searchParams.toString()}`;
 
-  const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
-
-  console.log("newPathname", newPathname);
-  router.push(newPathname); // Navigate to the updated URL
+    console.log("newPathname", newPathname);
+    router.push(newPathname); // Navigate to the updated URL
   };
 
   return (
@@ -117,9 +113,8 @@ console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
       <div className="flex flex-col px-3 py-5 bg-[#F5F5F5] rounded-t-[.7rem]">
         <form
           onSubmit={handleSearch}
-          className="flex justify-start gap-4  flex-nowrap px-2 "
+          className="flex justify-start gap-4  flex-nowrap px-2 overflow-x-auto "
         >
-          
           <SearchCity city={city} setCity={setCity} />
 
           <Select
@@ -129,73 +124,66 @@ console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
               setPropertyType(value); // Update the state with the selected value
             }}
           >
-            <SelectTrigger className="flex w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
-              <SelectValue placeholder={t("addUser.selectPropertyTypee")} />
+            <SelectTrigger className="flex hover:bg-gray-50 gap-3 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+              <SelectValue placeholder={t("addUser.selectPropertyType")} />
             </SelectTrigger>
 
             <SelectContent>
-              <SelectItem value="apartment">شقة</SelectItem>
-              <SelectItem value="villa">فيلا</SelectItem>
-              <SelectItem value="farm">مزرعة</SelectItem>
-              <SelectItem value="rest-house">استراحة</SelectItem>
-              <SelectItem value="residential-complex">مجمع سكني</SelectItem>
-              <SelectItem value="duplex">دوبلكس</SelectItem>
-              <SelectItem value="building">عمارة بالكامل</SelectItem>
-              <SelectItem value="hotel-apartments">فندق/شقق فندقية</SelectItem>
-              <SelectItem value="land">ارض</SelectItem>
-              <SelectItem value="full-floor">طابق كامل</SelectItem>
+              <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
+              <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
+              <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
+              <SelectItem value="Rest-House">
+                {t("inputs.rest-house")}
+              </SelectItem>
+              <SelectItem value="Residential-Complex">
+                {t("inputs.residential-complex")}
+              </SelectItem>
+              <SelectItem value="Duplex">{t("inputs.duplex")}</SelectItem>
+              <SelectItem value="Building">{t("inputs.building")}</SelectItem>
+              <SelectItem value="Hotel-Apartments">
+                {t("inputs.hotel-apartments")}
+              </SelectItem>
+              <SelectItem value="Land">{t("inputs.land")}</SelectItem>
+              <SelectItem value="Full-Floor">
+                {t("inputs.full-floor")}
+              </SelectItem>
             </SelectContent>
           </Select>
 
+          <RoomSelect
+            rooms={rooms}
+            setRooms={setRooms}
+            bathrooms={bathrooms}
+            setBathrooms={setBarooms}
+          />
 
-
-
-<RoomSelect rooms={rooms} setRooms={setRooms} bathrooms={bathrooms} setBathrooms={setBarooms} />
-
-
-<Select
+          <Select
             dir={locale === "ar" ? "rtl" : "ltr"}
             value={purpose}
             onValueChange={(value) => {
               setPurpose(value); // Update the state with the selected value
             }}
           >
-            <SelectTrigger className="flex w-بعمم h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+            <SelectTrigger className="flex  hover:bg-gray-50 duration-200 h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("search.buy")} />
             </SelectTrigger>
 
             <SelectContent>
               <SelectItem value="rent">{t("addUser.rental")}</SelectItem>
               <SelectItem value="sell">{t("addUser.sell")}</SelectItem>
-
             </SelectContent>
           </Select>
 
-
-
-<PriceFilter onPriceChange={setPriceRange} />
-
-
-
-
-
-
-
-  
-
-
+          <PriceFilter onPriceChange={setPriceRange} />
 
           <button
             type="submit"
-            className="flex w-[700px] h-[48px] items-center font-medium text-white bg-primary rounded-[.8rem] justify-between px-4"
+            className="flex gap-3 hover:bg-primary/80 duration-200 h-[48px] items-center font-medium text-white bg-primary rounded-[.8rem] justify-between px-4"
           >
             {t("search.search_button")}
             <GoSearch className="font-bold text-white" />
           </button>
-
         </form>
-
-
       </div>
 
       {/* Result of search */}

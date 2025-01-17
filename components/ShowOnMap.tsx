@@ -21,22 +21,33 @@ const ShowMap = ({ properties }) => {
       shadowUrl: markerShadow,
     });
 
+
+    const validProperties = properties.filter(
+      (property)=>property.location?.latitude && property.location?.longitude
+    )
+
+    if(validProperties.length === 0) return;
+
+
+
     const mapInstance = L.map("show-map").setView(
       [
-        properties[0].location?.latitude | 0,
-        properties[0].location?.longitude | 0,
+        validProperties[0].location.latitude,
+        validProperties[0].location.longitude,
       ],
       13
     );
+
+
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(mapInstance);
 
-    properties.forEach((property) => {
+    validProperties.forEach((property) => {
       const marker = L.marker([
-        property.location?.latitude | 0,
-        property.location?.longitude | 0,
+        property.location.latitude,
+        property.location.longitude,
       ])
         .addTo(mapInstance)
         .bindPopup(`<b>${property.title}</b><br>${property.address}`);

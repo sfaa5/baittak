@@ -92,7 +92,7 @@ console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         }}
         value={service}
       >
-        <SelectTrigger className="hidden sm:flex bg-white w-[150px] h-[48px] gap-2 items-center font-normal text-gray-400 rounded-[.8rem] justify-between px-2 md:px-4">
+        <SelectTrigger className="hidden sm:flex hover:bg-gray-50 bg-[#F5F5F5] w-[150px] h-[48px] gap-2 items-center font-normal text-gray-400 rounded-[.8rem] justify-between px-2 md:px-4">
           <SelectValue placeholder={t("agency.banner.service_needed")} />
         </SelectTrigger>
         <SelectContent>

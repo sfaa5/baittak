@@ -19,7 +19,7 @@ import { t } from "i18next";
       const isAuth = await getToken({ req: request });
   
       // Define protected routes
-      const protectedRoutes = ['/User/Posts', '/Company'];
+      const protectedRoutes = ['/User', '/Company'];
   
       console.log("Pathname:", pathname);
       console.log("Authenticated User Role:", isAuth?.role);

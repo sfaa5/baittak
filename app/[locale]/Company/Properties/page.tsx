@@ -1,79 +1,63 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { DataTable } from "@/components/Company/data-table";
-import { Property, columns } from "./Columns";
-
+import { useColumns } from "./Columns";
 import Title from "@/components/Company/titile";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useSharedState } from "@/app/context/stateProvider";
 import TableSkelton from "@/components/TableSkelton";
+import { useTranslations } from "next-intl";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 export default function DemoPage() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const {property,setProperty}=useSharedState();
-  const { data: session,status  } = useSession();
- const id = session?.user?.id
+   const { data: session, status } = useSession();
+   const { property, setProperty } = useSharedState();
+   const t = useTranslations(); // Ensure context is available
+   const columns = useColumns();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${URL_SERVER}/api/agency/${id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const result = await response.json();
-        setProperty(result.properties);
+   const id = session?.user?.id;
 
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+   useEffect(() => {
+      const fetchData = async () => {
+         try {
+            const response = await fetch(`${URL_SERVER}/api/agency/${id}`);
+            if (!response.ok) {
+               throw new Error("Failed to fetch data");
+            }
+            const result = await response.json();
+            setProperty(result.properties);
+         } catch (err) {
+            console.error("Error fetching properties:", err.message);
+         }
+      };
+
+      if (status === "authenticated") {
+         fetchData();
       }
-    };
+   }, [status, id, setProperty]);
 
-    if(status==="authenticated")
-       {fetchData();}
+   if (status === "loading") return <TableSkelton />;
 
+   return (
+      <div className="mx-auto py-10">
+         <div className="flex w-full justify-between">
+            <Title name="Properties" />
+            <Link href={"/Company/Properties/addProperty"}>
+               <Button>{t("property.add_Property")}</Button>
+            </Link>
+         </div>
 
-  }, [status, session]);
-
-
-console.log(data)
-
-
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  return (
-
-    <div className="mx-auto py-10">
-      <div className="flex w-full justify-between">
-        <Title name="Properties" />
-        <Link href={"Properties/addProperty"}>
-          <Button>Add Property</Button>
-        </Link>
+         {property ? (
+         
+            <DataTable columns={columns} columFilter="title" data={property} />
+         
+         ) : (
+            <TableSkelton />
+         )}
       </div>
-
-{
-  loading?(
-    <TableSkelton/>
-  ):(
-    <DataTable columns={columns} columFilter="title" data={property} />
-  )
-}
-
-     
-
-
-    </div>
-  );
+   );
 }

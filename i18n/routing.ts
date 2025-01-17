@@ -61,13 +61,13 @@ export const routing = defineRouting({
       },
       "/User/Favorit": {
         en: "/User/Favorit",  
-        ar: "/المفضله",      
+        ar: "/User/Favorit",      
       },"/User/plan":{
         en:"/User/plan",
-        ar:"/خطه/مستخدم"
+        ar:"/User/plan"
       },"/User/Edit":{
         en:"/User/Edit",
-        ar:"/تعديل/مستخدم"
+        ar:"/User/Edit"
       }
 
 

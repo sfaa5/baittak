@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 
 
@@ -35,6 +36,7 @@ const page = () => {
   const [verified, setVerified] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const t = useTranslations()
 
   const { data: session, status: sessionStatus } = useSession();
 
@@ -146,8 +148,8 @@ const page = () => {
 <div className="my-52">
   {/* Header Section */}
   <div className="text-center mb-8">
-    <h2 className="text-2xl font-bold text-gray-800 mb-2">Reset Password</h2>
-    <p className="text-gray-600">Enter your new password below to reset it.</p>
+    <h2 className="text-xl font-bold text-gray-800 mb-2">{t("sign.reset_password.title")}</h2>
+    <p className="text-gray-600">{t("sign.reset_password.description")}</p>
   </div>
 
   <Form {...form}>
@@ -164,7 +166,7 @@ const page = () => {
             <FormControl>
               <Input
                 type="password"
-                placeholder="Enter your new password"
+                placeholder={t("sign.reset_password.password_placeholder")}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...field}
               />
@@ -184,23 +186,24 @@ const page = () => {
         }`}
         type="submit"
       >
-        {loading ? "Sending..." : "Reset Password"}
+        {loading ? "Sending..." : t("sign.reset_password.reset_button")}
       </Button>
 
       {/* Error/Success Messages */}
       {error && (
         <p className="text-center mt-4 text-red-500 text-sm">
-          {error}
+          {t("sign.reset_password.error_message")}
         </p>
       )}
       {!error && !loading && (
         <p className="text-center mt-4 text-green-500 text-sm">
-          Password reset successful!
+          {t("sign.reset_password.success_message")}
         </p>
       )}
     </form>
   </Form>
 </div>
+
 
   );
 };

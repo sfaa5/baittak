@@ -46,14 +46,14 @@ function RoomSelect({
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="" ref={dropdownRef}>
       <button
         type="button"
         onClick={toggleDropdown}
-        className="flex w-[230px] h-[48px] items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
+        className="flex w-[230px] hover:bg-gray-50 duration-200 h-[48px] items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
       >
         {t("search.rooms")}
-        <IoIosArrowDown className="h-5 w-5 text-secondary" />
+        <IoIosArrowDown className="h-4 w-4 opacity-50" />
       </button>
 
       <Transition
@@ -66,7 +66,7 @@ function RoomSelect({
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div className="absolute z-10 mt-2 w-[300px] bg-white border border-gray-300 rounded-md shadow-lg">
+        <div className="absolute z-[9999] mt-2 w-[300px] bg-white border border-gray-300 rounded-md shadow-lg">
           <div className="py-2 px-4 text-gray-500 font-semibold">Bedrooms</div>
           <div className="grid grid-cols-5 gap-2 p-2">
             <button

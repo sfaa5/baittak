@@ -67,7 +67,7 @@ export function AppSidebar() {
       <SidebarContent>
         <div className="flex justify-center mb-10">
           <Link href="/">
-            {locale === "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
+            {locale === "ar" ? <BaittaklogoArabic  /> : <EnglishLogo />}
           </Link>
         </div>
 
@@ -97,7 +97,7 @@ export function AppSidebar() {
         className="flex items-center gap-2  text-secondary  hover:text-white bg-transparent hover:bg-secondary/80 px-4 py-2 rounded-lg transition-all duration-200 ease-in-out shadow-md"
       >
         <IoIosLogOut size={20} />
-        <span className="text-md font-medium">Log Out</span>
+        <span className="text-md font-medium">{t("table.Log_Out")}</span>
       </Button>
     </div> </SidebarFooter>
     </Sidebar>

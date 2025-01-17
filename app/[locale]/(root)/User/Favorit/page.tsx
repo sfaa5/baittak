@@ -30,6 +30,9 @@ function Page() {
     }
   }, [status, session, seFavorite]);
 
+
+console.log(favorite)
+
   return (
     <>
       {loading ? (

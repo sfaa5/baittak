@@ -35,29 +35,7 @@ import SignPhone from "@/components/SignPhoen";
 import { redirect, useRouter } from "next/navigation";
 import Map from "../../../(root)/User/AddPost/Map";
 
-// Define Zod schema for form validation
-const formSchema = z.object({
-  address: z.string().min(1, "plese inser address"),
-  amenities: z.array(z.string()),
 
-  title: z.string().min(1, "Title is required"),
-  description: z.string().min(1, "Description is required"),
-  price: z.string().min(1, "Price is required"),
-  area: z.string().min(1, "Area is required"),
-  propertyType: z.string().min(1, "Property type is required"),
-  bedrooms: z.number().nonnegative("Bedrooms cannot be negative"),
-  bathrooms: z.number().nonnegative("Bathrooms cannot be negative"),
-  floors: z.number().nonnegative("Floors cannot be negative"),
-  images: z.array(z.string()).optional(),
-  numFloors: z.number().min(1, "floors is required"),
-  plotWidth: z.string().optional(),
-  landNumber: z.string().optional(),
-  plotLength: z.string().optional(),
-  city: z.string().min(1, "city is required"),
-  rentalType: z.string().optional(),
-  currency: z.string().min(1, "currency is required"),
-  for: z.string().min(1, "plese complete"),
-});
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function Page() {
@@ -68,10 +46,40 @@ function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cities, setCities] = useState<City[]>([]);
   const [address, setAddress] = useState("");
+  const t = useTranslations();
+  const tE = useTranslations("erorr")
+  const locale = useLocale();
 
-  console.log("setionn", session);
 
   const router = useRouter();
+
+
+
+
+// Define Zod schema for form validation
+const formSchema = z.object({
+    address: z.string().min(1, tE("address")),
+    amenities: z.array(z.string()),
+    title: z.string().min(1, tE("title")),
+    description: z.string().min(1, tE("description")),
+    price: z.string().min(1, tE("price")),
+    area: z.string().min(1, tE("area")),
+    propertyType: z.string().min(1, tE("propertyType")),
+    bedrooms: z.number().nonnegative(tE("bedrooms")),
+
+    bathrooms: z.number().nonnegative(tE("bathrooms")),
+    floors: z.number().nonnegative(tE("floors")),
+    numFloors: z.number().min(1, tE("numFloors")),
+    city: z.string().min(1, tE("city")),
+    currency: z.string().min(1, tE("currency")),
+    for: z.string().min(1, tE("for")),
+    plotWidth: z.string().optional(),
+    plotLength: z.string().optional(),
+    landNumber: z.string().optional(),
+    rentalType: z.string().optional(),
+    images: z.array(z.string()).optional(),
+});
+
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -143,8 +151,7 @@ function Page() {
 
   console.log("location", location);
 
-  const t = useTranslations();
-  const locale = useLocale();
+
 
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   interface Amenity {
@@ -272,6 +279,8 @@ function Page() {
       });
       const data = await response.json();
       if (response.ok) {
+        router.push('/Company/Properties')
+        form.reset()
         toast({
           description: "the post add succussfuly",
           className: "bg-green-500 text-white p-4 rounded shadow-lg",
@@ -325,25 +334,17 @@ function Page() {
                             <SelectValue placeholder={t("addUser.select")} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="apartment">شقة</SelectItem>
-                            <SelectItem value="villa">فيلا</SelectItem>
-                            <SelectItem value="farm">مزرعة</SelectItem>
-                            <SelectItem value="rest-house">استراحة</SelectItem>
-                            <SelectItem value="residential-complex">
-                              مجمع سكني
-                            </SelectItem>
-                            <SelectItem value="duplex">دوبلكس</SelectItem>
-                            <SelectItem value="building">
-                              عمارة بالكامل
-                            </SelectItem>
-                            <SelectItem value="hotel-apartments">
-                              فندق/شقق فندقية
-                            </SelectItem>
-                            <SelectItem value="land">ارض</SelectItem>
-                            <SelectItem value="full-floor">
-                              طابق كامل
-                            </SelectItem>
-                          </SelectContent>
+      <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
+      <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
+      <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
+      <SelectItem value="Rest-House">{t("inputs.rest-house")}</SelectItem>
+      <SelectItem value="Residential-Complex">{t("inputs.residential-complex")}</SelectItem>
+      <SelectItem value="Duplex">{t("inputs.duplex")}</SelectItem>
+      <SelectItem value="Building">{t("inputs.building")}</SelectItem>
+      <SelectItem value="Hotel-Apartments">{t("inputs.hotel-apartments")}</SelectItem>
+      <SelectItem value="Land">{t("inputs.land")}</SelectItem>
+      <SelectItem value="Full-Floor">{t("inputs.full-floor")}</SelectItem>
+    </SelectContent>
                         </Select>
                       </FormControl>
                       <FormMessage />
@@ -393,39 +394,35 @@ function Page() {
                 </div>
 
                 <div className="col-span-2">
-                  <FormField
-                    control={form.control}
-                    name="currency"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t("addUser.currency")}</FormLabel>
-                        <FormControl>
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value}
-                            dir={locale === "ar" ? "rtl" : "ltr"}
-                          >
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder={t("addUser.select")} />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="USD">USD</SelectItem>
-                              <SelectItem value="IQD">IQD</SelectItem>
-                              <SelectItem value="EUR">EUR</SelectItem>
-                              <SelectItem value="SAR">SAR</SelectItem>
-                              <SelectItem value="AED">AED</SelectItem>
-                              <SelectItem value="KWD">KWD</SelectItem>
-                              <SelectItem value="QAR">QAR</SelectItem>
-                              <SelectItem value="OMR">OMR</SelectItem>
-                              <SelectItem value="BHD">BHD</SelectItem>
-                              <SelectItem value="JOD">JOD</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+      <FormField
+        control={form.control}
+        name="currency"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t("inputs.currency.label")}</FormLabel>
+            <FormControl>
+              <Select   dir={locale === "ar" ? "rtl" : "ltr"} onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t("inputs.currency.placeholder")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="USD">{t("inputs.currency.options.USD")}</SelectItem>
+                  <SelectItem value="IQD">{t("inputs.currency.options.IQD")}</SelectItem>
+                  <SelectItem value="EUR">{t("inputs.currency.options.EUR")}</SelectItem>
+                  <SelectItem value="SAR">{t("inputs.currency.options.SAR")}</SelectItem>
+                  <SelectItem value="AED">{t("inputs.currency.options.AED")}</SelectItem>
+                  <SelectItem value="KWD">{t("inputs.currency.options.KWD")}</SelectItem>
+                  <SelectItem value="QAR">{t("inputs.currency.options.QAR")}</SelectItem>
+                  <SelectItem value="OMR">{t("inputs.currency.options.OMR")}</SelectItem>
+                  <SelectItem value="BHD">{t("inputs.currency.options.BHD")}</SelectItem>
+                  <SelectItem value="JOD">{t("inputs.currency.options.JOD")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
                 </div>
 
                 <div className="col-span-2">
@@ -525,7 +522,7 @@ function Page() {
                   type="button"
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-primary text-white text-sm border-none rounded cursor-pointer"
                 >
-                  Select on Map
+                  {t("inputs.Select on Map")}
                 </button>
               </div>
 
@@ -563,9 +560,10 @@ function Page() {
                   name="address"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>العنوان</FormLabel>
+               <FormLabel>{t("inputs.address")}</FormLabel>
+
                       <FormControl>
-                        <Input {...field} placeholder="address" />
+                        <Input {...field} placeholder={t("inputs.address")} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -741,6 +739,7 @@ function Page() {
                     <FormControl>
                       <div className="flex relative">
                         <Input
+                        type="number"
                           {...field} // spread field to bind the input value and onChange
                           className="pr-24" // Add padding to the right side of the input
                         />
@@ -763,6 +762,7 @@ function Page() {
                     <FormControl>
                       <div className="flex relative">
                         <Input
+                        type="number"
                           {...field} // Spread field to bind the input value and onChange
                           className="pr-24" // Add padding to the right side of the input
                         />
@@ -785,6 +785,7 @@ function Page() {
                   <FormLabel>{t("addUser.landNumber")}</FormLabel>
                   <FormControl>
                     <Input
+                    type="number"
                       {...field} // Spread field to bind the input value and onChange
                       placeholder="0000"
                     />
@@ -871,7 +872,7 @@ function Page() {
                         <div className="flex flex-col items-center space-y-2">
                           <FiUpload className="text-gray-600 text-4xl" />
                           <p className="text-gray-600 font-medium">
-                            Upload Images
+                          {t("company.agentInfo.UploadImages")}
                           </p>
                         </div>
                       </label>
@@ -887,7 +888,8 @@ function Page() {
                       {selectedImages.length > 0 && (
                         <div className="w-full space-y-4">
                           <p className="text-center text-gray-500 mb-2">
-                            Selected Images:
+                          {t("inputs.SelectedImages")}
+
                           </p>
                           <div className="grid grid-cols-2 gap-4">
                             {selectedImages.map((image, index) => (
@@ -901,7 +903,8 @@ function Page() {
                                   onClick={() => handleRemoveImage(index)}
                                   className="absolute top-2 right-2 bg-red-500 text-white text-sm px-2 py-1 rounded-md"
                                 >
-                                  Remove
+                                                                  {t("inputs.Remove")}
+
                                 </button>
                               </div>
                             ))}
@@ -919,8 +922,8 @@ function Page() {
             type="submit"
             disabled={loading} // Disable the button while loading
           >
-            {loading ? "Submitting..." : "Submit"}{" "}
-            {/* Change text while loading */}
+            {loading ? t("property.Submitting") : t("property.Submit")}
+
           </Button>
         </form>
       </Form>

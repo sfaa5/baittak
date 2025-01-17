@@ -3,7 +3,7 @@
 import { DataTable } from '@/components/Company/data-table';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
-import { columns } from './Columns';
+import { useColumns } from './Columns';
 import { useSharedState } from '@/app/context/stateProvider';
 import TableSkelton from '@/components/TableSkelton';
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
@@ -12,6 +12,7 @@ function Page() {
   const { data: session, status } = useSession();
   const{property,setProperty}=useSharedState();
   const [loading, setLoading] = useState(true); 
+     const columns = useColumns();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +29,7 @@ function Page() {
     if (status === "authenticated") {
       fetchData();
     }
-  }, [status, session]); // Ensure useEffect runs when the status or session changes
+  }, [status]); // Ensure useEffect runs when the status or session changes
 
   console.log("User data:", property);
 

@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { useSharedState } from "@/app/context/stateProvider";
 import { deleteSelectedRequests, } from "@/lib/actions/project.action";
 import { useRouter,usePathname } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 interface RowData {
   _id?: string;  
@@ -53,6 +54,8 @@ export function DataTable<TData extends RowData, TValue>({
   const{starRequest,setStarRequest}=useSharedState();
   const pathnaem = usePathname()
   const router = useRouter(); 
+  const locale = useLocale();
+  const t =useTranslations()
 
 
   // const handleUnstarClick = async () => {
@@ -91,9 +94,10 @@ export function DataTable<TData extends RowData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4">
+        
         <div className="grid grid-cols-2 gap-[65%]  w-full">
           <Input
-            placeholder="Filter title..."
+            placeholder={t("inputs.Filter_title")}
             value={
               (table.getColumn(columFilter)?.getFilterValue() as string) ?? ""
             }
@@ -136,12 +140,12 @@ export function DataTable<TData extends RowData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader  >
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}  >
+              <TableRow   key={headerGroup.id}  >
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className={`${locale==="ar"?"text-right":"text-left"} `}  key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -187,14 +191,14 @@ export function DataTable<TData extends RowData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end gap-2 py-4">
         <Button
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          {t("table.Previous")}
         </Button>
         <Button
           variant="outline"
@@ -202,7 +206,7 @@ export function DataTable<TData extends RowData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          {t("table.Next")}
         </Button>
       </div>
     </div>
