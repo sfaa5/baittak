@@ -11,10 +11,12 @@ import LocaleSwitcher from "./LocalSwitcher";
 import { SignAgency } from "@/app/[locale]/auth/SignAgency";
 import SignOut from "./SignOut";
 import { usePathname } from "next/navigation";
+import MoonLoader from "react-spinners/MoonLoader";
+import { Skeleton } from "./ui/skeleton";
 
 const Navbar = () => {
   const t = useTranslations("header");
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
 
   const pathname = usePathname(); // Get the current path
   const [activeLink, setActiveLink] = useState("");
@@ -37,8 +39,18 @@ const Navbar = () => {
             <CiHeart /> <span>{t("favorites")}</span>
           </Link>
 
-          {session ? <SignOut user={session?.user} /> : <SignInWithGoogle />}
+     
+          { 
+       status === 'loading'?     <div className="flex items-center gap-2 px-4 py-2  border border-gray-300 rounded-lg text-gray-800 ">
+      <Skeleton className="h-6 w-6 rounded-full" />
+    
+      
+        <Skeleton className="h-2 w-[80px]" />
+      </div>:session ? <SignOut user={session?.user} /> : <SignInWithGoogle />
+   }
 
+
+  {/*  > */}
           {session?.user?.role == "agency" ? (
             <Link className="mt-2" href="/Company/about">
               {t("company")}

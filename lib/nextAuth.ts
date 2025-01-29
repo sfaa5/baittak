@@ -13,7 +13,10 @@ declare module "next-auth" {
       email?: string | null;
       image?: string | null;
       phoneNumber?:string|null;
+      accessToken?:string|null;
+      refreshToken?:string|null;
       role:string|null;
+
     };
   }
 
@@ -42,7 +45,7 @@ export const authOptions  = {
 
         try {
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_URL_SERVER}/api/users/login`,
+            `${process.env.NEXT_PUBLIC_URL_SERVER}/api/auth/login`,
             {
               method: "POST",
               headers: {
@@ -89,7 +92,7 @@ export const authOptions  = {
           return false;
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/users`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/auth`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -107,16 +110,14 @@ export const authOptions  = {
         }
 
         // Parse the response and assign the user ID
-        const { data } = await response.json();
+        const { data,accessToken,refreshToken } = await response.json();
         user.id = data._id; // Safely assign the ID
         user.role=data.role
         user.phoneNumber=data.phoneNumber||""
+        user.accessToken=accessToken
+        user.refreshToken=refreshToken
         console.log(user);
         console.log(data);
-
-
-
-
 
         return true;
       } catch (error) {
@@ -125,12 +126,19 @@ export const authOptions  = {
       }
     },
 
-    async jwt({ token, user }:any) {
+    async jwt({ token, user,trigger,session }:any) {
+
+if(trigger==="update"){
+  return {...token,...session.user}
+}
+
       // If the user is present (on sign in), add the user's ID to the token
       if (user) {
         token.id = user.id; // Store the user Id in the token
         token.role =user.role
         token.phoneNumber=user.phoneNumber||""
+        token.accessToken=user.accessToken
+        token.refreshToken=user.refreshToken
       }
 
       console.log("Token in jwt callback:", token);
@@ -142,6 +150,8 @@ export const authOptions  = {
       session.user.id = token.id;
       session.user.role = token.role;
       session.user.phoneNumber=token.phoneNumber||"";
+      session.user.accessToken=token.accessToken
+      session.user.refreshToken=token.refreshToken
       console.log("Session in session callback:", session);
       return session;
     },

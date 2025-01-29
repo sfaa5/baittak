@@ -12,10 +12,11 @@ import {useLocale} from "next-intl";
 
 
 function Header() {
+  
   const  t  = useTranslations();
   const router = usePathname();
   const locale = useLocale();
-  console.log("headerrrr",router)
+  console.log("header",router);
 
 
 

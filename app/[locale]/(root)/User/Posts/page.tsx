@@ -6,18 +6,22 @@ import React, { useEffect, useState } from 'react';
 import { useColumns } from './Columns';
 import { useSharedState } from '@/app/context/stateProvider';
 import TableSkelton from '@/components/TableSkelton';
+import useAxiosAuth from '@/hooks/useAxiosAuth';
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function Page() {
   const { data: session, status } = useSession();
   const{property,setProperty}=useSharedState();
   const [loading, setLoading] = useState(true); 
+  const axiosAuth = useAxiosAuth();
      const columns = useColumns();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${URL_SERVER}/api/users/${session.user.id}`);
-        const jsonData = await response.json();
+        const response = await axiosAuth.get(`api/users/${session?.user?.id}`);
+        console.log("response",response)
+        const jsonData = response.data;
+        console.log("jsondata",jsonData)
         setProperty(jsonData.properties);
         setLoading(false);
       } catch (error) {

@@ -15,7 +15,12 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${URL_SERVER}/api/users/${session?.user?.id}`);
+        const response = await fetch(`${URL_SERVER}/api/users/${session?.user?.id}`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.user?.accessToken}`  // Assuming you have a session token
+        }
+        });
         const jsonData = await response.json();
         seFavorite(jsonData.favorites);
         setLoading(false); // Stop loading after data is fetched

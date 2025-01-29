@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Skeleton } from "./ui/skeleton";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 const planTranslations ={
   "Free":"مجاني",
@@ -22,17 +23,18 @@ function UserCard() {
   const t = useTranslations();
   const locale = useLocale();
   console.log("sessionnnn", session);
+  const axiosAuth = useAxiosAuth();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL_SERVER}/api/users/${session?.user?.id}`
-        );
-        if (!response.ok) {
+        const response = await axiosAuth.get(`api/users/${session?.user?.id}`);
+
+        if (response.status !== 200) {
           throw new Error("Failed to fetch user data");
         }
-        const data = await response.json();
+
+        const data = response.data;
         setUser(data);
 
         setLoading(false);

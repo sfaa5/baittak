@@ -1,6 +1,6 @@
 "use client";
 
-import { LuHome } from "react-icons/lu";
+import { LuHouse } from "react-icons/lu";
 import Cities from "./Cities";
 import Properties from "./Properties";
 import { useTranslations } from "next-intl";
@@ -10,6 +10,7 @@ import Sign from "@/components/Sign";
 import { useSearchParams, useRouter } from "next/navigation";
 import SearchHome from "../../../components/SearchHome";
 import { useSession } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -40,8 +41,10 @@ export default function Home() {
     router.push("/");
   };
 
+
   return (
     <>
+
       {/* // landing */}
       <section className="h-[70vh] text- pb-36 bg-hero-pattern bg-cover w-full">
         <div className="container relative mx-auto h-full flex flex-col gap-36">
@@ -65,21 +68,21 @@ export default function Home() {
                   href="/Property?purpose=rent"
                   className="inline-flex gap-2 text-base font-medium hover:text-primary duration-200"
                 >
-                  <LuHome className="size-5 xs:size-6" />
+                  <LuHouse className="size-5 xs:size-6" />
                   <span>{t("landing.rent")}</span>
                 </a>
                 <a
                   href="/Property?purpose=sell"
                   className="inline-flex text-base gap-2 duration-200 font-medium hover:text-primary"
                 >
-                  <LuHome className="size-5 xs:size-6" />
+                  <LuHouse className="size-5 xs:size-6" />
                   <span>{t("landing.buy")}</span>
                 </a>
                 <a
                   href="/Projects"
                   className="inline-flex text-base gap-2 duration-200 font-medium hover:text-primary"
                 >
-                  <LuHome className="size-5 xs:size-6 items-center" />
+                  <LuHouse className="size-5 xs:size-6 items-center" />
                   <span>{t("landing.projects")}</span>
                 </a>
               </div>
