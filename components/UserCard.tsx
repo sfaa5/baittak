@@ -64,7 +64,7 @@ function UserCard() {
   }
 
   const { activePlan, propertiesPosted } = user;
-  const limit = activePlan?.limit + user.freePlanLimit;
+  const limit = activePlan?.limit | 0 + user.freePlanLimit;
   const freeLimit = user.freePlanLimit;
   const postsLeft = limit - propertiesPosted;
   const totalLimit = limit + freeLimit;
@@ -76,12 +76,13 @@ function UserCard() {
     ? formatDistanceToNow(expiresAt, { addSuffix: true })
     : null;
 
+  
   console.log(user.phoneNumber);
   console.log(user);
 
   return (
     <div className="relative mx-auto w-full xl:w-1/3">
-      <div className=" flex flex-col bg-gray-100 p-8  gap-8 rounded-[0.7rem]">
+      <div className=" flex flex-col bg-gray-100 p-6  gap-8 rounded-[0.7rem]">
         <div className="flex items-center gap-5">
           <img
             src={
@@ -90,7 +91,7 @@ function UserCard() {
                 : user.image || "/company/unknown.png"
             }
             alt="user"
-            className="rounded-full h-20"
+            className="rounded-full h-20 w-20  object-cover"
           />
           <div className="flex flex-col gap-2 text-lg">
             <p>{user.username}</p>
@@ -106,7 +107,7 @@ function UserCard() {
 
           <div className="flex  text-lg gap-3">
             <p className="text-primary font-medium">
-              {locale==="ar"? planTranslations[activePlan.name]:activePlan.name || t("company.free")}
+              {locale==="ar"? planTranslations[activePlan?.name]:activePlan?.name || t("company.free")}
             </p>
             <span> {timeUntilExpiration ? timeUntilExpiration : ""} </span>
           </div>

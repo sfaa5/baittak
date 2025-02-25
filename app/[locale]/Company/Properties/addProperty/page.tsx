@@ -53,6 +53,8 @@ function Page() {
 
   const router = useRouter();
 
+  const [errorr,setErrorr]= useState(false);
+  const [errImage,setErrImage]=useState("")
 
 
 
@@ -94,32 +96,9 @@ const formSchema = z.object({
     }
   }, [session, status]);
 
-  const handlePhoneUpdate = async (newPhoneNumber) => {
-    try {
-      // Send the update request
-      const response = await fetch(
-        `${URL_SERVER}/api/users/${session?.user.id}`,
-        {
-          method: "PUT", // Use PATCH for partial updates
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ phoneNumber: newPhoneNumber }), // Pass the new phone number
-        }
-      );
 
-      // Check if the response is successful
-      if (response.ok) {
-        // Optionally refetch the session or update it locally
-        session.user.phoneNumber = newPhoneNumber; // Simulating session update for now
-        setShowPhoneModal(false);
-      } else {
-        console.error("Failed to update phone number");
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
+
+
 
   const handleLocationSelect = async (selectedLocation) => {
     setLocation(selectedLocation);
@@ -198,15 +177,25 @@ const formSchema = z.object({
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
-      const newFiles = Array.from(files);
-      setSelectedImages((prevImages) => [...prevImages, ...newFiles]);
+    if(files){
+        const newFiles = Array.from(files);
+    setSelectedImages((prevImages) => [...prevImages, ...newFiles]);
     }
   };
-
+  
   const handleRemoveImage = (index: number) => {
-    setSelectedImages((prev) => prev.filter((_, i) => i !== index)); //  delet image
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index)); // Delete image
   };
+  
+  useEffect(() => {
+    if (selectedImages.length < 3) {
+      setErrorr(true);
+    } else {
+      setErrorr(false);
+    }
+  }, [selectedImages]);
+
+
 
   useEffect(() => {
     async function fetchAmenities() {
@@ -317,13 +306,13 @@ const formSchema = z.object({
             </div>
 
             <div className="grid gap-3 grid-cols-8">
-              <div className="col-span-2">
+            <div className="col-span-4 sm:col-span-2">
                 <FormField
                   control={form.control}
                   name="propertyType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("addUser.selectPropertyType")}</FormLabel>
+                      <FormLabel className="hidden sm:block">{t("addUser.selectPropertyType")}</FormLabel>
                       <FormControl>
                         <Select
                           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -334,17 +323,25 @@ const formSchema = z.object({
                             <SelectValue placeholder={t("addUser.select")} />
                           </SelectTrigger>
                           <SelectContent>
-      <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
-      <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
-      <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
-      <SelectItem value="Rest-House">{t("inputs.rest-house")}</SelectItem>
-      <SelectItem value="Residential-Complex">{t("inputs.residential-complex")}</SelectItem>
-      <SelectItem value="Duplex">{t("inputs.duplex")}</SelectItem>
-      <SelectItem value="Building">{t("inputs.building")}</SelectItem>
-      <SelectItem value="Hotel-Apartments">{t("inputs.hotel-apartments")}</SelectItem>
-      <SelectItem value="Land">{t("inputs.land")}</SelectItem>
-      <SelectItem value="Full-Floor">{t("inputs.full-floor")}</SelectItem>
-    </SelectContent>
+                            <SelectItem value="Apartment">شقة</SelectItem>
+                            <SelectItem value="Villa">فيلا</SelectItem>
+                            <SelectItem value="Farm">مزرعة</SelectItem>
+                            <SelectItem value="Rest-House">استراحة</SelectItem>
+                            <SelectItem value="Residential-Complex">
+                              مجمع سكني
+                            </SelectItem>
+                            <SelectItem value="Duplex">دوبلكس</SelectItem>
+                            <SelectItem value="Building">
+                              عمارة بالكامل
+                            </SelectItem>
+                            <SelectItem value="Hotel-Apartments">
+                              فندق/شقق فندقية
+                            </SelectItem>
+                            <SelectItem value="Land">ارض</SelectItem>
+                            <SelectItem value="Full-Floor">
+                              طابق كامل
+                            </SelectItem>
+                          </SelectContent>
                         </Select>
                       </FormControl>
                       <FormMessage />
@@ -353,13 +350,13 @@ const formSchema = z.object({
                 />
               </div>
 
-              <div className="col-span-2">
+              <div className="col-span-4 sm:col-span-2">
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("addUser.title")}</FormLabel>
+                      <FormLabel className="hidden sm:block">{t("addUser.title")}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -372,14 +369,14 @@ const formSchema = z.object({
                 />
               </div>
 
-              <div className="col-span-4 grid grid-cols-7 gap-2">
+              <div className="col-span-8 sm:col-span-4 grid grid-cols-7 gap-2">
                 <div className="col-span-3">
                   <FormField
                     control={form.control}
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("addUser.price")}</FormLabel>
+                        <FormLabel className="hidden sm:block">{t("addUser.price")}</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -394,12 +391,12 @@ const formSchema = z.object({
                 </div>
 
                 <div className="col-span-2">
-      <FormField
+                <FormField
         control={form.control}
         name="currency"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("inputs.currency.label")}</FormLabel>
+            <FormLabel className="hidden sm:block" >{t("inputs.currency.label")}</FormLabel>
             <FormControl>
               <Select   dir={locale === "ar" ? "rtl" : "ltr"} onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full">
@@ -431,7 +428,7 @@ const formSchema = z.object({
                     name="rentalType"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("addUser.rentalType")}</FormLabel>
+                        <FormLabel className="hidden sm:block">{t("addUser.rentalType")}</FormLabel>
                         <FormControl>
                           <Select
                             onValueChange={field.onChange}
@@ -526,7 +523,7 @@ const formSchema = z.object({
                 </button>
               </div>
 
-              <div className="col-span-2 flex flex-col gap-5">
+              <div className="sm:col-span-2 flex flex-col gap-5">
                 <FormField
                   control={form.control}
                   name="city"
@@ -570,6 +567,7 @@ const formSchema = z.object({
                   )}
                 />
               </div>
+
             </div>
 
             {isModalOpen && (
@@ -599,7 +597,7 @@ const formSchema = z.object({
               </h2>
             </div>
 
-            <div className="grid  sm:grid-cols-3   gap-5">
+            <div className="grid  md:grid-cols-3   gap-5">
               <FormField
                 control={form.control}
                 name="bedrooms"
@@ -706,24 +704,27 @@ const formSchema = z.object({
               />
             </div>
 
-            <div className="grid grid-cols-3  gap-5">
-              <FormField
+            <div className="grid grid-col-1  md:grid-cols-3  gap-5">
+            <FormField
                 control={form.control}
                 name="area"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t("addUser.area")}</FormLabel>
                     <FormControl>
-                      <div className="flex relative">
-                        <Input
-                          type="number"
-                          {...field}
-                          className="pr-24" // Add padding to the right side of the input
-                        />
-                        <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
-                          m <sup>2</sup>
-                        </div>
-                      </div>
+                    <div className="flex relative">
+    <Input
+      type="number"
+      {...field}
+      className={locale ==="en" ? 'pl-24' : ''} // Adjust padding based on locale
+    />
+    <div
+    dir="ltr"
+      className={`bg-gray-300 absolute ${locale ? 'left-0' : 'right-0'} rounded-[0.4rem] h-full w-20 flex items-center justify-center`}
+    >
+      m<sup>2</sup>
+    </div>
+  </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -737,16 +738,19 @@ const formSchema = z.object({
                   <FormItem>
                     <FormLabel>{t("addUser.plotWidth")}</FormLabel>
                     <FormControl>
-                      <div className="flex relative">
-                        <Input
-                        type="number"
-                          {...field} // spread field to bind the input value and onChange
-                          className="pr-24" // Add padding to the right side of the input
-                        />
-                        <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
-                          m <sup>2</sup>
-                        </div>
-                      </div>
+                    <div className="flex relative">
+    <Input
+      type="number"
+      {...field}
+      className={locale ==="en" ? 'pl-24' : ''} // Adjust padding based on locale
+    />
+    <div
+    dir="ltr"
+      className={`bg-gray-300 absolute ${locale ? 'left-0' : 'right-0'} rounded-[0.4rem] h-full w-20 flex items-center justify-center`}
+    >
+      m<sup>2</sup>
+    </div>
+  </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -760,16 +764,19 @@ const formSchema = z.object({
                   <FormItem>
                     <FormLabel>{t("addUser.plotLength")}</FormLabel>
                     <FormControl>
-                      <div className="flex relative">
-                        <Input
-                        type="number"
-                          {...field} // Spread field to bind the input value and onChange
-                          className="pr-24" // Add padding to the right side of the input
-                        />
-                        <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
-                          m<sup>2</sup>
-                        </div>
-                      </div>
+                    <div className="flex relative">
+    <Input
+      type="number"
+      {...field}
+      className={locale ==="en" ? 'pl-24' : ''} // Adjust padding based on locale
+    />
+    <div
+    dir="ltr"
+      className={`bg-gray-300 absolute ${locale ? 'left-0' : 'right-0'} rounded-[0.4rem] h-full w-20 flex items-center justify-center`}
+    >
+      m<sup>2</sup>
+    </div>
+  </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -911,6 +918,15 @@ const formSchema = z.object({
                           </div>
                         </div>
                       )}
+
+
+{(() => {
+  if (errorr) {
+    setErrImage(tE("At_least_3_images_required"))
+    return <span className="text-red-600">{errImage}</span>;
+  }
+  return null;
+})()}
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -920,7 +936,7 @@ const formSchema = z.object({
           </div>
           <Button
             type="submit"
-            disabled={loading} // Disable the button while loading
+            disabled={loading||errorr} // Disable the button while loading
           >
             {loading ? t("property.Submitting") : t("property.Submit")}
 
@@ -928,12 +944,7 @@ const formSchema = z.object({
         </form>
       </Form>
 
-      {showPhoneModal && (
-        <SignPhone
-          onComplete={handlePhoneUpdate} // Pass handler to update phone
-          isOpen={showPhoneModal}
-        />
-      )}
+
     </>
   );
 }

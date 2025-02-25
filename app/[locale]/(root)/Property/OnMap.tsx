@@ -13,7 +13,7 @@ function OnMap({ properties }) {
       <button
         onClick={() => setIsModalOpen(true)}
         type="button"
-        className="flex w-[160px] hover:bg-gray-50 duration-200  gap-2 h-[40px] items-center font-normal text-[#707070] rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-4"
+        className="flex text-sm  hover:bg-gray-50 duration-200  gap-4 h-[40px] items-center font-normal text-[#707070] rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-4"
       >
         <FaRegMap className="h-4 w-4 text-[#707070]" />
         {t("property.map")}

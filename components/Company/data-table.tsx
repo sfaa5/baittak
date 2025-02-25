@@ -95,7 +95,7 @@ export function DataTable<TData extends RowData, TValue>({
     <div>
       <div className="flex items-center py-4">
         
-        <div className="grid grid-cols-2 gap-[65%]  w-full">
+        <div className="grid grid-cols-2 gap-[10%] sm:gap-[65%]  w-full">
           <Input
             placeholder={t("inputs.Filter_title")}
             value={
@@ -104,7 +104,7 @@ export function DataTable<TData extends RowData, TValue>({
             onChange={(event) =>
               table.getColumn(columFilter)?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-md"
           />
 
 {activeButton === "inbox" && showDelte && (

@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           <SidebarProvider >
       <AppSidebar />
-      <main className="container px-[60px]">
+      <main className="md:container flex flex-col w-full px-4">
         <Companyheader/>
         <div className="">{children}</div>
         

@@ -23,12 +23,12 @@ function Buttons() {
   }, [pathname]); // Update state when the path changes
 
   const buttonClasses = (buttonName: string) =>
-    `flex w-auto h-[45px] items-center font-normal rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-4 transition-all duration-200 ${
+    `flex w-full whitespace-nowrap   h-[45px] items-center text-sm font-normal rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-2 sm:px-3 transition-all duration-200 ${
       activeButton === buttonName ? "bg-primary text-white" : "hover:bg-primary hover:text-white"
     }`;
 
   return (
-    <div className="flex gap-4 flex-nowrap  overflow-x-auto w-[100%]">
+    <div className="flex gap-4 flex-nowrap justify-start overflow-x-auto px-0 container">
       <Link href={"/User/Posts"}>
         <button
           onClick={() => setActiveButton("yourPosts")}

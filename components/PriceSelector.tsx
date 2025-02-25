@@ -27,6 +27,7 @@ export function PriceFilter({ onPriceChange }: PriceRangePopoverProps) {
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
+
       <PopoverTrigger asChild>
         <button   onClick={togglePopover} type="button" className="hover:bg-gray-50  duration-200 flex gap-10 h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
 
@@ -34,11 +35,13 @@ export function PriceFilter({ onPriceChange }: PriceRangePopoverProps) {
                 <ChevronDown className="h-4 w-4 opacity-50"/>
            
         </button>
-
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-4">
-        <div className="flex flex-col gap-2">
+
+      <PopoverContent className="w-[300px] p-4 ">
+
+        <div className="flex flex-col gap-2 ">
           <Input
+          className="text-sm"
             type="number"
             placeholder="Min price"
             value={minPrice ?? ""}
@@ -46,13 +49,15 @@ export function PriceFilter({ onPriceChange }: PriceRangePopoverProps) {
           />
          
           <Input
+            className="text-sm"
             type="number"
             placeholder="Max price"
             value={maxPrice ?? ""}
             onChange={(e) => setMaxPrice(e.target.value ? parseFloat(e.target.value) : undefined)}
           />
-          <Button onClick={handleApply}>Apply</Button>
+          <Button  onClick={handleApply}>Apply</Button>
         </div>
+
       </PopoverContent>
     </Popover>
   );

@@ -75,6 +75,7 @@
     "result_count": "(١٢٠٠)"
   },
   "property": {
+    "amenity":"المزايا",
     "More_Details": "تفاصيلل اكثر",
     "rooms": "غرف",
     "bath": "حمام",
@@ -360,6 +361,7 @@
     "close": "إغلاق"
   },
   "erorr": {
+    "At_least_3_images_required":"ادخل علي الاقل 3 صور",
     "Message_must_be_at_least_6_characters_long": "الرسالة يجب انت تكون علي الاقل 6 احرف",
     "Message_must_be_at_least_10 _haracters_long": "الرسالة يجب انت تكون علي الاقل 10 احرف",
     "First_Name_must_be_at_least_2_characters_longg": "يجب أن يكون الاسم الأول مكوناً من حرفين على الأقل.",

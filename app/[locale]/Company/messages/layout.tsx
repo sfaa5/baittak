@@ -37,8 +37,9 @@ function Layout({ children }: LayoutProps) {
     <main className="w-full mt-8">
 
 
-      <div className="flex flex-col md:flex-row mt-10">
-        <div className='w-full md:w-1/4 h-[50%] p-10 bg-white flex flex-col items-center gap-5 rounded-[0.6rem] shadow-lg'>
+      <div className="flex gap-10 flex-col md:flex-row mt-10">
+
+        <div className='hidden w-full md:w-1/4 h-[50%] p-10 bg-white xl:flex flex-col items-center gap-5 rounded-[0.6rem] shadow-lg'>
           <div className='flex flex-col w-full gap-3'>
             <p className='font-medium'>{ t("company.my_email")}</p>
             <div>
@@ -54,10 +55,13 @@ function Layout({ children }: LayoutProps) {
           </div>
         </div>
 
-        <div className="w-full md:w-3/4">
+        <div className="w-full  xl:w-3/4">
           {children}
         </div>
+
       </div>
+
+
     </main>
   );
 }

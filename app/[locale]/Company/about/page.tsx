@@ -37,12 +37,12 @@ async function Page() {
         <div className="flex justify-between">
           <div className="flex flex-col md:flex-row items-center gap-6">
             {data.image?.url ? (
-              <img src={data.image.url} alt="agent" className="w-48 h-48" />
+              <img src={data.image.url} alt="agent" className="w-32 h-32" />
             ) : (
               <img
                 src="/company/unknown.png"
                 alt="agent"
-                className="w-48 h-48"
+                className="w-32 h-32"
               />
             )}
 

@@ -23,7 +23,7 @@ function Header() {
   return (
     <header className=" pt-3 pb-  font-work-sans border-b-[1px]">
       <div
-        className={`container px-2 mx-auto flex justify-between items-center ${router!=="/en"&& router!=="/ar"? "lg:px-[120px]":""}`}
+        className={`container  px-4 mx-auto flex justify-between items-center ${router!=="/en"&& router!=="/ar"? "2xl:px-[120px]":""}`}
       >
         {/* mobile button */}
         <div className=" xl:hidden  ">
@@ -35,7 +35,7 @@ function Header() {
         </div>
 
         {/*logo */}
-        <Link href="/">
+        <Link href="/" >
           {locale == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
         </Link>
 

@@ -15,7 +15,7 @@ const toggleReadMore = () => {
     <div>
     <p
       className={`text-gray-600 overflow-hidden transition-all duration-500 ease-in-out ${
-        isExpanded ? "max-h-[1000px] opacity-100" : "max-h-20 opacity-75"
+        isExpanded ? "max-h-[1300px] opacity-100" : "max-h-20 opacity-75"
       }`}
       style={{ whiteSpace: "pre-line" }}
     >

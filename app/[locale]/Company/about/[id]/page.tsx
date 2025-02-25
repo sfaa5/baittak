@@ -307,6 +307,9 @@ const formSchema = z.object({
             />
           </div>
 
+
+          <div className="col-span-2 grid gap-6 lg:grid-cols-2">
+
           {/* Company Name Field */}
           <FormField
             control={form.control}
@@ -323,7 +326,6 @@ const formSchema = z.object({
           />
 
           {/* City Field */}
-
           <FormItem>
             <FormLabel>{t("city")}</FormLabel>
             <FormControl>
@@ -395,9 +397,11 @@ const formSchema = z.object({
               </FormItem>
             )}
           />
+          </div>
 
           {errorr && <p style={{ color: "red" }}>{errorr}</p>}
           <Button
+          className="col-span-2 lg:col-span-1 "
             type="submit"
             disabled={loadingButton} // Disable the button while loading
           >

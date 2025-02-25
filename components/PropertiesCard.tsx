@@ -38,15 +38,15 @@ const CurrencyTranslation = {
 };
 
 const propertyTypeTranslations = {
-  "Apartment": "شقة",
-  "villa": "فيلا",
-  "Farm": "مزرعة",
+  Apartment: "شقة",
+  Villa: "فيلا",
+  Farm: "مزرعة",
   "Rest-House": "استراحة",
   "Residential-Complex": "مجمع سكني",
-  "Duplex": "دوبلكس",
-  "Building": "عمارة بالكامل",
+  Duplex: "دوبلكس",
+  Building: "عمارة بالكامل",
   "Hotel-Apartments": "فندق/شقق فندقية",
-  "Land": "ارض",
+  Land: "ارض",
   "Full-Floor": "طابق كامل",
 };
 
@@ -55,7 +55,7 @@ function PropertiesCard({ post }: { post: property }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const [showNumber, setShowNumber] = useState(false);
-  const pathname =usePathname()
+  const pathname = usePathname();
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
@@ -98,66 +98,81 @@ function PropertiesCard({ post }: { post: property }) {
     currency,
     _id,
     email,
-    
   } = post;
 
   return (
-    <div className=" max-w-md mx-auto bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]">
-      <div className=" md:flex flex-col md:flex-row">
-        <div className="relative group">
-          <div
-            ref={carouselRef}
-            className="flex overflow-x-hidden gap-4 md:max-w-[340px]" // Hides overflow to only show one image
-            style={{ scrollSnapType: "x mandatory" }}
-          >
-            {images?.map((im, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-full snap-start " // Makes sure only one image shows up at a time
-              >
-                <img
-                  src={im?.url}
-                  alt={`carousel image ${index + 1}`}
-                  className="w-full h-[250px] object-cover  md:h-[280px] md:w-100"
-                />
-              </div>
-            ))}
+    <Link
+      href={`/${locale}/Property/${_id}`}
+      className="asChild flex flex-col pb-5 gap-3"
+    >
+      <div className=" hover:bg-gray-50  bg-white rounded-[.5rem] shadow-md overflow-hidden md:max-w-[100%] border-[1px]">
+        <div className="md:flex flex-col md:flex-row">
+          <div className="relative group">
+            <div
+              ref={carouselRef}
+              className="flex overflow-x-hidden gap-4 md:max-w-[340px]" // Hides overflow to only show one image
+              style={{ scrollSnapType: "x mandatory" }}
+            >
+              {images?.map((im, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-full snap-start" // Makes sure only one image shows up at a time
+                >
+                  <img
+                    src={im?.url}
+                    alt={`carousel image ${index + 1}`}
+                    className="h-[250px]  md:h-[315px] lg:h-[280px] w-full md:w-100 object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            <LikeButton propertyId={_id} />
+            <button
+              onClick={scrollPrev}
+              className="absolute text-xl left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all duration-300"
+            >
+              <MdKeyboardArrowLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={scrollNext}
+              className="absolute text-xl right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all  duration-300"
+            >
+              <MdKeyboardArrowRight className="w-6 h-6" />
+            </button>
           </div>
 
-          <LikeButton propertyId={_id} />
-
-          <button
-            onClick={scrollPrev}
-            className="absolute text-xl left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all duration-300"
-          >
-            <MdKeyboardArrowLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={scrollNext}
-            className="absolute text-xl right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all  duration-300"
-          >
-            <MdKeyboardArrowRight className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* details */}
-        <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 lg:w-[650px]">
-          <Link
-            href={`/${locale}/Property/${_id}`}
-            className="asChild flex flex-col pb-5 gap-3"
-          >
-            <div className="flex flex-wrap justify-between">
-              <div className=" flex items-end ">
-                <div className="text-3xl text-secondary font-semibold">
-                  {price.toLocaleString().replace(/,/g, '.')}  <span className="text-[16px] md:text-2xl text-secondary/80">{locale==="ar"?CurrencyTranslation[currency]:currency}</span>
+          {/* details */}
+          <div className="pt-5 pl-5 pr-5 flex flex-col gap-3 md:w-[60%] lg:w-[640px]">
+            <div className="flex flex-col md:flex-row flex-wrap justify-between">
+              <div className=" flex items-center gap-1">
+                <div className="text-lg sm:text-3xl text-secondary font-semibold">
+                  {new Intl.NumberFormat(locale, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }).format(
+                    price.toString().length > 7
+                      ? Number(price.toString().slice(0, 7))
+                      : Number(price)
+                  )}
                 </div>
-                {purpose === "rent" && (
-                  <span className="text-[#707070] text-lg"> / {locale==="ar" ? RentalTypeTranslation[rentaltype]:rentaltype }</span>
-                )}
+                <div className="flex items-center justify-center">
+                  {" "}
+                  <span className="text-[14px] md:text-xl font-[500] text-secondary/80">
+                    {locale === "ar" ? CurrencyTranslation[currency] : currency}
+                  </span>
+                  {purpose === "rent" && (
+                    <span className="text-[#707070] text-sm sm:text-lg">
+                      {" "}
+                      /{" "}
+                      {locale === "ar"
+                        ? RentalTypeTranslation[rentaltype]
+                        : rentaltype}
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <div className="flex gap-3 justify-center mt-3">
+              <div className="flex gap-3 justify-center mt-3 text-sm sm:text-base">
                 <div className="flex items-center gap-1">
                   <LiaBedSolid className="text-primary text-2xl" />
                   <span>
@@ -181,14 +196,14 @@ function PropertiesCard({ post }: { post: property }) {
               </div>
             </div>
 
-            <div className="hidden  sm:flex w-full justify-between mt-3 sm:mt-5">
+            <div className="hidden  md:flex w-full justify-between mt-3 sm:mt-5">
               <p className=" mt-1 text-base  font-medium text-secondary">
                 {locale === "en"
                   ? propertyType
                   : propertyTypeTranslations[propertyType] || propertyType}
               </p>
               <div className="flex items-center gap-2 text-[#707070]">
-                <FiMapPin className="text-primary" />{" "}
+                <FiMapPin className="text-primary" />
                 {address.split("").length > 6
                   ? address.split(" ").slice(0, 2).join(" ") +
                     " ... " +
@@ -196,7 +211,8 @@ function PropertiesCard({ post }: { post: property }) {
                   : address}
               </div>
             </div>
-            <p className="text-secondary font-semibold text-lg">
+
+            <p className="text-secondary  font-semibold md:text-lg">
               {title.split(" ").length > 4
                 ? title.split(" ").slice(0, 1).join(" ") +
                   " ... " +
@@ -220,59 +236,68 @@ function PropertiesCard({ post }: { post: property }) {
             ) : (
               ""
             )}
-          </Link>
-          <div className="flex w-full justify-between  pb-3">
-            {/* contact */}
-            <div className="flex gap-2 ">
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent the click from bubbling up to the Link
-                  e.preventDefault();
-                  setShowNumber(!showNumber);
-                }}
-                className="flex w-full  h-[45px] gap-2   hover:bg-gray-100 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3"
-              >
-                <FiPhoneCall className="w-5 h-5" />
-                {showNumber ? userDetails[0]?.phoneNumber : "Call"}
-              </Button>
 
-{!pathname.includes("Agency")&&<Mail ownerEmail={userDetails[0]?.email} title={title} />}
-              
+            <div className="flex w-full  justify-between  pb-3 md:pb-0 mt-6">
+              {/* contact */}
+              <div className="flex gap-2 ">
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent the click from bubbling up to the Link
+                    e.preventDefault();
+                    setShowNumber(!showNumber);
+                  }}
+                  className="flex w-full  h-[45px] gap-2    hover:bg-gray-100 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3"
+                >
+                  <FiPhoneCall className="w-4 h-4" />
+                  {showNumber ? userDetails[0]?.phoneNumber : "Call"}
+                </Button>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  {!pathname.includes("Agency") && (
+                    <Mail ownerEmail={userDetails[0]?.email} title={title} />
+                  )}
+                </div>
 
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent the click from bubbling up to the Link
-                  e.preventDefault();
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent the click from bubbling up to the Link
+                    e.preventDefault();
 
-                  {
-                    userDetails[0]?.phoneNumber &&
-                      window.open(
-                        `https://wa.me/${userDetails[0]?.phoneNumber}`,
-                        "_blank"
-                      );
-                  }
-                }}
-                className="flex w-full h-[45px] items-center  font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-              </Button>
+                    {
+                      userDetails[0]?.phoneNumber &&
+                        window.open(
+                          `https://wa.me/${userDetails[0]?.phoneNumber}`,
+                          "_blank"
+                        );
+                    }
+                  }}
+                  className="flex w-full h-[45px] items-center  font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3"
+                >
+                  <FaWhatsapp className="w-4 h-4" />
+                </Button>
 
-              <ShareButton
-                propertyUrl={`https://baittak.vercel.app/Property/${_id}`}
-                propertyTitle={title}
-              />
+                <ShareButton
+                  propertyUrl={`https://baittak.vercel.app/Property/${_id}`}
+                  propertyTitle={title}
+                />
+              </div>
+              {CompanyImage && (
+                <img
+                  src={CompanyImage}
+                  alt="comoany"
+                  className="hidden sm:flex w-10"
+                />
+              )}
             </div>
-            {CompanyImage && (
-              <img
-                src={CompanyImage}
-                alt="comoany"
-                className="hidden sm:flex w-10"
-              />
-            )}
           </div>
+
+          
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -55,7 +55,7 @@ export default function Page() {
 
   console.log("Updated dataRequest:", dataRequest);
   return (
-    <div className="w-full px-10">
+    <div className="w-full ">
       {loading ? (
        <TableSkelton/>
       ) : (

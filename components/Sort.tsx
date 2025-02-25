@@ -23,7 +23,9 @@ function Sort() {
   };
 
   return (
-    <Select
+
+    <Select 
+ 
       dir={locale === "ar" ? "rtl" : "ltr"}
       value={sort}
       onValueChange={(value) => {
@@ -31,11 +33,11 @@ function Sort() {
         handleUpdateParams(value); // Update the URL
       }}
     >
-      <SelectTrigger className="flex w-auto gap-3 hover:bg-gray-50 duration-200 h-[40px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
-        <SelectValue placeholder={t("property.list")} />
+      <SelectTrigger className="flex w-auto gap-3 text-sm    hover:bg-gray-50 duration-200 h-[40px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+        <SelectValue  placeholder={t("property.list")} />
       </SelectTrigger>
 
-      <SelectContent>
+      <SelectContent >
         <SelectItem value="price-asc">{t("addUser.the most price")}</SelectItem>
         <SelectItem value="price-desc">{t("addUser.the cheapest price")}</SelectItem>
         <SelectItem value="createdAt-desc">{t("addUser.the newest")}</SelectItem>

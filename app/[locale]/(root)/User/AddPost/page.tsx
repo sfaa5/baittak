@@ -49,6 +49,9 @@ function Page() {
   const router = useRouter();
   const tE = useTranslations("erorr")
 
+  const [errorr,setErrorr]= useState(false);
+  const [errImage,setErrImage]=useState("")
+
 
 
 
@@ -197,15 +200,23 @@ const formSchema = z.object({
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
-      const newFiles = Array.from(files);
-      setSelectedImages((prevImages) => [...prevImages, ...newFiles]);
+    if(files){
+        const newFiles = Array.from(files);
+    setSelectedImages((prevImages) => [...prevImages, ...newFiles]);
     }
   };
-
+  
   const handleRemoveImage = (index: number) => {
-    setSelectedImages((prev) => prev.filter((_, i) => i !== index)); //  delet image
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index)); // Delete image
   };
+  
+  useEffect(() => {
+    if (selectedImages.length < 3) {
+      setErrorr(true);
+    } else {
+      setErrorr(false);
+    }
+  }, [selectedImages]);
 
   useEffect(() => {
     async function fetchAmenities() {
@@ -308,21 +319,22 @@ const formSchema = z.object({
           className="space-y-4 flex flex-col gap-6 mb-20"
         >
           {/* add a listing */}
-          <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
+          <div className="relative  p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
             <div className="bg-white absolute -top-4 left-5">
               <h2 className="text-secondary  px-6 text-2xl font-medium">
                 {t("addUser.addListing")}
               </h2>
             </div>
 
+
             <div className="grid gap-3 grid-cols-8">
-              <div className="col-span-2">
+              <div className="col-span-4 sm:col-span-2">
                 <FormField
                   control={form.control}
                   name="propertyType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("addUser.selectPropertyType")}</FormLabel>
+                      <FormLabel className="hidden sm:block">{t("addUser.selectPropertyType")}</FormLabel>
                       <FormControl>
                         <Select
                           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -360,13 +372,13 @@ const formSchema = z.object({
                 />
               </div>
 
-              <div className="col-span-2">
+              <div className="col-span-4 sm:col-span-2">
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("addUser.title")}</FormLabel>
+                      <FormLabel className="hidden sm:block">{t("addUser.title")}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -379,14 +391,14 @@ const formSchema = z.object({
                 />
               </div>
 
-              <div className="col-span-4 grid grid-cols-7 gap-2">
+              <div className="col-span-8 sm:col-span-4 grid grid-cols-7 gap-2">
                 <div className="col-span-3">
                   <FormField
                     control={form.control}
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("addUser.price")}</FormLabel>
+                        <FormLabel className="hidden sm:block">{t("addUser.price")}</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -406,7 +418,7 @@ const formSchema = z.object({
         name="currency"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("inputs.currency.label")}</FormLabel>
+            <FormLabel className="hidden sm:block" >{t("inputs.currency.label")}</FormLabel>
             <FormControl>
               <Select   dir={locale === "ar" ? "rtl" : "ltr"} onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full">
@@ -438,7 +450,7 @@ const formSchema = z.object({
                     name="rentalType"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("addUser.rentalType")}</FormLabel>
+                        <FormLabel className="hidden sm:block">{t("addUser.rentalType")}</FormLabel>
                         <FormControl>
                           <Select
                             onValueChange={field.onChange}
@@ -534,13 +546,13 @@ const formSchema = z.object({
                 </button>
               </div>
 
-              <div className="col-span-2 flex flex-col gap-5">
+              <div className="col-span-2 flex flex-col gap-5 mt-5 sm:mt-0">
                 <FormField
                   control={form.control}
                   name="city"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("addUser.addCity")}</FormLabel>
+                      <FormLabel  >{t("addUser.addCity")}</FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -606,7 +618,7 @@ const formSchema = z.object({
               </h2>
             </div>
 
-            <div className="grid  sm:grid-cols-3   gap-5">
+            <div className="grid  md:grid-cols-3   gap-5">
               <FormField
                 control={form.control}
                 name="bedrooms"
@@ -713,24 +725,27 @@ const formSchema = z.object({
               />
             </div>
 
-            <div className="grid grid-cols-3  gap-5">
-              <FormField
+            <div className="grid grid-col-1  md:grid-cols-3  gap-5">
+            <FormField
                 control={form.control}
                 name="area"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t("addUser.area")}</FormLabel>
                     <FormControl>
-                      <div className="flex relative">
-                        <Input
-                          type="number"
-                          {...field}
-                          className="pr-24" // Add padding to the right side of the input
-                        />
-                        <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
-                          m <sup>2</sup>
-                        </div>
-                      </div>
+                    <div className="flex relative">
+    <Input
+      type="number"
+      {...field}
+      className={locale ==="en" ? 'pl-24' : ''} // Adjust padding based on locale
+    />
+    <div
+    dir="ltr"
+      className={`bg-gray-300 absolute ${locale ? 'left-0' : 'right-0'} rounded-[0.4rem] h-full w-20 flex items-center justify-center`}
+    >
+      m<sup>2</sup>
+    </div>
+  </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -744,16 +759,19 @@ const formSchema = z.object({
                   <FormItem>
                     <FormLabel>{t("addUser.plotWidth")}</FormLabel>
                     <FormControl>
-                      <div className="flex relative">
-                        <Input
-                          type="number"
-                          {...field} // spread field to bind the input value and onChange
-                          className="pr-24" // Add padding to the right side of the input
-                        />
-                        <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
-                          m <sup>2</sup>
-                        </div>
-                      </div>
+                    <div className="flex relative">
+    <Input
+      type="number"
+      {...field}
+      className={locale ==="en" ? 'pl-24' : ''} // Adjust padding based on locale
+    />
+    <div
+    dir="ltr"
+      className={`bg-gray-300 absolute ${locale ? 'left-0' : 'right-0'} rounded-[0.4rem] h-full w-20 flex items-center justify-center`}
+    >
+      m<sup>2</sup>
+    </div>
+  </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -767,16 +785,19 @@ const formSchema = z.object({
                   <FormItem>
                     <FormLabel>{t("addUser.plotLength")}</FormLabel>
                     <FormControl>
-                      <div className="flex relative">
-                        <Input
-                          type="number"
-                          {...field} // Spread field to bind the input value and onChange
-                          className="pr-24" // Add padding to the right side of the input
-                        />
-                        <div className="bg-gray-300 absolute right-0 rounded-[0.4rem] h-full w-1/3 flex items-center justify-center">
-                          m<sup>2</sup>
-                        </div>
-                      </div>
+                    <div className="flex relative">
+    <Input
+      type="number"
+      {...field}
+      className={locale ==="en" ? 'pl-24' : ''} // Adjust padding based on locale
+    />
+    <div
+    dir="ltr"
+      className={`bg-gray-300 absolute ${locale ? 'left-0' : 'right-0'} rounded-[0.4rem] h-full w-20 flex items-center justify-center`}
+    >
+      m<sup>2</sup>
+    </div>
+  </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -957,16 +978,27 @@ const formSchema = z.object({
                           </div>
                         </div>
                       )}
+
+{(() => {
+  if (errorr) {
+    setErrImage(tE("At_least_3_images_required"))
+    return <span className="text-red-600">{errImage}</span>;
+  }
+  return null;
+})()}
                     </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+
+       
           </div>
           <Button
             type="submit"
-            disabled={loading} // Disable the button while loading
+            disabled={loading||errorr} // Disable the button while loading
           >
            {loading ? t("property.Submitting") : t("property.Submit")}
             {/* Change text while loading */}

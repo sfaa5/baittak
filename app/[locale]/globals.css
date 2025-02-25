@@ -99,7 +99,7 @@
     @apply flex justify-between items-center;
   }
 
-  Hide the spinner for all number input fields
+  /* Hide the spinner for all number input fields */
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -120,7 +120,7 @@
 @layer base {
 
   .h{
-    @apply text-[28px] xl:text-[55px] leading-[1.1] font-semibold text-secondary;
+    @apply text-[28px]  sm:text-[35px] xl:text-[55px] leading-[1.1] font-semibold text-secondary;
   }
   .h1{
     @apply text-[24px] xl:text-[28px] leading-[1.1] font-semibold text-secondary;

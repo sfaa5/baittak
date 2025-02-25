@@ -11,10 +11,11 @@ function Image({images}) {
     console.log(images)
     
   return (
-    <div className="grid grid-cols-6 gap-y-7 gap-x-10 items-center grid-rows-7  xl:w-[62%] w-full">
+    <div className="grid grid-cols-6 gap-y-7 gap-x-10 items-center grid-rows-7   xl:w-[62%] w-full">
     {/* Large Image Swiper */}
     <div className="col-span-6 row-span-7">
       <Swiper
+        
         slidesPerView={1}
         spaceBetween={10}
         pagination={{ clickable: true }}
@@ -23,11 +24,11 @@ function Image({images}) {
         className="w-full"
       >
         {images.map((src, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide  key={index}>
             <img
               src={src?.url}
               alt={`Property Slide ${index + 1}`}
-              className="w-full h-[500px] md:h-[640px] object-cover rounded-xl"
+              className="w-full h-[300px] md:h-[560px] object-cover rounded-xl"
             />
           </SwiperSlide>
         ))}

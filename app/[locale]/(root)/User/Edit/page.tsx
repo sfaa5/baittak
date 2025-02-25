@@ -20,6 +20,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { toast } from "@/hooks/use-toast";
 import { FiUpload } from "react-icons/fi";
 import { useSession } from "next-auth/react";
+import { axiosAuth } from "@/lib/axios";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 function page() {
@@ -110,13 +111,13 @@ function page() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL_SERVER}/api/users/${session?.user?.id}`
-        );
-        if (!response.ok) {
+        const response = await axiosAuth.get(`api/users/${session?.user?.id}`);
+
+        if (response.status !== 200) {
           throw new Error("Failed to fetch user data");
         }
-        const data = await response.json();
+
+        const data =  response.data;
         setUser(data);
 
         setLoading(false);
@@ -191,6 +192,7 @@ function page() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 bg-gray-50 p-10  grid grid-cols-2 gap-x-6"
         >
+
           <div className="col-span-2 w-40">
             {" "}
             <FormField
@@ -218,7 +220,7 @@ function page() {
                             <img
                               src={imageBuffers}
                               alt={`Uploaded image`}
-                              className="rounded-md shadow-md w-full h-40 object-cover"
+                              className="rounded-md shadow-md w-full h-32 md:h-40 object-cover"
                             />
                           </div>
                         </label>
@@ -268,6 +270,8 @@ function page() {
               )}
             />
           </div>
+
+          <div className="col-span-2 grid gap-6 sm:grid-cols-2">
 
           {/*  Name Field */}
           <FormField
@@ -345,11 +349,14 @@ function page() {
               </FormItem>
             )}
           />
+          </div>
 
           {errorr && <p style={{ color: "red" }}>{errorr}</p>}
           <Button
+          className="col-span-2"
             type="submit"
             disabled={loadingButton} // Disable the button while loading
+            
           >
             {loadingButton ? t("saving") : t("save")}
             {/* Change text while loading */}

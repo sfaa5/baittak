@@ -18,7 +18,7 @@ function ContactDesk({
   const [showNumber, setShowNumber] = useState(false);
 
   return (
-    <div className="contact-buttons hidden md:flex gap-2 w-1/3 justify-center items-center">
+    <div className="contact-buttons hidden lg:flex gap-2 w-1/3 justify-center items-center">
       <Button
         onClick={(e) => {
           e.stopPropagation(); // Prevent the click from bubbling up to the Link

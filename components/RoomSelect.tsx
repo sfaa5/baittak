@@ -2,8 +2,9 @@
 import { useTranslations } from "next-intl";
 import React, { useState, useEffect, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { Transition } from "@headlessui/react";
+
 import { Fragment } from "react";
+import { PopoverContent, PopoverTrigger,Popover } from "./ui/popover";
 
 function RoomSelect({
 
@@ -17,13 +18,13 @@ function RoomSelect({
   setBathrooms: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const t = useTranslations();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const [selected, setSelected] = useState("");
   const [selectedBath, setSelectedBath] = useState("");
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const togglePopover = () => setIsOpen(!isOpen);
 
   const handleSelct = (num: string,type:string) => {
     if(type === "rooms"){
@@ -50,27 +51,23 @@ function RoomSelect({
   }, []);
 
   return (
-    <div className="" ref={dropdownRef}>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
+
+<PopoverTrigger>
       <button
         type="button"
-        onClick={toggleDropdown}
-        className="flex w-[230px] hover:bg-gray-50 duration-200 h-[48px] items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
+        onClick={togglePopover}
+        className="flex  w-[170px] sm:w-[200px] hover:bg-gray-50 duration-200 h-[48px] items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
       >
         {t("search.rooms_bath")}
         <IoIosArrowDown className="h-4 w-4 opacity-50" />
-      </button>
+      </button></PopoverTrigger>
 
-      <Transition
-        as={Fragment}
-        show={isOpen}
-        enter="transition ease-out duration-100"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div className="absolute z-10 mt-2 w-[300px] bg-white border border-gray-300 rounded-md shadow-lg">
+
+
+      <PopoverContent className="text-sm p-0 pt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+
+    
           <div className="py-2 px-4 text-gray-500 font-semibold">Bedrooms</div>
           <div className="grid grid-cols-5 gap-2 p-2">
             <button
@@ -152,9 +149,10 @@ function RoomSelect({
               5 
             </button>
           </div>
-        </div>
-      </Transition>
-    </div>
+    
+
+      </PopoverContent>
+    </Popover>
   );
 }
 

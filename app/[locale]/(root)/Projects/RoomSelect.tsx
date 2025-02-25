@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 function RoomSelect({
 
@@ -46,27 +47,22 @@ function RoomSelect({
   }, []);
 
   return (
-    <div className="" ref={dropdownRef}>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
+
+
+      
+<PopoverTrigger>
       <button
         type="button"
         onClick={toggleDropdown}
-        className="flex w-[230px] hover:bg-gray-50 duration-200 h-[48px] items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
+        className="flex  w-[120px] sm:w-[170px] hover:bg-gray-50 duration-200 h-[48px] items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4"
       >
         {t("search.rooms")}
         <IoIosArrowDown className="h-4 w-4 opacity-50" />
       </button>
+      </PopoverTrigger>
 
-      <Transition
-        as={Fragment}
-        show={isOpen}
-        enter="transition ease-out duration-100"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div className="absolute z-[9999] mt-2 w-[300px] bg-white border border-gray-300 rounded-md shadow-lg">
+      <PopoverContent className="text-sm p-0 pt-1 bg-white border border-gray-300 rounded-md shadow-lg">
           <div className="py-2 px-4 text-gray-500 font-semibold">Bedrooms</div>
           <div className="grid grid-cols-5 gap-2 p-2">
             <button
@@ -108,12 +104,8 @@ function RoomSelect({
             </button>
           </div>
 
-          <div className="border-t my-2"></div>
-
-
-        </div>
-      </Transition>
-    </div>
+</PopoverContent>
+    </Popover>
   );
 }
 

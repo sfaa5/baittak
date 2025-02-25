@@ -38,6 +38,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.5.1",
+    "framer-motion": "^12.0.6",
     "i18next": "^24.0.2",
     "install": "^0.13.0",
     "jose": "^5.9.6",

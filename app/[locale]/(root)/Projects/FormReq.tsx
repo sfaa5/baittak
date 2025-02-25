@@ -111,18 +111,18 @@ const formSchema = z.object({
     <div className="xl:flex flex-col gap-5 w-[35%] p-5 shadow-lg rounded-[0.6rem] hidden">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="w-full flex gap-2 items-center bg-gray-200 p-3 rounded-[0.6rem]">
+          <div className="w-full flex gap-3 items-center bg-gray-200 p-3 rounded-[0.6rem]">
                      {url?  <img
             src={url}
             alt="company"
-            className="w-14 rounded-sm sm:w-14"
+            className="w-14 rounded-sm sm:w-10"
 
           />:     <img
           src="/company/unknown.png"
           alt="company"
-          className="w-14 rounded-sm sm:w-14"
+          className="w-14 rounded-sm sm:w-10"
         />}
-            <p className="text-secondary font-medium ">{title}</p>
+            <p className="text-secondary font-medium text-sm">{title}</p>
           </div>
 
           <FormField
@@ -132,7 +132,7 @@ const formSchema = z.object({
               <FormItem>
                 <FormControl>
                   <input
-                    className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
+                    className="w-full border-gray-400 border-[1px] text-sm rounded-[0.6rem] text-gray-700 p-4"
                     placeholder={t("Project.Name")}
                     {...field}
                   />
@@ -149,7 +149,7 @@ const formSchema = z.object({
               <FormItem>
                 <FormControl>
                   <input
-                    className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
+                    className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 text-sm p-4"
                     placeholder={t("Project.phone")}
                     {...field}
                   />
@@ -166,7 +166,7 @@ const formSchema = z.object({
               <FormItem>
                 <FormControl>
                   <input
-                    className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
+                    className="w-full border-gray-400 border-[1px] rounded-[0.6rem] text-gray-700 text-sm p-4"
                     placeholder={t("Project.email")}
                     {...field}
                   />
@@ -183,7 +183,7 @@ const formSchema = z.object({
               <FormItem>
                 <FormControl>
                   <textarea
-                    className="w-full border-gray-400 h-36 border-[1px] rounded-[0.6rem] text-gray-700 p-5"
+                    className="w-full resize-none border-gray-400 h-28 border-[1px] rounded-[0.6rem] text-gray-700 text-sm p-4"
                     placeholder={t("Project.hello i am")}
                     {...field}
                   />
@@ -197,7 +197,7 @@ const formSchema = z.object({
             <button
               type="submit"
               disabled={loading}
-              className="rounded-[0.6rem] p-5 bg-secondary text-white font-semibold"
+              className="rounded-[0.6rem] p-4 text-sm bg-secondary text-white font-semibold"
             >
               {loading ? "Submitting..." : t("Project.request details")}
             </button>
@@ -205,7 +205,7 @@ const formSchema = z.object({
             <button
               type="button"
               onClick={() => setShowPhoneNumber(true)}
-              className="rounded-[0.6rem] p-5 bg-primary text-white font-semibold"
+              className="rounded-[0.6rem] p-4 text-sm bg-primary text-white font-semibold"
             >
               {showPhoneNumber ? phoneNumber : t("Project.CALL NOW")}
             </button>

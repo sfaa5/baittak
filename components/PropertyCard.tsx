@@ -79,7 +79,8 @@ const  t =useTranslations()
   };
 
   const handleLike = async (e: React.MouseEvent) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Prevent the click from bubbling up to the Link
+    e.preventDefault();
     try {
       if (!session?.user?.id) {
         router.push("/?login=true");
@@ -110,9 +111,9 @@ const  t =useTranslations()
   console.log(property)
 
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full max-w-md mx-auto ">
     <Link href={`/Property/${property._id}`}>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden group">
+      <div className="bg-white hover:bg-gray-50 transform  duration-200 rounded-lg shadow-md overflow-hidden group">
         <div className="relative">
           <div className="absolute z-10 text-white bg-primary text-[12px]  px-2 py-1 top-3 left-0">
             For {property.for}
@@ -190,9 +191,11 @@ const  t =useTranslations()
                 <span className="text-[#707070] text-sm"> / {locale==="ar" ? RentalTypeTranslation[property?.rentaltype]:property?.rentaltype }</span>
               )}
             </div>
+
             <div className="text-sm text-secondary font-medium">
               {locale==="ar"? propertyTypeTranslations[property?.propertyType]:property?.propertyType}
             </div>
+
           </div>
 
           <div className="flex gap-3 justify-center text-sm">
@@ -227,7 +230,9 @@ const  t =useTranslations()
               {property.amenities.slice(0, 3).map((amenity, index) => (
                 <li
                   key={index}
-                  className={`${index === 0 ? "" : "border-r-[1px] border-primary pr-3"}`}
+                  className={`${
+                    locale==="ar" && index === 0 || locale==="en" && index===property.amenities.length-1 ? "" : "border-r-[1px] border-primary pr-3"
+                   }`}
                 >
                   {locale === "ar" ? amenity?.name?.ar : amenity?.name?.en}
                 </li>

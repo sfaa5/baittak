@@ -50,13 +50,13 @@ export default function PlanCard({ plan }) {
 
   return (
     <div className="bg-white">
-      <div className="mb-20 grid gap-6 max-w-lg grid-cols-1 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-3">
+      <div className="mb-20 grid gap-[20px]  grid-cols-1  xl:grid-cols-3">
         {tiers.map((tier) => (
           <div
             key={tier.id}
             className={classNames(
               tier.featured ? 'relative bg-gray-900 shadow-2xl' : 'bg-white/60 sm:mx-8 lg:mx-0',
-              'rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10'
+              'rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10 '
             )}
           >
             <h3

@@ -112,7 +112,7 @@ const formSchema = z.object({
     setLoading(true);
 
     try {
-      const response = await fetch(`${URL_SERVER}/api/users/register/agency`, {
+      const response = await fetch(`${URL_SERVER}/api/auth/register/agency`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
