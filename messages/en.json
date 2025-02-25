@@ -74,6 +74,7 @@
     "result_count": "(1200)"
   },
   "property": {
+    "amenity":"Amenities",
     "More_Details":"More Details",
     "rooms":"Rooms",
     "bath":"Baths",
@@ -378,6 +379,7 @@
     "base": "Base"
   },
   "erorr": {
+    "At_least_3_images_required":"At least 3 images required",
     "Message_must_be_at_least_6_characters_long":"Message must be at least 6 characters long.",
    "Message_must_be_at_least_10 _haracters_long":"Message must be at least 10 characters long.",
     "First_Name_must_be_at_least_2_characters_longg":"First Name must be at least 2 characters long.",

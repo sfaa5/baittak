@@ -1,7 +1,8 @@
 import { IoMdShareAlt } from "react-icons/io";
 
 const ShareButton = ({ propertyUrl, propertyTitle }) => {
-  const handleShare = async () => {
+  const handleShare = async (e) => {
+    e.preventDefault();
     if (navigator.share) {
       try {
         await navigator.share({

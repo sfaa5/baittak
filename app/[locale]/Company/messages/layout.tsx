@@ -1,8 +1,8 @@
 "use client"
 import { Button } from '@/components/ui/button';
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail } from 'lucide-react';
-import { Star } from 'lucide-react';
+
 import { useTranslations } from "next-intl";
 import { useSharedState } from '@/app/context/stateProvider';
 
@@ -12,33 +12,24 @@ type LayoutProps = {
 
 function Layout({ children }: LayoutProps) {
   const  t  = useTranslations(); // Load translations
-  const {dataRequest, setDataRequest} = useSharedState();
-  const {starRequest,setStarRequest}=useSharedState();
-  const {allRequest,setAllRequest}=useSharedState();
 
-  const AllData = dataRequest;
+  const {allRequest}=useSharedState();
+
 
   // Track which button is "clicked"
-  const {activeButton, setActiveButton} = useSharedState();
+  const {activeButton } = useSharedState();
 
-  // Function to filter requests that are starred
-  const handleStarClick = () => {
-    setDataRequest(starRequest);
-    setActiveButton("starred"); // Set active button
-  };
 
-  // Function to show all requests (clear the filter)
-  const handleInboxClick = () => {
-    setDataRequest(allRequest); 
-    setActiveButton("inbox"); // Set active button
-  };
+
+
 
   return (
     <main className="w-full mt-8">
 
 
-      <div className="flex flex-col md:flex-row mt-10">
-        <div className='w-full md:w-1/4 h-[50%] p-10 bg-white flex flex-col items-center gap-5 rounded-[0.6rem] shadow-lg'>
+      <div className="flex gap-10 flex-col md:flex-row mt-10">
+
+        <div className='hidden w-full md:w-1/4 h-[50%] p-10 bg-white xl:flex flex-col items-center gap-5 rounded-[0.6rem] shadow-lg'>
           <div className='flex flex-col w-full gap-3'>
             <p className='font-medium'>{ t("company.my_email")}</p>
             <div>
@@ -54,10 +45,13 @@ function Layout({ children }: LayoutProps) {
           </div>
         </div>
 
-        <div className="w-full md:w-3/4">
+        <div className="w-full  xl:w-3/4">
           {children}
         </div>
+
       </div>
+
+
     </main>
   );
 }

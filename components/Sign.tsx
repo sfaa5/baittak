@@ -1,7 +1,6 @@
 "use client";
-import { useLocale, useTranslations } from "next-intl";
-import BaittaklogoArabic from "./ArabicLogo";
-import EnglishLogo from "./EnglishLogo";
+import {  useTranslations } from "next-intl";
+
 import { signIn } from "next-auth/react";
 import { useEffect, useRef } from "react";
 import * as React from "react";
@@ -15,25 +14,24 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
+
   FormMessage,
 } from "@/components/ui/form";
 import { Checkbox } from "./ui/checkbox";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "@/hooks/use-toast";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function Sign({ onClose }) {
-  const locale = useLocale();
+
   const t = useTranslations();
   const [errorr, setError] = React.useState("");
-  const [message, setMessage] = React.useState(false);
+
   const [Sign, setSign] = React.useState("sign");
   const [loading, setLoading] = React.useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+
   const searchParams = new URLSearchParams(window.location.search);
 const tE = useTranslations("erorr")
 
@@ -151,7 +149,7 @@ const tE = useTranslations("erorr")
         throw new Error("Failed to send data to the server");
       }
       form.reset();
-      setError("");
+      setSign("sign");
       toast({
         description: "Welcome to Baittak",
         className: "bg-green-500 text-white p-4 rounded shadow-lg",
@@ -160,6 +158,7 @@ const tE = useTranslations("erorr")
       // Parse the response if needed
       const result = await response.json();
       console.log("Response from API:", result);
+
     } catch (error) {
       console.error("Error during form submission:", error);
 
@@ -174,7 +173,7 @@ const tE = useTranslations("erorr")
       email: values.email,
       password: values.password,
       redirect: false,
-    });
+    },{callbackUrl:process.env.NEXT_PUBLIC_URL_CLIENT});
 
     if (result?.error) {
       setError("Invalid email or password");
@@ -355,7 +354,7 @@ const tE = useTranslations("erorr")
                   <Checkbox
                     className="ml-1"
                     checked={field.value}
-                    onCheckedChange={(checked) => {
+                    onCheckedChange={() => {
                       field.onChange(!field.value);
                     }}
                   />
@@ -378,7 +377,7 @@ const tE = useTranslations("erorr")
       {/* Google Sign-In Button */}
       <div className="space-y-4">
         <button
-          onClick={() => signIn("google")}
+          onClick={() => signIn("google",{callbackUrl:process.env.NEXT_PUBLIC_URL_CLIENT})}
           type="button"
           className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
         >
@@ -489,9 +488,7 @@ const tE = useTranslations("erorr")
   {/* Google Sign-In Button */}
   <div className="space-y-4">
     <button
-      onClick={() => {
-        signIn("google");
-      }}
+   onClick={() => signIn("google",{callbackUrl:process.env.NEXT_PUBLIC_URL_CLIENT})}
       type="button"
       className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white  py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
     >

@@ -17,7 +17,7 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
+
     FormMessage,
   } from "@/components/ui/form";
   import { Textarea } from "./ui/textarea";
@@ -25,7 +25,7 @@ import {
   import React, { useState } from "react";
   import { IoMailOutline } from "react-icons/io5";
 import { useSession } from "next-auth/react";
-import { Description } from "@radix-ui/react-toast";
+
 import { toast } from "@/hooks/use-toast";
 
 import { usePathname } from "next/navigation";
@@ -44,7 +44,7 @@ import { useTranslations } from "next-intl";
     const [open, setOpen] = useState(false);
   const [loading, setLoading] = React.useState(false);
 
-      const { data: session } = useSession();
+ 
       const pathname = usePathname();
     const t = useTranslations("inputs");
     const tE = useTranslations("erorr");
@@ -85,6 +85,7 @@ import { useTranslations } from "next-intl";
     });
   
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+      
       setLoading(true);
       console.log("Form Values:", values);
 console.log(ownerEmail)
@@ -129,9 +130,10 @@ console.log(ownerEmail)
         <DialogTrigger asChild>
           <Button
             type="button"
-            className={`${pathname.includes('Agency')? " hover:bg-gray-100 flex w-auto h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px]  justify-between px-4":"flex hover:bg-gray-100 gap-2 h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3"}`}
+            onClick={(e)=>{e.stopPropagation(); e.preventDefault(); setOpen(true)}}
+            className={`${pathname.includes('Agency')? " hover:bg-gray-100  flex w-auto h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px]  justify-between px-4":"flex hover:bg-gray-100 gap-2 h-[45px] items-center font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justify-between px-3"}`}
           >
-            <IoMailOutline className="w-5 h-5" />
+            <IoMailOutline className="w-4 h-4" />
             {t("Mail")}
           </Button>
         </DialogTrigger>

@@ -35,7 +35,7 @@ const truncateText = (text: string, maxWords: number) => {
   return text;
 };
 
-export const useColumns = (): ColumnDef<Property>[] => {
+export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property"); // Call the hook inside the function
   const locale = useLocale();
 

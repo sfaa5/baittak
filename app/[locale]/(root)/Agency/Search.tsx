@@ -1,7 +1,7 @@
 "use client";
 
 import { GoSearch } from "react-icons/go";
-import { IoIosArrowDown } from "react-icons/io";
+
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import SearchCity from "@/components/SearchProperty";

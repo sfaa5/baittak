@@ -1,8 +1,7 @@
 import AgentCard from "@/components/AgentCard";
 import Link from "next/link";
 import React from "react";
-import { GoSearch } from "react-icons/go";
-import { IoIosArrowDown } from "react-icons/io";
+
 import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 
@@ -33,7 +32,7 @@ async function Page({ searchParams }: PageProps) {
   const page = queryParams.get("page") ?? "1";
   const per_page = queryParams.get("per_page") ?? "6";
   const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ..
-  const end = start + Number(per_page); // 5, 10, 15 ..
+
 
   const city = queryParams.get("city") ?? "";
   const service = queryParams.get("service") ?? "";
@@ -51,13 +50,26 @@ async function Page({ searchParams }: PageProps) {
   console.log("in", data);
   console.log("agencies", data.data);
 
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/panner`);
+  const imgae = await res.json();
+
+  const panner = imgae[0]?.panner.url || "";
+
   return (
     <>
       {/* Banner Search */}
-      <section className="bg-hero-Agency bg-cover w-full h-auto mb-10 py-14">
-        <div className="container px-2 2xl:px-[120px] pt-3">
+      <section
+        className=" bg-cover w-full h-auto mb-10 py-14 relative"
+        style={{
+          backgroundImage: `url(${panner})`,
+        }}
+      >
+        {/* overlay */}
+        <div className="absolute inset-0 bg-secondary bg-opacity-50 z-0"></div>
+
+        <div className="relative z-10 container px-2 2xl:px-[120px] pt-3 ">
           <div className="flex flex-col gap-8 items-center">
-            <h1 className="text-4xl font-medium text-white">
+            <h1 className=" text-xl sm:text-2xl md:text-3xl xl:text-4xl font-medium text-white">
               {t("agency.banner.title")}
             </h1>
             <Search />

@@ -1,7 +1,7 @@
 "use client"
-import { CiHeart } from 'react-icons/ci';
+
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 function ImgeCard({img}) {
 
     console.log(img)

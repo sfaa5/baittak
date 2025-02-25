@@ -7,13 +7,9 @@ function AgentCard({post}) {
 const {
   image,
   _id,
-  username,
+
   companyName,
-  city,
-  phoneNumber,
-  properties,
-  projects,
-  email,
+
   rentCount
   ,sellCount
 }=post;

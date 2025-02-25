@@ -1,5 +1,5 @@
 import { Project } from "@/app/[locale]/Company/project/Columns";
-import { useSharedState } from "@/app/context/stateProvider";
+
 import { toast } from "@/hooks/use-toast";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;

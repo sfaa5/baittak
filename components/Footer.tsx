@@ -37,8 +37,8 @@ function Footer() {
   return (
     <footer className={`bg-secondary mx-auto flex w-full pt-10 bottom-0 mt-24`}>
       <div
-        className={`container mx-auto flex flex-col text-white ${
-          path !== "/en" && path !== "/ar" ? "lg:px-[120px]" : ""
+        className={`container mx-auto  flex flex-col text-white ${
+          path !== "/en" && path !== "/ar" ? "2xl:px-[120px]" : ""
         }`}
       >
         <div className="flex flex-col md:flex-row items-center justify-between border-b-2 pb-10">

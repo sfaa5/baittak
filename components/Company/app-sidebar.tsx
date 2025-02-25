@@ -5,9 +5,9 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { FaCircleUser } from "react-icons/fa6";
+
 import { House, Mail, Package2, LayoutDashboard, Building } from "lucide-react";
-import { FaSignInAlt } from "react-icons/fa";
+
 import { Link } from "@/i18n/routing";
 import { useState } from "react";
 import { useTranslations } from "next-intl";

@@ -6,8 +6,7 @@ import "leaflet/dist/leaflet.css";
 
 
 const Map = ({ initialLatitude, initialLongitude, onLocationSelect }) => {
-  const [map, setMap] = useState(null);
-//   const [marker, setMarker] = useState(null);
+
 
   useEffect(() => {
     // Set default icon options
@@ -59,7 +58,7 @@ const Map = ({ initialLatitude, initialLongitude, onLocationSelect }) => {
       setMarkerAtLocation(lat, lng);
     });
 
-    setMap(mapInstance);
+
 
     return () => {
       mapInstance.remove();

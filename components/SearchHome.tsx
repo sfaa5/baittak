@@ -1,8 +1,7 @@
 "use client";
-import { BsSearchHeartFill } from "react-icons/bs";
-import { FiMapPin } from "react-icons/fi";
+
 import { GoSearch } from "react-icons/go";
-import { IoIosArrowDown } from "react-icons/io";
+
 import React, { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -90,11 +89,11 @@ function SearchHome() {
   return (
     <form
       onSubmit={handleSearch}
-      className="realtive flex justify-around items-center w-full pt-7 flex-wrap"
+      className="realtive grid grid-cols-[94%] sm:grid-cols-[22%_65%]  md:grid-cols-[17%_37%_37%] lg:grid-cols-[10%_29%_20%_20%_13%] justify-center gap-3  items-center w-full pt-7 flex-wrap "
     >
-      <button className="items-center gap-2 hover:bg-primary/80 duration-200 bg-primary px-8 py-3 rounded-[6px] font-medium text-base hidden md:flex">
+      <button className="justify-center gap-2 hover:bg-primary/80 duration-200 bg-primary items-center py-3 rounded-[6px] font-medium text-base hidden sm:flex">
         <span>{t("landing.search")}</span>
-        <GoSearch className=" font-bold" />
+        <GoSearch className="font-bold " />
       </button>
 
       <SerchCityHome city={city} setCity={setCity} />
@@ -107,7 +106,7 @@ function SearchHome() {
             setPropertyType(value); // Update the state with the selected value
           }}
         >
-          <SelectTrigger className="items-center gap-5 justify-between px-4 h-full py-3 border rounded-[6px] border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2  w-full max-w-48 hidden xl:flex">
+          <SelectTrigger className="items-center gap-5 justify-between  h-full  border rounded-[6px] border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none  outline-none w-full   hidden md:flex">
             <SelectValue placeholder={t("addUser.selectPropertyType")} />
           </SelectTrigger>
 
@@ -141,7 +140,7 @@ function SearchHome() {
             setPurpose(value); // Update the state with the selected value
           }}
         >
-          <SelectTrigger className="bg-secondary/90 hover:bg-secondary/80 duration-200 text-white h-full gap-3 px-8 py-3 rounded-[6px] font-medium text-base hidden lg:flex">
+          <SelectTrigger className="bg-secondary/90 hover:bg-secondary/80 duration-200 text-white h-full gap-3 justify-center  py-3 rounded-[6px] font-medium text-base hidden lg:flex">
             <SelectValue placeholder={t("search.buy")} />
           </SelectTrigger>
 
@@ -151,6 +150,7 @@ function SearchHome() {
           </SelectContent>
         </Select>
       </div>
+
     </form>
   );
 }

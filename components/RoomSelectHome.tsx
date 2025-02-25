@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import React, { useState, useEffect, useRef } from "react";
-import { IoIosArrowDown } from "react-icons/io";
+
 import { Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDown } from "lucide-react";
@@ -55,7 +55,7 @@ function RoomSelectHome({
           <button
             type="button"
             onClick={toggleDropdown}
-            className="items-center justify-between gap-4  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2   max-w-60 hidden 2xl:flex"
+            className="items-center justify-between gap-4 w-full  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none    hidden lg:flex"
           >
             {t("search.rooms_bath")}
             <ChevronDown className="h-4 w-4 opacity-50" />

@@ -1,7 +1,7 @@
 "use client";
 import ShowMap from "@/components/ShowMap";
 import { useTranslations } from "next-intl";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 
 function Map({ location }) {
   console.log(location);

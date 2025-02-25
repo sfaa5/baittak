@@ -88,7 +88,7 @@ function SearchProject() {
     <div className="flex relative flex-col px-3 py-5 bg-[#F5F5F5] rounded-t-[.7rem]">
       <form
         onSubmit={handleSearch}
-        className="flex justify-start gap-4 flex-nowrap px-2 overflow-x-auto w-full scrollbar-hidden"
+        className="flex justify-start gap-4 text-sm  flex-nowrap px-2 overflow-x-auto "
       >
         <SearchCity city={city} setCity={setCity} />
 
@@ -99,7 +99,7 @@ function SearchProject() {
             setProjectType(value); // Update the state with the selected value
           }}
         >
-          <SelectTrigger className="flex hover:bg-gray-50 duration-200 h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+          <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
             <SelectValue placeholder={t("addUser.selectProjectType")} />
           </SelectTrigger>
 
@@ -130,7 +130,7 @@ function SearchProject() {
           }}
           value={purpose}
         >
-          <SelectTrigger className="flex  h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-secondary border-[1px] hover:bg-gray-50 duration-200 justify-between px-4">
+          <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
             <SelectValue placeholder={t("addUser.status")} />
           </SelectTrigger>
           <SelectContent>
@@ -146,7 +146,7 @@ function SearchProject() {
 
         <button
           type="submit"
-          className="flex w-[700px] h-[48px] items-center font-medium text-white bg-primary rounded-[.8rem] justify-between px-4"
+          className="flex gap-3 hover:bg-primary/80 duration-200 h-[48px] items-center font-medium text-white bg-primary rounded-[.8rem] justify-between px-4"
         >
           {t("search.search_button")}
           <GoSearch className="font-bold text-white" />

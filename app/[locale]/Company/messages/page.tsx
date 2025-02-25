@@ -2,7 +2,7 @@
 
 import { DataTable } from './data-table';
 import React, { useEffect, useState } from 'react';
-import { useColumns } from './columns';
+import { UseColumns } from './columns';
 import { useSession } from "next-auth/react";
 import TableSkelton from '@/components/TableSkelton';
 import { useSharedState } from '@/app/context/stateProvider';
@@ -12,9 +12,8 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 export default function Page() {
   const {dataRequest, setDataRequest} = useSharedState();
-  const {starRequest,setStarRequest}=useSharedState();
-  const {allRequest,setAllRequest}=useSharedState();
-   const columns = useColumns();
+
+   const columns = UseColumns();
 
   const [loading, setLoading] = useState(true); 
 
@@ -55,7 +54,7 @@ export default function Page() {
 
   console.log("Updated dataRequest:", dataRequest);
   return (
-    <div className="w-full px-10">
+    <div className="w-full ">
       {loading ? (
        <TableSkelton/>
       ) : (

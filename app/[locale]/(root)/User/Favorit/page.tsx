@@ -2,7 +2,7 @@
 import { useSharedState } from "@/app/context/stateProvider";
 import PropertyCard from "@/components/PropertyCard";
 import { SkeletonCard } from "@/components/SleltonCard";
-import { Skeleton } from "@/components/ui/skeleton";
+
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
@@ -15,7 +15,12 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${URL_SERVER}/api/users/${session?.user?.id}`);
+        const response = await fetch(`${URL_SERVER}/api/users/${session?.user?.id}`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.user?.accessToken}`  // Assuming you have a session token
+        }
+        });
         const jsonData = await response.json();
         seFavorite(jsonData.favorites);
         setLoading(false); // Stop loading after data is fetched

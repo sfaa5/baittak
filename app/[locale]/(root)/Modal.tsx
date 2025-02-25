@@ -5,13 +5,13 @@ import { useSession } from 'next-auth/react';
 import { usePathname } from "next/navigation";
 
 function Modal() {
-      const { data: session,status  } = useSession();
+      const { status  } = useSession();
     const searchParams = new URLSearchParams(window.location.search);
     const router = useRouter();
     const parms = useSearchParams();
     const [showLoginModal, setShowLoginModal] = useState(false);
     
-  const path = usePathname()
+
   
     if(status==="authenticated"&&parms.get('login')==='true'){
       searchParams.delete('login')

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Select,
     SelectContent,
@@ -34,7 +34,7 @@ function Fllter({ originalProperties, setFilteredProperties }) {
       handleFilter(value); // Apply filter on value change
     }}
   >
-    <SelectTrigger className="flex w-بعمم h-[40px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+    <SelectTrigger className="flex  h-[40px]  font-medium gap-2 text-sm text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
       <SelectValue placeholder={t("search.buy")} />
     </SelectTrigger>
 

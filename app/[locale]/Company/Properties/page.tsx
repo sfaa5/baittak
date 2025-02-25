@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { DataTable } from "@/components/Company/data-table";
-import { useColumns } from "./Columns";
+import { UseColumns } from "./Columns";
 import Title from "@/components/Company/titile";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export default function DemoPage() {
    const { data: session, status } = useSession();
    const { property, setProperty } = useSharedState();
    const t = useTranslations(); // Ensure context is available
-   const columns = useColumns();
+   const columns = UseColumns();
 
    const id = session?.user?.id;
 

@@ -2,19 +2,18 @@ import Link from "next/link";
 import React from "react";
 import { getTranslations } from "next-intl/server";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiPhoneCall } from "react-icons/fi";
+import { FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { getLocale } from "next-intl/server";
 import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdArrowForwardIos } from "react-icons/md";
-import { PiBathtubLight, PiShareFatThin, PiStairsThin } from "react-icons/pi";
+import { PiBathtubLight, PiStairsThin } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
 import Description from "../../Projects/Description";
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
 import Map from "../Map";
-import { RiShareForwardLine } from "react-icons/ri";
-import { CiHeart } from "react-icons/ci";
+
 import Like from "../Like";
 import Share from "../Share";
 
@@ -83,7 +82,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     location,
     numFloors,
     rentaltype,
-    purponse,
+
     propertyType,
     plotLength,
     likes,
@@ -128,10 +127,10 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   console.log(amenities?.map((item: Amenity) => item.name.en));
 
   return (
-    <div className="mt-5 md:container mx-auto px-0 lg:px-[120px] ">
+    <div className="mt-5 md:container mx-auto px-0 2xl:px-[120px] ">
       <div className="flex w-full justify-between items-center">
         {/* path */}
-        <ul className="hidden  md:flex items-center gap-2 mb-5">
+        <ul className="hidden text-sm md:flex items-center gap-2 mb-5">
           <li className="flex gap-3">
             <Link href={"/"}>
               <IoHomeSharp className="text-secondary" />
@@ -148,7 +147,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           <li className="text-[#707070] flex gap-3 items-center">{title}</li>
         </ul>
 
-        <div className="flex gap-4 items-start mb-5">
+        <div className="hidden md:flex gap-4 items-start mb-5">
           <Like propertyId={_id} likes={likes} />
           <Share
             propertyUrl={`https://baittak.vercel.app/Property/${_id}`}
@@ -162,13 +161,13 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         <ImageModel img={images} />
 
         {/* Mobile design */}
-        <div className="flex gap-4 overflow-x-auto hide-scrollbar  mt-5 sm:hidden">
+        <div className="flex gap-4 overflow-x-auto hide-scrollbar   sm:hidden">
           {images.map((im, key: React.Key) => (
             <img
               key={key}
               src={`${im.url}`}
               alt={`property image ${key}`}
-              className="flex-shrink-0 w-full h-[300px] object-cover rounded-xl"
+              className="flex-shrink-0 w-full h-[300px] object-cover "
             />
           ))}
         </div>
@@ -177,15 +176,28 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       <div className="flex justify-between flex-col items-center w-full mt-8 gap-10">
         <div className="w-full flex flex-col md:flex-row ">
           {/* details */}
-          <div className="flex  md:justify-between md:flex-row flex-col items-center md:w-2/3">
-            <h3 className="font-bold text-3xl text-secondary">
+          <div className="flex  lg:justify-between lg:flex-row flex-col items-center lg:w-2/3">
+
+            <div className="  text-secondary flex items-center gap-2">
+
             <div className="text-3xl text-secondary font-semibold">
-                  {price.toLocaleString().replace(/,/g, '.')}  <span className="text-[16px] md:text-2xl text-secondary/80">{locale==="ar"?CurrencyTranslation[currency]:currency}</span>
+            {new Intl.NumberFormat(locale, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }).format(
+                    price.toString().length > 7
+                      ? Number(price.toString().slice(0, 7))
+                      : price
+                  )}  
                 </div>
+
+                <span className="text-[16px] md:text-2xl font-[500] text-secondary/80">{locale==="ar"?CurrencyTranslation[currency]:currency}</span>
+
+
                 {purpose === "rent" && (
-                  <span className="text-[#707070] text-lg"> / {locale==="ar" ? RentalTypeTranslation[rentaltype]:rentaltype }</span>
+                  <span className="text-[#707070] text-xl font-[400]"> / {locale==="ar" ? RentalTypeTranslation[rentaltype]:rentaltype }</span>
                 )}
-            </h3>
+            </div>
 
             <div className="flex gap-6  mt-3">
               <div className="flex items-center gap-2">
@@ -214,7 +226,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           <ContactDesk user={user} title={title} />
 
           {/* contact Mobile */}
-          <div className="mobile-buttons md:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 z-50">
+          <div className="mobile-buttons text-sm lg:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 z-50">
             <button className="flex w-full h-[45px] gap-2 items-center font-semibold bg-red-500 text-white rounded-[.8rem] justify-between px-3">
               <FiPhoneCall className="w-5 h-5" />
               Call
@@ -223,18 +235,23 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
               <IoMailOutline className="w-5 h-5" />
               Mail
             </button>
-            <button className="flex gap-5 w-ful h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-between px-3">
+            <button className="flex gap-5 w-full h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-between px-3">
               <FaWhatsapp className="w-5 h-5" />
               Whatsup
             </button>
           </div>
+
+
         </div>
 
         {/* deep details */}
         <div className="w-full flex flex-col gap-10 justify-start">
           {/* describtion */}
-          <div className="flex flex-col md:w-2/3 px-3">
-            <p className="text-lg text-gray-500">{address}</p>
+          <div className="flex flex-col md:w-2/3 px-3 gap-3">
+            <p className="text-lg text-gray-500 flex  gap-2 items-center">
+               <FiMapPin className="text-primary" />
+             {address}
+             </p>
             <h3 className="text-2xl font-medium mb-7">{title}</h3>
 
             <Description des={des} />
@@ -246,7 +263,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
               {t("propertyDetails.property details")}
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
               <div className="flex gap-14">
                 {/* icons */}
                 <div className="flex flex-col gap-4">
@@ -678,7 +695,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           {location.latitude && <Map location={location} />}
 
           <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
-            <h3 className="text-2xl mb-9 text-secondary">المزايا</h3>
+            <h3 className="text-2xl mb-9 text-secondary">{t("property.amenity")}</h3>
             <div className="grid grid-cols-3 gap-y-8">
               {amenities.map((amenity: amenity, inx: number) => (
                 <div key={inx} className="flex gap-2 items-center">

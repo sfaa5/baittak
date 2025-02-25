@@ -10,6 +10,8 @@ declare module "next-auth"{
             phoneNumber?:string|null
             id:string
             role:string
+            accessToken?:string
+            refreshToken?:string
 
         }
     }

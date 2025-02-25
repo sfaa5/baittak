@@ -1,12 +1,12 @@
 import PropertiesCard from "@/components/PropertiesCard";
 import Serch from "@/components/Search";
-import { FaRegMap } from "react-icons/fa";
+
 import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 import { getTranslations } from "next-intl/server";
 import PaginationControll from "@/components/PaginationControll";
 import Sort from "@/components/Sort";
-import { getSession } from "next-auth/react";
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuth";
 import { UserFavoritesProvider } from "@/app/context/UserFavoritesContext";

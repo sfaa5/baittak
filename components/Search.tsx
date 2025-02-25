@@ -14,18 +14,7 @@ import {
 import RoomSelect from "./RoomSelect";
 import { PriceFilter } from "./PriceSelector";
 
-// const options = [
-//   { value: "apartment", label: "شقة" },
-//   { value: "villa", label: "فيلا" },
-//   { value: "farm", label: "مزرعة" },
-//   { value: "rest-house", label: "استراحة" },
-//   { value: "residential-complex", label: "مجمع سكني" },
-//   { value: "duplex", label: "دوبلكس" },
-//   { value: "building", label: "عمارة بالكامل" },
-//   { value: "hotel-apartments", label: "فندق/شقق فندقية" },
-//   { value: "land", label: "ارض" },
-//   { value: "full-floor", label: "طابق كامل" },
-// ];
+
 
 function Search() {
   const t = useTranslations();
@@ -113,7 +102,7 @@ function Search() {
       <div className="flex flex-col px-3 py-5 bg-[#F5F5F5] rounded-t-[.7rem]">
         <form
           onSubmit={handleSearch}
-          className="flex justify-start gap-4  flex-nowrap px-2 overflow-x-auto "
+          className="flex justify-start gap-4 text-sm  flex-nowrap px-2 overflow-x-auto "
         >
           <SearchCity city={city} setCity={setCity} />
 
@@ -124,7 +113,7 @@ function Search() {
               setPropertyType(value); // Update the state with the selected value
             }}
           >
-            <SelectTrigger className="flex hover:bg-gray-50 gap-3 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+            <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("addUser.selectPropertyType")} />
             </SelectTrigger>
 
@@ -164,7 +153,7 @@ function Search() {
               setPurpose(value); // Update the state with the selected value
             }}
           >
-            <SelectTrigger className="flex  hover:bg-gray-50 duration-200 h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+            <SelectTrigger className="flex  hover:bg-gray-50 duration-200 h-[48px] gap-4 items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("search.buy")} />
             </SelectTrigger>
 

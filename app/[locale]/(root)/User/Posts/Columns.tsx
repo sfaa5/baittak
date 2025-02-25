@@ -3,12 +3,12 @@ import { TiDeleteOutline } from "react-icons/ti";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { MoreHorizontal } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 import { deleteProperty } from "@/lib/actions/property.action";
 import { useSharedState } from "@/app/context/stateProvider";
-import { useLocale, useTranslations } from "next-intl";
+import {  useTranslations } from "next-intl";
 
 // This type is used to define the shape of our data.
 export type Property = {
@@ -23,9 +23,9 @@ export type Property = {
   currency:string
 };
 
-export const useColumns = (): ColumnDef<Property>[] => {
+export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property"); // Call the hook inside the function
-  const locale = useLocale();
+
 return[
   {
     accessorKey: "images",
@@ -52,7 +52,7 @@ return[
     accessorKey: "title",
     header: t("Title"),
     cell: ({ getValue }) => {
-      const title:any = getValue();
+      const title: string = getValue() as string;
       const words = title.split(" ").slice(0, 6).join(" "); // Take only the first 5 words
       return words + (title.split(" ").length > 6 ? "..." : ""); // Add "..." if there are more words
     },

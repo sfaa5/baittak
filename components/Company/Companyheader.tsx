@@ -1,14 +1,7 @@
 import React from "react";
 import { SidebarTrigger } from "../ui/sidebar";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useTranslation } from "react-i18next";
+
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuth";
 
