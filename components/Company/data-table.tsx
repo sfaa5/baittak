@@ -47,11 +47,11 @@ export function DataTable<TData extends RowData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const { showDelte, setShowDelte } = useSharedState();
+  const { showDelte } = useSharedState();
   const { req, setReq } = useSharedState();
-  const { dataRequest, setDataRequest } = useSharedState();
-  const {activeButton, setActiveButton} = useSharedState();
-  const{starRequest,setStarRequest}=useSharedState();
+  const {  setDataRequest } = useSharedState();
+  const {activeButton} = useSharedState();
+
   const pathnaem = usePathname()
   const router = useRouter(); 
   const locale = useLocale();

@@ -1,8 +1,7 @@
 import AgentCard from "@/components/AgentCard";
 import Link from "next/link";
 import React from "react";
-import { GoSearch } from "react-icons/go";
-import { IoIosArrowDown } from "react-icons/io";
+
 import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 
@@ -33,7 +32,7 @@ async function Page({ searchParams }: PageProps) {
   const page = queryParams.get("page") ?? "1";
   const per_page = queryParams.get("per_page") ?? "6";
   const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ..
-  const end = start + Number(per_page); // 5, 10, 15 ..
+
 
   const city = queryParams.get("city") ?? "";
   const service = queryParams.get("service") ?? "";

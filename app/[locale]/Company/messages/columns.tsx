@@ -5,7 +5,7 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSharedState } from "@/app/context/stateProvider";
-import { useLocale, useTranslations } from "next-intl";
+import {  useTranslations } from "next-intl";
 
 
 // Define the shape of the data
@@ -17,14 +17,14 @@ export type Message = {
   createdAt: Date;
 };
 
-export const useColumns = (): ColumnDef<Message>[] => {
+export const UseColumns = (): ColumnDef<Message>[] => {
   const t = useTranslations(""); // Call the hook inside the function
-  const locale = useLocale();
+
 return[
   {
     id: "select",
     header: ({ table }) => {
-      const { showDelte, setShowDelte } = useSharedState();
+      const {setShowDelte } = useSharedState();
       if (
         table.getIsAllPageRowsSelected() ||
         (table.getIsSomePageRowsSelected() && "indeterminate") ||
@@ -48,7 +48,7 @@ return[
       );
     },
     cell: ({ row }) => {
-      const { req, setReq } = useSharedState();
+      const { setReq } = useSharedState();
       const request = row.original;
 
 

@@ -1,8 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import { deleteProject } from "@/lib/actions/project.action";
-import { Update } from "./update";
+
 import { useSharedState } from "@/app/context/stateProvider";
 import { useRouter } from "next/navigation";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -31,9 +30,9 @@ const truncateText = (text: string, maxWords: number) => {
   return text;
 };
 
-export const useColumns = (): ColumnDef<Project>[] => {
+export const UseColumns = (): ColumnDef<Project>[] => {
   const t = useTranslations("project"); // Call the hook inside the function
-  const locale = useLocale();
+
 
   return [
     {
@@ -91,8 +90,8 @@ export const useColumns = (): ColumnDef<Project>[] => {
       cell: ({ row }) => {
         const project: Project = row.original;
         const id = project._id;
-        const { projects, setProjects } = useSharedState();
-        const router = useRouter();
+        const {  setProjects } = useSharedState();
+
 
         return (
           <button

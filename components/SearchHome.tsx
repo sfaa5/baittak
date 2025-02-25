@@ -1,8 +1,7 @@
 "use client";
-import { BsSearchHeartFill } from "react-icons/bs";
-import { FiMapPin } from "react-icons/fi";
+
 import { GoSearch } from "react-icons/go";
-import { IoIosArrowDown } from "react-icons/io";
+
 import React, { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {

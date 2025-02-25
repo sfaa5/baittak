@@ -17,7 +17,7 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
+
     FormMessage,
   } from "@/components/ui/form";
   import { Textarea } from "./ui/textarea";
@@ -25,7 +25,7 @@ import {
   import React, { useState } from "react";
   import { IoMailOutline } from "react-icons/io5";
 import { useSession } from "next-auth/react";
-import { Description } from "@radix-ui/react-toast";
+
 import { toast } from "@/hooks/use-toast";
 
 import { usePathname } from "next/navigation";
@@ -44,7 +44,7 @@ import { useTranslations } from "next-intl";
     const [open, setOpen] = useState(false);
   const [loading, setLoading] = React.useState(false);
 
-      const { data: session } = useSession();
+ 
       const pathname = usePathname();
     const t = useTranslations("inputs");
     const tE = useTranslations("erorr");

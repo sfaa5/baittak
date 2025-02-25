@@ -3,11 +3,11 @@ import { FiUpload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
-import imageCompression from "browser-image-compression";
+
 import {
   Select,
   SelectContent,
@@ -42,8 +42,7 @@ function Page() {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [previewSource, setPreviewSource] = useState<string[]>([]);
-  const [imageBuffers, setImageBuffers] = useState<string[]>([]);
+
   const tE = useTranslations("erorr");
 
   // Define Zod schema for form validation
@@ -89,7 +88,7 @@ function Page() {
   const [cities, setCities] = useState<City[]>([]);
   const { data: session } = useSession();
   const [location, setLocation] = useState({ latitude: null, longitude: null });
-  const [address, setAddress] = useState("");
+
 
   const [errorr, setErrorr] = useState(false);
   const [errImage, setErrImage] = useState("");
@@ -134,7 +133,7 @@ function Page() {
         const address = [house_number, road, suburb, neighbourhood, city]
           .filter(Boolean)
           .join(", ");
-        setAddress(address);
+ 
         form.setValue("address", address); // Update the form value
         console.log("Selected Address:", address);
       } else {
@@ -820,7 +819,7 @@ function Page() {
                               />
                               <button
                                 type="button"
-                                onClick={(e) => handleRemoveImage(index)}
+                                onClick={() => handleRemoveImage(index)}
                                 className="absolute top-2 right-2 bg-red-500 text-white text-sm px-2 py-1 rounded-md"
                               >
                                 {t("inputs.Remove")}

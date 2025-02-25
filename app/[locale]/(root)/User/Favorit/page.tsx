@@ -2,7 +2,7 @@
 import { useSharedState } from "@/app/context/stateProvider";
 import PropertyCard from "@/components/PropertyCard";
 import { SkeletonCard } from "@/components/SleltonCard";
-import { Skeleton } from "@/components/ui/skeleton";
+
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;

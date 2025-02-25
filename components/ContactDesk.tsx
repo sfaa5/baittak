@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FiPhoneCall } from "react-icons/fi";
-import { IoMailOutline } from "react-icons/io5";
+
 import { FaWhatsapp } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import Mail from "./Mail";

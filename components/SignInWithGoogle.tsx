@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import {signIn} from 'next-auth/react'
+
 import { FaSignInAlt } from 'react-icons/fa'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'

@@ -36,17 +36,17 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-  columFilter,
+
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const { showDelte, setShowDelte } = useSharedState();
+  const { showDelte } = useSharedState();
   const { req, setReq } = useSharedState();
-  const { dataRequest, setDataRequest } = useSharedState();
-  const {activeButton, setActiveButton} = useSharedState();
-  const{starRequest,setStarRequest}=useSharedState();
+  const { setDataRequest } = useSharedState();
+
+
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(null);
     const locale = useLocale();

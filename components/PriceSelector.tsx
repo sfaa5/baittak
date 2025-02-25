@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
-import { IoIosArrowDown } from "react-icons/io";
+
 import { ChevronDown } from "lucide-react";
 
 interface PriceRangePopoverProps {

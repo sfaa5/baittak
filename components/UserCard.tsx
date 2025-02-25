@@ -1,11 +1,11 @@
 "use client";
-import UpdateUser from "./UpdateUser";
+
 import { formatDistanceToNow } from "date-fns";
 import { useSharedState } from "@/app/context/stateProvider";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Skeleton } from "./ui/skeleton";
+
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 const planTranslations ={
@@ -67,7 +67,7 @@ function UserCard() {
   const limit = activePlan?.limit | 0 + user.freePlanLimit;
   const freeLimit = user.freePlanLimit;
   const postsLeft = limit - propertiesPosted;
-  const totalLimit = limit + freeLimit;
+
   const progressPercentage = (propertiesPosted / limit) * 100;
   const expiresAt = activePlan?.expiresAt
     ? new Date(activePlan.expiresAt)

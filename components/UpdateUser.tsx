@@ -23,11 +23,11 @@ import { toast } from "@/hooks/use-toast";
 
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Label } from "./ui/label";
+
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useSharedState } from "@/app/context/stateProvider";
-import { set } from "date-fns";
+
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -48,8 +48,8 @@ interface Props {
 }
 
 function UpdateUser({ phoneNumber, username }: Props) {
-  const {user,setUser}=useSharedState()
-  const { data: session, status } = useSession();
+  const {setUser}=useSharedState()
+  const { data: session } = useSession();
   const [errorr, setError] = React.useState("");
 
   const [loadingButton, setLoadingButton] = useState(false);

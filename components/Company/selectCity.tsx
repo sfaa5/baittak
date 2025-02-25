@@ -2,7 +2,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { useLocale, useTranslations } from "next-intl";
-import { FiMapPin } from "react-icons/fi";
+
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const SelectCity = ({ city, setCity }: { city: string; setCity: (city: string) => void }) => {

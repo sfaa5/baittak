@@ -1,6 +1,6 @@
 "use client";
-import { CiHeart } from "react-icons/ci";
-import { FaHeart, FaWhatsapp } from "react-icons/fa";
+
+import {  FaWhatsapp } from "react-icons/fa";
 import { FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
@@ -11,10 +11,10 @@ import { property } from "@/app/[locale]/(root)/Property/page";
 import React, { useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Mail } from "./Mail";
-import { like } from "@/lib/actions/user.action";
+
 import LikeButton from "./LikeButton";
 import { Button } from "./ui/button";
-import { IoMdShareAlt } from "react-icons/io";
+
 import ShareButton from "./Share";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { usePathname } from "next/navigation";
@@ -52,7 +52,7 @@ const propertyTypeTranslations = {
 
 function PropertiesCard({ post }: { post: property }) {
   const locale = useLocale();
-  const [isLoading, setIsLoading] = useState(false);
+
 
   const [showNumber, setShowNumber] = useState(false);
   const pathname = usePathname();
@@ -97,7 +97,7 @@ function PropertiesCard({ post }: { post: property }) {
     for: purpose,
     currency,
     _id,
-    email,
+
   } = post;
 
   return (

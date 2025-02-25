@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DataTable } from "@/components/Company/data-table";
-import { Project, useColumns } from "./Columns";
+import {  UseColumns } from "./Columns";
 import { useSession } from "next-auth/react";
 import Title from "@/components/Company/titile";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 export default function DemoPage() {
-   const columns = useColumns();
+   const columns = UseColumns();
   const [loading, setLoading] = useState(true);
   const {projects,setProjects}=useSharedState()
   const { data: session,status  } = useSession();

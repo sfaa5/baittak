@@ -1,7 +1,6 @@
 "use client";
-import { useLocale, useTranslations } from "next-intl";
-import BaittaklogoArabic from "./ArabicLogo";
-import EnglishLogo from "./EnglishLogo";
+import {  useTranslations } from "next-intl";
+
 import { signIn } from "next-auth/react";
 import { useEffect, useRef } from "react";
 import * as React from "react";
@@ -15,25 +14,24 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
+
   FormMessage,
 } from "@/components/ui/form";
 import { Checkbox } from "./ui/checkbox";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "@/hooks/use-toast";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function Sign({ onClose }) {
-  const locale = useLocale();
+
   const t = useTranslations();
   const [errorr, setError] = React.useState("");
-  const [message, setMessage] = React.useState(false);
+
   const [Sign, setSign] = React.useState("sign");
   const [loading, setLoading] = React.useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+
   const searchParams = new URLSearchParams(window.location.search);
 const tE = useTranslations("erorr")
 
@@ -356,7 +354,7 @@ const tE = useTranslations("erorr")
                   <Checkbox
                     className="ml-1"
                     checked={field.value}
-                    onCheckedChange={(checked) => {
+                    onCheckedChange={() => {
                       field.onChange(!field.value);
                     }}
                   />

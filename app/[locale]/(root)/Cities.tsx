@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { motion, useAnimation } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 function Cities() {
   const t = useTranslations();
   const locale = useLocale();
   const [data, setData] = useState([]);
-  const controls = useAnimation();
+  
 
   useEffect(() => {
     async function fetchCities() {

@@ -11,7 +11,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
+
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -43,7 +43,7 @@ export function SignAgency() {
   const [open, setOpen] = React.useState(false);
   const [errorr, setError] = React.useState("");
   const [passwordVisible, setPasswordVisible] = React.useState(false);
-  const [message, setMessage] = React.useState(false);
+  const [message] = React.useState(false);
   const [cities, setCities] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();

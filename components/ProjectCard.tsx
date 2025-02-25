@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import React from "react";
-import { CiHeart } from "react-icons/ci";
+
 import { FiMapPin } from "react-icons/fi";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+
 import { getLocale } from "next-intl/server";
 import ImgeCard from "./ImgeCard";
 
@@ -34,12 +34,10 @@ async function ProjectCard({ post }) {
     firstPayment,
     annualInterest,
     installmentPeriod,
-    priceM,
-    bedrooms,
-    status,
+
     amenities,
     images,
-    units,
+
     currency,
   } = post;
 

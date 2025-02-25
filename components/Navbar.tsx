@@ -11,7 +11,7 @@ import LocaleSwitcher from "./LocalSwitcher";
 import { SignAgency } from "@/app/[locale]/auth/SignAgency";
 import SignOut from "./SignOut";
 import { usePathname } from "next/navigation";
-import MoonLoader from "react-spinners/MoonLoader";
+
 import { Skeleton } from "./ui/skeleton";
 
 const Navbar = () => {

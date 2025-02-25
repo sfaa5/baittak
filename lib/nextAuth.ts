@@ -1,7 +1,7 @@
-import { type AuthOptions } from "next-auth";
+
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials"
-import { redirect } from "next/dist/server/api-utils";
+
 
 
 // Type augmentation for NextAuth
@@ -83,7 +83,7 @@ export const authOptions  = {
   },
 
   callbacks: {
-    async signIn({ user }:any) {
+    async signIn({ user }) {
       try {
         console.log("uaweeee",user);
 
@@ -126,7 +126,7 @@ export const authOptions  = {
       }
     },
 
-    async jwt({ token, user,trigger,session }:any) {
+    async jwt({ token, user,trigger,session }) {
 
 if(trigger==="update"){
   return {...token,...session.user}
@@ -145,7 +145,7 @@ if(trigger==="update"){
       return token;
     },
 
-    async session({ session, token }:any) {
+    async session({ session, token }) {
       // Add the token's ID to the session's user object
       session.user.id = token.id;
       session.user.role = token.role;
@@ -155,7 +155,7 @@ if(trigger==="update"){
       console.log("Session in session callback:", session);
       return session;
     },
-    async redirect({ url, baseUrl }: any) {
+    async redirect({ url, baseUrl }) {
       // Redirect to home with the query parameter if `signIn` returns `/?login=true`
       if (url === '/?login=true') {
         return `${baseUrl}/?login=true`; // Append `login=true` to the base URL

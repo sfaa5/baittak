@@ -10,12 +10,12 @@ import Sign from "@/components/Sign";
 import { useSearchParams, useRouter } from "next/navigation";
 import SearchHome from "../../../components/SearchHome";
 import { useSession } from "next-auth/react";
-import { getToken } from "next-auth/jwt";
+
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
-  const path = usePathname();
+
   const t = useTranslations();
   const searchParams = new URLSearchParams(window.location.search);
   const router = useRouter();

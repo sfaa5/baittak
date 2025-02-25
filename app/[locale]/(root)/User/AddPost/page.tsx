@@ -32,7 +32,7 @@ import {
 import { useSession } from "next-auth/react";
 import { useLocale } from "next-intl";
 import SignPhone from "@/components/SignPhoen";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import Map from "./Map";
 
 
@@ -45,7 +45,7 @@ function Page() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cities, setCities] = useState<City[]>([]);
-  const [address, setAddress] = useState("");
+
   const router = useRouter();
   const tE = useTranslations("erorr")
 
@@ -139,7 +139,7 @@ const formSchema = z.object({
         const address = [house_number, road, suburb, neighbourhood, city]
           .filter(Boolean)
           .join(", ");
-        setAddress(address);
+       
         form.setValue("address", address); // Update the form value
         console.log("Selected Address:", address);
       } else {

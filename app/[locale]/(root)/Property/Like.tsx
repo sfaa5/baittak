@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { CiHeart } from 'react-icons/ci';
-import { FaHeart, FaTruckLoading } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 
 interface LikeProps {
   propertyId: string;

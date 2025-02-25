@@ -1,10 +1,10 @@
 "use client"
-import { useSharedState } from '@/app/context/stateProvider';
+
 import { useUserFavorites } from "@/app/context/UserFavoritesContext";
 import { like } from '@/lib/actions/user.action';
 import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { CiHeart } from 'react-icons/ci';
 import { FaHeart } from 'react-icons/fa';
 
@@ -14,9 +14,9 @@ function LikeButton({propertyId}) {
    const router = useRouter()
   
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading] = useState(false)
 
-    const { data: session,status  } = useSession();
+    const { data: session  } = useSession();
 
     const id = session?.user.id
     console.log(id)

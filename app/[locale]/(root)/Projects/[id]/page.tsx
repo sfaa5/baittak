@@ -28,15 +28,11 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const {
     _id,
     title,
-    city,
 
-    address,
     des,
     price,
     priceTo,
-    firstPayment,
-    annualInterest,
-    installmentPeriod,
+
     currency,
     location,
     priceM,

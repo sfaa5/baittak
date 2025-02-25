@@ -1,8 +1,8 @@
 "use client"
 import { Button } from '@/components/ui/button';
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail } from 'lucide-react';
-import { Star } from 'lucide-react';
+
 import { useTranslations } from "next-intl";
 import { useSharedState } from '@/app/context/stateProvider';
 
@@ -12,26 +12,16 @@ type LayoutProps = {
 
 function Layout({ children }: LayoutProps) {
   const  t  = useTranslations(); // Load translations
-  const {dataRequest, setDataRequest} = useSharedState();
-  const {starRequest,setStarRequest}=useSharedState();
-  const {allRequest,setAllRequest}=useSharedState();
 
-  const AllData = dataRequest;
+  const {allRequest}=useSharedState();
+
 
   // Track which button is "clicked"
-  const {activeButton, setActiveButton} = useSharedState();
+  const {activeButton } = useSharedState();
 
-  // Function to filter requests that are starred
-  const handleStarClick = () => {
-    setDataRequest(starRequest);
-    setActiveButton("starred"); // Set active button
-  };
 
-  // Function to show all requests (clear the filter)
-  const handleInboxClick = () => {
-    setDataRequest(allRequest); 
-    setActiveButton("inbox"); // Set active button
-  };
+
+
 
   return (
     <main className="w-full mt-8">

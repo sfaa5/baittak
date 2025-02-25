@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
-  const [message, setMessage] = useState("Processing your payment...");
+const Page = () => {
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const userId = urlParams.get("userId");
         }
 
         const data = await response.json();
-        setMessage(data.message || "Payment successful and plan activated!");
+     
       } catch (err) {
         setError(err.message || "An error occurred while processing payment.");
       }
@@ -93,4 +93,4 @@ const userId = urlParams.get("userId");
   );
 };
 
-export default page;
+export default Page;

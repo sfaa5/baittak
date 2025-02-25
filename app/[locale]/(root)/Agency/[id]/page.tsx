@@ -1,14 +1,11 @@
-import ProjectCard from "@/components/ProjectCard";
+
 import Link from "next/link";
 import React from "react";
 import { FiPhoneCall } from "react-icons/fi";
-import { IoIosArrowDown } from "react-icons/io";
+
 import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 import { getLocale, getTranslations } from "next-intl/server";
-import PropertiesCard from "@/components/PropertiesCard";
-import Sort from "@/components/Sort";
-import Fllter from "../Fllter";
 import ShowCards from "../ShowCards";
 import { UserFavoritesProvider } from "@/app/context/UserFavoritesContext";
 import { getServerSession } from "next-auth";

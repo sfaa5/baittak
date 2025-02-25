@@ -8,8 +8,7 @@ import {getMessages} from 'next-intl/server';
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/toaster";
 import {routing} from '../../i18n/routing';
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+
 import NextAuthProvider from "../providers/NextAuthProvider";
 
 const droidArabicKufi = localFont({

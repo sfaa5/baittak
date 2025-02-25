@@ -1,9 +1,8 @@
 import ProjectCard from "@/components/ProjectCard";
-import Search from "@/components/Search";
+
 import React from "react";
 
-import { FaRegMap } from "react-icons/fa";
-import { IoIosArrowDown, IoIosList } from "react-icons/io";
+
 import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 import { getTranslations } from "next-intl/server";

@@ -2,7 +2,7 @@
 import PropertiesCard from "@/components/PropertiesCard";
 import { useTranslations } from "next-intl";
 import Fllter from "./Fllter";
-import Sort from "@/components/Sort";
+
 import { useEffect, useState } from "react";
 
 function ShowCards({ data }) {

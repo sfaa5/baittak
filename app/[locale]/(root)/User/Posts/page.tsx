@@ -3,18 +3,18 @@
 import { DataTable } from '@/components/Company/data-table';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
-import { useColumns } from './Columns';
+import { UseColumns } from './Columns';
 import { useSharedState } from '@/app/context/stateProvider';
 import TableSkelton from '@/components/TableSkelton';
 import useAxiosAuth from '@/hooks/useAxiosAuth';
-const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
 
 function Page() {
   const { data: session, status } = useSession();
   const{property,setProperty}=useSharedState();
   const [loading, setLoading] = useState(true); 
   const axiosAuth = useAxiosAuth();
-     const columns = useColumns();
+     const columns = UseColumns();
   useEffect(() => {
     const fetchData = async () => {
       try {

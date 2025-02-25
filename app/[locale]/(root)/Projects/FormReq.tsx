@@ -3,32 +3,25 @@ import { useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
+
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 
-type FormProps = {
-  url: string;
-  _id: any;
-  agencyy: any;
-  phoneNumber: any;
-  title: any;
-};
+
 
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-const FormReq: React.FC<FormProps> = ({
+const FormReq = ({
   agencyy,
   _id,
   phoneNumber,

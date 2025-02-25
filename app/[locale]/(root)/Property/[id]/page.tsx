@@ -7,14 +7,13 @@ import { getLocale } from "next-intl/server";
 import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdArrowForwardIos } from "react-icons/md";
-import { PiBathtubLight, PiShareFatThin, PiStairsThin } from "react-icons/pi";
+import { PiBathtubLight, PiStairsThin } from "react-icons/pi";
 import { SlSizeFullscreen } from "react-icons/sl";
 import Description from "../../Projects/Description";
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
 import Map from "../Map";
-import { RiShareForwardLine } from "react-icons/ri";
-import { CiHeart } from "react-icons/ci";
+
 import Like from "../Like";
 import Share from "../Share";
 
@@ -83,7 +82,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     location,
     numFloors,
     rentaltype,
-    purponse,
+
     propertyType,
     plotLength,
     likes,
