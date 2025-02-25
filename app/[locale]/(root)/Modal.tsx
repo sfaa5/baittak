@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from "next/navigation";
 import Sign from '@/components/Sign';
 import { useSession } from 'next-auth/react';
-import { usePathname } from "next/navigation";
+
 
 function Modal() {
       const { status  } = useSession();

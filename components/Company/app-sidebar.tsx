@@ -8,7 +8,7 @@ import {
 
 import { House, Mail, Package2, LayoutDashboard, Building } from "lucide-react";
 
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {useLocale} from "next-intl";
@@ -73,7 +73,7 @@ export function AppSidebar() {
 
         <div className="flex flex-col gap-6">
           {items.map((item, key) => (
-            <Link href={item.url as any} key={key} className="block">
+            <Link href={item.url } key={key} className="block">
               <Button
                 variant={"default"}
               

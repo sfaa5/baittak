@@ -23,7 +23,7 @@ import { useSession } from "next-auth/react";
 import { axiosAuth } from "@/lib/axios";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
-function page() {
+function Page() {
   const { user, setUser } = useSharedState();
 
   const [loadingButton, setLoadingButton] = useState(false);
@@ -367,4 +367,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

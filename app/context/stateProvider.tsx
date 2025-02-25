@@ -1,38 +1,38 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 
 // Define the type for the shared state context
-type SharedStateContextType = {
+// type SharedStateContextType = {
 //   amenities: Amenity[]; // Array of amenities
 //   setAmenities: Dispatch<SetStateAction<Amenity[]>>; // Setter for amenities
-  showDelte:any;
-  setShowDelte:any;
-  req:any;
-  setReq:any;
-  property:any;
-  setProperty:any;
-  favorite:any;
-  seFavorite:any;
-  setDataRequest:any;
-  dataRequest:any;
-  starRequest:any;
-  setStarRequest:any;
-  allRequest:any;
-  setAllRequest:any;
-  activeButton:any;
-  setActiveButton:any;
-  user:any;
-  setUser:any;
-  projects:any;
-  setProjects:any;
-  properties:any;
-  setProperties:any;
-};
+//   showDelte:any;
+//   setShowDelte:any;
+//   req:any;
+//   setReq:any;
+//   property:any;
+//   setProperty:any;
+//   favorite:any;
+//   seFavorite:any;
+//   setDataRequest:any;
+//   dataRequest:any;
+//   starRequest:any;
+//   setStarRequest:any;
+//   allRequest:any;
+//   setAllRequest:any;
+//   activeButton:any;
+//   setActiveButton:any;
+//   user:any;
+//   setUser:any;
+//   projects:any;
+//   setProjects:any;
+//   properties:any;
+//   setProperties:any;
+// };
 
 // Create the context with proper type
-export const stateContext = createContext<SharedStateContextType | null>(null);
+export const stateContext = createContext(null);
 
 // Props type for StateProvider
 type StateProviderProps = {

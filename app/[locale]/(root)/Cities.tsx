@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useAnimation } from 'framer-motion';
+
 function Cities() {
   const t = useTranslations();
   const locale = useLocale();

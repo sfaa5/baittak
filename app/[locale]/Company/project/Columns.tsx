@@ -3,10 +3,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { deleteProject } from "@/lib/actions/project.action";
 
 import { useSharedState } from "@/app/context/stateProvider";
-import { useRouter } from "next/navigation";
 import { TiDeleteOutline } from "react-icons/ti";
-import { useLocale, useTranslations } from "next-intl";
-
+import {  useTranslations } from "next-intl";
 // Define the shape of the data
 export type Project = {
   _id: string;

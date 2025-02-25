@@ -65,7 +65,7 @@ function UserCard() {
 
   const { activePlan, propertiesPosted } = user;
   const limit = activePlan?.limit | 0 + user.freePlanLimit;
-  const freeLimit = user.freePlanLimit;
+
   const postsLeft = limit - propertiesPosted;
 
   const progressPercentage = (propertiesPosted / limit) * 100;

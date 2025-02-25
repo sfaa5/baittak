@@ -15,19 +15,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { FaCircleUser } from "react-icons/fa6";
+
+
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "@/hooks/use-toast";
 import { FiUpload } from "react-icons/fi";
-import SearchCity from "@/components/SearchProperty";
+
 import SelectCity from "@/components/Company/selectCity";
 
 
@@ -37,17 +30,17 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 function page() {
   const [loadingButton, setLoadingButton] = useState(false);
 
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
   const [imageBuffers, setImageBuffers] = useState<string | null>(null);
 
   const [agency, setAgency] = useState(null); // State to store agency data
   const [loading, setLoading] = useState(true); // Loading state
 
   const [city, setCity] = useState("");
-  const [open, setOpen] = React.useState(false);
+
   const [errorr, setError] = React.useState("");
   const [citySend, setCitySend] = React.useState("");
-  const [message, setMessage] = React.useState(false);
+
   const t = useTranslations("company.agentInfo");
   const tE = useTranslations("erorr");
   const tI =useTranslations("inputs")
@@ -108,7 +101,7 @@ const formSchema = z.object({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]; // Get the first file
     if (file) {
-      setSelectedImage(file); // Optionally store the selected file
+    
       handelImage(file)
         .then((result) => {
           console.log("Base64 Image Data:", result); // Log the result for debugging
@@ -218,7 +211,7 @@ const formSchema = z.object({
         description: "Your request was added successfully.",
       });
 
-      setMessage(true);
+     
     } catch (error) {
       console.error("Error during form submission:", error);
       toast({

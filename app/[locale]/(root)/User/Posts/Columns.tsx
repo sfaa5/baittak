@@ -102,7 +102,7 @@ return[
     cell: ({ row }) => 
         
         {
-    const{property,setProperty}=useSharedState();
+    const{setProperty}=useSharedState();
       const propertyy = row.original; // Access the row data
       const id = propertyy._id;
   
@@ -111,7 +111,7 @@ return[
         
           onClick={(event) => {
             event.stopPropagation();
-            deleteProperty({ id,property,setProperty });
+            deleteProperty({ id,setProperty });
           }}
           className="text-red-500 hover:text-red-700 ml-5"
         >

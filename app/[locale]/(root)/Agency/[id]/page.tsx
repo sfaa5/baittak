@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { FiPhoneCall } from "react-icons/fi";
 
-import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
+import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
 import { getLocale, getTranslations } from "next-intl/server";
 import ShowCards from "../ShowCards";

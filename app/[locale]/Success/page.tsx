@@ -38,7 +38,7 @@ const userId = urlParams.get("userId");
           throw new Error(data.message || "Payment failed");
         }
 
-        const data = await response.json();
+    
      
       } catch (err) {
         setError(err.message || "An error occurred while processing payment.");

@@ -5,11 +5,12 @@ import Cities from "./Cities";
 import Properties from "./Properties";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+
 import Sign from "@/components/Sign";
 import { useSearchParams, useRouter } from "next/navigation";
 import SearchHome from "../../../components/SearchHome";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -93,27 +94,27 @@ export default function Home() {
             <div className="relative w-full h-36 bg-[#F5F5F5] bg-opacity-80 flex items-center  rounded-[7px] justify-center flex-wrap">
               {/* top search */}
               <div className="absolute -top-7 left-1/2 transform -translate-x-1/2  bg-secondary text-white flex justify-between items-center w-4/5 md:w-2/3  lg:w-1/3  xl:w-2/4  2xl:w-1/3 px-3 sm:px-6 py-4 rounded-[8px]">
-                <a
+                <Link
                   href="/Property?purpose=rent"
                   className="inline-flex gap-2 text-base font-medium hover:text-primary duration-200"
                 >
                   <LuHouse className="size-5 xs:size-6" />
                   <span>{t("landing.rent")}</span>
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/Property?purpose=sell"
                   className="inline-flex text-base gap-2 duration-200 font-medium hover:text-primary"
                 >
                   <LuHouse className="size-5 xs:size-6" />
                   <span>{t("landing.buy")}</span>
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/Projects"
                   className="inline-flex text-base gap-2 duration-200 font-medium hover:text-primary"
                 >
                   <LuHouse className="size-5 xs:size-6 items-center" />
                   <span>{t("landing.projects")}</span>
-                </a>
+                </Link>
               </div>
 
               {/* search */}

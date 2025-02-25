@@ -9,7 +9,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
+
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
@@ -30,7 +30,7 @@ import { useTranslations } from "next-intl";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [verified, setVerified] = useState(false);
@@ -208,4 +208,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
