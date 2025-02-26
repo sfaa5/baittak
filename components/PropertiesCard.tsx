@@ -1,6 +1,6 @@
 "use client";
 
-import {  FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import { FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
@@ -53,7 +53,6 @@ const propertyTypeTranslations = {
 function PropertiesCard({ post }: { post: property }) {
   const locale = useLocale();
 
-
   const [showNumber, setShowNumber] = useState(false);
   const pathname = usePathname();
 
@@ -97,7 +96,6 @@ function PropertiesCard({ post }: { post: property }) {
     for: purpose,
     currency,
     _id,
-
   } = post;
 
   return (
@@ -260,21 +258,18 @@ function PropertiesCard({ post }: { post: property }) {
                     <Mail ownerEmail={userDetails[0]?.email} title={title} />
                   )}
                 </div>
-
                 <Button
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent the click from bubbling up to the Link
+                    e.stopPropagation();
                     e.preventDefault();
 
-          
-                      userDetails[0]?.phoneNumber &&
-                        window.open(
-                          `https://wa.me/${userDetails[0]?.phoneNumber}`,
-                          "_blank"
-                        );
-          
+                    if (userDetails[0]?.phoneNumber) {
+                      window.open(
+                        `https://wa.me/${userDetails[0]?.phoneNumber}`,
+                        "_blank"
+                      );
+                    }
                   }}
-                  className="flex w-full h-[45px] items-center  font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3"
                 >
                   <FaWhatsapp className="w-4 h-4" />
                 </Button>
@@ -293,8 +288,6 @@ function PropertiesCard({ post }: { post: property }) {
               )}
             </div>
           </div>
-
-          
         </div>
       </div>
     </Link>
