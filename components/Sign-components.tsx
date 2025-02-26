@@ -5,7 +5,7 @@ import SignInWithGoogle from './SignInWithGoogle';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/nextAuth';
 async function SignComponents() {
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions as object);
 
   return (
     <>

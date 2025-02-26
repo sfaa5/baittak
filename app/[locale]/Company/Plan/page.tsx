@@ -11,7 +11,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Page() {
   const t = await getTranslations("plan");
-  const session = await getServerSession(authOptions); // Load translations from the "common" namespace
+  const session = await getServerSession(authOptions as object); // Load translations from the "common" namespace
   const id = session?.user.id;
   const response = await fetch(`${URL_SERVER}/api/plans`);
 

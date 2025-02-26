@@ -47,7 +47,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Page({ searchParams }: PageProps) {
   const t = await getTranslations();
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions as object);
 
   const userId = session?.user?.id;
 

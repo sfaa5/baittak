@@ -8,7 +8,7 @@ import { authOptions } from "@/lib/nextAuth";
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Companyheader() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions as object);
   const id = session?.user.id;
   console.log(id);
 

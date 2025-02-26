@@ -9,7 +9,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Page() {
   const t = await getTranslations();
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions as object);
   const locale = await getLocale();
   const id = session?.user.id;
   console.log(id);
