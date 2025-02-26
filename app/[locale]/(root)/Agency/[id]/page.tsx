@@ -8,8 +8,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { getLocale, getTranslations } from "next-intl/server";
 import ShowCards from "../ShowCards";
 import { UserFavoritesProvider } from "@/app/context/UserFavoritesContext";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/nextAuth";
+
 import Mail from "@/components/Mail";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
