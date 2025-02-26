@@ -58,12 +58,15 @@ const ShowMap = ({ properties }) => {
       });
 
       marker.on("click", () => {
-        pathname.includes("Projects") && router.push(`/Projects/${property._id}`);
-         
-
-        pathname.includes("Property") &&  router.push(`/Property/${property._id}`);
-        
+        if (pathname.includes("Projects")) {
+          router.push(`/Projects/${property._id}`);
+        }
+      
+        if (pathname.includes("Property")) {
+          router.push(`/Property/${property._id}`);
+        }
       });
+      
     });
 
     return () => {

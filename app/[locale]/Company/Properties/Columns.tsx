@@ -38,7 +38,7 @@ const truncateText = (text: string, maxWords: number) => {
 export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property"); // Call the hook inside the function
   const locale = useLocale();
-
+  const { setProperty } = useSharedState();
   return [
     {
       accessorKey: "images",
@@ -123,7 +123,7 @@ export const UseColumns = (): ColumnDef<Property>[] => {
       cell: ({ row }) => {
         const Property = row.original;
         const id = Property._id;
-        const { setProperty } = useSharedState();
+       
         return (
           <button
             onClick={(e) => {

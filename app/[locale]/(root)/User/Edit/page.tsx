@@ -29,9 +29,9 @@ function Page() {
   const [loadingButton, setLoadingButton] = useState(false);
   const { data: session, status } = useSession();
 
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
   const [imageBuffers, setImageBuffers] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+
 
   console.log("uuuuuuuuuuuu", user);
   console.log("uuuuuuuuuuuu", user.phoneNumber);
@@ -42,8 +42,7 @@ function Page() {
   const tE = useTranslations("erorr");
   const tI = useTranslations("inputs");
 
-  const params = useParams();
-  const locale = useLocale();
+
 
   // Schema for form validation
   const formSchema = z.object({
@@ -120,7 +119,7 @@ function Page() {
         const data =  response.data;
         setUser(data);
 
-        setLoading(false);
+ 
         // Update form values after fetching user data
         form.reset({
           username: data.username || "",
@@ -165,7 +164,7 @@ function Page() {
         }
         throw new Error("Failed to send data to the server");
       }
-      const data = response.json();
+
 
       toast({
         description: "Your request was added successfully.",

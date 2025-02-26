@@ -25,7 +25,7 @@ export type Property = {
 
 export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property"); // Call the hook inside the function
-
+  const{setProperty}=useSharedState();
 return[
   {
     accessorKey: "images",
@@ -102,7 +102,7 @@ return[
     cell: ({ row }) => 
         
         {
-    const{setProperty}=useSharedState();
+
       const propertyy = row.original; // Access the row data
       const id = propertyy._id;
   

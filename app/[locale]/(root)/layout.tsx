@@ -4,7 +4,7 @@ import "../globals.css";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/toaster";
 import { routing } from "../../../i18n/routing";
 import Header from "@/components/Header";

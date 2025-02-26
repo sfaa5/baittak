@@ -33,12 +33,12 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 const Page = () => {
   const router = useRouter();
   const [error, setError] = useState("");
-  const [verified, setVerified] = useState(false);
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const t = useTranslations()
 
-  const { data: session, status: sessionStatus } = useSession();
+  const {  status: sessionStatus } = useSession();
 
   const params = useParams<{ token: string }>();
   console.log(params);
@@ -64,7 +64,7 @@ const Page = () => {
         });
 
         if (!response.ok) {
-          setVerified(true);
+        
           const errorData = await response.json();
           if (errorData.message) {
             throw new Error(errorData.message);
@@ -72,7 +72,7 @@ const Page = () => {
           throw new Error("Failed to send data to the server");
         }
         setError("");
-        setVerified(true);
+   
         const userData = await response.json();
         setUser(userData.user);
       } catch (error) {

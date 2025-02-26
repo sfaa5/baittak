@@ -19,12 +19,13 @@ export type Message = {
 
 export const UseColumns = (): ColumnDef<Message>[] => {
   const t = useTranslations(""); // Call the hook inside the function
-
+      const {setShowDelte } = useSharedState();
+      const { setReq } = useSharedState();
 return[
   {
     id: "select",
     header: ({ table }) => {
-      const {setShowDelte } = useSharedState();
+
       if (
         table.getIsAllPageRowsSelected() ||
         (table.getIsSomePageRowsSelected() && "indeterminate") ||
@@ -48,7 +49,7 @@ return[
       );
     },
     cell: ({ row }) => {
-      const { setReq } = useSharedState();
+    
       const request = row.original;
 
 
