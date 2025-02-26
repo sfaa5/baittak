@@ -117,6 +117,7 @@ function PropertiesCard({ post }: { post: property }) {
                   className="flex-shrink-0 w-full snap-start" // Makes sure only one image shows up at a time
                 >
                   <img
+                  loading="lazy"
                     src={im?.url}
                     alt={`carousel image ${index + 1}`}
                     className="h-[250px]  md:h-[315px] lg:h-[280px] w-full md:w-100 object-cover"

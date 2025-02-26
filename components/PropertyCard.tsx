@@ -133,6 +133,7 @@ const  t =useTranslations()
                 className="relative flex-shrink-0 w-full snap-start"
               >
                 <img
+                  loading="lazy"
                   src={im?.url}
                   alt={`carousel image ${index + 1}`}
                   className="w-full h-64 object-cover"

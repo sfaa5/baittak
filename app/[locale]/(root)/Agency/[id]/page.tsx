@@ -19,12 +19,12 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const t = await getTranslations();
   const locale = await getLocale();
 
-  const session = await getServerSession(authOptions);
 
-  const userId = session?.user?.id;
+
+
 
   const response = await fetch(
-    `${URL_SERVER}/api/agency/${id}?userId=${userId}`
+    `${URL_SERVER}/api/agency/${id}`
   );
 
   const data = await response.json();
