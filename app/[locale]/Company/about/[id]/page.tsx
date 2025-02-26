@@ -27,7 +27,7 @@ import SelectCity from "@/components/Company/selectCity";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-function page() {
+function Page() {
   const [loadingButton, setLoadingButton] = useState(false);
 
 

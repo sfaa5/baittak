@@ -75,38 +75,20 @@ const tE = useTranslations("erorr")
     });
   }
 
-  let form = null;
+  let form  = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      password: "",
+      acceptPolicy: false,
+    },
+  });
 
-  if (Sign === "sign") {
-    form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        email: "",
-        password: "",
-      },
-    });
-  } else if (Sign === "register") {
-    // Define the register form
-    form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        address: "",
-        password: "",
-        acceptPolicy: false,
-      },
-    });
-  } else if (Sign === "forget") {
-    form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        email: "",
-      },
-    });
-  }
+
 
   useEffect(() => {
     // Event listener to close modal when clicking outside
@@ -133,7 +115,7 @@ const tE = useTranslations("erorr")
     console.log("Form Values:", values);
     setError("")
     try {
-      const response = await fetch(`${URL_SERVER}/api/users/register`, {
+      const response = await fetch(`${URL_SERVER}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

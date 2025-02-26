@@ -1,6 +1,6 @@
 "use client";
 import { useSharedState } from "@/app/context/stateProvider";
-import { useParams } from "next/navigation";
+
 import React, { useState, useEffect } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { useLocale, useTranslations } from "next-intl";
+import {  useTranslations } from "next-intl";
 import { toast } from "@/hooks/use-toast";
 import { FiUpload } from "react-icons/fi";
 import { useSession } from "next-auth/react";
