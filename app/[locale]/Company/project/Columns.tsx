@@ -31,7 +31,7 @@ const truncateText = (text: string, maxWords: number) => {
 export const UseColumns = (): ColumnDef<Project>[] => {
   const t = useTranslations("project"); // Call the hook inside the function
 
-
+  const {  setProjects } = useSharedState();
   return [
     {
       accessorKey: "images",
@@ -88,7 +88,7 @@ export const UseColumns = (): ColumnDef<Project>[] => {
       cell: ({ row }) => {
         const project: Project = row.original;
         const id = project._id;
-        const {  setProjects } = useSharedState();
+ 
 
 
         return (

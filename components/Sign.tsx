@@ -75,7 +75,7 @@ const tE = useTranslations("erorr")
     });
   }
 
-  let form  = useForm<z.infer<typeof formSchema>>({
+  const form  = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",

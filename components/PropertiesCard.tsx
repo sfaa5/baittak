@@ -266,13 +266,13 @@ function PropertiesCard({ post }: { post: property }) {
                     e.stopPropagation(); // Prevent the click from bubbling up to the Link
                     e.preventDefault();
 
-                    {
+          
                       userDetails[0]?.phoneNumber &&
                         window.open(
                           `https://wa.me/${userDetails[0]?.phoneNumber}`,
                           "_blank"
                         );
-                    }
+          
                   }}
                   className="flex w-full h-[45px] items-center  font-semibold  bg-primary bg-opacity-60 text-balck rounded-[.8rem]  justify-between px-3"
                 >

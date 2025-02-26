@@ -407,4 +407,4 @@ const formSchema = z.object({
   );
 }
 
-export default page;
+export default Page;
