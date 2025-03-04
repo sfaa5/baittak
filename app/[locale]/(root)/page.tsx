@@ -12,17 +12,15 @@ import SearchHome from "../../../components/SearchHome";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-
 export default function Home() {
   const { status } = useSession();
-
 
   const t = useTranslations();
   const searchParams = new URLSearchParams(window.location.search);
   const router = useRouter();
   const parms = useSearchParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [landImage, setLandPage] = useState("" );
+  const [landImage, setLandPage] = useState("");
 
   if (status === "authenticated" && parms.get("login") === "true") {
     searchParams.delete("login");
@@ -34,7 +32,6 @@ export default function Home() {
     }
   }, [parms.toString()]);
 
-
   useEffect(() => {
     const getPaner = async () => {
       try {
@@ -44,7 +41,7 @@ export default function Home() {
         const data = await res.json();
         console.log(data);
 
-        setLandPage(data[0]?.landPage.url ||  "" );
+        setLandPage(data[0]?.landPage.url || "");
       } catch (error) {
         console.log(error);
       }
@@ -52,10 +49,6 @@ export default function Home() {
 
     getPaner();
   }, []);
-
-
-
-
 
   const closeModal = () => {
     setShowLoginModal(false);
@@ -66,16 +59,14 @@ export default function Home() {
     router.push("/");
   };
 
-
   return (
     <>
-
       {/* landing */}
-      <section className="h-[70vh] text- pb-36  bg-cover w-full"
-      style={{
-        backgroundImage:`url(${landImage})`
-      }}
-      
+      <section
+        className="h-[70vh] text- pb-36  bg-cover w-full"
+        style={{
+          backgroundImage: `url(${landImage})`,
+        }}
       >
         <div className="container relative mx-auto h-full flex flex-col gap-36">
           {/* content */}

@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/sessionProvider.ts", "app/sessionProvider.ts", "next.config.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/sessionProvider.ts", "app/sessionProvider.ts", "next.config.ts", "hooks/useListenMessage.js"],
   "exclude": ["node_modules"]
 }

@@ -16,7 +16,7 @@ import { Skeleton } from "./ui/skeleton";
 
 const Navbar = () => {
   const t = useTranslations("header");
-  const { data: session,status } = useSession();
+  const { data: session, status } = useSession();
 
   const pathname = usePathname(); // Get the current path
   const [activeLink, setActiveLink] = useState("");
@@ -39,18 +39,19 @@ const Navbar = () => {
             <CiHeart /> <span>{t("favorites")}</span>
           </Link>
 
-     
-          { 
-       status === 'loading'?     <div className="flex items-center gap-2 px-4 py-2  border border-gray-300 rounded-lg text-gray-800 ">
-      <Skeleton className="h-6 w-6 rounded-full" />
-    
-      
-        <Skeleton className="h-2 w-[80px]" />
-      </div>:session ? <SignOut user={session?.user} /> : <SignInWithGoogle />
-   }
+          {status === "loading" ? (
+            <div className="flex items-center gap-2 px-4 py-2  border border-gray-300 rounded-lg text-gray-800 ">
+              <Skeleton className="h-6 w-6 rounded-full" />
 
+              <Skeleton className="h-2 w-[80px]" />
+            </div>
+          ) : session ? (
+            <SignOut user={session?.user} />
+          ) : (
+            <SignInWithGoogle />
+          )}
 
-  {/*  > */}
+          {/*  > */}
           {session?.user?.role == "agency" ? (
             <Link className="mt-2" href="/Company/about">
               {t("company")}
@@ -65,7 +66,8 @@ const Navbar = () => {
             {/* Property Link */}
             <Link
               className={`text-black-100 text-lg pb-3 border-b-2 ${
-                activeLink.includes("/Property") || activeLink.includes("/العقارات")
+                activeLink.includes("/Property") ||
+                activeLink.includes("/العقارات")
                   ? "border-secondary font-medium text-secondary"
                   : "border-transparent hover:border-secondary hover:font-medium hover:text-secondary"
               } duration-200`}
@@ -77,7 +79,8 @@ const Navbar = () => {
             {/* Projects Link */}
             <Link
               className={`text-black-100 text-lg pb-3 border-b-2 ${
-                activeLink.includes("/Projects") || activeLink.includes("/المشاريع")
+                activeLink.includes("/Projects") ||
+                activeLink.includes("/المشاريع")
                   ? "border-secondary font-medium text-secondary"
                   : "border-transparent hover:border-secondary hover:font-medium hover:text-secondary"
               } duration-200`}
@@ -102,7 +105,7 @@ const Navbar = () => {
             {session?.user.role !== "agency" && (
               <Link
                 className={`text-black-100 text-lg pb-3 border-b-2 ${
-                  activeLink.includes("/User/Posts") 
+                  activeLink.includes("/User/Posts")
                     ? "border-secondary font-medium text-secondary"
                     : "border-transparent hover:border-secondary hover:font-medium hover:text-secondary"
                 } duration-200`}

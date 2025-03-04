@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io";
 import FoterArabicLogo from "./foter-arabic-logo";
-import Link from "next/link";
+
 
 import { usePathname } from "next/navigation";
 import MessageButton from "./MessageButton";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
 
 function Footer() {
   const locale = useLocale();
@@ -47,10 +49,12 @@ function Footer() {
             {locale === "ar" ? (
               <FoterArabicLogo />
             ) : (
-              <img
-                src="home/Baittak LOGO whait.png"
+              <Image
+                src="/home/Baittak LOGO whait.png"
                 alt="logo"
-                className="w-2/3 sm:w-full h-auto max-w-52 object-contain"
+                className="-ml-4"
+                width={170}
+                height={150}
               />
             )}
           </Link>
@@ -89,10 +93,12 @@ function Footer() {
                 <p>Loading cities...</p>
               ) : cities.length === 0 ? (
                 <p>Cities not available</p>
+                
               ) : (
                 cities.map((city, index) => (
                   <ul key={index} className="list-disc ml-4 lg:ml-0">
-                    <li>{locale === "ar" ? city.name.ar : city.name.en}</li>
+                                <Link href={`/Property?city=${city.name.en}`}>
+                                <li>{locale === "ar" ? city.name.ar : city.name.en}</li></Link>
                   </ul>
                 ))
               )}

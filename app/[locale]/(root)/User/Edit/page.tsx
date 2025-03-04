@@ -27,7 +27,7 @@ function Page() {
   const { user, setUser } = useSharedState();
 
   const [loadingButton, setLoadingButton] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session, status,update } = useSession();
 
 
   const [imageBuffers, setImageBuffers] = useState<string | null>(null);
@@ -138,6 +138,7 @@ function Page() {
   }, [session?.user?.id, form.reset]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setError('')
     setLoadingButton(true);
     console.log("Form Values:", values);
 
@@ -164,6 +165,19 @@ function Page() {
         }
         throw new Error("Failed to send data to the server");
       }
+
+      const res = await response.json();
+      console.log("res",res)
+
+            // ✅ Update session properly
+            await update({
+              ...session,
+              user: {
+                  ...session.user,
+                  name: res.user.username,
+                  image:res.user.image.url
+              }
+          });
 
 
       toast({

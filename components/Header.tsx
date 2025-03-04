@@ -9,6 +9,7 @@ import MobileNavbar from "./MobileNavbar";
 import BaittaklogoArabic from "./ArabicLogo";
 import EnglishLogo from "./EnglishLogo";
 import {useLocale} from "next-intl";
+import useListenMessages from "@/hooks/useListenMessage";
 
 
 function Header() {
@@ -17,6 +18,8 @@ function Header() {
   const router = usePathname();
   const locale = useLocale();
   console.log("header",router);
+  useListenMessages();
+  
 
 
 
@@ -26,7 +29,7 @@ function Header() {
         className={`container  px-4 mx-auto flex justify-between items-center ${router!=="/en"&& router!=="/ar"? "2xl:px-[120px]":""}`}
       >
         {/* mobile button */}
-        <div className=" xl:hidden  ">
+        <div className=" xl:hidden ">
           <Link href={"/User/AddPost"}>
             <button className="bg-primary px-2 py-2 rounded-[0.3rem] font-semibold text-xs">
               {t("header.post property")}

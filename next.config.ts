@@ -9,7 +9,7 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
     images:{
-      domains:['lh3.googleusercontent.com'],
+      domains:['lh3.googleusercontent.com',"res.cloudinary.com"],
     }
     };
 

@@ -113,7 +113,9 @@ export const authOptions  = {
         const { data,accessToken,refreshToken } = await response.json();
         user.id = data._id; // Safely assign the ID
         user.role=data.role
+        user.name = data.username
         user.phoneNumber=data.phoneNumber||""
+        user.image=data.image?.url || ''
         user.accessToken=accessToken
         user.refreshToken=refreshToken
         console.log(user);
@@ -136,6 +138,8 @@ if(trigger==="update"){
       if (user) {
         token.id = user.id; // Store the user Id in the token
         token.role =user.role
+        token.image=user?.image 
+        token.name = user.name
         token.phoneNumber=user.phoneNumber||""
         token.accessToken=user.accessToken
         token.refreshToken=user.refreshToken
@@ -149,6 +153,8 @@ if(trigger==="update"){
       // Add the token's ID to the session's user object
       session.user.id = token.id;
       session.user.role = token.role;
+      session.user.image=token?.image;
+      session.user.name= token.name;
       session.user.phoneNumber=token.phoneNumber||"";
       session.user.accessToken=token.accessToken
       session.user.refreshToken=token.refreshToken

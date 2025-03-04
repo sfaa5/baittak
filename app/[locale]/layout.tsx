@@ -10,6 +10,8 @@ import { Toaster } from "@/components/ui/toaster";
 import {routing} from '../../i18n/routing';
 
 import NextAuthProvider from "../providers/NextAuthProvider";
+import { ConversationProvider } from "../context/ConversationProvider";
+import { SocketContextProvider } from "../context/SocketContext";
 
 const droidArabicKufi = localFont({
   src: [ 
@@ -76,8 +78,12 @@ export default async function RootLayout({
  
 
         <NextAuthProvider>        <NextIntlClientProvider messages={messages}>
+          <ConversationProvider>
         <StateProvider>
-       {children}</StateProvider>
+          <SocketContextProvider> {children}</SocketContextProvider>
+      
+       </StateProvider>
+       </ConversationProvider>
        <Toaster />
          </NextIntlClientProvider>
           </NextAuthProvider>

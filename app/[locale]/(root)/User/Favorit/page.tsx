@@ -1,7 +1,7 @@
 "use client";
 import { useSharedState } from "@/app/context/stateProvider";
 import PropertyCard from "@/components/PropertyCard";
-import { SkeletonCard } from "@/components/SleltonCard";
+import  SkeletonCard  from "@/components/skeletons/SkeletonCard";
 
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
@@ -41,7 +41,8 @@ console.log(favorite)
   return (
     <>
       {loading ? (
-<SkeletonCard/>
+        <div className="flex w-full justify-between"> {[...Array(2)].map((_,idx)=> <SkeletonCard key={idx}/>)}</div>
+
       ) : (
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-36">
           {favorite?.map((property, index) => (

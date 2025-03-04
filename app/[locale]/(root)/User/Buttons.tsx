@@ -3,11 +3,18 @@ import { Link } from "@/i18n/routing";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { CiMail } from "react-icons/ci";
+import { IoMdMail } from "react-icons/io";
+import { useConversationContext } from "@/app/context/ConversationProvider";
 
 function Buttons() {
   const t = useTranslations();
   const pathname = usePathname();
   const [activeButton, setActiveButton] = useState("");
+  const{totalUnreadMessages,setTotalUnreadMessages} = useConversationContext();
+
+  console.log("TotalUnreadMessages",totalUnreadMessages)
+
 
   useEffect(() => {
     // Set the active button based on the current path
@@ -19,11 +26,15 @@ function Buttons() {
       setActiveButton("selectPlan");
     } else if (pathname.includes("/User/AddPost")) {
       setActiveButton("addingList");
+    } else if (pathname.includes("/messages")){
+      setActiveButton("messages")
     }
+
+
   }, [pathname]); // Update state when the path changes
 
   const buttonClasses = (buttonName: string) =>
-    `flex w-full whitespace-nowrap   h-[45px] items-center text-sm font-normal rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-2 sm:px-3 transition-all duration-200 ${
+    `flex w-full whitespace-nowrap flex gap-2  h-[45px] items-center text-sm font-normal rounded-[.8rem] border-[.1px] border-[#707070] justify-between px-2 sm:px-3 transition-all duration-200 ${
       activeButton === buttonName ? "bg-primary text-white" : "hover:bg-primary hover:text-white"
     }`;
 
@@ -71,6 +82,19 @@ function Buttons() {
           className={buttonClasses("edit")}
         >
           {t("userButton.editUser")}
+        </button>
+      </Link>  
+      
+      <Link href={"/messages"}>
+      <button
+          onClick={() => setActiveButton("messages")}
+          className={buttonClasses("messages")}
+
+        >
+          <IoMdMail size={18}/>
+
+        {totalUnreadMessages>0&&  <span className='text-xs  text-center rounded-full w-4 h-4 text-white bg-primary'>{totalUnreadMessages}</span>}
+
         </button>
       </Link>
     </div>

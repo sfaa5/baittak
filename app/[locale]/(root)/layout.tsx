@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import "../globals.css";
@@ -10,6 +11,7 @@ import { routing } from "../../../i18n/routing";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NextAuthProvider from "../../providers/NextAuthProvider";
+
 
 // const droidArabicKufi = localFont({
 //   src: [
@@ -84,6 +86,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid

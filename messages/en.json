@@ -5,6 +5,7 @@
   },
   "welcome": "Welcome to our website!",
   "header": {
+    "messages": "Messages",
     "company": "Company",
     "signTitle": "Create a new account",
     "signDesc": " Sign in to explore your dream properties and manage your account.",
@@ -179,6 +180,7 @@
     "editUser": "Edit "
   },
   "contact": {
+    "chat":"Chat",
     "Whatsup": "Whatsup",
     "Mail": "Mail",
     "Call": "Call"

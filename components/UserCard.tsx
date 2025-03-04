@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import useAxiosAuth from "@/hooks/useAxiosAuth";
+import Image from "next/image";
 
 const planTranslations ={
   "Free":"مجاني",
@@ -84,15 +85,20 @@ function UserCard() {
     <div className="relative mx-auto w-full xl:w-1/3">
       <div className=" flex flex-col bg-gray-100 p-6  gap-8 rounded-[0.7rem]">
         <div className="flex items-center gap-5">
-          <img
+
+          <Image
             src={
               user?.image?.url
                 ? user.image?.url
                 : user.image || "/company/unknown.png"
             }
+            width={50}
+            height={50}
+           
             alt="user"
-            className="rounded-full h-20 w-20  object-cover"
+            className="rounded-full  object-cover"
           />
+
           <div className="flex flex-col gap-2 text-lg">
             <p>{user.username}</p>
             <p>{session?.user.email}</p>

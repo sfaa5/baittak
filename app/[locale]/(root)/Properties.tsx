@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropertyCard from "@/components/PropertyCard";
 import { useTranslations } from "next-intl";
+import SkeletonCard from "@/components/skeletons/SkeletonCard";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -45,11 +46,10 @@ function Properties() {
               {t("properties.latest_properties")}
             </h1>
           </div>
+{  loading&&  <div className="flex w-[1000px] justify-between">  <SkeletonCard />  </div> }
 
-          <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
-            {loading ? (
-              <div>Loading...</div>
-            ) : (
+          <div className="grid  gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+ { !loading &&  (
               randomProperties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))

@@ -91,11 +91,26 @@ function SearchHome() {
       onSubmit={handleSearch}
       className="realtive grid grid-cols-[94%] sm:grid-cols-[22%_65%]  md:grid-cols-[17%_37%_37%] lg:grid-cols-[10%_29%_20%_20%_13%] justify-center gap-3  items-center w-full pt-7 flex-wrap "
     >
-      <button className="justify-center gap-2 hover:bg-primary/80 duration-200 bg-primary items-center py-3 rounded-[6px] font-medium text-base hidden sm:flex">
-        <span>{t("landing.search")}</span>
-        <GoSearch className="font-bold " />
-      </button>
 
+<div>
+        <Select
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          value={purpose}
+          onValueChange={(value) => {
+            setPurpose(value); // Update the state with the selected value
+          }}
+        >
+          <SelectTrigger className="bg-secondary/90 hover:bg-secondary/80 duration-200 text-white h-full gap-3 justify-center  py-3 rounded-[6px] font-medium text-base hidden lg:flex">
+            <SelectValue placeholder={t("search.buy")} />
+          </SelectTrigger>
+
+          <SelectContent>
+            <SelectItem value="rent">{t("addUser.rental")}</SelectItem>
+            <SelectItem value="sell">{t("addUser.sell")}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      
       <SerchCityHome city={city} setCity={setCity} />
 
       <div className="h-full">
@@ -132,24 +147,13 @@ function SearchHome() {
         setBathrooms={setBarooms}
       />
 
-      <div>
-        <Select
-          dir={locale === "ar" ? "rtl" : "ltr"}
-          value={purpose}
-          onValueChange={(value) => {
-            setPurpose(value); // Update the state with the selected value
-          }}
-        >
-          <SelectTrigger className="bg-secondary/90 hover:bg-secondary/80 duration-200 text-white h-full gap-3 justify-center  py-3 rounded-[6px] font-medium text-base hidden lg:flex">
-            <SelectValue placeholder={t("search.buy")} />
-          </SelectTrigger>
 
-          <SelectContent>
-            <SelectItem value="rent">{t("addUser.rental")}</SelectItem>
-            <SelectItem value="sell">{t("addUser.sell")}</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+
+
+      <button className="justify-center gap-2 hover:bg-primary/80 duration-200 bg-primary items-center py-3 rounded-[6px] font-medium text-base hidden sm:flex">
+        <span>{t("landing.search")}</span>
+        <GoSearch className="font-bold " />
+      </button>
 
     </form>
   );

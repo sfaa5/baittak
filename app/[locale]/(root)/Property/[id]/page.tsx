@@ -82,7 +82,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     location,
     numFloors,
     rentaltype,
-
     propertyType,
     plotLength,
     likes,
@@ -114,7 +113,9 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       .catch((error) => console.error("Error fetching address:", error));
   }
 
-  console.log(data);
+
+
+  console.log("propertiesData",data);
 
   interface Amenity {
     name: {
@@ -124,7 +125,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     svg: string;
   }
 
-  console.log(amenities?.map((item: Amenity) => item.name.en));
 
   return (
     <div className="mt-5 md:container mx-auto px-0 2xl:px-[120px] ">
@@ -173,10 +173,11 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         </div>
       </div>
 
-      <div className="flex justify-between flex-col items-center w-full mt-8 gap-10">
-        <div className="w-full flex flex-col md:flex-row ">
+<div className="flex justify-start  items-start gap-5">        
+      <div className="flex justify-between flex-col items-center  mt-8 gap-10 w-2/3">
+     
           {/* details */}
-          <div className="flex  lg:justify-between lg:flex-row flex-col items-center lg:w-2/3">
+          <div className="flex  lg:justify-between lg:flex-row flex-col items-center lg:w-full">
 
             <div className="  text-secondary flex items-center gap-2">
 
@@ -222,8 +223,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             </div>
           </div>
 
-          {/* contact Desktop */}
-          <ContactDesk user={user} title={title} />
+
 
           {/* contact Mobile */}
           <div className="mobile-buttons text-sm lg:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 z-50">
@@ -242,23 +242,23 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
 
 
-        </div>
+     
 
         {/* deep details */}
         <div className="w-full flex flex-col gap-10 justify-start">
           {/* describtion */}
-          <div className="flex flex-col md:w-2/3 px-3 gap-3">
+          <div className="flex flex-col md:w-full px-3 gap-3">
             <p className="text-lg text-gray-500 flex  gap-2 items-center">
                <FiMapPin className="text-primary" />
              {address}
              </p>
-            <h3 className="text-2xl font-medium mb-7">{title}</h3>
+            <h3 className="text-2xl font-medium mb-7 ">{title}</h3>
 
             <Description des={des} />
           </div>
 
           {/* property details */}
-          <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
+          <div className=" bg-gray-100 rounded-[.3rem] p-5 ">
             <h3 className="text-2xl mb-9 text-secondary">
               {t("propertyDetails.property details")}
             </h3>
@@ -694,7 +694,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
           {location.latitude && <Map location={location} />}
 
-          <div className=" md:w-2/3 bg-gray-100 rounded-[.3rem] p-5 ">
+          <div className=" bg-gray-100 rounded-[.3rem] p-5 ">
             <h3 className="text-2xl mb-9 text-secondary">{t("property.amenity")}</h3>
             <div className="grid grid-cols-3 gap-y-8">
               {amenities.map((amenity: amenity, inx: number) => (
@@ -715,6 +715,10 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       </div> */}
         </div>
       </div>
+        {/* contact Desktop */}
+<ContactDesk user={user} title={title} />
+</div>
+
     </div>
   );
 }

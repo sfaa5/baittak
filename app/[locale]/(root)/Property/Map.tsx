@@ -9,7 +9,7 @@ function Map({ location }) {
   const t = useTranslations("inputs")
   return (
     <>
-      <div className=" md:w-2/3  rounded-[.3rem]  relative w-full col-span-1 flex justify-center items-center">
+      <div className="   rounded-[.3rem]  relative w-full col-span-1 flex justify-center items-center">
         {/* Static Map */}
         <img
           src="/map.png" // Replace with an actual static map URL
