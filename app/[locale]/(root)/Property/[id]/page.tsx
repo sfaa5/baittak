@@ -13,7 +13,6 @@ import Description from "../../Projects/Description";
 import ContactDesk from "@/components/ContactDesk";
 import ImageModel from "@/components/ImageModel";
 import Map from "../Map";
-
 import Like from "../Like";
 import Share from "../Share";
 
@@ -115,15 +114,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
 
 
-  console.log("propertiesData",data);
 
-  interface Amenity {
-    name: {
-      en: string;
-      ar: string;
-    };
-    svg: string;
-  }
 
 
   return (

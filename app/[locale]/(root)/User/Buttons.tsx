@@ -3,7 +3,7 @@ import { Link } from "@/i18n/routing";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { CiMail } from "react-icons/ci";
+
 import { IoMdMail } from "react-icons/io";
 import { useConversationContext } from "@/app/context/ConversationProvider";
 
@@ -11,7 +11,7 @@ function Buttons() {
   const t = useTranslations();
   const pathname = usePathname();
   const [activeButton, setActiveButton] = useState("");
-  const{totalUnreadMessages,setTotalUnreadMessages} = useConversationContext();
+  const{totalUnreadMessages} = useConversationContext();
 
   console.log("TotalUnreadMessages",totalUnreadMessages)
 

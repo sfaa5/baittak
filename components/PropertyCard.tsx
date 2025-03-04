@@ -48,7 +48,7 @@ const propertyTypeTranslations = {
 };
 
 function PropertyCard({ property }) {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const path = usePathname();
   const locale = useLocale();
@@ -88,15 +88,16 @@ const  t =useTranslations()
       }
 
       if (isLike) {
+        setIsLike(false);
         const updatedFavorites = favorite.filter(
           (fav) => fav._id !== property._id
         );
-        setIsLike(false);
         seFavorite(updatedFavorites);
       } else {
+        setIsLike(true);
         // If not liked, toggle to like
         const updatedFavorites = await like(property._id, session?.user?.id);
-        setIsLike(true);
+        
         seFavorite(updatedFavorites); // Update local state with updated favorites
       }
     } catch (error) {

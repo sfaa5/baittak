@@ -1,14 +1,14 @@
 import { useConversationContext } from "@/app/context/ConversationProvider";
 import { useSocketContext } from "@/app/context/SocketContext";
 import useReadMessage from "@/hooks/useReadMessage";
-import { useState } from "react";
+
 
 
 
 // STARTER CODE SNIPPET
 const Conversation = ({conversation,lastIdx}) => {
 
-	const {selectedConversation, setSelectedConversation} = useConversationContext();
+	const {selectedConversation} = useConversationContext();
 	const{readMessage}=useReadMessage()
 	const isSelected = selectedConversation?._id === conversation._id;
     const {onlineUsers}=useSocketContext();

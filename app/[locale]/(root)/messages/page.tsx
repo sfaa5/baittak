@@ -1,15 +1,15 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React, {  useEffect } from "react";
 import MessageInput from "../../../../components/messages/MessageInput";
 import Messages from "../../../../components/messages/Messages";
 import { TiMessages } from "react-icons/ti";
 import { useConversationContext } from "@/app/context/ConversationProvider";
-import { set } from "date-fns";
-import { useSession } from "next-auth/react";
-import useListenMessages from "@/hooks/useListenMessage";
 
-function page() {
-  const { data:session } = useSession();
+import { useSession } from "next-auth/react";
+
+
+function Page() {
+
 
   const { selectedConversation, setSelectedConversation } =
     useConversationContext();
@@ -46,7 +46,7 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
 
 const NoChatSelected: React.FC = () => {
 

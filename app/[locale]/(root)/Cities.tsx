@@ -48,7 +48,7 @@ function Cities() {
         <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {randomProperties.map((city, index) => {
             return (
-              <Link href={`/Property?city=${city.name.en}`}>
+              <Link key={index} href={`/Property?city=${city.name.en}`}>
               <div
                 key={index}
                 className="relative group shadow-lg rounded-[18px] overflow-hidden transition-transform transform"

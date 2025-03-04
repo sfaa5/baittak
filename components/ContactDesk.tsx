@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { FiPhoneCall } from "react-icons/fi";
+
 
 import { FaWhatsapp } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import Mail from "./Mail";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { useConversationContext } from "@/app/context/ConversationProvider";
+
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { LuMessagesSquare } from "react-icons/lu";
@@ -26,8 +26,8 @@ function ContactDesk({
   title: string;
 }) {
   const t = useTranslations();
-  const [showNumber, setShowNumber] = useState(false);
-  const {setConversations}=useConversationContext();
+
+ 
   const { data: session } = useSession();
   const router =useRouter()
 
@@ -66,7 +66,7 @@ function ContactDesk({
 
       <div className="contact-buttons hidden lg:flex gap-2  justify-stretch">
       <Button
-          onClick={(e) => {
+          onClick={() => {
             chatWith()
    
           }}

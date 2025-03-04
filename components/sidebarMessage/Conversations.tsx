@@ -3,8 +3,7 @@
 // STARTER CODE SNIPPET
 import useGetConversations from "@/hooks/useGetConversations";
 import Conversation from "./Conversation";
-import { useEffect, useRef } from "react";
-import useListenMessages from "@/hooks/useListenMessage";
+
 import SidebarSkeleton from "../skeletons/sidebarSkeleton";
 
 const Conversations = () => {
