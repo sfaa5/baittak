@@ -109,7 +109,7 @@ export const authOptions  = {
           return '/?login=true';
         }
 
-        // Parse the response and assign the user IDh
+        // Parse the response and assign the user ID
         const { data,accessToken,refreshToken } = await response.json();
         user.id = data._id; // Safely assign the ID
         user.role=data.role
