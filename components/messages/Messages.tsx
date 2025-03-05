@@ -10,8 +10,6 @@ const Messages = () => {
 
 
 
-
-
 	return (
 		<div className={`${!loading && messages.length !== 0 && 'flex-col-reverse'} flex-col px-4 flex  gap-6 h-[82%] pb-6 pt-4 overflow-auto overscroll-contain`}>
 			{!loading&& messages.length>0 && messages.map((message)=>(

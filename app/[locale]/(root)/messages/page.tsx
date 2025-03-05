@@ -4,6 +4,7 @@ import MessageInput from "../../../../components/messages/MessageInput";
 import Messages from "../../../../components/messages/Messages";
 import { TiMessages } from "react-icons/ti";
 import { useConversationContext } from "@/app/context/ConversationProvider";
+import useListenMessages from "@/hooks/useListenMessage";
 
 
 
@@ -13,8 +14,7 @@ function Page() {
 
   const { selectedConversation, setSelectedConversation } =
     useConversationContext();
-    // useListenMessages();
- 
+
   useEffect(() => {
     // Cleanup function
     return () => setSelectedConversation(null);

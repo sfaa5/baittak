@@ -14,13 +14,11 @@ const Conversation = ({conversation,lastIdx}) => {
     const {onlineUsers}=useSocketContext();
 	const isOnlie = onlineUsers.includes(conversation._id);
 	
-// console.log("selected",selectedConversation)
 
 const seen = async(conversation)=>{
 	await readMessage(conversation);
 }
 
-console.log("testConversation",conversation)
 	return (
 		<>
 			<div className={`flex gap-2 items-center hover:bg-gray-200 rounded p-2 py-1 cursor-pointer

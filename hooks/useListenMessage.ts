@@ -15,7 +15,7 @@ const useListenMessages = () => {
   } = useConversationContext();
 
   useEffect(() => {
-    socket?.on("newMessage", async (newMessage) => {
+    socket?.on("newMessage", async(newMessage) => {
       newMessage.shouldShake = true;
 
       const sound = new Audio("/notification.mp3");
@@ -31,46 +31,38 @@ const useListenMessages = () => {
       console.log("sender", newMessage.senderId);
 
       console.log("0", totalUnreadMessages);
+      console.log("slectedd",selectedConversation)
+      console.log("conversation",conversations)
       if (selectedConversation?._id === newMessage.senderId) {
-        setMessages([newMessage, ...messages]);
-      } else {
+        console.log("1")
+        setMessages((prevMessages) => [newMessage, ...prevMessages]);
+        console.log("2")
         setConversations((prevUsers) => {
-          const updatedUsers = prevUsers.map((user) => {
-            if (
-              user._id === newMessage.senderId ||
-              user._id === newMessage.receiverId
-            ) {
-              return {
-                ...user,
-                lastMessage: newMessage,
-                unreadMessagesCount: user.unreadMessagesCount + 1,
-              };
-            }
-            return user;
-          });
-          return updatedUsers;
+          const index = prevUsers.findIndex(user=>user._id===newMessage.senderId|| user._id === newMessage.receiverId)
+          if (index === -1) return prevUsers  // return it as it
+          const sortedUser = prevUsers[index];
+          return [sortedUser, ...prevUsers.slice(0, index), ...prevUsers.slice(index + 1)];
+        })
+
+
+      } else {
+
+        setConversations((prevUsers) => {
+         const index = prevUsers.findIndex(user=>user._id===newMessage.senderId|| user._id === newMessage.receiverId)
+         if (index === -1) return prevUsers  // return it as it
+         const updatedUser = { ...prevUsers[index], unreadMessagesCount: prevUsers[index].unreadMessagesCount + 1 };
+         return [updatedUser, ...prevUsers.slice(0, index), ...prevUsers.slice(index + 1)];
+
         });
 
         setTotalUnreadMessages((prev) => prev + 1);
       }
 
-      setConversations((prevUsers) => {
-        // Create a new array before sorting
-        const sortedUsers = [...prevUsers].sort((a, b) => {
-          if (a._id === newMessage.senderId || a._id === newMessage.receiverId)
-            return -1;
-          if (b._id === newMessage.senderId || b._id === newMessage.receiverId)
-            return 1;
-          return 0;
-        });
-
-        return sortedUsers;
-      });
       console.log("sortttttttt", conversations);
     });
 
     return () => socket?.off("newMessage");
-  }, [socket]);
+  }, [socket, selectedConversation, conversations, totalUnreadMessages]);
 };
 
 export default useListenMessages;

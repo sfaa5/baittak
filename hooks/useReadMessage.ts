@@ -1,40 +1,46 @@
-"use client"
+"use client";
 
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 import useAxiosAuth from "./useAxiosAuth";
 import { toast } from "./use-toast";
 import { useConversationContext } from "@/app/context/ConversationProvider";
 
-const useReadMessage=()=>{
-  
+const useReadMessage = () => {
+  const axiosAuth = useAxiosAuth();
+  const { setSelectedConversation,selectedConversation, setTotalUnreadMessages } =
+    useConversationContext();
 
-    const axiosAuth = useAxiosAuth();
-      const { setSelectedConversation ,setTotalUnreadMessages} = useConversationContext();
+  const readMessage = async (conversation) => {
+    const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+    const senderId = conversation._id;
+    console.log("convestaion",conversation)
+    setSelectedConversation(conversation);
 
-    const readMessage=async (conversation)=>{
-        const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
-        const senderId = conversation._id;
-        setSelectedConversation(conversation)
-     await setTotalUnreadMessages((prev)=>prev-conversation.unreadMessagesCount)
-        conversation.unreadMessagesCount = 0;
+    console.log("convestaion",selectedConversation)
 
-        try {
-            
-            const res = await axiosAuth.put(`${URL_SERVER}/api/messages/read`,{senderId});
-            if (res.status !== 201 && res.status !== 200) {
-                throw new Error(res.data);
-              }
-        } catch (error) {
-            toast({
-                description: "something went wrong",
-                className: "bg-red-500 text-white p-4 rounded shadow-lg",
-              });
-              console.log(error); 
-        }
+    await setTotalUnreadMessages(
+      (prev) => prev - conversation.unreadMessagesCount
+    );
+    conversation.unreadMessagesCount = 0;
+    console.log("Slectte",selectedConversation)
 
+    try {
+      const res = await axiosAuth.put(`${URL_SERVER}/api/messages/read`, {
+        senderId,
+      });
+      if (res.status !== 201 && res.status !== 200) {
+        throw new Error(res.data);
+      }
+    } catch (error) {
+      toast({
+        description: "something went wrong",
+        className: "bg-red-500 text-white p-4 rounded shadow-lg",
+      });
+      console.log(error);
     }
+  };
 
-    return{ readMessage}
-}
+  return { readMessage };
+};
 
-export default useReadMessage
+export default useReadMessage;
