@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { toast } from "./use-toast";
 
 import useAxiosAuth from "@/hooks/useAxiosAuth";
-;
+
+import { useSession } from "next-auth/react";
 import { useConversationContext } from "@/app/context/ConversationProvider";
 
 const useGetConversations = () => {
@@ -16,7 +17,7 @@ const useGetConversations = () => {
   } = useConversationContext();
   const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
   const axiosAuth = useAxiosAuth();
-
+  const { data: session, status } = useSession();
 
   useEffect(() => {
 
@@ -28,10 +29,6 @@ const useGetConversations = () => {
         if (res.status !== 200) {
           throw new Error("Something went wrong!");
         }
-
-        console.log("render");
-
-      
 
         setConversations(res.data.usersWithLastMessage)
 
@@ -71,9 +68,9 @@ const useGetConversations = () => {
       }
     };
 
-      getConversations();
+    status === "authenticated" && getConversations();
 
-  }, []);
+  }, [session]);
 
   return { loading, conversations, setConversations };
 };
