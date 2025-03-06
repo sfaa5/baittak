@@ -20,13 +20,13 @@ function Page() {
   }, [setSelectedConversation]);
 
   return (
-    <div className="md:min-w-[450px] w-full flex  flex-col bg-[#EFEAE2]  backdrop-blur-lg ">
+    <div className="md:min-w-[450px] w-full flex  flex-col bg-[#EFEAE2]  backdrop-blur-lg rounded-r-[8px] shadow-sm">
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
           {/* Header */}
-          <div className="bg-[#F0F2F5] px-4 py-2 mb-2">
+          <div className="bg-[#F0F2F5] px-4 py-2 mb-2 rounded-tr-[8px]">
             <span className="label-text">To:</span>{" "}
             <span className="text-gray-900 font-medium">
               {selectedConversation.username}

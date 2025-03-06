@@ -1,18 +1,21 @@
 "use client";
 import { axiosAuth } from "@/lib/axios";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import { useRefreshToken } from "./useRefreshToken";
 
 const useAxiosAuth = () => {
   const { data: session } = useSession();
-  const refreshToken = useRefreshToken();
+  const refreshToken = useRefreshToken(); // Ensure it's stable
+  const accessToken = useMemo(() => session?.user?.accessToken, [session]);
 
   useEffect(() => {
+    if (!accessToken) return; // Avoid running when there's no token
+
     const requestIntercept = axiosAuth.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${session?.user?.accessToken}`;
+          config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
         return config;
       },
@@ -26,7 +29,7 @@ const useAxiosAuth = () => {
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           prevRequest.sent = true;
           await refreshToken();
-          prevRequest.headers["Authorization"] = `Bearer ${session?.user.accessToken}`;
+          prevRequest.headers["Authorization"] = `Bearer ${session?.user?.accessToken}`;
           return axiosAuth(prevRequest);
         }
         return Promise.reject(error);
@@ -37,7 +40,7 @@ const useAxiosAuth = () => {
       axiosAuth.interceptors.request.eject(requestIntercept);
       axiosAuth.interceptors.response.eject(responseIntercept);
     };
-  }, [session, refreshToken]);
+  }, [accessToken, refreshToken]);
 
   return axiosAuth;
 };

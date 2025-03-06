@@ -19,7 +19,7 @@ const handelSubmit=async(e)=> {
 			<div className='w-full relative'>
 				<input
 					type='text'
-					className='border text-sm rounded-lg  w-full p-2.5   bg-white focus:outline-none border-gray-600 '
+					className='border text-sm rounded-lg  w-full p-2.5   bg-white focus:outline-none border-gray-300 '
 					placeholder='Send a message'
 					value={message}
 					onChange={(e)=>setMessage(e.target.value)}

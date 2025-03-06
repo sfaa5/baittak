@@ -1,10 +1,9 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "./use-toast";
 
 import useAxiosAuth from "@/hooks/useAxiosAuth";
-import { useSession } from "next-auth/react";
-import { stat } from "fs";
+;
 import { useConversationContext } from "@/app/context/ConversationProvider";
 
 const useGetConversations = () => {
@@ -17,9 +16,10 @@ const useGetConversations = () => {
   } = useConversationContext();
   const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
   const axiosAuth = useAxiosAuth();
-  const { data: session, status } = useSession();
+
 
   useEffect(() => {
+
     const getConversations = async () => {
       setLoading(true);
       try {
@@ -29,25 +29,35 @@ const useGetConversations = () => {
           throw new Error("Something went wrong!");
         }
 
+        console.log("render");
+
+      
+
+        setConversations(res.data.usersWithLastMessage)
+
         const chatUser = JSON.parse(localStorage.getItem("chat-user"));
 
+        // Update state efficiently
+        setConversations((prev) => {
+          const updatedConversations = [...res.data.usersWithLastMessage];
 
-// Update state efficiently
-      setConversations((prev) => {
-        const updatedConversations = [...res.data.usersWithLastMessage];
+          if (chatUser) {
+            const isFind = updatedConversations.some(
+              (con) => con._id === chatUser._id
+            );
+            if (!isFind) updatedConversations.push(chatUser);
+          }
+
+          if (JSON.stringify(prev) !== JSON.stringify(updatedConversations)) {
+            return updatedConversations;
+          }
+
+          return prev;
+        });
 
         if (chatUser) {
-          const isFind = updatedConversations.some((con) => con._id === chatUser._id);
-          if (!isFind) updatedConversations.push(chatUser);
+          setSelectedConversation(chatUser);
         }
-
-        return updatedConversations;
-      });
-
-      if (chatUser) {
-        setSelectedConversation(chatUser);
-        localStorage.removeItem("chat-user");
-      }
 
         setTotalUnreadMessages(res.data.totalUnreadMessages);
       } catch (error) {
@@ -56,11 +66,14 @@ const useGetConversations = () => {
           className: "bg-red-500 text-white p-4 rounded shadow-lg",
         });
       } finally {
-        setLoading(false);
+         setLoading(false);
+        
       }
     };
-    status === "authenticated" && getConversations();
-  }, [session]);
+
+      getConversations();
+
+  }, []);
 
   return { loading, conversations, setConversations };
 };

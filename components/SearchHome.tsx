@@ -89,10 +89,9 @@ function SearchHome() {
   return (
     <form
       onSubmit={handleSearch}
-      className="realtive grid grid-cols-[94%] sm:grid-cols-[22%_65%]  md:grid-cols-[17%_37%_37%] lg:grid-cols-[10%_29%_20%_20%_13%] justify-center gap-3  items-center w-full pt-7 flex-wrap "
+      className="realtive grid grid-cols-[94%] sm:grid-cols-[63%_33%]  md:grid-cols-[37%_37%_20%] lg:grid-cols-[10%_29%_20%_20%_13%] justify-center gap-3  items-center w-full pt-7 flex-wrap "
     >
-
-<div>
+      <div className="hidden lg:block">
         <Select
           dir={locale === "ar" ? "rtl" : "ltr"}
           value={purpose}
@@ -110,10 +109,10 @@ function SearchHome() {
           </SelectContent>
         </Select>
       </div>
-      
+
       <SerchCityHome city={city} setCity={setCity} />
 
-      <div className="h-full">
+      <div className="h-full hidden md:block">
         <Select
           dir={locale === "ar" ? "rtl" : "ltr"}
           value={propertyType}
@@ -126,17 +125,21 @@ function SearchHome() {
           </SelectTrigger>
 
           <SelectContent>
-      <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
-      <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
-      <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
-      <SelectItem value="Rest-House">{t("inputs.rest-house")}</SelectItem>
-      <SelectItem value="Residential-Complex">{t("inputs.residential-complex")}</SelectItem>
-      <SelectItem value="Duplex">{t("inputs.duplex")}</SelectItem>
-      <SelectItem value="Building">{t("inputs.building")}</SelectItem>
-      <SelectItem value="Hotel-Apartments">{t("inputs.hotel-apartments")}</SelectItem>
-      <SelectItem value="Land">{t("inputs.land")}</SelectItem>
-      <SelectItem value="Full-Floor">{t("inputs.full-floor")}</SelectItem>
-    </SelectContent>
+            <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
+            <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
+            <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
+            <SelectItem value="Rest-House">{t("inputs.rest-house")}</SelectItem>
+            <SelectItem value="Residential-Complex">
+              {t("inputs.residential-complex")}
+            </SelectItem>
+            <SelectItem value="Duplex">{t("inputs.duplex")}</SelectItem>
+            <SelectItem value="Building">{t("inputs.building")}</SelectItem>
+            <SelectItem value="Hotel-Apartments">
+              {t("inputs.hotel-apartments")}
+            </SelectItem>
+            <SelectItem value="Land">{t("inputs.land")}</SelectItem>
+            <SelectItem value="Full-Floor">{t("inputs.full-floor")}</SelectItem>
+          </SelectContent>
         </Select>
       </div>
 
@@ -147,14 +150,13 @@ function SearchHome() {
         setBathrooms={setBarooms}
       />
 
-
-
-
       <button className="justify-center gap-2 hover:bg-primary/80 duration-200 bg-primary items-center py-3 rounded-[6px] font-medium text-base hidden sm:flex">
         <span>{t("landing.search")}</span>
         <GoSearch className="font-bold " />
       </button>
 
+
+      
     </form>
   );
 }
