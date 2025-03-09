@@ -4,7 +4,7 @@ import  useSendMessage  from "@/hooks/useSendMessage";
 import { useState } from "react";
 
 const MessageInput = () => {
-const {loading,sendMessage}=useSendMessage();
+const {sendMessage}=useSendMessage();
 const [message,setMessage]=useState('');
 
 const handelSubmit=async(e)=> {
@@ -25,7 +25,7 @@ const handelSubmit=async(e)=> {
 					onChange={(e)=>setMessage(e.target.value)}
 				/>
 				<button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3 text-primary '>
-					{loading ? <p>Loading...</p> : <BsSend />}
+					{<BsSend />}
 				</button>
 			</div>
 		</form>

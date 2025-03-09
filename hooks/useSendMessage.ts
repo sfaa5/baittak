@@ -2,14 +2,25 @@ import { useConversationContext } from "@/app/context/ConversationProvider";
 import { useState } from "react";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { toast } from "./use-toast";
+import { useSession } from "next-auth/react";
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
   const { messages, setMessages, selectedConversation, conversations, setConversations } = useConversationContext();
   const axiosAuth = useAxiosAuth();
+  const {data:session}=useSession()
 
   const sendMessage = async (message) => {
     const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
+    const tempMessage ={
+      "message":message,
+      "createdAt":new Date().toISOString(),
+      "senderId":session.user.id
+    }
+
+    setMessages([ tempMessage,...messages]);
+
     setLoading(true);
     try {
       const res = await axiosAuth.post(
@@ -19,7 +30,6 @@ const useSendMessage = () => {
       if (res.status !== 201 && res.status !== 200) {
         throw new Error(res.data);
       }
-      setMessages([ res.data,...messages]);
 
       if(conversations[0]._id!==selectedConversation._id){
         setConversations((prevUsers) => {
