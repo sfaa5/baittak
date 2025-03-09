@@ -6,14 +6,15 @@ import Conversation from "./Conversation";
 
 import SidebarSkeleton from "../skeletons/sidebarSkeleton";
 import { useEffect, useState } from "react";
+import { useConversationContext } from "@/app/context/ConversationProvider";
 
 
 
 const Conversations = () => {
 	const [count,setCount]=useState(0)
+	const{filteredResults,search}=useConversationContext();
+	const {loading,conversations} = useGetConversations();
 
-	const {loading,conversations} =  useGetConversations()
-	console.log("conversations",conversations);
 
   // Increment count when component re-renders
   useEffect(() => {
@@ -39,17 +40,38 @@ const Conversations = () => {
 
 
 
-  console.log("conversations", conversations);
+  console.log("filtered",filteredResults.length)
+
 
 	return (
 		<div className='py-2 flex flex-col overflow-auto'>
-		{loading && [...Array(4)].map((_, idx) => <SidebarSkeleton key={idx} />)}
 
-			{!loading&&conversations.map((conversation,idx) => (
-				<Conversation key={conversation._id} conversation={conversation} lastIdx={idx === conversations.length - 1} />
-			))}
-	
-		</div>
+		{/* Show filtered results if available */}
+		{filteredResults.length > 0 ? (
+		  filteredResults.map((filteredResult, idx) => (
+			<Conversation
+			  key={filteredResult._id}
+			  conversation={filteredResult}
+			  lastIdx={idx === filteredResults.length - 1}
+			/>
+		  ))
+		) : search ? ( // If searching and no results
+		  <p className="text-center text-gray-500 py-4">No users found.</p>
+		) : (
+		  // Show all conversations when not searching
+		  conversations.map((conversation, idx) => (
+			<Conversation
+			  key={conversation._id}
+			  conversation={conversation}
+			  lastIdx={idx === conversations.length - 1}
+			/>
+		  ))
+		)}
+  
+		{/* Show skeleton loaders when loading */}
+		{loading && [...Array(4)].map((_, idx) => <SidebarSkeleton key={idx} />)}
+  
+	  </div>
 	);
 };
 export default Conversations;

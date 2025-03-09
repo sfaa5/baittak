@@ -4,10 +4,15 @@ import { toast } from "@/hooks/use-toast";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-export async function deleteProject({ id,setProjects }: { id: string,setProjects:React.Dispatch<React.SetStateAction<Project[]>>; } ) {
+export async function deleteProject({
+  id,
+  setProjects,
+}: {
+  id: string;
+  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
+}) {
 
-  
-
+    setProjects((prevData) => prevData.filter((item) => item._id !== id));
   try {
     const response = await fetch(`${URL_SERVER}/api/projects/${id}`, {
       method: "DELETE",
@@ -19,19 +24,25 @@ export async function deleteProject({ id,setProjects }: { id: string,setProjects
       throw new Error("Failed to delete project");
     }
 
-    setProjects((prevData)=>
-    prevData.filter((item)=>id!==item._id))
+
 
     toast({
       description: "the project deleted succussfuly",
     });
   } catch (error) {
     console.error("Failed to delete project:", error);
+      // **Rollback (التراجع)** في حالة فشل الطلب
+      setProjects((prevData) => [...prevData, prevData.find((item) => item._id === id)!]);
     alert("An error occurred while trying to delete the project.");
   }
 }
 
-export const deleteSelectedRequests = async (selectedIds, setDataRequest, setReq, table) => {
+export const deleteSelectedRequests = async (
+  selectedIds,
+  setDataRequest,
+  setReq,
+  table
+) => {
   try {
     const response = await fetch(`${URL_SERVER}/api/requests/delete`, {
       method: "DELETE",
@@ -57,7 +68,6 @@ export const deleteSelectedRequests = async (selectedIds, setDataRequest, setReq
   }
 };
 
-
 // export const starrSelectedRequests = async (selectedIds, setDataRequest, setStarRequest,starRequest, table) => {
 //   try {
 //     const response = await fetch("http://localhost:5001/api/requests/star", {
@@ -78,7 +88,6 @@ export const deleteSelectedRequests = async (selectedIds, setDataRequest, setReq
 //       // // // Mark selected requests as starred in both dataRequest and starRequest
 //       // setDataRequest(starRequest
 //       // );
-
 
 //       table.resetRowSelection(); // Clear table selection
 //     } else {
@@ -105,8 +114,6 @@ export const deleteSelectedRequests = async (selectedIds, setDataRequest, setReq
 //       );
 
 //       console.log("starring requests:", starRequest);
-
-
 
 //       // Clear table selection
 //       table.resetRowSelection();

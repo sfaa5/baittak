@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 
-
 import { FaWhatsapp } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import Mail from "./Mail";
@@ -17,7 +16,7 @@ function ContactDesk({
   title,
 }: {
   user: {
-    _id:string;
+    _id: string;
     username: string;
     phoneNumber: string;
     email: string;
@@ -27,48 +26,40 @@ function ContactDesk({
 }) {
   const t = useTranslations();
 
- 
   const { data: session } = useSession();
-  const router =useRouter()
+  const router = useRouter();
 
-  const chatWith=()=>{
+   const chatWith = () => {
     if (session.user.id === user._id) return;
-    const data ={
-      image:{url:user?.image?.url},
-      username:user.username,
-      _id:user._id,
-    }
+    const data = {
+      image: { url: user?.image?.url },
+      username: user.username,
+      _id: user._id,
+    };
     localStorage.setItem("chat-user", JSON.stringify(data));
-    router.push("/messages")
-
-
-  }
+    router.push("/messages");
+  };
 
   return (
-    <div className="flex  flex-col w-1/3 lg:flex border p-3 gap-8  right-0 top-6 mt-6 rounded-md shadow-sm sticky ">
+    <div className="lg:flex hidden  flex-col w-1/3  border p-3 gap-8  right-0 top-6 mt-6 rounded-md shadow-sm sticky ">
       <div className="flex gap-4">
         <Image
           width={56}
           height={56}
           className="rounded-full"
           alt="user avatar"
-          src={
-            user.image?.url ||
-            "/messageImage.png"
-          }
+          src={user.image?.url || "/messageImage.png"}
         />
         <div className="flex flex-col">
-        <span className="text-black">{user.username}</span>
-        <span>{user.phoneNumber}</span>
+          <span className="text-black">{user.username}</span>
+          <span>{user.phoneNumber}</span>
         </div>
-
       </div>
 
-      <div className="contact-buttons hidden lg:flex gap-2  justify-stretch">
-      <Button
+      <div className="contact-buttons  lg:flex gap-2  justify-stretch">
+        <Button
           onClick={() => {
-            chatWith()
-   
+            chatWith();
           }}
           className="flex gap-2  w-full h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-startpx-3"
         >

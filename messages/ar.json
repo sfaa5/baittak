@@ -64,6 +64,8 @@
     "copyright": "©2024 Baittak.com. جميع الحقوق محفوظة"
   },
   "search": {
+    "Welcome":"اهلا",
+    "Select_a_chat_to_start_messaging":"اختر محادثة لبدء المراسلة",
     "buy": "شراء",
     "enter_location": "أدخل الموقع هنا",
     "apartment": "شقة",
@@ -312,7 +314,8 @@
     "spaHotTub": "سبا / حوض ساخن"
   },
   "company": {
-    "free": "مجاني",
+    "requests":"الطلبات",
+    "free":"مجاني",
     "Information": "معلومات",
     "Properties": "عقارات",
     "Agents": "وكلاء",
@@ -362,6 +365,13 @@
     "email": "البريد الإلكتروني",
     "close": "إغلاق"
   },
+  "alert": {
+  "head": "هل أنت متأكد تمامًا ؟",
+  "body": "لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف هذا العقار نهائيًا من سجلاتنا.",
+   "Cancel":"الغاء",
+   "Delete":"مسح"
+}
+,
   "erorr": {
     "At_least_3_images_required":"ادخل علي الاقل 3 صور",
     "Message_must_be_at_least_6_characters_long": "الرسالة يجب انت تكون علي الاقل 6 احرف",

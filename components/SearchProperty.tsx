@@ -56,7 +56,7 @@ const SearchCity = ({ city, setCity }: { city: string; setCity: (city: string) =
           {/* Input field */}
           <Combobox.Input
             placeholder={t("search.enter_location")}
-            className= {`${pathname.includes("Agency") ? 'bg-white ' : 'bg-[#F5F5F5]'}  hover:bg-gray-50 duration-200 pl-10 flex h-[48px] font-normal items-center w-[200px] lg:w-[400px] text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4`}
+            className= {`${pathname.includes("Agency") ? 'bg-white ' : 'bg-[#F5F5F5]'}  hover:bg-gray-50 duration-200 pl-10 flex h-[48px] font-normal items-center w-[200px] lg:w-[350px] text-secondary rounded-[.8rem] border-[1px] border-[#466e7f] justify-between px-4`}
             displayValue={(item: string) => item}
             onChange={(event) => setQuery(event.target.value)} // Update query on input change
           /></div>

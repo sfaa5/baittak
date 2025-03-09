@@ -6,6 +6,17 @@ import { deleteProperty } from "@/lib/actions/property.action";
 import { useSharedState } from "@/app/context/stateProvider";
 import { useLocale, useTranslations } from "next-intl";
 import { TiDeleteOutline } from "react-icons/ti";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 // This type is used to define the shape of our data.
 export type Property = {
@@ -37,6 +48,7 @@ const truncateText = (text: string, maxWords: number) => {
 
 export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property"); // Call the hook inside the function
+  const ta =useTranslations("alert");
   const locale = useLocale();
   const { setProperty } = useSharedState();
   return [
@@ -125,15 +137,31 @@ export const UseColumns = (): ColumnDef<Property>[] => {
         const id = Property._id;
        
         return (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteProperty({ id, setProperty });
-            }}
-            className="text-red-500 hover:text-red-700 ml-5"
-          >
-            <TiDeleteOutline size={22} />
-          </button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <button className="text-red-500 hover:text-red-700 ml-5">
+                <TiDeleteOutline size={22} />
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{ta("head")}</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {ta("body")}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>{ta("Cancel")}</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={async () => {
+                    await deleteProperty({ id, setProperty });
+                  }}
+                >
+                  {ta("Delete")}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         );
       },
     },

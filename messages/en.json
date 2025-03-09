@@ -62,6 +62,8 @@
     "copyright": "©2024 Baittak.com. All rights reserved"
   },
   "search": {
+    "Welcome":"Welcome",
+    "Select_a_chat_to_start_messaging":"Select a chat to start messaging",
     "buy": "Buy",
     "enter_location": "Enter location here",
     "apartment": "Apartment",
@@ -75,12 +77,12 @@
     "result_count": "(1200)"
   },
   "property": {
-    "amenity":"Amenities",
-    "More_Details":"More Details",
-    "rooms":"Rooms",
-    "bath":"Baths",
-    "Submit":"Submit",
-    "Submitting":"Submiting...",
+    "amenity": "Amenities",
+    "More_Details": "More Details",
+    "rooms": "Rooms",
+    "bath": "Baths",
+    "Submit": "Submit",
+    "Submitting": "Submiting...",
     "Image": "Image",
     "City": "City",
     "Title": "Title",
@@ -88,7 +90,7 @@
     "Price": "Price",
     "Area": "Area",
     "Likes": "Likes",
-"Actions":"Actions",
+    "Actions": "Actions",
 
     "add_Property": "Add Property",
     "search_placeholder": "Search properties...",
@@ -106,18 +108,15 @@
     "results": "results"
   },
   "project": {
-    "add_Project":"Add Project",
-      "Image": "Image",
-      "Title": "Title",
-      "Status": "Status",
-      "Price From": "Price From",
-      "Location": "Location",
-      "Total Units": "Total Units",
-      "Bedrooms": "Bedrooms",
-      "Actions": "Actions"
-    ,
-    
-
+    "add_Project": "Add Project",
+    "Image": "Image",
+    "Title": "Title",
+    "Status": "Status",
+    "Price From": "Price From",
+    "Location": "Location",
+    "Total Units": "Total Units",
+    "Bedrooms": "Bedrooms",
+    "Actions": "Actions",
     "address": "Address",
     "MONTHLY": "MONTHLY",
     "YEARS": "YEARS",
@@ -131,10 +130,10 @@
     "list": "List"
   },
   "agency": {
-    "posts":"posted:",
+    "posts": "posted:",
 
-    "for_rent":"For Rent:",
-    "for_sale":"For Sale:",
+    "for_rent": "For Rent:",
+    "for_sale": "For Sale:",
     "banner": {
       "title": "Find Best Companies For Living",
       "search_placeholder": "Enter location or Company name",
@@ -180,7 +179,7 @@
     "editUser": "Edit "
   },
   "contact": {
-    "chat":"Chat",
+    "chat": "Chat",
     "Whatsup": "Whatsup",
     "Mail": "Mail",
     "Call": "Call"
@@ -325,6 +324,7 @@
     "spaHotTub": "Spa / Hot Tub"
   },
   "company": {
+    "requests":"Requests",
     "progress": "progress",
     "free": "Free",
     "Information": "Information",
@@ -334,9 +334,10 @@
     "Messages": "Messages",
     "Package": "Package",
     "Logout": "Logout",
-    "agentInfo": {
-      "save":"Save",
     
+    "agentInfo": {
+      "save": "Save",
+
       "companyNameA": "Company Name",
 
       "UploadImages": "Upload  Images",
@@ -380,15 +381,21 @@
     "standard": "Standard",
     "base": "Base"
   },
+  "alert":{
+    "head":"Are you absolutely sure ?",
+    "body":"This action cannot be undone. This will permanently delete this property from our records.",
+    "Cancel":"Cancel",
+    "Delete":"Delete"
+  },
   "erorr": {
-    "At_least_3_images_required":"At least 3 images required",
-    "Message_must_be_at_least_6_characters_long":"Message must be at least 6 characters long.",
-   "Message_must_be_at_least_10 _haracters_long":"Message must be at least 10 characters long.",
-    "First_Name_must_be_at_least_2_characters_longg":"First Name must be at least 2 characters long.",
-    "Last_Name_must_be_at_least_2_characters_long":"Last Name must be at least 2 characters long.",
-    "You_must_accept_the_policy_to_proceed":"You must accept the policy to proceed.",
-    "Password_must_be_at_least_6_characters_long":"Password must be at least 6 characters long",
-    "City_is_rquired":"City is rquired",
+    "At_least_3_images_required": "At least 3 images required",
+    "Message_must_be_at_least_6_characters_long": "Message must be at least 6 characters long.",
+    "Message_must_be_at_least_10 _haracters_long": "Message must be at least 10 characters long.",
+    "First_Name_must_be_at_least_2_characters_longg": "First Name must be at least 2 characters long.",
+    "Last_Name_must_be_at_least_2_characters_long": "Last Name must be at least 2 characters long.",
+    "You_must_accept_the_policy_to_proceed": "You must accept the policy to proceed.",
+    "Password_must_be_at_least_6_characters_long": "Password must be at least 6 characters long",
+    "City_is_rquired": "City is rquired",
     "Addressmustbeatleast5characterslong": "Address must be at least 5 characters long.",
     "Company_Name_must_be_at_least_2_characters_long": "Company Name must be at least 2 characters long.",
     "Job_Title_must_be_at_least_2_characters_long": "Job Title must be at least 2 characters long.",
@@ -415,15 +422,13 @@
     "city": "City is required",
     "currency": "Currency is required",
     "for": "Purpose is required",
-    "project_type":"Project type is required"
-    
+    "project_type": "Project type is required"
   },
 
   "inputs": {
-   
-      "Read Less": "Read Less",
-  "Read More": "Read More",
-  "See on Map":"See on Map",
+    "Read Less": "Read Less",
+    "Read More": "Read More",
+    "See on Map": "See on Map",
     "Mail": "Mail",
     "Send Mail": "Send Mail",
     "Enter_the_details_below_to_send_an_email": "Enter the details below to send an email.",
@@ -436,10 +441,10 @@
     "Phone": "Phone",
     "Enter phone number": "Enter phone number",
     "Send": "Send",
-    "sending":"Sending...",
-    "address":"Address",
-    "units":"Units",
-    "Filter_title":"Filter Title...",
+    "sending": "Sending...",
+    "address": "Address",
+    "units": "Units",
+    "Filter_title": "Filter Title...",
     "EnterCompanyName": "Enter company name",
     "SelectCity": "Select a city",
     "EnterAddress": "Enter address",
@@ -456,11 +461,11 @@
     "hotel-apartments": "Hotel/Hotel Apartments",
     "land": "Land",
     "full-floor": "Full Floor",
-    "Select on Map":"Select on Map",
-    "SelectedImages":"Selected Images:",
-    "Filter_by_name":"Filter by name...",
-    "Delete":"Delete",
-    "Remove":"Remove",
+    "Select on Map": "Select on Map",
+    "SelectedImages": "Selected Images:",
+    "Filter_by_name": "Filter by name...",
+    "Delete": "Delete",
+    "Remove": "Remove",
     "priceM": {
       "label": "Price for m²",
       "placeholder": "priceM"
@@ -489,24 +494,21 @@
         "JOD": "JOD"
       }
     }
-  
-
-  },"table":{
-    "Next":"Next",
-    "Previous":"Previous",
-    "No_results":"No results",
-    "Title":"Title",
-    "message":"Message",
-    "phone":"Phone",
-    "time":"Time",
-    "Log_Out":"Log Out"
-
   },
-  "plan":{
+  "table": {
+    "Next": "Next",
+    "Previous": "Previous",
+    "No_results": "No results",
+    "Title": "Title",
+    "message": "Message",
+    "phone": "Phone",
+    "time": "Time",
+    "Log_Out": "Log Out"
+  },
+  "plan": {
     "posts": "posted:",
 
-
-      "free": "Free",
+    "free": "Free",
 
     "planLimit": "Plan Limit: {limit} posts",
     "postsLeft": "Posts Left",
@@ -518,29 +520,28 @@
     "posts_left": "Posts Left",
     "progress": "Progress",
     "time_until_expiration": "until expiration",
-  
-      "freePlan": {
-        "name": "Free Plan",
-        "description": "Start now for free and enjoy publishing up to {limit} ads quickly.",
-        "feature1": "Publish {limit} ads",
-        "feature2": "Limited support"
-      },
-      "basicPlan": {
-        "name": "Basic Plan",
-        "description": "The ideal choice for growth, publish up to {limit} ads for only {price} per month.",
-        "feature1": "Publish {limit} ads",
-        "feature2": "Faster support"
-      },
-      "premiumPlan": {
-        "name": "Premium Plan",
-        "description": "Stand out with your ads by publishing up to {limit} ads with priority display.",
-        "feature1": "Publish {limit} ads",
-        "feature2": "Premium support"
-      },
-      "month": "month"
-    
 
-  },"sign":{
+    "freePlan": {
+      "name": "Free Plan",
+      "description": "Start now for free and enjoy publishing up to {limit} ads quickly.",
+      "feature1": "Publish {limit} ads",
+      "feature2": "Limited support"
+    },
+    "basicPlan": {
+      "name": "Basic Plan",
+      "description": "The ideal choice for growth, publish up to {limit} ads for only {price} per month.",
+      "feature1": "Publish {limit} ads",
+      "feature2": "Faster support"
+    },
+    "premiumPlan": {
+      "name": "Premium Plan",
+      "description": "Stand out with your ads by publishing up to {limit} ads with priority display.",
+      "feature1": "Publish {limit} ads",
+      "feature2": "Premium support"
+    },
+    "month": "month"
+  },
+  "sign": {
     "header": {
       "signTitle": "Create an account",
       "signDesc": "Sign up to access exclusive features."
@@ -561,7 +562,7 @@
     "links": {
       "policy": "Policy",
       "signIn": "Sign-in",
-      "alreadyHaveAccount":"Already have account"
+      "alreadyHaveAccount": "Already have account"
     },
     "title": "Sign-in",
     "description": "Welcome back! Baittak website",
@@ -572,23 +573,23 @@
     "sign_in_button": "Sign-in",
     "google_sign_in": "Sign in with Google",
     "no_account": "Don't you have an account?",
-    "register": "Register" ,
-     "forgot_password": {
-    "for": "Forgot password",
-    "description": "To reset password, please enter your email",
-    "email": "Email",
-    "send_button": "Send"
-
+    "register": "Register",
+    "forgot_password": {
+      "for": "Forgot password",
+      "description": "To reset password, please enter your email",
+      "email": "Email",
+      "send_button": "Send"
+    },
+    "reset_password": {
+      "title": "Reset Password",
+      "description": "Enter your new password below to reset it.",
+      "password_placeholder": "Enter your new password",
+      "reset_button": "Reset Password",
+      "error_message": "There was an error resetting your password. Please try again.",
+      "success_message": "Password reset successful!"
+    }
   },
-  "reset_password": {
-    "title": "Reset Password",
-    "description": "Enter your new password below to reset it.",
-    "password_placeholder": "Enter your new password",
-    "reset_button": "Reset Password",
-    "error_message": "There was an error resetting your password. Please try again.",
-    "success_message": "Password reset successful!"
-  }
-  } , "signAgency":{
+  "signAgency": {
     "header": {
       "agentLogin": "Agent Login"
     },
@@ -609,6 +610,4 @@
       "register_buttonn": "Register..."
     }
   }
-
-
 }

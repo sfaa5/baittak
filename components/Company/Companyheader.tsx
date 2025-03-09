@@ -1,30 +1,35 @@
+"use client"
 import React from "react";
 import { SidebarTrigger } from "../ui/sidebar";
 
+import { useSession } from "next-auth/react";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/nextAuth";
+
+import useListenMessages from "@/hooks/useListenMessage";
+import useListenReuests from "@/hooks/useListenReuests";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-async function Companyheader() {
-  const session = await getServerSession(authOptions as object);
+ function Companyheader() {
+  const {data:session,status} = useSession();
+  
   const id = session?.user.id;
   console.log(id);
+  useListenMessages();
+  useListenReuests();
 
-  const response = await fetch(`${URL_SERVER}/api/agency/${id}`);
-  const data = await response.json();
 
-  console.log("headerrr", data);
+  console.log("headerrr", session);
+  console.log("headerrr", status);
 
   return (
-    <div className="flex justify-between items-center w-full border-b-2 py-4 ">
+    <div className="flex justify-between items-center w-full border-b-2 py-2 ">
       <SidebarTrigger />
 
       <nav className="flex items-center gap-5">
-        {data.image?.url ? (
+        {session?.user?.image ? (
           <img
-            src={data.image.url}
+            src={session.user?.image}
             alt="logo"
             className="  rounded-md  h-12 max-w-full object-contain"
           />

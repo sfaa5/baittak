@@ -14,7 +14,7 @@ const withAuthMiddleware = withAuth(
     console.log("Auth", isAuth);
 
     // Define protected routes
-    const protectedRoutes = ["/User", "/Company"];
+    const protectedRoutes = ["/User", "/Company","messages"];
 
     console.log("Pathname:", pathname);
     console.log("Authenticated User Role:", isAuth?.role);
@@ -33,8 +33,8 @@ const withAuthMiddleware = withAuth(
 
     // Handle role-based access
     if (
-      (isAuth?.role === "agency" && pathname.includes("/Company")) ||
-      (isAuth?.role === "user" && pathname.includes("/User"))
+      (isAuth?.role === "agency" && pathname.includes("/Company") ) ||
+      (isAuth?.role === "user" && pathname.includes("/User") || isAuth?.role === "user" && pathname.includes("messages"))
     ) {
       return I18nMiddleware(request);
     }

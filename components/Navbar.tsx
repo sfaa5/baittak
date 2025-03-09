@@ -18,7 +18,7 @@ const Navbar = () => {
   const t = useTranslations("header");
   const { data: session, status } = useSession();
 
-  const pathname = usePathname(); // Get the current path
+  const pathname = usePathname(); 
   const [activeLink, setActiveLink] = useState("");
 
   // Normalize and set the active link based on the current pathname
@@ -62,10 +62,16 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-20">
-          <div className="text-center grid grid-cols-4 w-[510px]">
+          <div
+            className={`text-center ${
+              session?.user.role !== "agency"
+                ? "grid grid-cols-4"
+                : "grid grid-cols-3"
+            }  gap-`}
+          >
             {/* Property Link */}
             <Link
-              className={`text-black-100 text-lg pb-3 border-b-2 ${
+              className={`text-black-100 text-lg pb-3 w-[127px] border-b-2  ${
                 activeLink.includes("/Property") ||
                 activeLink.includes("/العقارات")
                   ? "border-secondary font-medium text-secondary"
@@ -78,7 +84,7 @@ const Navbar = () => {
 
             {/* Projects Link */}
             <Link
-              className={`text-black-100 text-lg pb-3 border-b-2 ${
+              className={`text-black-100 text-lg pb-3 border-b-2  ${
                 activeLink.includes("/Projects") ||
                 activeLink.includes("/المشاريع")
                   ? "border-secondary font-medium text-secondary"
@@ -91,7 +97,7 @@ const Navbar = () => {
 
             {/* Agency Link */}
             <Link
-              className={`text-black-100 text-lg pb-3 border-b-2 ${
+              className={`text-black-100 text-lg pb-3 border-b-2  ${
                 activeLink.includes("/Agency") || activeLink.includes("/الوكيل")
                   ? "border-secondary font-medium text-secondary"
                   : "border-transparent hover:border-secondary hover:font-medium hover:text-secondary"
@@ -104,7 +110,7 @@ const Navbar = () => {
             {/* Profile Link */}
             {session?.user.role !== "agency" && (
               <Link
-                className={`text-black-100 text-lg pb-3 border-b-2 ${
+                className={`text-black-100 text-lg pb-3 w-[127px] border-b-2 ${
                   activeLink.includes("/User/Posts")
                     ? "border-secondary font-medium text-secondary"
                     : "border-transparent hover:border-secondary hover:font-medium hover:text-secondary"

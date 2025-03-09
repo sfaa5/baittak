@@ -11,6 +11,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import SearchHome from "../../../components/SearchHome";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import useListenMessages from "@/hooks/useListenMessage";
 
 export default function Home() {
   const { status } = useSession();

@@ -9,6 +9,8 @@ import MobileNavbar from "./MobileNavbar";
 import BaittaklogoArabic from "./ArabicLogo";
 import EnglishLogo from "./EnglishLogo";
 import {useLocale} from "next-intl";
+
+import useNotification from "@/hooks/useNotification";
 import useListenMessages from "@/hooks/useListenMessage";
 
 
@@ -19,6 +21,7 @@ function Header() {
   const locale = useLocale();
   console.log("header",router);
   useListenMessages();
+  // useNotification();
   
 
 
@@ -39,7 +42,7 @@ function Header() {
 
         {/*logo */}
         <Link href="/" >
-          {locale == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
+          {locale == "ar" ? <BaittaklogoArabic where="user" /> : <EnglishLogo />}
         </Link>
 
         {/* desktop nav */}

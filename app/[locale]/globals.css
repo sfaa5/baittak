@@ -123,7 +123,7 @@
     @apply text-[28px]  sm:text-[35px] xl:text-[55px] leading-[1.1] font-semibold text-secondary;
   }
   .h1{
-    @apply text-[24px] xl:text-[28px] leading-[1.1] font-semibold text-secondary;
+    @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold text-secondary;
   }
   .h2{
     @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;
@@ -206,9 +206,8 @@
   /* dark mode looking scrollbar */
 ::-webkit-scrollbar {
 	width: 8px;
+  height: 8px;
 }
-
-
 
 
 ::-webkit-scrollbar-thumb {

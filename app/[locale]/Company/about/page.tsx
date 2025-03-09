@@ -26,8 +26,7 @@ async function Page() {
   }
   const data = await response.json();
 
-  console.log(data);
-  console.log("gggggggggggggggg", data.properties);
+
 
   return (
     <div>

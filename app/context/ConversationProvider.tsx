@@ -14,6 +14,9 @@ const [selectedConversation, setSelectedConversation] = useState(null);
 const [conversations, setConversations] = useState([])
 const [messages,setMessages] = useState([]);
 const [totalUnreadMessages,setTotalUnreadMessages]=useState<number>(0)
+const [filteredResults, setFilteredResults ]=useState([]);
+const [search, setSearch] = useState("");
+
 
 
   // 🟢 Memoize the context value to prevent unnecessary re-renders
@@ -25,8 +28,9 @@ const [totalUnreadMessages,setTotalUnreadMessages]=useState<number>(0)
     totalUnreadMessages,
     setTotalUnreadMessages,
     messages,
-    setMessages
-  }), [conversations, selectedConversation, totalUnreadMessages,messages]);
+    setMessages,
+    filteredResults, setFilteredResults ,search, setSearch
+  }), [conversations, selectedConversation, totalUnreadMessages,messages,filteredResults]);
 
 return (
     <stateContext.Provider

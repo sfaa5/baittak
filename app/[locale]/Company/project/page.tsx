@@ -39,7 +39,7 @@ export default function DemoPage() {
  }, [status, id]);
 
   return (
-    <div className="mx-auto py-10">
+    <div className="mx-auto py-5">
       <div className="flex w-full justify-between">
         <Title name="Project" />
         <Link href={"project/addProject"}>

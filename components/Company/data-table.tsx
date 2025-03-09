@@ -83,9 +83,9 @@ export function DataTable<TData extends RowData, TValue>({
 
   const handleRowClick = (id: string) => {
     console.log(pathnaem)
-   if (pathnaem.includes("/Company/properties"))router.push(`/Property/${id}`);
-   if(pathnaem.includes("/User/posts"))router.push(`/Property/${id}`)
-    if(pathnaem.includes("/Company/project"))router.push(`/Projects/${id}`)
+   if (pathnaem.includes("Company/Properties"))router.push(`/Property/${id}`);
+   if(pathnaem.includes("/User/Posts"))router.push(`/Property/${id}`);
+    if(pathnaem.includes("/Company/project"))router.push(`/Projects/${id}`);
 
   };
 

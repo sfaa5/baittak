@@ -1,12 +1,14 @@
 import { useConversationContext } from "@/app/context/ConversationProvider";
 import { useSocketContext } from "@/app/context/SocketContext";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const useListenMessages = () => {
   const { socket } = useSocketContext();
+  const router =usePathname()
+  
   const {
     selectedConversation,
-    messages,
     setMessages,
     conversations,
     setConversations,
@@ -33,10 +35,11 @@ const useListenMessages = () => {
       console.log("0", totalUnreadMessages);
       console.log("slectedd",selectedConversation)
       console.log("conversation",conversations)
+      console.log("router",router)
+
       if (selectedConversation?._id === newMessage.senderId) {
-        console.log("1")
+        console.log("here1")
         setMessages((prevMessages) => [newMessage, ...prevMessages]);
-        console.log("2")
         setConversations((prevUsers) => {
           const index = prevUsers.findIndex(user=>user._id===newMessage.senderId|| user._id === newMessage.receiverId)
           if (index === -1) return prevUsers  // return it as it
@@ -44,25 +47,40 @@ const useListenMessages = () => {
           return [sortedUser, ...prevUsers.slice(0, index), ...prevUsers.slice(index + 1)];
         })
 
-
-      } else {
-
+      } else if(router.includes("/messages")) {
         setConversations((prevUsers) => {
-         const index = prevUsers.findIndex(user=>user._id===newMessage.senderId|| user._id === newMessage.receiverId)
-         if (index === -1) return prevUsers  // return it as it
-         const updatedUser = { ...prevUsers[index], unreadMessagesCount: prevUsers[index].unreadMessagesCount + 1 };
+        console.log("here2")
+
+         const index = prevUsers.findIndex(user=>user._id===newMessage.senderId|| user._id === newMessage.receiverId);
+
+         if (index === -1 && newMessage.senderInfo) {
+         
+          // if user is not found and senderInfo exists,add them to the list
+          return[{
+                   _id:newMessage.senderId,
+                   username:newMessage.senderInfo.username,
+                   image:{url:newMessage.senderInfo.image?.url},
+                   unreadMessagesCount: 1,
+          },
+        ...prevUsers
+        ]
+         } 
+         console.log("here3")
+
+         const updatedUser = { ...prevUsers[index], unreadMessagesCount: prevUsers[index]?.unreadMessagesCount + 1 };
          return [updatedUser, ...prevUsers.slice(0, index), ...prevUsers.slice(index + 1)];
 
         });
 
-        setTotalUnreadMessages((prev) => prev + 1);
-      }
-
+        console.log("increase count noti")
+        
+      }else{setTotalUnreadMessages((prev) => prev + 1);}
+      
       console.log("sortttttttt", conversations);
     });
 
     return () => socket?.off("newMessage");
-  }, [socket, selectedConversation, conversations, totalUnreadMessages]);
+  }, [socket, selectedConversation, setConversations, totalUnreadMessages]);
 };
 
 export default useListenMessages;

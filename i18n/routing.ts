@@ -17,23 +17,23 @@ export const routing = defineRouting({
     },
     "/Company":{
       en:"/Company",
-      ar:"/شركة"
+      ar:"/Company"
     },
     "/Company/about":{
       en:"/Company/about",
-      ar:"/شركة/معلومات"
+      ar:"/Company/about"
     },
     "/Company/Properties":{
       en:"/Company/Properties",
-      ar:"/شركة/العقارات"
+      ar:"/Company/Properties"
     }, 
        "/messages":{
       en:"/messages",
-      ar:"/الرسال"
+      ar:"/messages"
     },
     "/Plan":{
       en:"/Plan",
-      ar:"/الخطط"
+      ar:"/Plan"
     },
 
     

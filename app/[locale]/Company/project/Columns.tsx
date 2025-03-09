@@ -4,7 +4,18 @@ import { deleteProject } from "@/lib/actions/project.action";
 
 import { useSharedState } from "@/app/context/stateProvider";
 import { TiDeleteOutline } from "react-icons/ti";
-import {  useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 // Define the shape of the data
 export type Project = {
   _id: string;
@@ -21,17 +32,18 @@ export type Project = {
 
 // Helper function to truncate text to a max of 7 words
 const truncateText = (text: string, maxWords: number) => {
-  const words = text.split(' ');
+  const words = text.split(" ");
   if (words.length > maxWords) {
-    return words.slice(0, maxWords).join(' ') + '...';
+    return words.slice(0, maxWords).join(" ") + "...";
   }
   return text;
 };
 
 export const UseColumns = (): ColumnDef<Project>[] => {
   const t = useTranslations("project"); // Call the hook inside the function
+  const ta = useTranslations("alert");
 
-  const {  setProjects } = useSharedState();
+  const { setProjects } = useSharedState();
   return [
     {
       accessorKey: "images",
@@ -66,7 +78,11 @@ export const UseColumns = (): ColumnDef<Project>[] => {
       cell: ({ row }) => {
         const priceFrom = row.original.price;
         const currency = row.original.currency;
-        return <span>{priceFrom} {currency}</span>;
+        return (
+          <span>
+            {priceFrom} {currency}
+          </span>
+        );
       },
     },
     {
@@ -88,22 +104,34 @@ export const UseColumns = (): ColumnDef<Project>[] => {
       cell: ({ row }) => {
         const project: Project = row.original;
         const id = project._id;
- 
-
 
         return (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteProject({ id, setProjects });
-            }}
-            className="text-red-500 hover:text-red-700 ml-5"
-          >
-            <TiDeleteOutline size={22} />
-          </button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <button onClick={(e)=>{e.stopPropagation();}} className="text-red-500  hover:text-red-700 ml-10">
+                <TiDeleteOutline size={22} />
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{ta("head")}</AlertDialogTitle>
+                <AlertDialogDescription>{ta("body")}</AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={(e)=>{e.stopPropagation();}}>{ta("Cancel")}</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteProject({ id, setProjects });
+                  }}
+                >
+                  {ta("Delete")}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         );
       },
     },
   ];
-
-}
+};

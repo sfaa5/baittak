@@ -26,6 +26,7 @@ export default function StateProvider({ children }: StateProviderProps) {
   const [user,setUser]=useState([]);
   const [projects,setProjects]=useState([]);
   const [properties,setProperties]=useState([]);
+  const [showSidebar, setShowSidebar] = useState(true);
   
 
 
@@ -56,6 +57,8 @@ export default function StateProvider({ children }: StateProviderProps) {
         setProjects,
         properties,
         setProperties,
+        showSidebar,
+         setShowSidebar
 
 
       }}

@@ -22,8 +22,8 @@ function Search() {
 
   const [city, setCity] = useState("");
   const [propertyType, setPropertyType] = useState("");
-  const [rooms, setRooms] = useState("");
-  const [bathrooms, setBarooms] = useState("");
+  const [rooms, setRooms] = useState(0);
+  const [bathrooms, setBarooms] = useState(0);
   const [purpose, setPurpose] = useState("");
 
   const [priceRange, setPriceRange] = React.useState<{
@@ -58,8 +58,8 @@ function Search() {
   const updateSearchParams = (
     city: string,
     propertyType: string,
-    rooms: string,
-    bathrooms: string,
+    rooms: number,
+    bathrooms: number,
     purpose: string,
     priceRange: { min?: number; max?: number }
   ) => {
@@ -110,7 +110,7 @@ function Search() {
             dir={locale === "ar" ? "rtl" : "ltr"}
             value={propertyType}
             onValueChange={(value) => {
-              setPropertyType(value); // Update the state with the selected value
+             value==="all"?setPropertyType(""):setPropertyType(value); // Update the state with the selected value
             }}
           >
             <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
@@ -118,6 +118,8 @@ function Search() {
             </SelectTrigger>
 
             <SelectContent>
+            <SelectItem value="all">{t("addUser.all")}</SelectItem>
+
               <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
               <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
               <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
@@ -150,7 +152,8 @@ function Search() {
             dir={locale === "ar" ? "rtl" : "ltr"}
             value={purpose}
             onValueChange={(value) => {
-              setPurpose(value); // Update the state with the selected value
+              value==="All"?setPurpose(""):setPurpose(value);
+            
             }}
           >
             <SelectTrigger className="flex  hover:bg-gray-50 duration-200 h-[48px] gap-4 items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
@@ -158,6 +161,8 @@ function Search() {
             </SelectTrigger>
 
             <SelectContent>
+            <SelectItem value="All">{t("addUser.all")}</SelectItem>
+
               <SelectItem value="rent">{t("addUser.rental")}</SelectItem>
               <SelectItem value="sell">{t("addUser.sell")}</SelectItem>
             </SelectContent>

@@ -23,7 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSharedState } from "@/app/context/stateProvider";
-import { deleteSelectedRequests, } from "@/lib/actions/project.action";
+import { deleteSelectedRequests } from "@/lib/actions/project.action";
 import Modal from "./Modal";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -36,7 +36,6 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -46,11 +45,10 @@ export function DataTable<TData, TValue>({
   const { req, setReq } = useSharedState();
   const { setDataRequest } = useSharedState();
 
-
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState(null);
-    const locale = useLocale();
-    const t =useTranslations()
+  const locale = useLocale();
+  const t = useTranslations();
 
   // const handleUnstarClick = async () => {
   //   await unstarSelectedRequests(req, setDataRequest, setStarRequest, starRequest, table);
@@ -67,7 +65,6 @@ export function DataTable<TData, TValue>({
     setIsModalOpen(false);
     setSelectedRow(null);
   };
-
 
   const table = useReactTable({
     data,
@@ -86,47 +83,44 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
+      <div className="flex justify-between  py-4    w-full">
+        <Input
+          placeholder={t("inputs.Filter_by_name")}
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("name")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
 
-
-                <div className="flex justify-between  py-4    w-full">
-          <Input
-            placeholder={t("inputs.Filter_by_name")}
-            value={
-              (table.getColumn("name")?.getFilterValue() as string) ?? ""
-            }
-            onChange={(event) =>
-              table.getColumn("name")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-
-          {showDelte && (
-            <div className="">
-              <Button
-                onClick={() =>
-                  deleteSelectedRequests(req, setDataRequest, setReq, table)
-                }
-                variant={"secondary"}
-                size="sm"
-                className="bg-red-600 hover:bg-red-400 text-white"
-              >
-                {t("inputs.Delete")}
-              </Button>
-            </div>
-          )}
-
-    
-        
-
+        {showDelte && (
+          <div className="">
+            <Button
+              onClick={() =>
+                deleteSelectedRequests(req, setDataRequest, setReq, table)
+              }
+              variant={"secondary"}
+              size="sm"
+              className="bg-red-600 hover:bg-red-400 text-white"
+            >
+              {t("inputs.Delete")}
+            </Button>
+          </div>
+        )}
       </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}  >
+              <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead className={`${locale==="ar"?"text-right":"text-left"} `} key={header.id}>
+                    <TableHead
+                      className={`${
+                        locale === "ar" ? "text-right" : "text-left"
+                      } `}
+                      key={header.id}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -163,7 +157,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {("No_results")}
+                  {"No_results"}
                 </TableCell>
               </TableRow>
             )}
@@ -177,8 +171,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-                    {t("table.Previous")}
-
+          {t("table.Previous")}
         </Button>
         <Button
           variant="outline"
@@ -186,8 +179,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-                    {t("table.Next")}
-
+          {t("table.Next")}
         </Button>
       </div>
       {isModalOpen && selectedRow && (
