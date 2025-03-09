@@ -13,13 +13,12 @@ import Link from "next/link";
 import { FaRegMessage } from "react-icons/fa6";
 import { IoIosLogOut } from "react-icons/io";
 import { RiUserFill } from "react-icons/ri";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/nextAuth";
+
 
  function SignOut({ user }) {
   const t = useTranslations();
   const { totalUnreadMessages } = useConversationContext();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
 
   return (

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { getTranslations } from "next-intl/server";
-import { FaWhatsapp } from "react-icons/fa";
-import { FiMapPin, FiPhoneCall } from "react-icons/fi";
+
+import { FiMapPin } from "react-icons/fi";
 import { getLocale } from "next-intl/server";
-import { IoHomeSharp, IoMailOutline } from "react-icons/io5";
+import { IoHomeSharp } from "react-icons/io5";
 import { LiaBedSolid } from "react-icons/lia";
 import { MdArrowForwardIos } from "react-icons/md";
 import { PiBathtubLight, PiStairsThin } from "react-icons/pi";
@@ -15,7 +15,7 @@ import ImageModel from "@/components/ImageModel";
 import Map from "../Map";
 import Like from "../Like";
 import Share from "../Share";
-import { LuMessagesSquare } from "react-icons/lu";
+
 import ContactMobile from "@/components/ContactMobile";
 
 const propertyTypeTranslations = {
@@ -113,12 +113,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       })
       .catch((error) => console.error("Error fetching address:", error));
   }
-
-  
-
-  
-
-
 
 
   return (

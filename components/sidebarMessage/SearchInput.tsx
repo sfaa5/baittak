@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IoArrowBackSharp, IoSearchSharp } from "react-icons/io5";
 import { Input } from "../ui/input";
 import { useConversationContext } from "@/app/context/ConversationProvider";

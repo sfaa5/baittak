@@ -10,7 +10,7 @@ import BaittaklogoArabic from "./ArabicLogo";
 import EnglishLogo from "./EnglishLogo";
 import {useLocale} from "next-intl";
 
-import useNotification from "@/hooks/useNotification";
+
 import useListenMessages from "@/hooks/useListenMessage";
 
 

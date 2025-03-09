@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import useListenMessages from "@/hooks/useListenMessage";
 import useListenReuests from "@/hooks/useListenReuests";
 
-const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
+
 
  function Companyheader() {
   const {data:session,status} = useSession();

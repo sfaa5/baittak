@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 
 import React from 'react'
 import { FaWhatsapp } from 'react-icons/fa';
-import { IoMailOutline } from 'react-icons/io5';
 import { LuMessagesSquare } from 'react-icons/lu';
 import { Button } from './ui/button';
 import Mail from './Mail';

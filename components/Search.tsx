@@ -109,9 +109,9 @@ function Search() {
           <Select
             dir={locale === "ar" ? "rtl" : "ltr"}
             value={propertyType}
-            onValueChange={(value) => {
-             value==="all"?setPropertyType(""):setPropertyType(value); // Update the state with the selected value
-            }}
+            onValueChange={(value) => (
+             value==="all"?setPropertyType(""):setPropertyType(value)
+    )  }
           >
             <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("addUser.selectPropertyType")} />
@@ -151,10 +151,10 @@ function Search() {
           <Select
             dir={locale === "ar" ? "rtl" : "ltr"}
             value={purpose}
-            onValueChange={(value) => {
-              value==="All"?setPurpose(""):setPurpose(value);
+            onValueChange={(value) => (
+              value==="All"?setPurpose(""):setPurpose(value)
             
-            }}
+  )}
           >
             <SelectTrigger className="flex  hover:bg-gray-50 duration-200 h-[48px] gap-4 items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("search.buy")} />

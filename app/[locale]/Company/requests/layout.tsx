@@ -3,7 +3,6 @@
 import React from "react";
 
 
-import { useTranslations } from "next-intl";
 
 
 type LayoutProps = {
@@ -11,7 +10,7 @@ type LayoutProps = {
 };
 
 function Layout({ children }: LayoutProps) {
-  const t = useTranslations(); // Load translations
+
 
 
 

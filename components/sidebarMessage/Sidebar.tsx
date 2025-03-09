@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import SearchInput from "./SearchInput";
 import Conversations from "./Conversations";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -8,10 +8,10 @@ import { useLocale, useTranslations } from "next-intl";
 
 function Sidebar() {
   console.log("Parent re-rendered!");
-  const { showSidebar, setShowSidebar } = useSharedState();
+  const { showSidebar } = useSharedState();
   const isMobile = useIsMobile();
 
-  const t = useTranslations();
+
   const locale =useLocale()
 
   return (
