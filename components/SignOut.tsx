@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { signOut, useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { FaRegMessage } from "react-icons/fa6";
 import { IoIosLogOut } from "react-icons/io";
@@ -19,6 +19,8 @@ import { RiUserFill } from "react-icons/ri";
   const t = useTranslations();
   const { totalUnreadMessages } = useConversationContext();
   const { data: session } = useSession();
+  const locale =useLocale();
+  const isRTL = locale === "ar";
 
 
   return (
@@ -48,7 +50,7 @@ import { RiUserFill } from "react-icons/ri";
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white shadow-lg rounded-md py-1 ">
           <Link href={session.user.role === "user" ? "/messages" : "/Company/messages"}>
-            <DropdownMenuItem  className="flex w-full items-center gap-2 px-2 py-2 hover:bg-gray-100 cursor-pointer">
+            <DropdownMenuItem dir={isRTL ? "rtl" : "ltr"}  className="flex w-full items-center gap-2 px-2 py-2 hover:bg-gray-100 cursor-pointer">
               <FaRegMessage size={20} />
               <span className="text-sm font-medium">
                 {t("header.messages")}
