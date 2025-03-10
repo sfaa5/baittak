@@ -1,11 +1,17 @@
 "use client"
 import Sidebar from "@/components/sidebarMessage/Sidebar";
 import Buttons from "../User/Buttons";
+import { useEffect } from "react";
+import { useSharedState } from "@/app/context/stateProvider";
 
 
 export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const { setShowSidebar } = useSharedState();
+  useEffect(()=>{
+    return setShowSidebar(true)
+  },[])
   
   return (
     <div className="container 2xl:px-[120px] flex flex-col pt-5 gap-5  ">
