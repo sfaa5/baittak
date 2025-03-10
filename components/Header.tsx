@@ -38,6 +38,8 @@ function Header() {
               {t("header.post property")}
             </button>
           </Link>
+
+          
         </div>
 
         {/*logo */}
@@ -55,6 +57,7 @@ function Header() {
         <div className="xl:hidden">
           <MobileNavbar />
         </div>
+
       </div>
     </header>
   );

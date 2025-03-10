@@ -9,15 +9,23 @@ import EnglishLogo from "./EnglishLogo";
 import { CiHeart } from "react-icons/ci";
 import { FaSignInAlt } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
-import {useLocale} from "next-intl";
+import { useLocale } from "next-intl";
+import SignInWithGoogle from "./SignInWithGoogle";
+import { Skeleton } from "./ui/skeleton";
+import SignOut from "./SignOut";
 
 import { useTranslations } from "next-intl";
-
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { SignAgency } from "@/app/[locale]/auth/SignAgency";
+import LocaleSwitcher from "./LocalSwitcher";
 
 function MobileNavbar() {
   const locale = useLocale();
-  const  t  = useTranslations();
+  const t = useTranslations();
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  const [isOpen, setIsOpen] = useState(false);
 
   // Links are created dynamically with the `t` function.
   const links = [
@@ -40,12 +48,12 @@ function MobileNavbar() {
   ];
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen} >
       <SheetTrigger className="flex justify-center items-center">
         <CiMenuFries className="text-[32px] text-secondry" />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
-        <div className="mt-5 mb-10 text-center text-2xl">
+        <div className="mt-5 mb-10 mx-auto text-center text-2xl">
           <Link href="/">
             {locale == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
           </Link>
@@ -55,6 +63,7 @@ function MobileNavbar() {
           {links.map((link, index) => {
             return (
               <Link
+              onClick={() => setIsOpen(false)}
                 href={link.path}
                 key={index}
                 className={`${
@@ -68,31 +77,38 @@ function MobileNavbar() {
             );
           })}
           <div className="flex flex-col gap-8 items-center border-t-[2px] pt-6">
-            <Link href="">
-     
-              <div className="flex items-center  gap-2 ">
-                {/* <TfiWorld /> <LanguageSwitcher /> */}
+            {status === "loading" ? (
+              <div className="flex items-center gap-2 px-4 py-2  border border-gray-300 rounded-lg text-gray-800 ">
+                <Skeleton className="h-6 w-6 rounded-full" />
+
+                <Skeleton className="h-2 w-[80px]" />
               </div>
-            </Link>
-            <Link href="/">
-      
-              <div className="flex items-center gap-2 ">
+            ) : session ? (
+              <SignOut user={session?.user} />
+            ) : (
+              <div onClick={() => setIsOpen(false)}>
+               
+                <SignInWithGoogle />
+              </div>
+            )}
+
+          
+          <LocaleSwitcher />
+            
+
+            <Link href="/User/Favorit">
+              <div onClick={() => setIsOpen(false)} className="flex items-center gap-2 ">
                 <CiHeart /> <span>{t("header.favorites")}</span>
               </div>
             </Link>
 
-            <Link href="/Company/about">
-  
-              <div className="flex items-center  gap-2">
-                <FaCircleUser /> <span>{t("header.agent login")}</span>
-              </div>
-            </Link>
-            <Link href="/">
-           
-              <div className="flex items-center  gap-2 ">
-                <FaSignInAlt /> <span>{t("header.sign in")}</span>
-              </div>
-            </Link>
+            {session?.user?.role == "agency" ? (
+              <Link onClick={() => setIsOpen(false)} className="mt-2" href="/Company/about">
+                {t("header.company")}
+              </Link>
+            ) : (
+              <SignAgency />
+            )}
           </div>
         </nav>
       </SheetContent>
