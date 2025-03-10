@@ -10,8 +10,9 @@ const [message,setMessage]=useState('');
 const handelSubmit=async(e)=> {
 	e.preventDefault();
 	if(!message) return;
-	await sendMessage(message);
 	setMessage('');
+	await sendMessage(message);
+
 }
 
 	return (
