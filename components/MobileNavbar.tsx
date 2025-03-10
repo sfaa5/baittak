@@ -52,7 +52,7 @@ function MobileNavbar() {
         <CiMenuFries className="text-[32px] text-secondry" />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
-        <div className="mt-5 mb-10 mx-auto text-center text-2xl">
+        <div className="mt- mb-4 mx-auto text-center text-2xl">
           <Link href="/">
             {locale == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
           </Link>
@@ -69,7 +69,7 @@ function MobileNavbar() {
                   link.path === pathname
                     ? "text-secondry border-b-2 border-secondry"
                     : ""
-                } text-xl capitalize hover:text-primary transition-all`}
+                } text-lg capitalize hover:text-primary transition-all`}
               >
                 {link.name}
               </Link>

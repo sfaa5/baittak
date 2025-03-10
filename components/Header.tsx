@@ -43,8 +43,8 @@ function Header() {
         </div>
 
         {/*logo */}
-        <Link href="/" >
-          {locale == "ar" ? <BaittaklogoArabic where="user" /> : <EnglishLogo />}
+        <Link href="/"  >
+          {locale == "ar" ? <div className="-mr-8"> <BaittaklogoArabic where="user" /></div> : <EnglishLogo />}
         </Link>
 
         {/* desktop nav */}
