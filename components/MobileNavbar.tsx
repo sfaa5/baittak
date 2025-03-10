@@ -7,8 +7,7 @@ import { CiMenuFries } from "react-icons/ci";
 import BaittaklogoArabic from "./ArabicLogo";
 import EnglishLogo from "./EnglishLogo";
 import { CiHeart } from "react-icons/ci";
-import { FaSignInAlt } from "react-icons/fa";
-import { FaCircleUser } from "react-icons/fa6";
+
 import { useLocale } from "next-intl";
 import SignInWithGoogle from "./SignInWithGoogle";
 import { Skeleton } from "./ui/skeleton";
