@@ -17,16 +17,15 @@ import BaittaklogoArabic from "../ArabicLogo";
 import { Button } from "../ui/button";
 import { IoIosLogOut } from "react-icons/io";
 import { signOut } from "next-auth/react";
-
+import { useConversationContext } from "@/app/context/ConversationProvider";
 import { usePathname } from "next/navigation";
-import useGetUnReadCount from "@/hooks/useGetUnReadCount";
 
 
 export function AppSidebar() {
   const [activeItem, setActiveItem] = useState<string>("");
   const  t = useTranslations();
   const locale = useLocale();
-  const {totalUnreadMessages}=useGetUnReadCount()
+  const {totalUnreadMessages}=useConversationContext();
   const pathname = usePathname(); 
 
 
