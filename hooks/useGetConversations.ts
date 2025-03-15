@@ -40,7 +40,7 @@ const useGetConversations = () => {
 
           if (chatUser) {
             const isFind = updatedConversations.some(
-              (con) => con._id === chatUser._id
+              (con) => con?.post?._id === chatUser.post._id
             );
             if (!isFind) updatedConversations.push(chatUser);
           }
@@ -53,6 +53,7 @@ const useGetConversations = () => {
         });
 
         if (chatUser) {
+          console.log("chatUser",chatUser)
           setSelectedConversation(chatUser);
         }
 

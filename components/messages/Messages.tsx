@@ -3,15 +3,17 @@
 import useGetMessages from "@/hooks/useGetMessages";
 import Message from "./Message";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
+import { useConversationContext } from "@/app/context/ConversationProvider";
 
 
 const Messages = () => {
 	const {messages,loading}=useGetMessages();
+	const {selectedConversation}=useConversationContext()
 
 
 
 	return (
-		<div className={`${!loading && messages.length !== 0 && 'flex-col-reverse'} flex-col px-4 flex  gap-6 h-[83%] sm:h-[86%] pb-6 pt-4 overflow-auto overscroll-contain `}>
+		<div className={`${!loading && messages.length !== 0 && 'flex-col-reverse'} flex-col px-4 flex  gap-6  ${selectedConversation?.post?"h-[75%] sm:h-[76%]":"h-[83%] sm:h-[86%]"}  pb-6 pt-4 overflow-auto overscroll-contain `}>
 			{!loading&& messages.length>0 && messages.map((message)=>(
 
 				<div className="" key={message._id} >

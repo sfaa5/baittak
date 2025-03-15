@@ -36,12 +36,15 @@ function MessageButton() {
       }
 
       const user = session?.user.id;
+      const email = session?.user.email;
+      const username = session?.user.name;
+      const phoneNumber = session?.user.phoneNumber;
       const response = await fetch(`${URL_SERVER}/api/requests/Send`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message, user }),
+        body: JSON.stringify({ message, user,email,username,phoneNumber }),
       });
 
       if (!response.ok) {

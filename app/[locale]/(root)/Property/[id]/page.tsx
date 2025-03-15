@@ -217,7 +217,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
 
           {/* contact Mobile */}
-<ContactMobile user={user} title={title}/>
+<ContactMobile post={{ _id, title, price,images,currency,rentaltype }} user={user} title={title}/>
 
           {/* deep details */}
           <div className="w-full flex flex-col gap-10 justify-start">
@@ -693,7 +693,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
         </div>
         {/* contact Desktop */}
-        <ContactDesk user={user} title={title} />
+        <ContactDesk post={{ _id, title, price,images,currency,rentaltype }} user={user} title={title} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import {  useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import { signIn } from "next-auth/react";
 import { useEffect, useRef } from "react";
@@ -14,18 +14,15 @@ import {
   FormControl,
   FormField,
   FormItem,
-
   FormMessage,
 } from "@/components/ui/form";
 import { Checkbox } from "./ui/checkbox";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "@/hooks/use-toast";
 
-
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function Sign({ onClose }) {
-
   const t = useTranslations();
   const [errorr, setError] = React.useState("");
 
@@ -33,8 +30,7 @@ function Sign({ onClose }) {
   const [loading, setLoading] = React.useState(false);
 
   const searchParams = new URLSearchParams(window.location.search);
-const tE = useTranslations("erorr")
-
+  const tE = useTranslations("erorr");
 
   const modalRef = useRef(null);
 
@@ -44,7 +40,9 @@ const tE = useTranslations("erorr")
       password: z.string().min(6, {
         message: tE("Password_must_be_at_least_6_characters_long"),
       }),
-      email: z.string().email({   message: tE("Please_enter_a_valid_email_address"),}),
+      email: z
+        .string()
+        .email({ message: tE("Please_enter_a_valid_email_address") }),
     });
   } else if (Sign === "register") {
     // Schema for form validation
@@ -67,15 +65,19 @@ const tE = useTranslations("erorr")
       acceptPolicy: z.boolean().refine((val) => val === true, {
         message: tE("You_must_accept_the_policy_to_proceed"),
       }),
-      email: z.string().email({   message: tE("Please_enter_a_valid_email_address"), }),
+      email: z
+        .string()
+        .email({ message: tE("Please_enter_a_valid_email_address") }),
     });
   } else if (Sign === "forget") {
     formSchema = z.object({
-      email: z.string().email({  message: tE("Please_enter_a_valid_email_address"), }),
+      email: z
+        .string()
+        .email({ message: tE("Please_enter_a_valid_email_address") }),
     });
   }
 
-  const form  = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
@@ -88,8 +90,6 @@ const tE = useTranslations("erorr")
     },
   });
 
-
-
   useEffect(() => {
     // Event listener to close modal when clicking outside
     const handleClickOutside = (event) => {
@@ -101,8 +101,7 @@ const tE = useTranslations("erorr")
     // Attach the event listener to the document
     document.addEventListener("mousedown", handleClickOutside);
 
-    searchParams.delete('login')
-
+    searchParams.delete("login");
 
     // Clean up the event listener when the component is unmounted
     return () => {
@@ -113,7 +112,7 @@ const tE = useTranslations("erorr")
   // Submit handler
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log("Form Values:", values);
-    setError("")
+    setError("");
     try {
       const response = await fetch(`${URL_SERVER}/api/auth/register`, {
         method: "POST",
@@ -140,7 +139,6 @@ const tE = useTranslations("erorr")
       // Parse the response if needed
       const result = await response.json();
       console.log("Response from API:", result);
-
     } catch (error) {
       console.error("Error during form submission:", error);
 
@@ -151,11 +149,15 @@ const tE = useTranslations("erorr")
   const onSubmitSign = async (values: z.infer<typeof formSchema>) => {
     setError("");
     setLoading(true);
-    const result = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    },{callbackUrl:process.env.NEXT_PUBLIC_URL_CLIENT});
+    const result = await signIn(
+      "credentials",
+      {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      },
+      { callbackUrl: process.env.NEXT_PUBLIC_URL_CLIENT }
+    );
 
     if (result?.error) {
       setError("Invalid email or password");
@@ -206,292 +208,332 @@ const tE = useTranslations("erorr")
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       {Sign === "register" ? (
-      <div
-      ref={modalRef}
-      className="bg-white px-6 pt-8 pb-4 rounded-lg shadow-lg max-w-md w-full relative"
-    >
-      {/* Close Icon */}
-      <button
-        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-        onClick={onClose}
-        aria-label="Close"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+        <div
+          ref={modalRef}
+          className="bg-white px-6 pt-8 pb-4 rounded-lg shadow-lg max-w-md w-full relative"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
-
-      {/* Text Description */}
-      <div className="text-center mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-2">
-          {t("sign.header.signTitle")}
-        </h2>
-        <p className="text-gray-600 text-sm">{t("header.signDesc")}</p>
-      </div>
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          {/* First Name Field */}
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder={t("sign.form.firstName")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Last Name Field */}
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder={t("sign.form.lastName")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Email Field */}
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input type="text" placeholder={t("sign.form.email")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Phone Number Field */}
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input type="text" placeholder={t("sign.form.phoneNumber")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Address Field */}
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder={t("sign.form.address")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Password Field */}
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input type="password" placeholder={t("sign.form.password")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Accept Policy Field */}
-          <FormField
-            control={form.control}
-            name="acceptPolicy"
-            render={({ field }) => (
-              <FormItem className="flex items-center">
-                <FormControl>
-                  <Checkbox
-                    className="ml-1"
-                    checked={field.value}
-                    onCheckedChange={() => {
-                      field.onChange(!field.value);
-                    }}
-                  />
-                </FormControl>
-                <label className="ml-2 pb-1 text-[12px]">
-                  {t("sign.form.acceptPolicy")} <a href="#">{t("sign.links.policy")}</a>
-                </label>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {errorr && <p style={{ color: "red" }}>{errorr}</p>}
-          <Button className="w-full py-3" type="submit">
-            {t("sign.buttons.createAccount")}
-          </Button>
-        </form>
-      </Form>
-
-      {/* Google Sign-In Button */}
-      <div className="space-y-4">
-        <button
-          onClick={() => signIn("google",{callbackUrl:process.env.NEXT_PUBLIC_URL_CLIENT})}
-          type="button"
-          className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
-        >
-          <FaGoogle className="text-lg" />
-          {t("sign.buttons.googleSignIn")}
-        </button>
-      </div>
-
-      <p className="text-gray-500 font-light text-[16px] w-full text-center mt-4">
-        {t("sign.links.alreadyHaveAccount")}        <span
-          onClick={() => { setSign("sign"); setError(''); }}
-          className="cursor-pointer text-primary font-semibold mx-1"
-        >
-          {t("sign.links.signIn")}
-        </span>
-
-      </p>
-    </div>
-      ) : Sign === "sign" ? (
-<div
-  ref={modalRef}
-  className="bg-white px-6 pt-8 pb-4 rounded-lg shadow-lg max-w-md w-full relative"
->
-  {/* Close Icon */}
-  <button
-    className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-    onClick={onClose}
-    aria-label="Close"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
-  </button>
-
-  {/* Text Description */}
-  <div className="text-center mb-6">
-    <h2 className="text-xl font-bold text-gray-800 mb-2">{t("sign.title")}</h2>
-    <p className="text-gray-600 text-sm">{t("sign.description")}</p>
-  </div>
-
-  <Form {...form}>
-    <form
-      onSubmit={form.handleSubmit(onSubmitSign)}
-      className="space-y-6"
-    >
-      {/* Email Field */}
-      <FormField
-        control={form.control}
-        name="email"
-        render={({ field }) => (
-          <FormItem>
-            <FormControl>
-              <Input type="text" placeholder={t("sign.email")} {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      {/* Password Field */}
-      <FormField
-        control={form.control}
-        name="password"
-        render={({ field }) => (
-          <FormItem>
-            <FormControl>
-              <Input
-                type="password"
-                placeholder={t("sign.password")}
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <div className="text-[14px] font-light">
-        <p>
-          {t("sign.forget_password")}{" "}
-          <span
-            onClick={() => { setSign("forget"); setError("") }}
-            className="text-secondary cursor-pointer hover:underline"
+          {/* Close Icon */}
+          <button
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+            aria-label="Close"
           >
-            {t("sign.reset_here")}
-          </span>
-        </p>
-      </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
 
-      {errorr && <p style={{ color: "red" }}>{errorr}</p>}
-      <Button disabled={loading} className="w-full py-3" type="submit">
-        {loading ? t("sign.sign_in_button") + "..." : t("sign.sign_in_button")}
-      </Button>
-    </form>
-  </Form>
+          {/* Text Description */}
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-2">
+              {t("sign.header.signTitle")}
+            </h2>
+            <p className="text-gray-600 text-sm">{t("header.signDesc")}</p>
+          </div>
 
-  {/* Google Sign-In Button */}
-  <div className="space-y-4">
-    <button
-   onClick={() => signIn("google",{callbackUrl:process.env.NEXT_PUBLIC_URL_CLIENT})}
-      type="button"
-      className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white  py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
-    >
-      <FaGoogle className="text-lg" />
-      {t("sign.google_sign_in")}
-    </button>
-  </div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* First Name Field */}
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder={t("sign.form.firstName")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-  <div>
-    <p className="text-gray-500 font-light text-[16px] w-full text-center mt-4">
-      {t("sign.no_account")}
-      <span
-        onClick={() => { setSign("register"); setError("") }}
-        className="cursor-pointer text-primary font-semibold mx-1"
-      >
-        {t("sign.register")}
-      </span>
-    </p>
-  </div>
-</div>
+              {/* Last Name Field */}
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder={t("sign.form.lastName")} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
+              {/* Email Field */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder={t("sign.form.email")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Phone Number Field */}
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder={t("sign.form.phoneNumber")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Address Field */}
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder={t("sign.form.address")} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Password Field */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder={t("sign.form.password")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Accept Policy Field */}
+              <FormField
+                control={form.control}
+                name="acceptPolicy"
+                render={({ field }) => (
+                  <FormItem className="flex items-center">
+                    <FormControl>
+                      <Checkbox
+                        className="ml-1"
+                        checked={field.value}
+                        onCheckedChange={() => {
+                          field.onChange(!field.value);
+                        }}
+                      />
+                    </FormControl>
+                    <label className="ml-2 pb-1 text-[12px]">
+                      {t("sign.form.acceptPolicy")}{" "}
+                      <a href="#">{t("sign.links.policy")}</a>
+                    </label>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {errorr && <p style={{ color: "red" }}>{errorr}</p>}
+              <Button className="w-full py-3" type="submit">
+                {t("sign.buttons.createAccount")}
+              </Button>
+            </form>
+          </Form>
+
+          {/* Google Sign-In Button */}
+          <div className="space-y-4">
+            <button
+              onClick={() =>
+                signIn("google", {
+                  callbackUrl: process.env.NEXT_PUBLIC_URL_CLIENT,
+                })
+              }
+              type="button"
+              className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
+            >
+              <FaGoogle className="text-lg" />
+              {t("sign.buttons.googleSignIn")}
+            </button>
+          </div>
+
+          <p className="text-gray-500 font-light text-[16px] w-full text-center mt-4">
+            {t("sign.links.alreadyHaveAccount")}{" "}
+            <span
+              onClick={() => {
+                setSign("sign");
+                setError("");
+              }}
+              className="cursor-pointer text-primary font-semibold mx-1"
+            >
+              {t("sign.links.signIn")}
+            </span>
+          </p>
+        </div>
+      ) : Sign === "sign" ? (
+        <div
+          ref={modalRef}
+          className="bg-white px-6 pt-8 pb-4 rounded-lg shadow-lg max-w-md w-full relative"
+        >
+          {/* Close Icon */}
+          <button
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Text Description */}
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-2">
+              {t("sign.title")}
+            </h2>
+            <p className="text-gray-600 text-sm">{t("sign.description")}</p>
+          </div>
+
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmitSign)}
+              className="space-y-6"
+            >
+              {/* Email Field */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder={t("sign.email")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Password Field */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder={t("sign.password")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="text-[14px] font-light">
+                <p>
+                  {t("sign.forget_password")}{" "}
+                  <span
+                    onClick={() => {
+                      setSign("forget");
+                      setError("");
+                    }}
+                    className="text-secondary cursor-pointer hover:underline"
+                  >
+                    {t("sign.reset_here")}
+                  </span>
+                </p>
+              </div>
+
+              {errorr && <p style={{ color: "red" }}>{errorr}</p>}
+              <Button disabled={loading} className="w-full py-3" type="submit">
+                {loading
+                  ? t("sign.sign_in_button") + "..."
+                  : t("sign.sign_in_button")}
+              </Button>
+            </form>
+          </Form>
+
+          {/* Google Sign-In Button */}
+          <div className="space-y-4">
+            <button
+              onClick={() =>
+                signIn("google", {
+                  callbackUrl: process.env.NEXT_PUBLIC_URL_CLIENT,
+                })
+              }
+              type="button"
+              className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white  py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
+            >
+              <FaGoogle className="text-lg" />
+              {t("sign.google_sign_in")}
+            </button>
+          </div>
+
+          <div>
+            <p className="text-gray-500 font-light text-[16px] w-full text-center mt-4">
+              {t("sign.no_account")}
+              <span
+                onClick={() => {
+                  setSign("register");
+                  setError("");
+                }}
+                className="cursor-pointer text-primary font-semibold mx-1"
+              >
+                {t("sign.register")}
+              </span>
+            </p>
+          </div>
+        </div>
       ) : Sign === "forget" ? (
         <div
           ref={modalRef}
@@ -525,7 +567,7 @@ const tE = useTranslations("erorr")
               {t("sign.forgot_password.for")}
             </h2>
             <p className="text-gray-600 text-sm">
-            {t("sign.forgot_password.description")}
+              {t("sign.forgot_password.description")}
             </p>
           </div>
 
@@ -541,7 +583,11 @@ const tE = useTranslations("erorr")
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input type="text" placeholder={t("sign.forgot_password.email")} {...field} />
+                      <Input
+                        type="text"
+                        placeholder={t("sign.forgot_password.email")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -549,7 +595,9 @@ const tE = useTranslations("erorr")
               />
               {errorr && <p style={{ color: "red" }}>{errorr}</p>}
               <Button disabled={loading} className="w-full py-3" type="submit">
-                {loading ? t("sign.forgot_password.send_button") + "..." : t("sign.forgot_password.send_button")}
+                {loading
+                  ? t("sign.forgot_password.send_button") + "..."
+                  : t("sign.forgot_password.send_button")}
               </Button>
             </form>
           </Form>

@@ -1,4 +1,5 @@
 import { IoMdShareAlt } from "react-icons/io";
+import { PiShareFatThin } from "react-icons/pi";
 
 const ShareButton = ({ propertyUrl, propertyTitle }) => {
   const handleShare = async (e) => {
@@ -21,11 +22,12 @@ const ShareButton = ({ propertyUrl, propertyTitle }) => {
 
   return (
     <button
-      className="flex w-full h-[45px] hover:bg-gray-100 items-center font-semibold bg-[#1F4454] bg-opacity-25 text-black rounded-[.8rem] justify-between px-3"
+    className="flex w-full items-center text-sm hover:bg-gray-100 gap-2 h-[45px]   bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justi px-3"
+
       onClick={handleShare}
     >
-      <IoMdShareAlt />
-
+      <PiShareFatThin />
+      
     </button>
   );
 };

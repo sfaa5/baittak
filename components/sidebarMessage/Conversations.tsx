@@ -61,7 +61,7 @@ const Conversations = () => {
 		  // Show all conversations when not searching
 		  conversations.map((conversation, idx) => (
 			<Conversation
-			  key={conversation._id}
+			  key={conversation.convId}
 			  conversation={conversation}
 			  lastIdx={idx === conversations.length - 1}
 			/>

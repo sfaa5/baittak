@@ -3,6 +3,7 @@ import { extractTime } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
+import { BsCheckAll } from "react-icons/bs";
 
 const Message = ({ message }) => {
   const { data: session } = useSession();
@@ -45,6 +46,7 @@ const Message = ({ message }) => {
        
          { extractTime(message.createdAt)}
         </span>
+        { fromMe &&( message.seen ? <BsCheckAll className="text-blue-600" /> :<BsCheckAll  />)}
 
         {/* SVG Tail */}
         <svg

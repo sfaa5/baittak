@@ -16,8 +16,17 @@ import LikeButton from "./LikeButton";
 import { Button } from "./ui/button";
 
 import ShareButton from "./Share";
-import { SlSizeFullscreen } from "react-icons/sl";
+import { SlOptionsVertical, SlSizeFullscreen } from "react-icons/sl";
 import { usePathname } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { IoPersonRemoveOutline } from "react-icons/io5";
+import { CiFlag1 } from "react-icons/ci";
+import Report from "./Report";
 
 const RentalTypeTranslation = {
   Monthly: "شهريًّا",
@@ -55,6 +64,7 @@ function PropertiesCard({ post }: { post: property }) {
 
   const [showNumber, setShowNumber] = useState(false);
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
@@ -117,7 +127,7 @@ function PropertiesCard({ post }: { post: property }) {
                   className="flex-shrink-0 w-full snap-start" // Makes sure only one image shows up at a time
                 >
                   <img
-                  loading="lazy"
+                    loading="lazy"
                     src={im?.url}
                     alt={`carousel image ${index + 1}`}
                     className="h-[250px]  md:h-[315px] lg:h-[280px] w-full md:w-100 object-cover"
@@ -250,6 +260,7 @@ function PropertiesCard({ post }: { post: property }) {
                   <FiPhoneCall className="w-4 h-4" />
                   {showNumber ? userDetails[0]?.phoneNumber : "Call"}
                 </Button>
+
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
@@ -259,11 +270,12 @@ function PropertiesCard({ post }: { post: property }) {
                     <Mail ownerEmail={userDetails[0]?.email} title={title} />
                   )}
                 </div>
+
                 <Button
+                  className="h-[45px] rounded-[.8rem]"
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-
                     if (userDetails[0]?.phoneNumber) {
                       window.open(
                         `https://wa.me/${userDetails[0]?.phoneNumber}`,
@@ -279,7 +291,16 @@ function PropertiesCard({ post }: { post: property }) {
                   propertyUrl={`https://baittak.vercel.app/Property/${_id}`}
                   propertyTitle={title}
                 />
+
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <Report propertyId={_id} open={open} setOpen={setOpen} />
+                </div>
               </div>
+
               {CompanyImage && (
                 <img
                   src={CompanyImage}

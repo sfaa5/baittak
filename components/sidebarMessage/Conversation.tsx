@@ -1,14 +1,24 @@
 import { useConversationContext } from "@/app/context/ConversationProvider";
 import { useSocketContext } from "@/app/context/SocketContext";
+import useDeleteMessage from "@/hooks/useDeleteMessage";
 import useReadMessage from "@/hooks/useReadMessage";
 import Image from "next/image";
 import { useMemo } from "react";
+import { SlOptionsVertical } from "react-icons/sl";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
+import { IoPersonRemoveOutline } from "react-icons/io5";
 
 // STARTER CODE SNIPPET
 const Conversation = ({ conversation, lastIdx }) => {
   const { selectedConversation } = useConversationContext();
   const { readMessage } = useReadMessage();
-  const isSelected = selectedConversation?._id === conversation._id;
+  const { deleteMessage } = useDeleteMessage();
+  const isSelected = selectedConversation?.convId === conversation.convId;
   const { onlineUsers } = useSocketContext();
   const isOnline = useMemo(
     () => onlineUsers.includes(conversation._id),
@@ -17,6 +27,10 @@ const Conversation = ({ conversation, lastIdx }) => {
 
   const seen = async (conversation) => {
     await readMessage(conversation);
+  };
+
+  const remove = async (conversation) => {
+    await deleteMessage(conversation);
   };
 
   return (
@@ -52,16 +66,38 @@ const Conversation = ({ conversation, lastIdx }) => {
         <div className="flex flex-col flex-1">
           <div className="flex gap-3 justify-between">
             <p className="font-medium text-gray-700">{conversation.username}</p>
-            {conversation.unreadMessagesCount > 0 && (
-              <span className="text-sm text-center rounded-full w-5 h-5 text-white bg-primary">
-                {conversation.unreadMessagesCount}
-              </span>
-            )}
+
+            <div className="flex gap-4 items-center">
+              {conversation.unreadMessagesCount > 0 && (
+                <span className="text-sm text-center rounded-full w-5 h-5 text-white bg-primary">
+                  {conversation.unreadMessagesCount}
+                </span>
+              )}
+
+              <DropdownMenu>
+                <DropdownMenuTrigger className=" focus:outline-none">
+                  <SlOptionsVertical color="gray" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      remove(conversation);
+                    }}
+                    className="text-sm py-1 px-1 cursor-pointer hover:bg-gray-200 focus:outline-none flex gap-1 items-center"
+                  >
+                    <IoPersonRemoveOutline /> delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </div>
       </div>
 
-      {!lastIdx && !isSelected && <div className="border-t mx-3 border-gray-300 "></div>}
+      {!lastIdx && !isSelected && (
+        <div className="border-t mx-3 border-gray-300 "></div>
+      )}
     </>
   );
 };

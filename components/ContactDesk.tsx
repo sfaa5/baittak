@@ -14,6 +14,7 @@ import { LuMessagesSquare } from "react-icons/lu";
 function ContactDesk({
   user,
   title,
+  post
 }: {
   user: {
     _id: string;
@@ -23,6 +24,14 @@ function ContactDesk({
     image: { url: string };
   };
   title: string;
+  post: {
+    title:string,
+    _id:string,
+    price:string,
+    images:[url:string],
+    currency:string,
+    rentaltype:string,
+  };
 }) {
   const t = useTranslations();
 
@@ -34,7 +43,8 @@ function ContactDesk({
     const data = {
       image: { url: user?.image?.url },
       username: user.username,
-      _id: user._id,
+      post: post,
+      _id: user._id
     };
     localStorage.setItem("chat-user", JSON.stringify(data));
     router.push("/messages");

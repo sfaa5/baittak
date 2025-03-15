@@ -10,15 +10,23 @@ import { Button } from './ui/button';
 import Mail from './Mail';
 
 
-function ContactMobile({user,title}:{
-    user: {
-        _id: string;
-        username: string;
-        phoneNumber: string;
-        email: string;
-        image: { url: string };
-      };
-      title: string;
+function ContactMobile({user,title,post}:{
+  user: {
+    _id: string;
+    username: string;
+    phoneNumber: string;
+    email: string;
+    image: { url: string };
+  };
+  title: string;
+  post: {
+    title:string,
+    _id:string,
+    price:string,
+    images:[url:string],
+    currency:string,
+    rentaltype:string,
+  };
 }) {
 
     const t = useTranslations();
@@ -26,12 +34,13 @@ function ContactMobile({user,title}:{
     const { data: session } = useSession();
     const router = useRouter();
   
-     const chatWith = () => {
+    const chatWith = () => {
       if (session.user.id === user._id) return;
       const data = {
         image: { url: user?.image?.url },
         username: user.username,
-        _id: user._id,
+        post: post,
+        _id: user._id
       };
       localStorage.setItem("chat-user", JSON.stringify(data));
       router.push("/messages");

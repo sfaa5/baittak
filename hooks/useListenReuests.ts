@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 function useListenReuests() {
     const {socket}=useSocketContext()
     const {dataRequest, setDataRequest} = useSharedState();
-console.log("fff")
+
     useEffect(()=>{
       socket?.on("newRequest",async(newRequest)=>{
         const sound = new Audio("/notification.mp3");

@@ -8,15 +8,20 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useSharedState } from "@/app/context/stateProvider";
 import { ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-
+import useSeenMessage from "@/hooks/useSeenMessage";
+import Header from "@/components/messages/Header";
+import useDeleteRealtime from "@/hooks/useDeleteRealtime";
 
 function Page() {
-  const { selectedConversation, setSelectedConversation } = useConversationContext();
-  const isMobile=useIsMobile();
-  const {showSidebar,setShowSidebar}=useSharedState();
-  
-  console.log(showSidebar)
-  console.log("isMobile",isMobile)
+  const { selectedConversation, setSelectedConversation } =
+    useConversationContext();
+  const isMobile = useIsMobile();
+  const { showSidebar, setShowSidebar } = useSharedState();
+  useSeenMessage();
+  useDeleteRealtime();
+
+  console.log(showSidebar);
+  console.log("isMobile", isMobile);
 
   const locale = useLocale();
 
@@ -26,26 +31,38 @@ function Page() {
   }, [setSelectedConversation]);
 
   return (
-
-      <div className={`md:min-w-[450px] w-full  bg-[#EFEAE2]   flex-col transition-all duration-300  backdrop-blur-lg ${locale==="en"?"rounded-r-[8px]":"rounded-l-[8px]"}  shadow-sm
-         ${showSidebar && isMobile ? "translate-x-full " : "translate-x-0 "}`}>
+    <div
+      className={`md:min-w-[450px] w-full  bg-[#EFEAE2]   flex-col transition-all duration-300  backdrop-blur-lg ${
+        locale === "en" ? "rounded-r-[8px]" : "rounded-l-[8px]"
+      }  shadow-sm
+         ${showSidebar && isMobile ? "translate-x-full " : "translate-x-0 "}`}
+    >
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
           {/* Header */}
-          <div className="bg-[#F0F2F5] flex items-center px-2 py-2 mb-2 rounded-tr-[8px]">
-          {isMobile && (
-            <button
-              onClick={() => {setShowSidebar(true); setSelectedConversation("")}}
-              className="self-start text-gray-600 "
-            >
-              <ChevronRight size={24} />
-            </button>
-          )}
-            <span className="text-sm"> </span> <span className="text-gray-900 font-medium mx-1 text-sm">  {selectedConversation.username}</span>
-    
+
+          <div className="bg-[#F0F2F5] flex border-b-[1px] border-gray-300 items-center px-2 py-2  rounded-tr-[8px]">
+            {isMobile && (
+              <button
+                onClick={() => {
+                  setShowSidebar(true);
+                  setSelectedConversation("");
+                }}
+                className="self-start text-gray-600 "
+              >
+                <ChevronRight size={24} />
+              </button>
+            )}
+            <span className="text-sm"> </span>{" "}
+            <span className="text-gray-900 font-medium mx-1 text-sm">
+              {" "}
+              {selectedConversation.username}
+            </span>
           </div>
+
+          {selectedConversation.post && <Header />}
 
           <Messages />
 
@@ -59,7 +76,7 @@ function Page() {
 export default Page;
 
 const NoChatSelected: React.FC = () => {
-  const t =useTranslations()
+  const t = useTranslations();
 
   return (
     <div className="flex items-center justify-center w-full h-full">

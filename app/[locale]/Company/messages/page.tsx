@@ -8,11 +8,19 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useSharedState } from "@/app/context/stateProvider";
 import { ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import useSeenMessage from "@/hooks/useSeenMessage";
+
+import useDeleteRealtime from "@/hooks/useDeleteRealtime";
+
 
 
 function Page() {
   const { selectedConversation, setSelectedConversation } =
     useConversationContext();
+
+    useSeenMessage();
+    useDeleteRealtime();
+
   const isMobile = useIsMobile();
   const { showSidebar, setShowSidebar } = useSharedState();
 

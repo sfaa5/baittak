@@ -6,6 +6,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import useGetUnReadCount from "@/hooks/useGetUnReadCount";
 
 import { signOut, useSession } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
@@ -17,7 +18,7 @@ import { RiUserFill } from "react-icons/ri";
 
  function SignOut({ user }) {
   const t = useTranslations();
-  const { totalUnreadMessages } = useConversationContext();
+  const {totalUnreadMessages}=useGetUnReadCount()
   const { data: session } = useSession();
   const locale =useLocale();
   const isRTL = locale === "ar";
