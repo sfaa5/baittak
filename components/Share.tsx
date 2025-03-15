@@ -1,4 +1,4 @@
-import { IoMdShareAlt } from "react-icons/io";
+
 import { PiShareFatThin } from "react-icons/pi";
 
 const ShareButton = ({ propertyUrl, propertyTitle }) => {

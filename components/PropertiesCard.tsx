@@ -16,16 +16,9 @@ import LikeButton from "./LikeButton";
 import { Button } from "./ui/button";
 
 import ShareButton from "./Share";
-import { SlOptionsVertical, SlSizeFullscreen } from "react-icons/sl";
+import {  SlSizeFullscreen } from "react-icons/sl";
 import { usePathname } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { IoPersonRemoveOutline } from "react-icons/io5";
-import { CiFlag1 } from "react-icons/ci";
+
 import Report from "./Report";
 
 const RentalTypeTranslation = {
