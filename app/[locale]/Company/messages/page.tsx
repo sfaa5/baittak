@@ -11,20 +11,17 @@ import { useLocale, useTranslations } from "next-intl";
 import useSeenMessage from "@/hooks/useSeenMessage";
 
 import useDeleteRealtime from "@/hooks/useDeleteRealtime";
-
-
+import Header from "@/components/messages/Header";
 
 function Page() {
   const { selectedConversation, setSelectedConversation } =
-    useConversationContext();
+  useConversationContext();
 
-    useSeenMessage();
-    useDeleteRealtime();
+  useSeenMessage();
+  useDeleteRealtime();
 
   const isMobile = useIsMobile();
   const { showSidebar, setShowSidebar } = useSharedState();
-
-
 
   const locale = useLocale();
 
@@ -45,7 +42,8 @@ function Page() {
       ) : (
         <>
           {/* Header */}
-          <div className="bg-[#F0F2F5] flex items-center px-2 py-2 mb-2 rounded-tr-[8px]">
+
+          <div className="bg-[#F0F2F5] flex border-b-[1px] border-gray-300 items-center px-2 py-2  rounded-tr-[8px]">
             {isMobile && (
               <button
                 onClick={() => {
@@ -59,10 +57,12 @@ function Page() {
             )}
             <span className="text-sm"> </span>{" "}
             <span className="text-gray-900 font-medium mx-1 text-sm">
-           
+              {" "}
               {selectedConversation.username}
             </span>
           </div>
+
+          {selectedConversation.post && <Header />}
 
           <Messages />
 
