@@ -24,7 +24,8 @@
   },
   "Pagination": { "next": "Next", "Prev": "Prev" },
   "landing": {
-    "all properties on one place": "All Properties <br/> on one Place",
+    "all properties on one place": "All Properties On One Place",
+    "second_address":"Find Your Dream Home Effortlessly",
     "rent": "Rent",
     "buy": "Buy",
     "projects": "Projects",
@@ -37,7 +38,9 @@
     "we are available in many cities & areas": "We are available in many Cities & Areas"
   },
   "properties": {
-    "latest_properties": "Letest Properties"
+    "latest_properties": "New Properties to discover",
+    "New_Projects _to_Explore": "Latest Projects to Discover",
+    "view_all": "View All"
   },
   "footer": {
     "unauthorized": "You are not authorized to perform this action.",

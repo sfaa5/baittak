@@ -1,8 +1,8 @@
 "use client";
 
 import { LuHouse } from "react-icons/lu";
-import Cities from "./Cities";
-import Properties from "./Properties";
+import Cities from "./home/Cities";
+import Properties from "./home/Properties";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import SearchHome from "../../../components/SearchHome";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import Projects from "./home/Projects";
 
 
 export default function Home() {
@@ -64,22 +65,23 @@ export default function Home() {
     <>
       {/* landing */}
       <section
-        className="h-[70vh] text- pb-36  bg-cover w-full"
+        className="h-[70vh] sm:h-[80vh] text- pb-28 bg-center  bg-cover w-full"
         style={{
           backgroundImage: `url(${landImage})`,
         }}
       >
-        <div className="container relative mx-auto h-full flex flex-col gap-36">
+        <div className="container relative mx-auto h-full flex flex-col items-center justify-center gap-20">
+          
           {/* content */}
-          <div className="absolute h-96 rounded-full blur"></div>
-          <div className="flex relative flex-col  pt-24 gap-3 pl-6 md:pl-0">
-            <h1 className="h text-white sm:text-secondary">
+          <div className=" pt-24 gap-3 pl-6 md:pl-0">
+            <h1 className="h text-white">
               <div
                 dangerouslySetInnerHTML={{
                   __html: t("landing.all properties on one place"),
                 }}
               />
             </h1>
+            <h2 className="secondary-address text-white text-center pt-1">{t("landing.second_address")}</h2>
           </div>
 
           <div className="w-full flex justify-center  px-0 lg:px-1 xl:px-36 2xl:px-56">
@@ -113,6 +115,7 @@ export default function Home() {
               <SearchHome />
             </div>
           </div>
+
         </div>
       </section>
 
@@ -120,6 +123,8 @@ export default function Home() {
       <Cities />
 
       <Properties />
+
+      <Projects/>
 
       {showLoginModal && <Sign onClose={closeModal} />}
     </>

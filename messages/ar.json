@@ -25,7 +25,9 @@
   "Pagination": { "next": "التالي", "Prev": "السابق" },
 
   "landing": {
-    "all properties on one place": "كل البيوت <br/> تحت سقف واحد",
+    "all properties on one place": "كل البيوت تحت سقف واحد",
+    "second_address":"ابحث عن منزل أحلامك بكل سهولة",
+
     "rent": "إيجار",
     "buy": "شراء",
     "projects": "المشاريع",
@@ -38,7 +40,11 @@
     "we are available in many cities & areas": "نحن متاحون في العديد من المدن والمناطق"
   },
   "properties": {
-    "latest_properties": "أحدث العقارات "
+    "latest_properties": "اكتشف عقارات جديدة",
+    "New_Projects _to_Explore": "اكتشف مشاريع جديدة",
+    "view_all": "عرض الكل"
+
+
   },
   "footer": {
     "contact": "اتصل بنا",

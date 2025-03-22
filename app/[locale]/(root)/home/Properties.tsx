@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropertyCard from "@/components/PropertyCard";
 import { useTranslations } from "next-intl";
 import SkeletonCard from "@/components/skeletons/SkeletonCard";
+import Link from "next/link";
+import { IoArrowForwardCircleOutline } from "react-icons/io5";
+
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -39,24 +42,38 @@ function Properties() {
 
   return (
     <section>
-      <div className="container mx-auto flex w-full justify-center pb-20">
-        <div className="flex flex-col items-center gap-16">
-          <div className="flex flex-col items-center">
-            <h1 className="text-3xl font-semibold text-secondary">
-              {t("properties.latest_properties")}
-            </h1>
+      <div className="container mx-auto flex w-full justify-center pb-40">
+        <div className="flex flex-col items-center gap-3">
+
+          <div className="flex justify-between w-full items-end gap-2">
+       
+            
+              <h1 className="text-xl md:text-3xl w-auto font-semibold text-secondary">
+                {t("properties.latest_properties")}
+              </h1>
+            
+
+            <Link href="/Property">
+              <div className="text-sm md:text-base flex items-center  gap-2 cursor-pointer text-primary">
+                <h1 className="  ">
+                  {t("properties.view_all")}
+                </h1>
+                <IoArrowForwardCircleOutline className="w-4 h-4"/>
+              </div>
+            </Link>
           </div>
+
           {loading && (
             <div className="flex w-[1000px] justify-between">
-              {" "}
-              <SkeletonCard />{" "}
+             
+              <SkeletonCard />
             </div>
           )}
 
-          <div className="grid  gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+          <div className="grid  gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
             {!loading &&
               randomProperties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
+                <PropertyCard key={property._id} property={property} />
               ))}
           </div>
         </div>

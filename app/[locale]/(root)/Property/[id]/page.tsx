@@ -61,8 +61,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const t = await getTranslations();
   const id = (await params).id;
 
-
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_URL_SERVER}/api/properties/${id}`
   );
@@ -114,7 +112,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       .catch((error) => console.error("Error fetching address:", error));
   }
 
-
   return (
     <div className="mt-5 md:container mx-auto px-0 2xl:px-[120px] ">
       <div className="flex w-full justify-between items-center">
@@ -165,8 +162,9 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       <div className="flex justify-start  items-start gap-5">
         <div className="flex justify-between flex-col items-center  mt-8 gap-10 w-full lg:w-2/3">
           {/* details */}
+
           <div className="flex  lg:justify-between lg:flex-row flex-col items-center lg:w-full">
-            <div className="  text-secondary flex items-center gap-2">
+            <div className="  text-secondary flex items-baseline gap-2">
               <div className="text-3xl text-secondary font-semibold">
                 {new Intl.NumberFormat(locale, {
                   minimumFractionDigits: 0,
@@ -217,7 +215,11 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
 
           {/* contact Mobile */}
-<ContactMobile post={{ _id, title, price,images,currency,rentaltype }} user={user} title={title}/>
+          <ContactMobile
+            post={{ _id, title, price, images, currency, rentaltype }}
+            user={user}
+            title={title}
+          />
 
           {/* deep details */}
           <div className="w-full flex flex-col gap-10 justify-start">
@@ -689,11 +691,14 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
         {/* contact Desktop */}
-        <ContactDesk post={{ _id, title, price,images,currency,rentaltype }} user={user} title={title} />
+        <ContactDesk
+          post={{ _id, title, price, images, currency, rentaltype }}
+          user={user}
+          title={title}
+        />
       </div>
     </div>
   );

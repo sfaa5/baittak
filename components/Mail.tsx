@@ -126,8 +126,8 @@ export function Mail({ ownerEmail, title }: MailProps) {
             setOpen(true);
           }}
           className={`${
-            pathname.includes("Agency")
-              ? " hover:bg-gray-100  flex w-full h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px]  justify-between px-4"
+            pathname.includes("Agency") || pathname.includes("userListing")
+              ? " hover:bg-gray-100  flex w-full h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px]   px-4"
               : "flex w-full  hover:bg-gray-100 gap-2 h-[45px] item font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justi px-3"
           }`}
         >

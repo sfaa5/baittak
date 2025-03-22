@@ -18,6 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import Link from "next/link";
 
 // This type is used to define the shape of our data.
 export type Property = {
@@ -34,7 +35,7 @@ export type Property = {
 
 export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property");
-  const ta =useTranslations("alert");
+  const ta = useTranslations("alert");
   const { setProperty } = useSharedState();
   return [
     {
@@ -107,6 +108,7 @@ export const UseColumns = (): ColumnDef<Property>[] => {
       header: t("Likes"),
       cell: ({ row }) => <span>{row.original.likes?.length || 0}</span>,
     },
+
     {
       id: "actions",
 
@@ -115,41 +117,60 @@ export const UseColumns = (): ColumnDef<Property>[] => {
         const id = propertyy._id;
 
         return (
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <button
-                className="text-red-500 hover:text-red-700 ml-5"
+          <div className="flex gap-2 justify-end">
+            <Link href={`./Posts/${id}`} passHref>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="bg-primary hover:bg-primary/80 text-white hover:text-white text-xs "
                 onClick={(e) => {
-                  e.stopPropagation();
+                  e.preventDefault(); // Prevents navigation from the outer link
+                  e.stopPropagation(); // Stops event bubbling
+                  window.location.href = `./Posts/${id}`; // Navigate manually
                 }}
               >
-                <TiDeleteOutline size={22} />
-              </button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>{ta("head")}</AlertDialogTitle>
-                <AlertDialogDescription>{ta("body")}</AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel
+                Edit
+              </Button>
+            </Link>
+
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-red-500 hover:bg-red-500/80 text-white hover:text-white text-xs p-2"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
                 >
-                  {ta("Cancel")}
-                </AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    deleteProperty({ id, setProperty });
-                  }}
-                >
-                  {ta("Delete")}
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>{ta("head")}</AlertDialogTitle>
+                  <AlertDialogDescription>{ta("body")}</AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  >
+                    {ta("Cancel")}
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      deleteProperty({ id, setProperty });
+                    }}
+                  >
+                    {ta("Delete")}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
         );
       },
     },

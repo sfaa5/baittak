@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Locale, routing, usePathname, useRouter } from "@/i18n/routing";
+import { Globe } from "lucide-react";
 import { useParams } from "next/navigation";
 import { ReactNode } from "react";
 
@@ -36,10 +37,13 @@ export default function LocaleSwitcherSelect({ defaultValue, label }: Props) {
   return (
     <Select defaultValue={defaultValue} onValueChange={onSelectChange}>
       <SelectTrigger
-        className='w-[80px] h-8 border-none bg-transparent focus:ring-0 focus:ring-offset-0'
+        className=' h-8 border-none bg-transparent focus:ring-0 focus:ring-offset-0 space-x-2'
         aria-label={label}
       >
+      <Globe className='h-4 w-4 text-muted-foreground' />
+
         <SelectValue />
+
       </SelectTrigger>
       <SelectContent>
         {routing.locales.map((locale) => (

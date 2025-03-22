@@ -14,6 +14,7 @@ import Link from "next/link";
 import { FaRegMessage } from "react-icons/fa6";
 import { IoIosLogOut } from "react-icons/io";
 import { RiUserFill } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 
 
  function SignOut({ user }) {
@@ -28,7 +29,7 @@ import { RiUserFill } from "react-icons/ri";
     <div className="relative inline-block">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="relative flex items-center gap-2 px-4 py-2 bg-transparent border border-gray-300 rounded-lg text-gray-800 hover:bg-gray-100">
+          <button className="relative flex items-center gap-2 px-2 py-1 bg-transparent border border-gray-300 rounded-lg text-gray-800 hover:bg-gray-100">
             {/* User Image or Icon */}
             {user?.image ? (
               <img
@@ -50,25 +51,39 @@ import { RiUserFill } from "react-icons/ri";
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white shadow-lg rounded-md py-1 ">
+
+        <Link href={session.user.role === "user" ? "/User/Posts" : "/Company/messages"}>
+            <DropdownMenuItem dir={isRTL ? "rtl" : "ltr"}  className="flex w-full items-center gap-2 px-2 py-2 hover:bg-gray-100 cursor-pointer">
+            <CgProfile  />
+              <span className="text-sm font-medium">
+                {t("header.profile")}
+              </span>
+       
+            </DropdownMenuItem>
+          </Link>
+
           <Link href={session.user.role === "user" ? "/messages" : "/Company/messages"}>
             <DropdownMenuItem dir={isRTL ? "rtl" : "ltr"}  className="flex w-full items-center gap-2 px-2 py-2 hover:bg-gray-100 cursor-pointer">
-              <FaRegMessage size={20} />
+              <FaRegMessage />
               <span className="text-sm font-medium">
                 {t("header.messages")}
               </span>
+            {totalUnreadMessages>0&&
               <span className="text-sm text-center rounded-full w-5 h-5 text-white bg-primary">
-                {totalUnreadMessages}
-              </span>
+               {  totalUnreadMessages}
+              </span>}
             </DropdownMenuItem>
           </Link>
 
           <DropdownMenuItem
             onClick={() => signOut()}
             className="flex w-full items-center gap-2 px-2 py-2 hover:bg-gray-100 cursor-pointer"
+            dir={isRTL ? "rtl" : "ltr"} 
           >
-            <IoIosLogOut size={20} />
+            <IoIosLogOut  />
             <span className="text-sm font-medium">{t("table.Log_Out")}</span>
           </DropdownMenuItem>
+
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

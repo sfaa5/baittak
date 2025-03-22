@@ -13,7 +13,7 @@ import {
 } from "./ui/select";
 import SerchCityHome from "./SerchCityHome";
 import { useRouter } from "next/navigation";
-
+import RoomSelect from "./RoomSelect";
 import RoomSelectHome from "./RoomSelectHome";
 
 function SearchHome() {
@@ -22,8 +22,8 @@ function SearchHome() {
   const [purpose, setPurpose] = useState("");
   const [city, setCity] = useState("");
   const [propertyType, setPropertyType] = useState("");
-  const [rooms, setRooms] = useState("");
-  const [bathrooms, setBarooms] = useState("");
+  const [rooms, setRooms] = useState(0);
+  const [bathrooms, setBarooms] = useState(0);
 
   const router = useRouter();
 
@@ -55,8 +55,8 @@ function SearchHome() {
   const updateSearchParams = (
     city: string,
     propertyType: string,
-    rooms: string,
-    bathrooms: string,
+    rooms: number,
+    bathrooms: number,
     purpose: string
   ) => {
     // Create a new URLSearchParams object using the current URL search parameters
@@ -99,7 +99,7 @@ function SearchHome() {
             setPurpose(value); // Update the state with the selected value
           }}
         >
-          <SelectTrigger className="bg-secondary/90 hover:bg-secondary/80 duration-200 text-white h-full gap-3 justify-center  py-3 rounded-[6px] font-medium text-base hidden lg:flex">
+          <SelectTrigger className="bg-secondary/90 focus:outline-none focus:ring-0 focus:border-transparent ring-0 hover:bg-secondary/80 duration-200 text-white h-full gap-3 justify-center  py-3 rounded-[6px] font-medium text-base hidden lg:flex">
             <SelectValue placeholder={t("search.buy")} />
           </SelectTrigger>
 
@@ -120,7 +120,10 @@ function SearchHome() {
             setPropertyType(value); // Update the state with the selected value
           }}
         >
-          <SelectTrigger className="items-center gap-5 justify-between  h-full  border rounded-[6px] border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none  outline-none w-full   hidden md:flex">
+          <SelectTrigger
+            className="items-center  justify-between h-full border rounded-[6px] border-gray-300 bg-white text-gray-700 hover:bg-gray-50 
+    focus:outline-none focus:ring-0 focus:border-transparent ring-0 border-transparent w-full hidden md:flex"
+          >
             <SelectValue placeholder={t("addUser.selectPropertyType")} />
           </SelectTrigger>
 
@@ -150,13 +153,10 @@ function SearchHome() {
         setBathrooms={setBarooms}
       />
 
-      <button className="justify-center gap-2 hover:bg-primary/80 duration-200 bg-primary items-center py-3 rounded-[6px] font-medium text-base hidden sm:flex">
+      <button className="justify-center gap-2  text-white hover:bg-primary/80 duration-200 bg-primary items-center py-3 rounded-[6px] font-medium text-base hidden sm:flex">
         <span>{t("landing.search")}</span>
         <GoSearch className="font-bold " />
       </button>
-
-
-      
     </form>
   );
 }

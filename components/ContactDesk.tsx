@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { LuMessagesSquare } from "react-icons/lu";
+import Link from "next/link";
 
 function ContactDesk({
   user,
@@ -35,11 +36,16 @@ function ContactDesk({
 }) {
   const t = useTranslations();
 
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
   const router = useRouter();
 
    const chatWith = () => {
+    if (status==="unauthenticated"){
+      router.push(`/?login=true`);
+      return;
+    }
     if (session.user.id === user._id) return;
+
     const data = {
       image: { url: user?.image?.url },
       username: user.username,
@@ -51,7 +57,7 @@ function ContactDesk({
   };
 
   return (
-    <div className="lg:flex hidden  flex-col w-1/3  border p-3 gap-8  right-0 top-6 mt-6 rounded-md shadow-sm sticky ">
+    <Link href={`userListing/${user._id}`} className="lg:flex hidden  flex-col w-1/3  border p-3 gap-8  right-0 top-6 mt-6 rounded-md shadow-sm sticky ">
       <div className="flex gap-4">
         <Image
           width={56}
@@ -68,7 +74,9 @@ function ContactDesk({
 
       <div className="contact-buttons  lg:flex gap-2  justify-stretch">
         <Button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent the click from bubbling up to the Link
+            e.preventDefault();
             chatWith();
           }}
           className="flex gap-2  w-full h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-startpx-3"
@@ -90,7 +98,7 @@ function ContactDesk({
           {t("contact.Whatsup")}
         </Button>
       </div>
-    </div>
+    </Link>
   );
 }
 

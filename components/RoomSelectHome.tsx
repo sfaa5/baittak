@@ -7,31 +7,45 @@ import { ChevronDown } from "lucide-react";
 function RoomSelectHome({
 
   setRooms,
-
-  setBathrooms
+  bathrooms,
+  rooms,
+  setBathrooms,
 }: {
-  rooms: string;
-  setRooms: React.Dispatch<React.SetStateAction<string>>;
-  bathrooms: string;
-  setBathrooms: React.Dispatch<React.SetStateAction<string>>;
+  rooms: number;
+  setRooms: React.Dispatch<React.SetStateAction<number>>;
+  bathrooms: number;
+  setBathrooms: React.Dispatch<React.SetStateAction<number>>;
 }) {
 
 
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("");
-  const [selectedBath, setSelectedBath] = useState("");
+  const [selected, setSelected] = useState(0);
+  const [selectedBath, setSelectedBath] = useState(0);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleSelct = (num: string,type:string) => {
-    if(type === "rooms"){
-      if(selected === num)  {setSelected(""); setRooms("") } else {setSelected(num); setRooms(num);}}
-    else if(type === "bathrooms") {
-    if(selected === num ) {setSelectedBath(""); setBathrooms("");}  else {setSelectedBath(num); setBathrooms(num);}}
-  }
+  const handleSelct = (num: number, type: string) => {
+    if (type === "rooms") {
+      if (selected === num) {
+        setSelected(0);
+        setRooms(0);
+      } else {
+        setSelected(num);
+        setRooms(num);
+      }
+    } else if (type === "bathrooms") {
+      if (selectedBath === num) {
+        setSelectedBath(0);
+        setBathrooms(0);
+      } else {
+        setSelectedBath(num);
+        setBathrooms(num);
+      }
+    }
+  };
 
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -55,9 +69,25 @@ function RoomSelectHome({
           <button
             type="button"
             onClick={toggleDropdown}
-            className="items-center justify-between gap-4 w-full  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none    hidden lg:flex"
+            className="items-center justify-between  w-full  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none    hidden lg:flex"
           >
-            {t("search.rooms_bath")}
+              {bathrooms === 0 && rooms === 0 && (
+            <span>{t("search.rooms_bath")}</span>
+          )}
+
+          <div className="flex gap-2 items-center  text-xs text-primary font-medium">
+            {bathrooms > 0 && (
+              <span className="px-2 py-1 bg-[#466e7f] text-white rounded-md">
+                {bathrooms} 🛁
+              </span>
+            )}
+            {rooms > 0 && (
+              <span className="px-2 py-1 bg-[#466e7f] text-white rounded-md">
+                {rooms} 🏠
+              </span>
+            )}
+          </div>
+
             <ChevronDown className="h-4 w-4 opacity-50" />
           </button>
     
@@ -74,85 +104,44 @@ function RoomSelectHome({
             <div className="absolute z-10 mt-2 w-[300px] bg-white border border-gray-300 rounded-md shadow-lg">
               <div className="py-2 px-4 text-gray-500 font-semibold">Bedrooms</div>
               <div className="grid grid-cols-5 gap-2 p-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleSelct("1","rooms");
-                  }}
-                  className={` border p-2 rounded ${selected === "1" ? "bg-primary" : ""}`}
-                >
-                  1 
-                </button>
-                <button
-                  type="button"
-                  onClick={()=> handleSelct("2","rooms")}
-                  className={`border p-2 rounded ${selected === "2" ? "bg-primary" : ""}`}
-                >
-                  2 
-                </button>
-                <button
-                  type="button"
-                  onClick={() => { handleSelct("3","rooms")} }
-                  className={`border p-2 rounded ${selected === "3" ? "bg-primary" : ""}`}
-                >
-                  3 
-                </button>
-                <button
-                  type="button"
-                  onClick={() => { handleSelct("4","rooms")} }
-                  className={`border p-2 rounded ${selected === "4" ? "bg-primary" : ""}`}
-                >
-                  4 
-                </button>
-                <button
-                  type="button"
-                  onClick={() => { handleSelct("5","rooms")} }
-                  className={`border p-2 rounded ${selected === "5" ? "bg-primary" : ""}`}
-                >
-                  5 
-                </button>
-              </div>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => {
+                handleSelct(index + 1, "rooms");
+              }}
+              className={`border p-2 rounded ${
+                selected === index + 1 ? "bg-primary" : ""
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+
+
+
     
               <div className="border-t my-2"></div>
     
               <div className="py-2 px-4 text-gray-500 font-semibold">Bathrooms</div>
-              <div className="grid grid-cols-5 gap-2 p-2">
-                <button
-                type="button"
-                  onClick={() => {handleSelct("1","bathrooms");}}
-                  className={`border p-2 rounded ${selectedBath === "1" ? "bg-primary" : ""}`}
-                >
-                  1 
-                </button>
-                <button
-                        type="button"
-                        onClick={() => {handleSelct("2","bathrooms");}}
-                        className={`border p-2 rounded ${selectedBath === "2" ? "bg-primary" : ""}`}
-                >
-                  2 
-                </button>
-                <button
-                        type="button"
-                        onClick={() => {handleSelct("3","bathrooms");}}
-                        className={`border p-2 rounded ${selectedBath === "3" ? "bg-primary" : ""}`}
-                >
-                  3 
-                </button>
-                <button
-                        type="button"
-                        onClick={() => {handleSelct("4","bathrooms");}}
-                        className={`border p-2 rounded ${selectedBath === "4" ? "bg-primary" : ""}`}
-                >
-                  4 
-                </button>
-                <button
-                        type="button"
-                        onClick={() => {handleSelct("5","bathrooms");}}
-                        className={`border p-2 rounded ${selectedBath === "5" ? "bg-primary" : ""}`}
-                >
-                  5 
-                </button>
-              </div>
+        <div className="grid grid-cols-5 gap-2 p-2">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => {
+                handleSelct(index + 1, "bathrooms");
+              }}
+              className={`border p-2 rounded ${
+                selectedBath === index + 1 ? "bg-primary" : ""
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
             </div>
           </Transition>
         </div>

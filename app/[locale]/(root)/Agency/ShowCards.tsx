@@ -40,12 +40,14 @@ function ShowCards({ data }) {
 
       {/* Cards */}
       <div className="flex flex-col w-full xl:w-[75%] gap-8 mb-28">
-        {data?.properties.length > 0 ? (
+        {data?.properties?.length > 0 ? (
           properties.map((post, key: number) => {
             const combinedProps = {
               ...post, // Spread all properties from `post`
               CompanyImage: data.image?.url || "",
+              userDetails: data.userDetails
             };
+
 
             return <PropertiesCard key={key} post={combinedProps} />;
           })

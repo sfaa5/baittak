@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SearchCity from "./SearchProperty";
 import {
   Select,
@@ -13,37 +13,66 @@ import {
 } from "./ui/select";
 import RoomSelect from "./RoomSelect";
 import { PriceFilter } from "./PriceSelector";
+import { get } from "http";
 
-
-
-function Search() {
+function Search({cities}) {
   const t = useTranslations();
   const locale = useLocale();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
+  // State variables
   const [city, setCity] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [rooms, setRooms] = useState(0);
-  const [bathrooms, setBarooms] = useState(0);
+  const [bathrooms, setBathrooms] = useState(0);
   const [purpose, setPurpose] = useState("");
+  const [priceRange, setPriceRange] = useState<{ min?: number; max?: number }>(
+    {}
+  );
 
-  const [priceRange, setPriceRange] = React.useState<{
-    min?: number;
-    max?: number;
-  }>({});
 
-  const router = useRouter();
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      const params = new URLSearchParams(window.location.search);
 
+      const cityParam = params.get("city") || "";
+      const propertyTypeParam = params.get("propertyType") || "";
+      const roomsParam = params.get("rooms") ? Number(params.get("rooms")) : 0;
+      const bathroomsParam = params.get("bathrooms")
+        ? Number(params.get("bathrooms"))
+        : 0;
+      const purposeParam = params.get("purpose") || "";
+      const priceParam = params.get("price") || "";
+
+      // Extract min/max price if available
+      const [minPrice, maxPrice] = priceParam.split("-").map(Number);
+
+      // Update state with extracted values
+      setCity(cityParam);
+      setPropertyType(propertyTypeParam);
+      setRooms(roomsParam);
+      setBathrooms(bathroomsParam);
+      setPurpose(purposeParam);
+      setPriceRange({
+        min: isNaN(minPrice) ? undefined : minPrice,
+        max: isNaN(maxPrice) ? undefined : maxPrice,
+      });
+    }, 500); // 500ms debounce time
+
+    return () => clearTimeout(handler); // Cleanup on unmount or when searchParams change
+  }, []); // Runs when searchParams change
+
+  // Handle search submission
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     console.log("city", city);
     console.log("propertyType", propertyType);
     console.log("rooms", rooms);
     console.log("bathrooms", bathrooms);
     console.log("purpose", purpose);
     console.log("priceRange", priceRange);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
     updateSearchParams(
       city,
@@ -63,15 +92,14 @@ function Search() {
     purpose: string,
     priceRange: { min?: number; max?: number }
   ) => {
-    // Create a new URLSearchParams object using the current URL search parameters
     const searchParams = new URLSearchParams(window.location.search);
 
     const filters = {
       city,
-      purpose,
       propertyType,
       rooms,
       bathrooms,
+      purpose,
       price:
         priceRange.min || priceRange.max
           ? `${priceRange.min || ""}-${priceRange.max || ""}`
@@ -79,47 +107,54 @@ function Search() {
     };
 
     Object.entries(filters).forEach(([key, value]) => {
-      if (value === "all") {
+      if (value === "all" || !value) {
         searchParams.delete(key);
-      } else if (value) {
-        searchParams.set(key, value.toString());
       } else {
-        searchParams.delete(key);
+        searchParams.set(key, value.toString());
       }
     });
 
-    const newPathname = `${
-      window.location.pathname
-    }?${searchParams.toString()}`;
-
-    console.log("newPathname", newPathname);
-    router.push(newPathname); // Navigate to the updated URL
+    router.push(`?${searchParams.toString()}`);
   };
+
+  // // Fetch cities
+  // useEffect(() => {
+  //   const getCities = async () => {
+  //     try {
+  //       const res = await fetch(
+  //         `${process.env.NEXT_PUBLIC_URL_SERVER}/api/cities`
+  //       );
+  //       const data = await res.json();
+  //       setCities(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getCities();
+  // }, []);
 
   return (
     <div>
-      {/* Search */}
       <div className="flex flex-col px-3 py-5 bg-[#F5F5F5] rounded-t-[.7rem]">
         <form
           onSubmit={handleSearch}
-          className="flex justify-start gap-4 text-sm  flex-nowrap px-2 overflow-x-auto "
+          className="flex justify-start gap-4 text-sm flex-nowrap px-2 overflow-x-auto"
         >
           <SearchCity city={city} setCity={setCity} />
 
+          {/* Property Type Selection */}
           <Select
             dir={locale === "ar" ? "rtl" : "ltr"}
             value={propertyType}
-            onValueChange={(value) => (
-             value==="all"?setPropertyType(""):setPropertyType(value)
-    )  }
+            onValueChange={(value) =>
+              setPropertyType(value === "all" ? "" : value)
+            }
           >
             <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("addUser.selectPropertyType")} />
             </SelectTrigger>
-
             <SelectContent>
-            <SelectItem value="all">{t("addUser.all")}</SelectItem>
-
+              <SelectItem value="all">{t("addUser.all")}</SelectItem>
               <SelectItem value="Apartment">{t("inputs.apartment")}</SelectItem>
               <SelectItem value="Villa">{t("inputs.villa")}</SelectItem>
               <SelectItem value="Farm">{t("inputs.farm")}</SelectItem>
@@ -141,35 +176,34 @@ function Search() {
             </SelectContent>
           </Select>
 
+          {/* Rooms Selection */}
           <RoomSelect
             rooms={rooms}
             setRooms={setRooms}
             bathrooms={bathrooms}
-            setBathrooms={setBarooms}
+            setBathrooms={setBathrooms}
           />
 
+          {/* Purpose Selection */}
           <Select
             dir={locale === "ar" ? "rtl" : "ltr"}
             value={purpose}
-            onValueChange={(value) => (
-              value==="All"?setPurpose(""):setPurpose(value)
-            
-  )}
+            onValueChange={(value) => setPurpose(value === "All" ? "" : value)}
           >
-            <SelectTrigger className="flex  hover:bg-gray-50 duration-200 h-[48px] gap-4 items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+            <SelectTrigger className="flex hover:bg-gray-50 duration-200 h-[48px] gap-4 items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("search.buy")} />
             </SelectTrigger>
-
             <SelectContent>
-            <SelectItem value="All">{t("addUser.all")}</SelectItem>
-
+              <SelectItem value="All">{t("addUser.all")}</SelectItem>
               <SelectItem value="rent">{t("addUser.rental")}</SelectItem>
               <SelectItem value="sell">{t("addUser.sell")}</SelectItem>
             </SelectContent>
           </Select>
 
+          {/* Price Filter */}
           <PriceFilter onPriceChange={setPriceRange} />
 
+          {/* Search Button */}
           <button
             type="submit"
             className="flex gap-3 hover:bg-primary/80 duration-200 h-[48px] items-center font-medium text-white bg-primary rounded-[.8rem] justify-between px-4"
@@ -181,22 +215,37 @@ function Search() {
       </div>
 
       {/* Result of search */}
-      {/* <div className="flex lg:gap-32 bg-[#F5F5F5] justify-center border-t-[1px] py-8 rounded-b-[.7rem] overflow-x-auto">
-        {Array(4)
-          .fill(null)
-          .map((_, colIdx) => (
-            <div key={colIdx} className="flex flex-col gap-3">
-              {Array(3)
-                .fill(null)
-                .map((_, rowIdx) => (
-                  <div key={rowIdx} className="flex gap-2">
-                    <div className="text-secondary text-base font-medium">{t('search.city')}</div>
-                    <span className="text-[#707070] text-sm font-normal">{t('search.result_count')}</span>
-                  </div>
-                ))}
-            </div>
-          ))}
-      </div> */}
+
+      <div className="  bg-[#F5F5F5]  border-t-[1px] p-4 rounded-b-[.7rem] overflow-x-auto">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-2 px-3">
+          {cities.length > 0 &&
+            cities.map((city) => (
+              <div 
+              onClick={() => {
+                setCity(city.cityDetails.name.en);
+                updateSearchParams(
+                  city.cityDetails.name.en,
+                  propertyType,
+                  rooms,
+                  bathrooms,
+                  purpose,
+                  priceRange
+                );
+              }} 
+              key={city._id} 
+              className="flex gap-2 cursor-pointer"
+            >
+                <div className="text-secondary text-sm font-medium">
+                  {city.cityDetails.name.en}
+                </div>
+                <span className="text-[#707070] text-xs font-normal">
+                  ({city.count})
+                </span>
+              </div>
+            ))}
+        </div>
+      </div>
+  
     </div>
   );
 }

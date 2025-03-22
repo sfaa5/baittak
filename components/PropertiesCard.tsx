@@ -52,7 +52,7 @@ const propertyTypeTranslations = {
   "Full-Floor": "طابق كامل",
 };
 
-function PropertiesCard({ post }: { post: property }) {
+function PropertiesCard({post} ) {
   const locale = useLocale();
 
   const [showNumber, setShowNumber] = useState(false);
@@ -100,6 +100,9 @@ function PropertiesCard({ post }: { post: property }) {
     currency,
     _id,
   } = post;
+
+console.log("userDetails", userDetails);
+  
 
   return (
     <Link
@@ -228,7 +231,7 @@ function PropertiesCard({ post }: { post: property }) {
                   <li
                     key={index}
                     className={`${
-                      index === 0 ? "" : "border-r-[1px] border-primary pr-3"
+                     ( index === 0&&locale==="ar") || (index===2 && locale==="en") ? "" : "border-r-[1px] border-primary pr-3"
                     }`}
                   >
                     {locale === "ar" ? amenity?.name?.ar : amenity?.name?.en}
@@ -248,7 +251,7 @@ function PropertiesCard({ post }: { post: property }) {
                     e.preventDefault();
                     setShowNumber(!showNumber);
                   }}
-                  className="flex w-full  h-[45px] gap-2    hover:bg-gray-100 items-center font-semibold  bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem]  justify-between px-3"
+                  className="flex w-full  h-[45px] gap-2   bg-white hover:bg-gray-100 items-center font-semibold    text-secondary rounded-[.8rem]  justify-between px-3"
                 >
                   <FiPhoneCall className="w-4 h-4" />
                   {showNumber ? userDetails[0]?.phoneNumber : "Call"}
@@ -294,13 +297,14 @@ function PropertiesCard({ post }: { post: property }) {
                 </div>
               </div>
 
-              {CompanyImage && (
+              {(CompanyImage && userDetails[0].role ==="agency")  && (
                 <img
                   src={CompanyImage}
                   alt="comoany"
                   className="hidden sm:flex w-10"
                 />
               )}
+
             </div>
           </div>
         </div>

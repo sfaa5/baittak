@@ -17,19 +17,6 @@
     display: none; /* Webkit */
   }
 
-  .blur {
-    inset: 0;
-    background: radial-gradient(
-      circle,
-      #78b84ec5 40%,
-      rgba(212, 223, 240, 0.1) 100%,
-      transparent 100%
-    );
-    top: 60px;
-    left:10px;
-    width: 100px;
-    height: 100px;
-  }
 
   .modal {
     position: fixed;
@@ -58,41 +45,7 @@
 
 
 
-  @screen sm {
-    .blur {
-      width: 300px; /* Even smaller for small screens */
-      top: 60px;
-      left: -6px;
-      height: 200px;
-    }
-  }
-  
-  @screen md {
-    .blur {
-      width: 250px; /* Smaller width for medium screens */
-      top: 60px;
-      left: 15px;
-      height: 200px;
-    }
-  }
-  
-  @screen lg {
-    .blur {
-      width: 350px; /* Smaller width for medium screens */
-      top: 60px;
-      left: -20px;
-      height: 200px;
-    }
-  }
 
-  @screen xl {
-    .blur {
-      width: 410px; /* Smaller width for medium screens */
-      top: 60px;
-      left: 10px;
-      height: 200px;
-    }
-  }
 
 
   .flex-between {
@@ -120,7 +73,7 @@
 @layer base {
 
   .h{
-    @apply text-[28px]  sm:text-[35px] xl:text-[55px] leading-[1.1] font-semibold text-secondary;
+    @apply text-[26px]  sm:text-[35px] xl:text-[35px] leading-[1.1] font-semibold text-secondary;
   }
   .h1{
     @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold text-secondary;
@@ -201,6 +154,9 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
+  }
+  .secondary-address{
+    @apply text-[16px]  sm:text-[18px] xl:text-[18px] leading-[1.1]  ;
   }
 
   /* dark mode looking scrollbar */

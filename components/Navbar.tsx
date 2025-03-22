@@ -30,6 +30,7 @@ const Navbar = () => {
     <nav className="flex justify-between items-center ">
       <div className="flex flex-col gap-4 ">
         <div className="flex gap-8 justify-end">
+
           <LocaleSwitcher />
 
           <Link
@@ -61,13 +62,9 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="flex gap-20">
+        <div className="flex gap-10">
           <div
-            className={`text-center ${
-              session?.user.role !== "agency"
-                ? "grid grid-cols-4"
-                : "grid grid-cols-3"
-            }  gap-`}
+            className={`text-center grid grid-cols-3 `}
           >
             {/* Property Link */}
             <Link
@@ -107,24 +104,12 @@ const Navbar = () => {
               {t("agency")}
             </Link>
 
-            {/* Profile Link */}
-            {session?.user.role !== "agency" && (
-              <Link
-                className={`text-black-100 text-lg pb-3 w-[127px] border-b-2 ${
-                  activeLink.includes("/User/Posts")
-                    ? "border-secondary font-medium text-secondary"
-                    : "border-transparent hover:border-secondary hover:font-medium hover:text-secondary"
-                } duration-200`}
-                href="/User/Posts"
-              >
-                {t("profile")}
-              </Link>
-            )}
+
           </div>
 
           {/* Post Property Button */}
           <Link href={"/User/AddPost"}>
-            <button className="bg-primary px-5 py-1 hover:bg-primary/80 duration-300 rounded-[6px] font-medium text-[16px]">
+            <button className="bg-primary px-5 py-1 hover:bg-primary/80 duration-300 rounded-[6px] font-medium text-[16px] text-white">
               {t("post property")}
             </button>
           </Link>
