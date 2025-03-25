@@ -119,23 +119,7 @@ async function Page({ searchParams }: PageProps) {
       <div className="container 2xl:px-[120px] mx-auto pt-3">
         <Serch cities={cities} />
 
-              {/* Result of search */}
-      {/* <div className="  bg-[#F5F5F5]  border-t-[1px] p-4 rounded-b-[.7rem] overflow-x-auto">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-2 px-3">
-          {cities.length > 0 &&
-            cities.map((city) => (
-              <div key={city._id} className="flex gap-2">
-                <div className="text-secondary text-sm font-medium">
-                  {city.cityDetails.name.en}
-                </div>
-                <span className="text-[#707070] text-xs font-normal">
-                  ({city.count})
-                </span>
-              </div>
-            ))}
-        </div>
-      </div> */}
-
+        {/* Result of search */}
         <div className="flex gap-4 flex-col mt-5 xl:w-[75%]">
           {/* path */}
           <ul className="flex items-center gap-2 mb-5">

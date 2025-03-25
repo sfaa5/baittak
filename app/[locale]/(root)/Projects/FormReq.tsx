@@ -10,52 +10,41 @@ import {
   FormControl,
   FormField,
   FormItem,
-
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 
-
-
-
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-const FormReq = ({
-  agencyy,
-  _id,
-  phoneNumber,
-  title,
-  url,
-}) => {
+const FormReq = ({ agencyy, _id, phoneNumber, title, url }) => {
   const [loading, setLoading] = useState(false);
 
   const t = useTranslations();
-  const tE =useTranslations("erorr");
+  const tE = useTranslations("erorr");
   const [showPhoneNumber, setShowPhoneNumber] = useState(false);
 
-// Schema for form validation
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: tE("First_Name_must_be_at_least_2_characters long"),
-  }),
+  // Schema for form validation
+  const formSchema = z.object({
+    name: z.string().min(2, {
+      message: tE("First_Name_must_be_at_least_2_characters long"),
+    }),
 
-      phone: z.string().regex(/^\d{10,15}$/, {
-        message: tE("Please_enter_a_valid_phone_number_(10-15_digits)"),
-      }),
+    phone: z.string().regex(/^\d{10,15}$/, {
+      message: tE("Please_enter_a_valid_phone_number_(10-15_digits)"),
+    }),
 
-  email: z
-    .string()
-    .email({ message: tE("Please_enter_a_valid_email_address"), })
-    .min(2, { message: "Email must be at least 2 characters long." }),
+    email: z
+      .string()
+      .email({ message: tE("Please_enter_a_valid_email_address") })
+      .min(2, { message: "Email must be at least 2 characters long." }),
 
-  message: z.string().min(6, {
-    message: tE("Message_must_be_at_least_6_characters_long"),
-  }),
-  project: z.string().optional(),
-  agency: z.string().optional(),
-});
-
+    message: z.string().min(6, {
+      message: tE("Message_must_be_at_least_6_characters_long"),
+    }),
+    project: z.string().optional(),
+    agency: z.string().optional(),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -105,16 +94,19 @@ const formSchema = z.object({
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="w-full flex gap-3 items-center bg-gray-200 p-3 rounded-[0.6rem]">
-                     {url?  <img
-            src={url}
-            alt="company"
-            className="w-14 rounded-sm sm:w-10"
-
-          />:     <img
-          src="/company/unknown.png"
-          alt="company"
-          className="w-14 rounded-sm sm:w-10"
-        />}
+            {url ? (
+              <img
+                src={url}
+                alt="company"
+                className="w-14 rounded-sm sm:w-10"
+              />
+            ) : (
+              <img
+                src="/company/unknown.png"
+                alt="company"
+                className="w-14 rounded-sm sm:w-10"
+              />
+            )}
             <p className="text-secondary font-medium text-sm">{title}</p>
           </div>
 

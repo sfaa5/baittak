@@ -38,11 +38,11 @@ export function PriceFilter({ onPriceChange }: PriceRangePopoverProps) {
         <button
           onClick={togglePopover}
           type="button"
-          className={`hover:bg-gray-50   duration-200 flex   ${!minPrice && !maxPrice? "gap-10 px-4":"gap-1 px-2"}  h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between `}
+          className={`hover:bg-gray-50   duration-200 flex   ${!minPrice && !maxPrice? "gap-10 px-4":"gap-1 px-2"}  h-[48px] items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between `}
         >
-          <div className="flex gap-2 items-center flex-wrap">
+          <div className="flex gap-2 items-center flex-wrap ">
             {minPrice || maxPrice ? (
-              <span className="whitespace-nowrap px-2 py-1 bg-[#466e7f] text-white rounded-md max-w-[100px] sm:max-w-[130px] truncate overflow-hidden">
+              <span className="whitespace-nowrap px-2 py-1 bg-[#466e7f] text-white  rounded-md max-w-[100px] sm:max-w-[130px] truncate overflow-hidden">
                 {minPrice ?? "—"} - {maxPrice ?? "—"}
               </span>
             ) : (

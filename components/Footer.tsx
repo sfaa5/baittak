@@ -4,7 +4,6 @@ import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io";
 import FoterArabicLogo from "./foter-arabic-logo";
 
-
 import { usePathname } from "next/navigation";
 import MessageButton from "./MessageButton";
 import { useLocale } from "next-intl";
@@ -18,12 +17,21 @@ function Footer() {
   const path = usePathname();
   const [cities, setCities] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
+    const [data, setData] = useState({
+
+      emails: { info: "", sales: "", agent: "" },
+      socialMedia: { instagram: "", facebook: "", youtube: "" },
+      contact: { address: "", phone: "" },   
+    
+    });
 
   // Fetch cities only once when the component mounts
   useEffect(() => {
     async function fetchCities() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/cities`);
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL_SERVER}/api/cities`
+        );
         const data = await response.json();
         setCities(data);
       } catch (error) {
@@ -35,6 +43,25 @@ function Footer() {
 
     fetchCities();
   }, []); // Empty dependency array ensures this runs only once
+
+
+    useEffect(() => {
+      async function getData() {
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_URL_SERVER}/api/contact`
+          );
+  
+          const data = await response.json();
+  
+          setData(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+  
+      getData();
+    }, []);
 
   return (
     <footer className={`bg-secondary mx-auto flex w-full pt-10 bottom-0 mt-24`}>
@@ -67,20 +94,26 @@ function Footer() {
             <h2 className="text-2xl font-semibold mb-3 text-white">
               {t("footer.contact")}
             </h2>
-            <p>{t("footer.email1")}</p>
-            <p>{t("footer.email2")}</p>
-            <p>{t("footer.email3")}</p>
+            <p>{data.emails?.info}</p>
+            <p>{data.emails?.sales}</p>
+            <p>{data.emails?.agent}</p>
           </div>
 
           <div className="flex flex-col">
-            <h2 className="text-2xl font-semibold lg:-ml-5 mb-3">
+            <h2 className="text-2xl font-semibold  mb-3">
               {t("footer.links")}
             </h2>
-            <ul className="list-disc ml-4 lg:ml-0">
-              <li>{t("footer.contactUs")}</li>
-              <li>{t("footer.aboutUs")}</li>
-              <li>{t("footer.career")}</li>
-              <li>{t("footer.terms")}</li>
+            <ul className="list-disc ml-4 lg:ml-0 flex flex-col gap-1">
+              <li>
+                <Link href={"/contact-us"}>{t("footer.contactUs")}</Link>
+              </li>
+              <li>
+                <Link href={"/aboutUs"}>{t("footer.aboutUs")}</Link>
+              </li>
+
+              <li>
+                <Link href={"/terms"}>{t("footer.terms")}</Link>
+              </li>
             </ul>
           </div>
 
@@ -93,12 +126,12 @@ function Footer() {
                 <p>Loading cities...</p>
               ) : cities.length === 0 ? (
                 <p>Cities not available</p>
-                
               ) : (
                 cities.map((city, index) => (
                   <ul key={index} className="list-disc ml-4 lg:ml-0">
-                                <Link href={`/Property?city=${city.name.en}`}>
-                                <li>{locale === "ar" ? city.name.ar : city.name.en}</li></Link>
+                    <Link href={`/Property?city=${city.name.en}`}>
+                      <li>{locale === "ar" ? city.name.ar : city.name.en}</li>
+                    </Link>
                   </ul>
                 ))
               )}
@@ -108,7 +141,7 @@ function Footer() {
 
         <div className="flex justify-between py-5">
           <div className="flex text-xl sm:text-3xl gap-1 sm:gap-3">
-            <IoLogoInstagram /> <CiFacebook /> <CiYoutube />
+           <Link href={`${data.socialMedia?.instagram} `}><IoLogoInstagram /></Link>  <Link href={`${data.socialMedia?.facebook}`}><CiFacebook /></Link>  <Link href={`${data.socialMedia?.youtube}`}> <CiYoutube /></Link>
           </div>
           <span className="text-sm sm:text-base">{t("footer.copyright")}</span>
         </div>

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "./ui/textarea";
 import { Input } from "./ui/input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMailOutline } from "react-icons/io5";
 
 import { toast } from "@/hooks/use-toast";
@@ -61,7 +61,7 @@ export function Mail({ ownerEmail, title }: MailProps) {
       message: tE("Please_enter_a_valid_phone_number_(10-15_digits)"),
     }),
     ownerEmail: z.string().optional(),
-    title: z.string(),
+    title: z.string().optional(),
   });
 
   // Define the form
@@ -77,6 +77,15 @@ export function Mail({ ownerEmail, title }: MailProps) {
     },
   });
 
+
+
+  useEffect(()=>{
+    form.reset({
+      title:title,
+   
+    });
+  },[form])
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     console.log("Form Values:", values);
@@ -85,7 +94,7 @@ export function Mail({ ownerEmail, title }: MailProps) {
     values.title = title;
 
     try {
-      const response = await fetch("http://localhost:5001/api/email", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +119,9 @@ export function Mail({ ownerEmail, title }: MailProps) {
         className: "bg-red-500 text-white p-4 rounded shadow-lg",
       });
     } finally {
+      form.reset()
       setOpen(false);
+      setLoading(false);
     }
   };
 
@@ -128,7 +139,7 @@ export function Mail({ ownerEmail, title }: MailProps) {
           className={`${
             pathname.includes("Agency") || pathname.includes("userListing")
               ? " hover:bg-gray-100  flex w-full h-[48px] gap-2 bg-white items-center font-medium text-secondary rounded-[.8rem] border-[1px]   px-4"
-              : "flex w-full  hover:bg-gray-100 gap-2 h-[45px] item font-semibold bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justi px-3"
+              : "flex w-full bg-white  hover:bg-gray-100 gap-2 h-[45px] item font-semibold border-secondary border-[1px] bg-opacity-25 text-secondary rounded-[.8rem] justi px-3"
           }`}
         >
           <IoMailOutline className="w-4 h-4" />

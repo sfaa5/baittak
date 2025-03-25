@@ -140,7 +140,7 @@ export function DataTable<TData extends RowData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader  >
+          <TableHeader className="text-sm" >
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow   key={headerGroup.id}  >
                 {headerGroup.headers.map((header) => {
@@ -165,7 +165,8 @@ export function DataTable<TData extends RowData, TValue>({
                   key={row.id}
                   onClick={() => handleRowClick(row.original._id )}
                   data-state={row.getIsSelected() && "selected"}
-                 className={"cursor-pointer"}
+                  
+                 className={`cursor-pointer ${pathnaem.includes("User/Posts") && row.getIsSelected() && "selected" && "data-[state=selected]:bg-primary data-[state=selected]:bg-opacity-35"}` }
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

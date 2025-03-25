@@ -150,7 +150,7 @@ function Search({cities}) {
               setPropertyType(value === "all" ? "" : value)
             }
           >
-            <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 duration-200 w-full h-[48px] items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+            <SelectTrigger className="flex hover:bg-gray-50 gap-4 sm:gap-10 font-normal duration-200 w-full h-[48px] items-center  text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("addUser.selectPropertyType")} />
             </SelectTrigger>
             <SelectContent>
@@ -190,7 +190,7 @@ function Search({cities}) {
             value={purpose}
             onValueChange={(value) => setPurpose(value === "All" ? "" : value)}
           >
-            <SelectTrigger className="flex hover:bg-gray-50 duration-200 h-[48px] gap-4 items-center font-medium text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
+            <SelectTrigger className="flex hover:bg-gray-50 duration-200 h-[48px] gap-4 items-center font-normal text-secondary rounded-[.8rem] border-[1px] border-[#1F4454] justify-between px-4">
               <SelectValue placeholder={t("search.buy")} />
             </SelectTrigger>
             <SelectContent>
@@ -233,10 +233,11 @@ function Search({cities}) {
                 );
               }} 
               key={city._id} 
-              className="flex gap-2 cursor-pointer"
+              className="flex gap-1 items-center cursor-pointer"
             >
-                <div className="text-secondary text-sm font-medium">
-                  {city.cityDetails.name.en}
+                <div className="text-secondary text-sm ">
+                
+                  {locale === "en" ? city.cityDetails.name.en : city.cityDetails.name.ar}
                 </div>
                 <span className="text-[#707070] text-xs font-normal">
                   ({city.count})

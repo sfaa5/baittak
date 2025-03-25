@@ -41,12 +41,12 @@ async function Page({ params }: { params: Promise<{ idd: string }> }) {
   console.log("userAgefter", data);    
 
   const userDetails = [{
-    _id: data._id,
-    username: data.username,
-    phoneNumber: data.phoneNumber,
-    email: data.email,
-    image: data.image,
-    role: data.role
+    _id: data?._id,
+    username: data?.username,
+    phoneNumber: data?.phoneNumber,
+    email: data?.email,
+    image: data?.image,
+    role: data?.role
   }]
 
 

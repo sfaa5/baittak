@@ -4,8 +4,10 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteProperty } from "@/lib/actions/property.action";
+import { deleteProperty,toggleFeaturedProperty } from "@/lib/actions/property.action";
 import { useSharedState } from "@/app/context/stateProvider";
+import { Checkbox } from "@/components/ui/checkbox";
+
 import { useTranslations } from "next-intl";
 import {
   AlertDialog,
@@ -19,6 +21,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import Link from "next/link";
+import {  useSession } from "next-auth/react";
+import { useState } from "react";
 
 // This type is used to define the shape of our data.
 export type Property = {
@@ -31,12 +35,14 @@ export type Property = {
   propertyType: string;
   _id: string;
   currency: string;
+  featured: boolean;
 };
 
 export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property");
   const ta = useTranslations("alert");
   const { setProperty } = useSharedState();
+    const { data: session, status } = useSession();
   return [
     {
       accessorKey: "images",
@@ -77,9 +83,10 @@ export const UseColumns = (): ColumnDef<Property>[] => {
         return (
           <Button
             variant="ghost"
+            className="text-sm"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            price
+            {t("Price")}
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
@@ -94,21 +101,37 @@ export const UseColumns = (): ColumnDef<Property>[] => {
         );
       },
     },
-    {
-      accessorKey: "area",
-      header: t("Area"),
-      cell: ({ row }) => (
-        <span>
-          {row.original.area}m<sup>2</sup>
-        </span>
-      ),
-    },
+  
     {
       accessorKey: "like",
       header: t("Likes"),
-      cell: ({ row }) => <span>{row.original.likes?.length || 0}</span>,
+      cell: ({ row }) => <span className="flex items-center justify-center">{row.original.likes?.length || 0}</span>,
     },
+    {
+      accessorKey: "featured",
+      header: () => <div className="flex justify-center text-sm">{t("Featured")}</div>,
+      cell: ({ row }) => {
+       const [featured, setFeatured] = useState(row.original.featured);
 
+        return(
+          
+        <div className="flex items-center justify-center">
+          <Checkbox
+            className=""
+            onClick={(e) => {e.stopPropagation();setFeatured(!featured)}}
+            checked={featured}
+            onCheckedChange={async (value) => {
+              console.log(featured)
+              console.log(!featured)
+              await toggleFeaturedProperty(row.original._id, !featured ,session);
+              row.toggleSelected(!!value);
+            }}
+          />
+        </div>
+        
+      )}
+      ,
+    },
     {
       id: "actions",
 
@@ -129,7 +152,7 @@ export const UseColumns = (): ColumnDef<Property>[] => {
                   window.location.href = `./Posts/${id}`; // Navigate manually
                 }}
               >
-                Edit
+                {t("Edit")}
               </Button>
             </Link>
 
@@ -143,7 +166,7 @@ export const UseColumns = (): ColumnDef<Property>[] => {
                     e.stopPropagation();
                   }}
                 >
-                  Delete
+                  {t("Delete")}
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -176,3 +199,7 @@ export const UseColumns = (): ColumnDef<Property>[] => {
     },
   ];
 };
+
+
+
+

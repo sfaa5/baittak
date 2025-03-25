@@ -94,7 +94,7 @@ function Cities() {
                           <div className="absolute inset-0 bg-gradient-to-b from-[rgba(43,43,43,0)] via-[rgba(43,43,43,0.24)] to-[rgba(48,48,48,0.97)]"></div>
                         </div>
 
-                        <div className="absolute bottom-0 left-0 w-full py-2 bg-opacity-80 px-5 text-white">
+                        <div className="absolute bottom-0 left-0 w-full py-2 bg-opacity-80 px-5  text-white">
                           <p className="text-[18px] font-semibold">
                             {locale === "en" ? city.name.en : city.name.ar}
                           </p>

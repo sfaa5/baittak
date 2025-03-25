@@ -17,6 +17,7 @@ import Like from "../Like";
 import Share from "../Share";
 
 import ContactMobile from "@/components/ContactMobile";
+import Report from "../Report";
 
 const propertyTypeTranslations = {
   Apartment: "شقة",
@@ -139,7 +140,10 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             propertyUrl={`https://baittak.vercel.app/Property/${_id}`}
             propertyTitle={title}
           />
+          <Report propertyId={_id} />
         </div>
+
+
       </div>
       {/* images */}
       <div>

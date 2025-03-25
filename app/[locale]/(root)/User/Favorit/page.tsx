@@ -22,7 +22,7 @@ function Page() {
         }
         });
         const jsonData = await response.json();
-        seFavorite(jsonData.favorites);
+        seFavorite(jsonData.user.favorites);
         setLoading(false); // Stop loading after data is fetched
       } catch (error) {
         console.error("Error fetching data:", error);

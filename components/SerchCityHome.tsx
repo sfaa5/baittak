@@ -5,9 +5,14 @@ import { useLocale, useTranslations } from "next-intl";
 import { FiMapPin } from "react-icons/fi";
 import { BsSearchHeartFill } from 'react-icons/bs';
 
+interface City {
+  name: { ar: string; en: string };
+  properties: string[];
+}
+
 function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string) => void }) {
   const [query, setQuery] = useState("");
-  const [cities, setCities] = useState<string[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
   const [openDropdown, setOpenDropdown] = useState(false); // ✅ Controls dropdown visibility
   const locale = useLocale();
   const t = useTranslations();
@@ -19,10 +24,7 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
       try {
         const response = await fetch("https://baittak-server.vercel.app/api/cities");
         const data = await response.json();
-        const displayedCities = data.map((item: { name: { ar: string; en: string } }) =>
-          locale === "ar" ? item.name.ar : item.name.en
-        );
-        setCities(displayedCities);
+        setCities(data);
       } catch (error) {
         console.error("Can't fetch cities", error);
       }
@@ -34,8 +36,13 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
   const filteredCities = query === ""
     ? cities
     : cities.filter((city) =>
-        city.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
+        (locale === "ar" ? city.name.ar : city.name.en)
+          .toLowerCase()
+          .replace(/\s+/g, "")
+          .includes(query.toLowerCase().replace(/\s+/g, ""))
       );
+
+      console.log("filteredCities", filteredCities);
 
   // ✅ Close dropdown when clicking outside
   useEffect(() => {
@@ -56,13 +63,13 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
             {/* Icon */}
             <div className="absolute inset-y-0 flex items-center z-20">
               <FiMapPin className="absolute mx-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <BsSearchHeartFill className="absolute left-1 top-1/2 -translate-y-1/2 text-white text-3xl bg-primary rounded-full p-2 sm:hidden" />
+              <BsSearchHeartFill className="absolute -left-9 top-1/2 -translate-y-1/2 text-white text-3xl bg-primary rounded-full p-2 sm:hidden" />
             </div>
 
             {/* Input field */}
             <Combobox.Input
               placeholder={t("landing.enter location here")}
-              className="w-full px-11 sm:px-7 pr-4 py-3 border rounded-[6px] border-gray-300 focus:outline-none"
+              className="w-full px-11 sm:px-7  pr- py-3 border rounded-[6px] border-gray-300 focus:outline-none"
               displayValue={(item: string) => item}
               onChange={(event) => setQuery(event.target.value)}
               onFocus={() => setOpenDropdown(true)} // ✅ Opens dropdown on focus
@@ -86,15 +93,15 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
                 ) : (
                   filteredCities.map((city) => (
                     <Combobox.Option
-                      key={city}
+                      key={locale === "ar" ? city.name.ar : city.name.en}
                       className={({ active }) =>
-                        `relative px-4 py-2 cursor-pointer ${active ? "bg-primary-blue text-gray" : "text-gray-900"}`
+                        `relative px-4 py-2 cursor-pointer h-[40px]  ${active ? "bg-primary-blue text-gray" : "text-gray-900"}`
                       }
-                      value={city}
+                      value={locale === "ar" ? city.name.ar : city.name.en}
                     >
                       {({ selected, active }) => (
-                        <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                          {city}
+                        <span className={`block truncate   ${selected ? "font-normal" : "font-light"}`}>
+                          {locale === "ar" ? city.name.ar : city.name.en}  <span className="text-gray-500 text-xs">({city.properties.length})</span> 
                         </span>
                       )}
                     </Combobox.Option>

@@ -24,7 +24,7 @@ function Share({ propertyUrl, propertyTitle }) {
 
   return (
 
-    <div className="flex items-center gap-2 cursor-pointer hover:scale-110 transition-transform duration-200"   onClick={handleShare}>
+    <div className="flex items-center gap-1 cursor-pointer hover:scale-110 transition-transform duration-200"   onClick={handleShare}>
     <PiShareFatThin /> <span className="text-sm">{t("propertyDetails.share")}</span>
   </div>
   )

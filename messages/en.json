@@ -39,6 +39,7 @@
   },
   "properties": {
     "latest_properties": "New Properties to discover",
+    "featured_properties": "Featured Properties",
     "New_Projects _to_Explore": "Latest Projects to Discover",
     "view_all": "View All"
   },
@@ -90,11 +91,13 @@
     "City": "City",
     "Title": "Title",
     "propertyType": "Property Type",
+    "Featured": "Featured",
     "Price": "Price",
     "Area": "Area",
     "Likes": "Likes",
     "Actions": "Actions",
-
+"Delete": "Delete",
+    "Edit": "Edit",
     "add_Property": "Add Property",
     "search_placeholder": "Search properties...",
     "properties_for": "Properties for",
@@ -617,4 +620,68 @@
     "title":"Submit a Report",
     "description":"Please provide details about your report. Your submission will be reviewed, and appropriate action will be taken."
   }
+  ,"about":{
+    "title": "About Us",
+  "subtitle": "Learn more about our mission, vision, and values.",
+  "mission": {
+    "title": "Our Mission",
+    "description": "To provide the best real estate services and help our clients find their dream homes."
+  },
+  "vision": {
+    "title": "Our Vision",
+    "description": "To be the leading real estate company known for our exceptional service and commitment to our clients."
+  },
+  "values": {
+    "title": "Our Values",
+    "description": "Integrity, Excellence, and Customer Satisfaction are at the core of everything we do."
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "description": "Our dedicated team of professionals is here to assist you every step of the way."
+  }
+  },
+  "contact-us":{
+    "title": "Contact Us",
+    "subtitle": "We would love to hear from you.",
+    "contactInfo": {
+      "title": "Contact Information",
+      "description": "You can reach us through the following contact details:",
+      "emailLabel": "Email",
+      "email": "info@realestate.com",
+      "phoneLabel": "Phone",
+      "phone": "+123 456 7890",
+      "addressLabel": "Address",
+      "address": "123 Real Estate St, City, Country"
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "messageLabel": "Message",
+      "submitButton": "Submit",
+      "Submitting": "Submitting..."
+    }
+  }
+  ,
+  "terms":{
+    "title": "Terms and Conditions",
+    "subtitle": "Please read these terms and conditions carefully before using our services.",
+    "section1": {
+      "title": "Introduction",
+      "content": "Welcome to our real estate platform. By accessing or using our services, you agree to be bound by these terms and conditions."
+    },
+    "section2": {
+      "title": "User Responsibilities",
+      "content": "As a user, you are responsible for providing accurate information and complying with all applicable laws and regulations."
+    },
+    "section3": {
+      "title": "Privacy Policy",
+      "content": "We are committed to protecting your privacy. Please review our privacy policy to understand how we collect, use, and disclose your personal information."
+    },
+    "section4": {
+      "title": "Changes to Terms",
+      "content": "We may update these terms and conditions from time to time. Any changes will be posted on this page, and your continued use of our services constitutes acceptance of the updated terms."
+    }
+  }
+  
 }

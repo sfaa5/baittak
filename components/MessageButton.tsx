@@ -12,6 +12,7 @@ function MessageButton() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER || "http://localhost:3000";
+  
   const locale = useLocale()
   const handleSubmit = async (e) => {
     e.preventDefault();

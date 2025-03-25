@@ -37,7 +37,7 @@ function Like({ propertyId, likes }: LikeProps) {
       return;
     }
 
-    setIsLoading(true);
+
 
     // Optimistic update
     const updatedLikeState = !isLiked;
@@ -63,7 +63,7 @@ function Like({ propertyId, likes }: LikeProps) {
     <button
       onClick={handleLikeToggle}
       disabled={isLoading}
-      className={`flex items-center gap-2  text-secondary bg-white text-xl    hover:scale-110 transition-transform duration-200 ${
+      className={`flex items-center gap-1   bg-white text-xl    hover:scale-110 transition-transform duration-200 ${
         isLoading ? 'opacity-50 cursor-not-allowed' : ''
       }`}
     >

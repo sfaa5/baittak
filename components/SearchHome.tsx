@@ -121,7 +121,7 @@ function SearchHome() {
           }}
         >
           <SelectTrigger
-            className="items-center  justify-between h-full border rounded-[6px] border-gray-300 bg-white text-gray-700 hover:bg-gray-50 
+            className="items-center   justify-between h-full border rounded-[6px] border-gray-300 bg-white text-gray-700 hover:bg-gray-50 
     focus:outline-none focus:ring-0 focus:border-transparent ring-0 border-transparent w-full hidden md:flex"
           >
             <SelectValue placeholder={t("addUser.selectPropertyType")} />

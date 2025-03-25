@@ -8,7 +8,10 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
-function Properties() {
+function Properties(params) {
+
+console.log("params",params);
+
   // Fetch translations
   const t = useTranslations();
 
@@ -20,7 +23,13 @@ function Properties() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch(`${URL_SERVER}/api/properties/get`); // Assuming the API endpoint is for properties
+
+        let response= null
+        if(params.params ==="properties"){      
+         response = await fetch(`${URL_SERVER}/api/properties/get`); // Assuming the API endpoint is for properties
+        }else{
+          response = await fetch(`${URL_SERVER}/api/properties/featured/get`); // Assuming the API endpoint is for properties
+        }
         const jsonData = await response.json();
         setProperties(jsonData.properties);
         setLoading(false);
@@ -34,6 +43,7 @@ function Properties() {
 
   // Function to shuffle and get 4 random properties
   const getRandomProperties = (properties) => {
+    console.log("properties",properties);
     const shuffled = [...properties].sort(() => Math.random() - 0.5); // Shuffle the array
     return shuffled.slice(0, 4); // Get the first 4 random properties
   };
@@ -47,10 +57,10 @@ function Properties() {
 
           <div className="flex justify-between w-full items-end gap-2">
        
-            
-              <h1 className="text-xl md:text-3xl w-auto font-semibold text-secondary">
-                {t("properties.latest_properties")}
+           <h1 className="text-xl md:text-3xl w-auto font-semibold text-secondary">
+           {params.params ==="properties"? t("properties.latest_properties"):t("properties.featured_properties")}
               </h1>
+           
             
 
             <Link href="/Property">

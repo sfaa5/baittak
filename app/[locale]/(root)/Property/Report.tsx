@@ -8,31 +8,34 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+
 
 import { z } from "zod";
 import { useLocale, useTranslations } from "next-intl";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { toast } from "@/hooks/use-toast";
 import { CiFlag1 } from "react-icons/ci";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
-function Report({ propertyId, open, setOpen }) {
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
+function Report({ propertyId }) {
+      const [open, setOpen] = useState(false);
+    
   const tE = useTranslations("erorr");
   const t = useTranslations("inputs");
   const r = useTranslations("report");
   const [loading, setLoading] = useState(false);
   const axiosAuth = useAxiosAuth();
-  const locale =useLocale();
-  const router =useRouter();
-  const {data:session,status}=useSession()
-  
+  const locale =useLocale()
+    const router =useRouter();
+    const {data:session,status}=useSession()
 
   // Schema for form validation
   const formSchema = z.object({
@@ -82,7 +85,7 @@ function Report({ propertyId, open, setOpen }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
+        <button
           type="button"
           onClick={(e) => {
           status==="unauthenticated"&&router.push("/?login=true")
@@ -91,12 +94,13 @@ function Report({ propertyId, open, setOpen }) {
             e.preventDefault();
             setOpen(true);
           }}
-          className={`${"flex w-full  hover:bg-gray-100 gap-2 h-[45px] item font-semibold bg-white border-secondary border-[0.5px] bg-opacity-25 text-secondary rounded-[.8rem] justi px-3"}`}
+          className={`${"flex items-center gap-1   bg-white text-xl    hover:scale-110 transition-transform duration-200"}`}
         >
         
-          <CiFlag1 />
+          <CiFlag1 className="w-4" />
           
-        </Button>
+          <span className="text-sm">Report</span>
+        </button>
       </DialogTrigger>
 
       <DialogContent>

@@ -22,7 +22,7 @@ const ShareButton = ({ propertyUrl, propertyTitle }) => {
 
   return (
     <button
-    className="flex w-full items-center text-sm hover:bg-gray-100 gap-2 h-[45px]   bg-[#1F4454] bg-opacity-25 text-secondary rounded-[.8rem] justi px-3"
+    className="flex w-full items-center  text-sm hover:bg-gray-100 gap-2 h-[45px] border-secondary border-[1px]  bg-white bg-opacity-25 text-secondary rounded-[.8rem] justi px-3"
 
       onClick={handleShare}
     >

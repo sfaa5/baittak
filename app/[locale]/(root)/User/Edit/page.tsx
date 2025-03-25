@@ -116,7 +116,7 @@ function Page() {
           throw new Error("Failed to fetch user data");
         }
 
-        const data =  response.data;
+        const data =  response.data.user;
         setUser(data);
 
  

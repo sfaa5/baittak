@@ -122,7 +122,11 @@ export default function Home() {
       {/* // Cities and areas */}
       <Cities />
 
-      <Properties />
+      <Properties params={"properties"} />
+      
+      <Properties params={"featured"} />
+
+
 
       <Projects/>
 

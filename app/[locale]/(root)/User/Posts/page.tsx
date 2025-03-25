@@ -1,32 +1,31 @@
 "use client"; // This tells Next.js to render this component on the client side
 
-import { DataTable } from '@/components/Company/data-table';
-import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
-import { UseColumns } from './Columns';
-import { useSharedState } from '@/app/context/stateProvider';
-import TableSkelton from '@/components/TableSkelton';
-import useAxiosAuth from '@/hooks/useAxiosAuth';
-
+import { DataTable } from "@/components/Company/data-table";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { UseColumns } from "./Columns";
+import { useSharedState } from "@/app/context/stateProvider";
+import TableSkelton from "@/components/TableSkelton";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 function Page() {
   const { data: session, status } = useSession();
-  const{property,setProperty}=useSharedState();
-  const [loading, setLoading] = useState(true); 
+  const { property, setProperty } = useSharedState();
+  const [loading, setLoading] = useState(true);
   const axiosAuth = useAxiosAuth();
-     const columns = UseColumns();
+  const columns = UseColumns();
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosAuth.get(`api/users/${session?.user?.id}`);
-        console.log("response",response)
+        console.log("response", response);
         const jsonData = response.data;
-        console.log("jsondata",jsonData)
-        setProperty(jsonData.properties);
+        console.log("jsondata", jsonData);
+        setProperty(jsonData.user.properties);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false); 
+        console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
 
@@ -38,14 +37,12 @@ function Page() {
   console.log("User data:", property);
 
   return (
-
-    <div className="w-full  ">{
-
-    loading?(<TableSkelton/>):
-    (  <DataTable columns={columns} columFilter="title" data={property} />)
-     
-    }
-     
+    <div className="w-full  ">
+      {loading ? (
+        <TableSkelton />
+      ) : (
+        <DataTable columns={columns} columFilter="title" data={property} />
+      )}
     </div>
   );
 }

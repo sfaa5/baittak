@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import Mail from "./Mail";
 import { Button } from "./ui/button";
 import Image from "next/image";
-
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { LuMessagesSquare } from "react-icons/lu";
@@ -15,7 +14,7 @@ import Link from "next/link";
 function ContactDesk({
   user,
   title,
-  post
+  post,
 }: {
   user: {
     _id: string;
@@ -26,38 +25,42 @@ function ContactDesk({
   };
   title: string;
   post: {
-    title:string,
-    _id:string,
-    price:string,
-    images:[url:string],
-    currency:string,
-    rentaltype:string,
+    title: string;
+    _id: string;
+    price: string;
+    images: [url: string];
+    currency: string;
+    rentaltype: string;
   };
 }) {
   const t = useTranslations();
 
-  const { data: session,status } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
-   const chatWith = () => {
-    if (status==="unauthenticated"){
+  const chatWith = () => {
+    if (status === "unauthenticated") {
       router.push(`/?login=true`);
       return;
     }
+
     if (session.user.id === user._id) return;
 
     const data = {
       image: { url: user?.image?.url },
       username: user.username,
       post: post,
-      _id: user._id
+      _id: user._id,
     };
     localStorage.setItem("chat-user", JSON.stringify(data));
     router.push("/messages");
   };
 
   return (
-    <Link href={`userListing/${user._id}`} className="lg:flex hidden  flex-col w-1/3  border p-3 gap-8  right-0 top-6 mt-6 rounded-md shadow-sm sticky ">
+    <Link
+      href={`userListing/${user._id}`}
+      className="lg:flex hidden hover:bg-gray-50  flex-col w-1/3  border p-3 gap-8  right-0 top-6 mt-6 rounded-md shadow-sm sticky "
+    >
       <div className="flex gap-4">
         <Image
           width={56}
@@ -85,7 +88,15 @@ function ContactDesk({
           {t("contact.chat")}
         </Button>
 
-        <Mail title={title} />
+        <div
+          className="w-full"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <Mail title={title} ownerEmail={user.email} />
+        </div>
+
         <Button
           onClick={(e) => {
             e.stopPropagation(); // Prevent the click from bubbling up to the Link

@@ -16,10 +16,11 @@ import LikeButton from "./LikeButton";
 import { Button } from "./ui/button";
 
 import ShareButton from "./Share";
-import {  SlSizeFullscreen } from "react-icons/sl";
-import { usePathname } from "next/navigation";
+import { SlSizeFullscreen } from "react-icons/sl";
+import { usePathname, useRouter } from "next/navigation";
 
 import Report from "./Report";
+import { useSession } from "next-auth/react";
 
 const RentalTypeTranslation = {
   Monthly: "شهريًّا",
@@ -52,7 +53,7 @@ const propertyTypeTranslations = {
   "Full-Floor": "طابق كامل",
 };
 
-function PropertiesCard({post} ) {
+function PropertiesCard({ post }) {
   const locale = useLocale();
 
   const [showNumber, setShowNumber] = useState(false);
@@ -60,6 +61,7 @@ function PropertiesCard({post} ) {
   const [open, setOpen] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
+  const router=useRouter()
 
   const t = useTranslations();
 
@@ -101,8 +103,8 @@ function PropertiesCard({post} ) {
     _id,
   } = post;
 
-console.log("userDetails", userDetails);
-  
+  console.log("userDetails", userDetails);
+  console.log("CompanyImage", CompanyImage);
 
   return (
     <Link
@@ -231,7 +233,10 @@ console.log("userDetails", userDetails);
                   <li
                     key={index}
                     className={`${
-                     ( index === 0&&locale==="ar") || (index===2 && locale==="en") ? "" : "border-r-[1px] border-primary pr-3"
+                      (index === 0 && locale === "ar") ||
+                      (index === 2 && locale === "en")
+                        ? ""
+                        : "border-r-[1px] border-primary pr-3"
                     }`}
                   >
                     {locale === "ar" ? amenity?.name?.ar : amenity?.name?.en}
@@ -251,10 +256,10 @@ console.log("userDetails", userDetails);
                     e.preventDefault();
                     setShowNumber(!showNumber);
                   }}
-                  className="flex w-full  h-[45px] gap-2   bg-white hover:bg-gray-100 items-center font-semibold    text-secondary rounded-[.8rem]  justify-between px-3"
+                  className="flex btn-border w-full h-[45px] gap-2 border-secondary border-[0.5px] bg-white hover:bg-gray-100 items-center font-semibold text-secondary rounded-[.8rem] justify-between px-3"
                 >
                   <FiPhoneCall className="w-4 h-4" />
-                  {showNumber ? userDetails[0]?.phoneNumber : "Call"}
+                  {showNumber ? userDetails[0]?.phoneNumber : t("contact.Call")}
                 </Button>
 
                 <div
@@ -295,16 +300,17 @@ console.log("userDetails", userDetails);
                 >
                   <Report propertyId={_id} open={open} setOpen={setOpen} />
                 </div>
+
+
               </div>
 
-              {(CompanyImage && userDetails[0].role ==="agency")  && (
+              {CompanyImage && (
                 <img
                   src={CompanyImage}
                   alt="comoany"
                   className="hidden sm:flex w-10"
                 />
               )}
-
             </div>
           </div>
         </div>

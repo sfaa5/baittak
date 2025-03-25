@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -21,3 +22,7 @@ function padZero(number) {
 
 
 
+export const isValidPhoneNumber = (phoneNumber: string): boolean => {
+	const phoneNumberParsed = parsePhoneNumberFromString(phoneNumber);
+	return phoneNumberParsed ? phoneNumberParsed.isValid() : false;
+  };

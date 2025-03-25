@@ -33,7 +33,8 @@
     max-height: 90%;
     overflow: auto;
   }
-  
+
+
   .overlay {
     position: fixed;
     top: 0;

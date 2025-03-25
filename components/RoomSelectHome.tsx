@@ -65,11 +65,11 @@ function RoomSelectHome({
   }, []);
 
   return (
-       <div className="relative hidden lg:block" ref={dropdownRef}>
+       <div className="relative hidden lg:block h-full" ref={dropdownRef}>
           <button
             type="button"
             onClick={toggleDropdown}
-            className="items-center justify-between  w-full  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none    hidden lg:flex"
+            className="items-center justify-between font-normal text-sm  w-full h-full  px-4 py-3 border border-gray-300 rounded-[6px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none    hidden lg:flex"
           >
               {bathrooms === 0 && rooms === 0 && (
             <span>{t("search.rooms_bath")}</span>
