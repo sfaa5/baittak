@@ -4,7 +4,7 @@ import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io";
 import FoterArabicLogo from "./foter-arabic-logo";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import MessageButton from "./MessageButton";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
@@ -17,7 +17,7 @@ function Footer() {
   const path = usePathname();
   const [cities, setCities] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
-  const router =useRouter()
+
     const [data, setData] = useState({
 
       emails: { info: "", sales: "", agent: "" },
