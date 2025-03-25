@@ -24,7 +24,9 @@ function ChatButton(user: {
   const router = useRouter();
 
   const chatWith = () => {
-    if (session.user.id === user._id) return;
+
+    if (session?.user?.id === user._id) return;
+    
     const data = {
       image: { url: user?.image?.url },
       username: user.username,

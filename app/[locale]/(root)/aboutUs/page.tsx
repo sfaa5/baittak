@@ -16,7 +16,7 @@ async function Page() {
   console.log(data);
 
   return (
-    <section className="py-16 bg-primary/10">
+    <section className="py-16 bg-primary/10 min-h-screen">
       <div className="container mx-auto px-4 2xl:px-[120px]">
         <div className=" mb-12">
           <h2 className="text-3xl md:text-4xl font-semibold text-">

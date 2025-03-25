@@ -4,7 +4,7 @@ import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io";
 import FoterArabicLogo from "./foter-arabic-logo";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import MessageButton from "./MessageButton";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
@@ -17,6 +17,7 @@ function Footer() {
   const path = usePathname();
   const [cities, setCities] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
+  const router =useRouter()
     const [data, setData] = useState({
 
       emails: { info: "", sales: "", agent: "" },
@@ -64,7 +65,7 @@ function Footer() {
     }, []);
 
   return (
-    <footer className={`bg-secondary mx-auto flex w-full pt-10 bottom-0 mt-24`}>
+    <footer className={`bg-secondary mx-auto flex w-full ${["contact-us","terms","aboutUs"].some(subPath => path.includes(subPath)) ? "mt-0" : " mt-24"} bottom-0 pt-10`}>
       <div
         className={`container mx-auto  flex flex-col text-white ${
           path !== "/en" && path !== "/ar" ? "2xl:px-[120px]" : ""
