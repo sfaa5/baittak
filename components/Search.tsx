@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import SearchCity from "./SearchProperty";
 import {
   Select,

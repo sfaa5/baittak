@@ -5,7 +5,7 @@ import { FiPhoneCall } from "react-icons/fi";
 
 import { IoHomeSharp } from "react-icons/io5";
 import { MdArrowForwardIos } from "react-icons/md";
-import { getLocale, getTranslations } from "next-intl/server";
+import {  getTranslations } from "next-intl/server";
 
 import { UserFavoritesProvider } from "@/app/context/UserFavoritesContext";
 import { getServerSession } from "next-auth";

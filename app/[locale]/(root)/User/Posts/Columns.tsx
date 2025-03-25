@@ -47,7 +47,7 @@ const FeaturedCheckbox = ({ row }) => {
       <Checkbox
         checked={featured}
         onClick={(e) => e.stopPropagation()}
-        onCheckedChange={async (value) => {
+        onCheckedChange={async () => {
           setFeatured(!featured);
           await toggleFeaturedProperty(row.original._id, !featured, session);
         }}
@@ -60,7 +60,7 @@ export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property");
   const ta = useTranslations("alert");
   const { setProperty } = useSharedState();
-    const { data: session } = useSession();
+
   return [
     {
       accessorKey: "images",

@@ -7,10 +7,6 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 import { useLocale, useTranslations } from "next-intl";
 
-
-import { useSession } from "next-auth/react";
-
-import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 const CurrencyTranslation = {

@@ -17,7 +17,7 @@ import { Button } from "./ui/button";
 
 import ShareButton from "./Share";
 import { SlSizeFullscreen } from "react-icons/sl";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import Report from "./Report";
 
