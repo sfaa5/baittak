@@ -60,6 +60,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 import React from "react";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 
 interface Property {
   user?: { _id: string };
@@ -95,6 +96,7 @@ function Page() {
   const [deletedImages, setDeletedImages] = useState([]);
   const [Amenities, setAmenities] = useState<Amenity[]>([]);
   const t = useTranslations();
+  const {data:session,status}=useSession();
 
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -341,9 +343,16 @@ function Page() {
         formData.append(`amenities[${index}]`, amenity);
       });
 
+      if(status==="unauthenticated"){
+          router.push("/?login=true")
+      }
+
       const response = await fetch(
         `${URL_SERVER}/api/properties/${params.id}`,
         {
+          headers:{
+            Authorization:session?.user?.accessToken
+          },
           method: "PUT",
           body: formData,
         }

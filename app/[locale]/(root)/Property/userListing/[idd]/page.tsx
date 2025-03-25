@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import ChatButton from "@/components/ChatButton";
 import ShowCards from "../../../Agency/ShowCards";
 
+
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 async function Page({ params }: { params: Promise<{ idd: string }> }) {
@@ -29,6 +30,8 @@ async function Page({ params }: { params: Promise<{ idd: string }> }) {
   const response = await fetch(
     `${URL_SERVER}/api/users/${id}?userId=${userId}`
   );
+
+
 
   const dataJson = await response.json();
 
