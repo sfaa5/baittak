@@ -1,5 +1,5 @@
 "use client";
-import { TiDeleteOutline } from "react-icons/ti";
+
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
@@ -38,11 +38,29 @@ export type Property = {
   featured: boolean;
 };
 
+const FeaturedCheckbox = ({ row }) => {
+  const [featured, setFeatured] = useState(row.original.featured);
+  const { data: session } = useSession();
+
+  return (
+    <div className="flex items-center justify-center">
+      <Checkbox
+        checked={featured}
+        onClick={(e) => e.stopPropagation()}
+        onCheckedChange={async (value) => {
+          setFeatured(!featured);
+          await toggleFeaturedProperty(row.original._id, !featured, session);
+        }}
+      />
+    </div>
+  );
+};
+
 export const UseColumns = (): ColumnDef<Property>[] => {
   const t = useTranslations("property");
   const ta = useTranslations("alert");
   const { setProperty } = useSharedState();
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
   return [
     {
       accessorKey: "images",
@@ -110,27 +128,8 @@ export const UseColumns = (): ColumnDef<Property>[] => {
     {
       accessorKey: "featured",
       header: () => <div className="flex justify-center text-sm">{t("Featured")}</div>,
-      cell: ({ row }) => {
-       const [featured, setFeatured] = useState(row.original.featured);
-
-        return(
-          
-        <div className="flex items-center justify-center">
-          <Checkbox
-            className=""
-            onClick={(e) => {e.stopPropagation();setFeatured(!featured)}}
-            checked={featured}
-            onCheckedChange={async (value) => {
-              console.log(featured)
-              console.log(!featured)
-              await toggleFeaturedProperty(row.original._id, !featured ,session);
-              row.toggleSelected(!!value);
-            }}
-          />
-        </div>
-        
-      )}
-      ,
+      cell: ({ row }) => <FeaturedCheckbox row={row} />
+      
     },
     {
       id: "actions",

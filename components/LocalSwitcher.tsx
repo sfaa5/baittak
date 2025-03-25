@@ -1,5 +1,5 @@
 import { routing } from "@/i18n/routing";
-import { Globe } from "lucide-react";
+
 import { useLocale } from "next-intl";
 import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
 

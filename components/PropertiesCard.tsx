@@ -6,7 +6,7 @@ import { LiaBedSolid } from "react-icons/lia";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { PiBathtubLight } from "react-icons/pi";
 import Link from "next/link";
-import { property } from "@/app/[locale]/(root)/Property/page";
+
 
 import React, { useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
@@ -20,7 +20,7 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import { usePathname, useRouter } from "next/navigation";
 
 import Report from "./Report";
-import { useSession } from "next-auth/react";
+
 
 const RentalTypeTranslation = {
   Monthly: "شهريًّا",
@@ -61,7 +61,7 @@ function PropertiesCard({ post }) {
   const [open, setOpen] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const router=useRouter()
+
 
   const t = useTranslations();
 

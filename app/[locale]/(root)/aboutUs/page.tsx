@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 
 async function Page() {
-  const t = await getTranslations("about");
+
   const locale = await getLocale();
   const response = await axios.get(
     `${
@@ -62,7 +62,7 @@ async function Page() {
 
         <div className="mt-12 ">
           {data.sections.map((section, index) => (
-            <div>
+            <div key={index}>
               <h3 className="text-lg font-semibold  mb-4">
                 {locale === "en" ? section.title.en : section.title.ar}
               </h3>

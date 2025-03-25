@@ -13,7 +13,7 @@ import { authOptions } from "@/lib/nextAuth";
 
 import Mail from "@/components/Mail";
 import { Button } from "@/components/ui/button";
-import { LuMessagesSquare } from "react-icons/lu";
+
 import ChatButton from "@/components/ChatButton";
 import ShowCards from "../../../Agency/ShowCards";
 
@@ -22,7 +22,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 async function Page({ params }: { params: Promise<{ idd: string }> }) {
   const id = (await params).idd;
   const t = await getTranslations();
-  const locale = await getLocale();
+
   const session = await getServerSession(authOptions as object);
   const userId = session?.user?.id;
 

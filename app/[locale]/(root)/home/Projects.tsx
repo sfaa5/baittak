@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropertyCard from "@/components/PropertyCard";
+
 import { useTranslations } from "next-intl";
 import SkeletonCard from "@/components/skeletons/SkeletonCard";
 import ProjectCardHome from "@/components/ProjectCardHome";

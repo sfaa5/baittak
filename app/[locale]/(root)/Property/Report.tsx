@@ -35,7 +35,7 @@ function Report({ propertyId }) {
   const axiosAuth = useAxiosAuth();
   const locale =useLocale()
     const router =useRouter();
-    const {data:session,status}=useSession()
+    const {status}=useSession()
 
   // Schema for form validation
   const formSchema = z.object({
@@ -88,7 +88,7 @@ function Report({ propertyId }) {
         <button
           type="button"
           onClick={(e) => {
-          status==="unauthenticated"&&router.push("/?login=true")
+         if( status==="unauthenticated"){ router.push("/?login=true")}
             
             e.stopPropagation();
             e.preventDefault();

@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 
 async function Terms() {
-  const t = await getTranslations("terms");
+
   const locale =await getLocale();
 
  const response = await axios.get(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/terms/getTerm/${"67e0d56402ed34fa766a1868"}`);
@@ -26,7 +26,7 @@ async function Terms() {
         <div className="space-y-8">
         {
           term.sections.map((section, index) => (
-                    <div>
+                    <div key={index}>
             <h3 className="text-lg font-semibold text-primary mb-4">
               {locale==="en"? section.title.en: section.title.ar}
             </h3>

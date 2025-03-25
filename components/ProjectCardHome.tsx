@@ -1,25 +1,17 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { LiaBedSolid } from "react-icons/lia";
-import { PiBathtubLight } from "react-icons/pi";
+
 import { FiMapPin } from "react-icons/fi";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 import { useLocale, useTranslations } from "next-intl";
 
-import { FaHeart } from "react-icons/fa";
-import { like } from "@/lib/actions/user.action";
+
 import { useSession } from "next-auth/react";
-import { useSharedState } from "@/app/context/stateProvider";
+
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { SlSizeFullscreen } from "react-icons/sl";
-import Image from "next/image";
-
-const RentalTypeTranslation = {
-  Monthly: "شهريًّا",
-  Yearly: "سنوياً",
-};
 
 const CurrencyTranslation = {
   USD: "دولار",
@@ -34,23 +26,11 @@ const CurrencyTranslation = {
   JOD: "دينار أردني",
 };
 
-const propertyTypeTranslations = {
-  Apartment: "شقة",
-  villa: "فيلا",
-  Farm: "مزرعة",
-  "Rest-House": "استراحة",
-  "Residential-Complex": "مجمع سكني",
-  Duplex: "دوبلكس",
-  Building: "عمارة بالكامل",
-  "Hotel-Apartments": "فندق/شقق فندقية",
-  Land: "ارض",
-  "Full-Floor": "طابق كامل",
-};
+
 
 function ProjectCardHome({ property }) {
-  const { data: session } = useSession();
-  const router = useRouter();
-  const path = usePathname();
+
+
   const locale = useLocale();
  
   const t = useTranslations();

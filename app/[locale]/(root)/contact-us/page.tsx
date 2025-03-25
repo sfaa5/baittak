@@ -18,13 +18,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { isValidPhoneNumber } from "@/lib/utils";
-import axios from "axios";
+
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function ContactUs() {
   const t = useTranslations("contact-us");
-  const T = useTranslations("");
+
   const tE = useTranslations("erorr");
   const [loading, setLoading] = useState(false);
   const locale = useLocale();

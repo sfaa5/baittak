@@ -99,7 +99,7 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
                       }
                       value={locale === "ar" ? city.name.ar : city.name.en}
                     >
-                      {({ selected, active }) => (
+                      {({ selected }) => (
                         <span className={`block truncate   ${selected ? "font-normal" : "font-light"}`}>
                           {locale === "ar" ? city.name.ar : city.name.en}  <span className="text-gray-500 text-xs">({city.properties.length})</span> 
                         </span>

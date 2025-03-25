@@ -126,7 +126,7 @@ const SearchCity = ({
                       }
                       value={locale === "ar" ? city.name.ar : city.name.en}
                     >
-                      {({ selected, active }) => (
+                      {({ selected }) => (
                         <span
                           className={`block truncate   ${
                             selected ? "font-normal" : "font-light"

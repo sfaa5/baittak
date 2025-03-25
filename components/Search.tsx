@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -13,12 +13,12 @@ import {
 } from "./ui/select";
 import RoomSelect from "./RoomSelect";
 import { PriceFilter } from "./PriceSelector";
-import { get } from "http";
+
 
 function Search({cities}) {
   const t = useTranslations();
   const locale = useLocale();
-  const searchParams = useSearchParams();
+
   const router = useRouter();
 
   // State variables
