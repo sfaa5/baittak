@@ -70,6 +70,7 @@ function Report({ propertyId }) {
         className: "bg-green-500 text-white p-4 rounded shadow-lg",
       });
     } catch (error) {
+      if(error.response.status===401||error.response.status===403) return
       console.error("Error:", error);
       toast({
         description: "Faild to send report",

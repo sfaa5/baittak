@@ -26,6 +26,7 @@ function useDeleteMessage() {
         throw new Error("Something went wrong!");
       }
     } catch (error) {
+      if(error.response.status===401||error.response.status===403) return
       toast({
         description: error.response,
         className: "bg-red-500 text-white p-4 rounded shadow-lg",

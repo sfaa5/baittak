@@ -25,6 +25,7 @@ const useGetMessages = () => {
         if (res.data.error) throw new Error(res.data.error);
         setMessages(res.data);
       } catch (error) {
+        if(error.response.status===401||error.response.status===403) return
         toast({
           description: error,
           className: "bg-red-500 text-white p-4 rounded shadow-lg",

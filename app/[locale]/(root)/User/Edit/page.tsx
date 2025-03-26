@@ -128,6 +128,7 @@ function Page() {
           email: data.email || "",
         });
       } catch (error) {
+        if(error.response.status===401||error.response.status===403) return
         console.error("Error fetching user data:", error);
       }
     };

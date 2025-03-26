@@ -59,6 +59,7 @@ const useSendMessage = () => {
         });
       }
     } catch (error) {
+      if(error.response.status===401||error.response.status===403) return
       toast({
         description: "something went wrong",
         className: "bg-red-500 text-white p-4 rounded shadow-lg",
