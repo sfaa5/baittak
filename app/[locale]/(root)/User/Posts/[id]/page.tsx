@@ -351,7 +351,8 @@ function Page() {
         `${URL_SERVER}/api/properties/${params.id}`,
         {
           headers:{
-            Authorization:session?.user?.accessToken
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.user.accessToken}`,
           },
           method: "PUT",
           body: formData,
