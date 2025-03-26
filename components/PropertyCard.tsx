@@ -107,7 +107,6 @@ const  t =useTranslations()
 
 
 
-  console.log(property)
 
   return (
     <div className="relative w-full max-w-md mx-auto ">

@@ -10,7 +10,7 @@ const Message = ({ message }) => {
   const { selectedConversation } = useConversationContext();
   const locale =useLocale();
 
-  const fromMe = message.senderId === session.user.id;
+  const fromMe = message.senderId === session?.user?.id;
   const chatClassName = fromMe ? "self-end flex-row-reverse" : "self-start";
   const profilePic = fromMe
     ? session.user.image

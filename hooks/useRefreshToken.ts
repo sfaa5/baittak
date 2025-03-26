@@ -30,7 +30,7 @@ export const useRefreshToken = () => {
 
         } catch (error) {
             console.error("Error refreshing token:", error);
-            if (error.status === 403) {
+            if (error.response.status === 403) {
                 signOut();
             }
     

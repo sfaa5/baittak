@@ -10,7 +10,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 function Properties(params) {
 
-console.log("params",params);
+
 
   // Fetch translations
   const t = useTranslations();
@@ -43,7 +43,7 @@ console.log("params",params);
 
   // Function to shuffle and get 4 random properties
   const getRandomProperties = (properties) => {
-    console.log("properties",properties);
+  
     const shuffled = [...properties].sort(() => Math.random() - 0.5); // Shuffle the array
     return shuffled.slice(0, 4); // Get the first 4 random properties
   };

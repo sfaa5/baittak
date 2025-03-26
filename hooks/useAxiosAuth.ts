@@ -1,4 +1,5 @@
 "use client";
+
 import { axiosAuth } from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useCallback, useMemo } from "react";
@@ -6,16 +7,20 @@ import { useRefreshToken } from "./useRefreshToken";
 
 const useAxiosAuth = () => {
   const { data: session } = useSession();
-  const refreshToken = useRefreshToken(); // Ensure it's stable
-  const accessToken = useMemo(() => session?.user?.accessToken, [session]);
+  const refreshToken = useRefreshToken();
+  
+  // Always get the latest access token
+  const getAccessToken = () => session?.user?.accessToken;
+
+  console.log("getAccessToken",getAccessToken());
 
   useEffect(() => {
-    if (!accessToken) return; // Avoid running when there's no token
+    if (!getAccessToken()) return;
 
     const requestIntercept = axiosAuth.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${accessToken}`;
+          config.headers["Authorization"] = `Bearer ${getAccessToken()}`;
         }
         return config;
       },
@@ -26,12 +31,18 @@ const useAxiosAuth = () => {
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
+
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           prevRequest.sent = true;
+
+          // Refresh the token
           await refreshToken();
-          prevRequest.headers["Authorization"] = `Bearer ${session?.user?.accessToken}`;
+
+          // Ensure the latest token is used
+          prevRequest.headers["Authorization"] = `Bearer ${getAccessToken()}`;
           return axiosAuth(prevRequest);
         }
+
         return Promise.reject(error);
       }
     );
@@ -40,7 +51,7 @@ const useAxiosAuth = () => {
       axiosAuth.interceptors.request.eject(requestIntercept);
       axiosAuth.interceptors.response.eject(responseIntercept);
     };
-  }, [accessToken, refreshToken]);
+  }, [session, refreshToken]); // Depend on session to always get the latest token
 
   return axiosAuth;
 };

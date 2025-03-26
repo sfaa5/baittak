@@ -31,7 +31,7 @@ function ProjectCardHome({ property }) {
  
   const t = useTranslations();
 
-  console.log("projectss", property);
+;
 
   const userImageUrl = property?.user[0].image?.url || null;
 

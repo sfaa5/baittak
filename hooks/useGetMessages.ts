@@ -17,7 +17,7 @@ const useGetMessages = () => {
       setLoading(true);
       try {
         const res = await axiosAuth.get(
-          `/api/messages/${selectedConversation._id}${
+          `/api/messages/${selectedConversation?._id}${
             post ? `?postId=${post}` : ""
           }`
         );

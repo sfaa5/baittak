@@ -20,9 +20,10 @@ const Conversation = ({ conversation, lastIdx }) => {
   const { deleteMessage } = useDeleteMessage();
   const isSelected = selectedConversation?.convId === conversation.convId;
   const { onlineUsers } = useSocketContext();
+
   const isOnline = useMemo(
-    () => onlineUsers.includes(conversation._id),
-    [onlineUsers, conversation._id]
+    () => onlineUsers.includes(conversation?._id),
+    [onlineUsers, conversation?._id]
   );
 
   const seen = async (conversation) => {
