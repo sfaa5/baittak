@@ -2,7 +2,7 @@
 
 import { signOut, useSession } from "next-auth/react";
 import axios from "@/lib/axios";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 export const useRefreshToken = () => {
     const { data: session, update } = useSession(); // Get `update` function from useSession
@@ -29,7 +29,7 @@ export const useRefreshToken = () => {
             });
 
         } catch (error) {
-            console.error("Error refreshing token:", error);
+         
             if (error.response.status === 403) {
                 signOut();
             }
