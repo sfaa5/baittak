@@ -4,9 +4,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 // Import marker images
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+
 
 const Map = ({ initialLatitude, initialLongitude, onLocationSelect }) => {
 
@@ -15,9 +13,9 @@ const Map = ({ initialLatitude, initialLongitude, onLocationSelect }) => {
   useEffect(() => {
     // Set default icon options
     L.Icon.Default.mergeOptions({
-      iconUrl: markerIcon,
-      iconRetinaUrl: markerIcon2x,
-      shadowUrl: markerShadow,
+      iconUrl: "/marker-icon-blue.png",
+      iconRetinaUrl: "/marker-icon-2x-blue.png",
+      shadowUrl: "/leaflet/marker-shadow.png",
     });
 
     const mapInstance = L.map("map").setView([initialLatitude, initialLongitude], 13);

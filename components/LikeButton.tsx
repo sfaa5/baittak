@@ -31,9 +31,11 @@ function LikeButton({propertyId}) {
 
       const handleLikeToggle = async (e: React.MouseEvent<HTMLButtonElement>) => {
 
-        if(id===undefined){
-          console.log("id",id)
-          router.push('/')
+
+        if (!session?.user?.id) {
+          router.push("/?login=true");
+          return;
+      
         }else{
         e.stopPropagation();
         e.preventDefault();

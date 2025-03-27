@@ -133,7 +133,10 @@ function PropertiesCard({ post }) {
                 </div>
               ))}
             </div>
+            <div onClick={(e)=>{e.preventDefault(); e.stopPropagation()}}> 
             <LikeButton propertyId={_id} />
+            
+            </div>
             <button
               onClick={scrollPrev}
               className="absolute text-xl left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-black hover:scale-105 transition-all duration-300"
