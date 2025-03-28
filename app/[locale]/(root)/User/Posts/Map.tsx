@@ -14,7 +14,7 @@ const Map = ({ initialLatitude, initialLongitude, onLocationSelect }) => {
 
     // Load Google Maps script dynamically
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.key_google}`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA393tkbBtNS-0Oo2uShJseBUqJ1NdWN7o`;
     script.async = true;
     script.onload = () => setGoogleLoaded(true);
     document.body.appendChild(script);

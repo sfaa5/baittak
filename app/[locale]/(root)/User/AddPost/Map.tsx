@@ -13,7 +13,7 @@ const Map = ({ initialLatitude, initialLongitude, onLocationSelect }) => {
     }
 
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.key_google}&libraries=places&v=weekly`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA393tkbBtNS-0Oo2uShJseBUqJ1NdWN7o&libraries=places&v=weekly`;
     script.async = true;
     script.onload = () => setGoogleLoaded(true);
     document.body.appendChild(script);
