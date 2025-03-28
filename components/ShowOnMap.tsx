@@ -91,7 +91,7 @@ const ShowMap = ({ properties }) => {
     } else {
       const script = document.createElement("script");
       script.src =
-        `https://maps.googleapis.com/maps/api/js?key=key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&v=weekly`;
+        `https://maps.googleapis.com/maps/api/js?key=key=${process.env.key_google}&libraries=places&v=weekly`;
       script.async = true;
       script.defer = true;
       script.onload = loadGoogleMaps;
