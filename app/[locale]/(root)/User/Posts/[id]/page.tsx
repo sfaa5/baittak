@@ -97,7 +97,7 @@ function Page() {
   const [deletedImages, setDeletedImages] = useState([]);
   const [Amenities, setAmenities] = useState<Amenity[]>([]);
   const t = useTranslations();
-  const {data:session,status}=useSession();
+  const {status}=useSession();
 
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -373,7 +373,8 @@ function Page() {
         });
       }
 
-    } catch (err) {
+    } catch (error) {
+      console.log(error)
       toast({
         description: "Something went Wrong",
         className: "bg-red-500 text-white p-4 rounded shadow-lg",
