@@ -176,7 +176,7 @@ function Page() {
               user: {
                   ...session.user,
                   name: res.user.username,
-                  image:res.user.image.url
+                  image:res?.user?.image?.url
               }
           });
 

@@ -61,6 +61,7 @@ const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 import React from "react";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 interface Property {
   user?: { _id: string };
@@ -103,6 +104,8 @@ function Page() {
   const [errImage, setErrImage] = useState("");
   const [errorr, setErrorr] = useState(false);
   const tE = useTranslations("erorr");
+    const axiosAuth = useAxiosAuth();
+  
 
   const handleLocationSelect = async (selectedLocation) => {
     setLocation(selectedLocation);
@@ -318,6 +321,8 @@ function Page() {
         });
       }
 
+      console.log("values",values);
+
       formData.append("propertyType", values.propertyType);
       formData.append("title", values.title);
       formData.append("price", values.price.toString());
@@ -347,33 +352,30 @@ function Page() {
           router.push("/?login=true")
       }
 
-      const response = await fetch(
-        `${URL_SERVER}/api/properties/${params.id}`,
-        {
-          headers:{
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session.user.accessToken}`,
-          },
-          method: "PUT",
-          body: formData,
-        }
-      );
-      const data = await response.json();
-      if (response.ok) {
+          console.log("first",formData.get("city"))
+
+          const response = await axiosAuth.put(
+            `${URL_SERVER}/api/properties/${params.id}`,
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+      
+      console.log("data",response)
+      if (response.status >= 200 && response.status < 300) {
         router.push("/User/Posts");
         toast({
           description: "the post updated succussfuly",
           className: "bg-green-500 text-white p-4 rounded shadow-lg",
         });
-      } else {
-        toast({
-          description: data.message,
-          className: "bg-red-500 text-white p-4 rounded shadow-lg",
-        });
       }
+
     } catch (err) {
       toast({
-        description: err.message,
+        description: "Something went Wrong",
         className: "bg-red-500 text-white p-4 rounded shadow-lg",
       });
     } finally {

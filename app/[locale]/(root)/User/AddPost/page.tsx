@@ -119,15 +119,19 @@ function Page() {
   };
 
   const handleLocationSelect = async (selectedLocation) => {
+    console.log("1111111111111111111111111111111111111111111111111")
     setLocation(selectedLocation);
+    console.log("localtionnnnnnnnnnnnnnnnnn",location)
 
     try {
       // Reverse geocode to get the address
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${selectedLocation.latitude}&lon=${selectedLocation.longitude}`
       );
+      console.log("dataaaaaaaaaaaaaaaaa",response)
       const data = await response.json();
       const addressComponents = data.address;
+      console.log("addressComponets",addressComponents)
       if (addressComponents) {
         // Construct the address excluding city, postcode, and country
         const { road, house_number, suburb, neighbourhood, city } =

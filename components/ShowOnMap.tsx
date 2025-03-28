@@ -2,18 +2,20 @@
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const ShowMap = ({ properties }) => {
   const router = useRouter();
   const pathname = usePathname();
   const mapRef = useRef(null);
+  const t = useTranslations();
+  const infoWindowRef = useRef(null); // Track the currently open InfoWindow
 
   useEffect(() => {
     if (!properties || properties.length === 0) return;
 
     const validProperties = properties.filter(
-      (property) =>
-        property.location?.latitude && property.location?.longitude
+      (property) => property.location?.latitude && property.location?.longitude
     );
 
     if (validProperties.length === 0) return;
@@ -38,32 +40,34 @@ const ShowMap = ({ properties }) => {
             title: property.title,
           });
 
-          console.log("property",property)
+          console.log("property", property);
 
-          const imageUrl = property.images[0].url || "/placeholder-image.jpg"; // Fallback image
+          const imageUrl = property.images[0]?.url || "/placeholder-image.jpg"; // Fallback image
 
           const infoWindow = new window.google.maps.InfoWindow({
             content: `
-              <div style="max-width: 250px; font-family: Arial, sans-serif;">
+              <div style="padding: 0; max-width: 250px; font-family: Arial, sans-serif;">
                 <img src="${imageUrl}" alt="${property.title}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 5px;">
-                <h3 style="margin: 5px 0;">${property.title}</h3>
-                <p><strong>Address:</strong> ${property.address}</p>
-                <p><strong>Price:</strong> ${property.price ? `$${property.price}` : "N/A"}</p>
+                <h3 style="margin: 22px 0 5px 0;">${property.title}</h3>
+                <p><strong>${t("project.address")}:</strong> ${property.address}</p>
+                <p><strong>${t("property.Price")}:</strong> ${property.price ? `$${property.price}` : "N/A"}</p>
                 <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
                   <button id="viewDetails-${property._id}" 
                     style="padding: 6px 10px; background: #79B84E; color: white; border: none; cursor: pointer; border-radius: 4px;">
-                    View
+                    ${t("properties.view")}
                   </button>
                 </div>
               </div>
             `,
           });
 
-          marker.addListener("mouseover", () => infoWindow.open(map, marker));
-          // marker.addListener("mouseout", () => infoWindow.close());
-
+          // Add click event to open the info window and close the previous one
           marker.addListener("click", () => {
+            if (infoWindowRef.current) {
+              infoWindowRef.current.close(); // Close previously open infoWindow
+            }
             infoWindow.open(map, marker);
+            infoWindowRef.current = infoWindow; // Set the current open infoWindow
           });
 
           // Handle button click inside info window
@@ -87,7 +91,7 @@ const ShowMap = ({ properties }) => {
     } else {
       const script = document.createElement("script");
       script.src =
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyA393tkbBtNS-0Oo2uShJseBUqJ1NdWN7o&libraries=places&v=weekly";
+        `https://maps.googleapis.com/maps/api/js?key=key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&v=weekly`;
       script.async = true;
       script.defer = true;
       script.onload = loadGoogleMaps;

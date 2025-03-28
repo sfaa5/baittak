@@ -41,7 +41,9 @@
     "latest_properties": "New Properties to discover",
     "featured_properties": "Featured Properties",
     "New_Projects _to_Explore": "Latest Projects to Discover",
-    "view_all": "View All"
+    "view_all": "View All",
+    "view":"View"
+
   },
   "footer": {
     "unauthorized": "You are not authorized to perform this action.",
