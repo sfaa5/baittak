@@ -100,7 +100,7 @@ function Report({ propertyId }) {
         
           <CiFlag1 className="w-4" />
           
-          <span className="text-sm">Report</span>
+          <span className="text-sm">{r("report")}</span>
         </button>
       </DialogTrigger>
 

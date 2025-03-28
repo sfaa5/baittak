@@ -619,6 +619,7 @@
     }
   },
   "report":{
+    "report":"Report",
     "title":"Submit a Report",
     "description":"Please provide details about your report. Your submission will be reviewed, and appropriate action will be taken."
   }

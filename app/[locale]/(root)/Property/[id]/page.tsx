@@ -669,7 +669,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
                     </span>
                     <span className="font-medium">
                       {purpose === "rent"
-                        ? t("Residential for rent")
+                        ? t("propertyDetails.Residential for rent")
                         : t("propertyDetails.Residential for sale")}
                     </span>
 

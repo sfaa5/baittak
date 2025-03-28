@@ -300,6 +300,7 @@ function PropertiesCard({ post }) {
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
+                  className="hidden xs:block"
                 >
                   <Report propertyId={_id} open={open} setOpen={setOpen} />
                 </div>

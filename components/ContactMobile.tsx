@@ -56,7 +56,7 @@ function ContactMobile({
   };
 
   return (
-     <Link href={`userListing/${user._id}`} className="flex-col bgbg-gray-50 mobile-buttons text-sm lg:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 z-50">
+     <Link href={`userListing/${user._id}`} className="flex-col bg-[#e9f7e1]  mobile-buttons text-sm lg:hidden fixed bottom-0 left-0 w-full  flex gap-2 p-2 z-50">
 
 
       <div className="flex gap-4 items-center">
