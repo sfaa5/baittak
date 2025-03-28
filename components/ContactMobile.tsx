@@ -9,6 +9,7 @@ import { LuMessagesSquare } from "react-icons/lu";
 import { Button } from "./ui/button";
 import Mail from "./Mail";
 import Link from "next/link";
+import Image from "next/image";
 
 function ContactMobile({
   user,
@@ -34,7 +35,7 @@ function ContactMobile({
 }) {
   const t = useTranslations();
 
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
   const router = useRouter();
 
   const chatWith = () => {
@@ -55,9 +56,28 @@ function ContactMobile({
   };
 
   return (
-     <Link href={`userListing/${user._id}`} className="hover:bg-gray-50 mobile-buttons text-sm lg:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 z-50">
+     <Link href={`userListing/${user._id}`} className="flex-col bgbg-gray-50 mobile-buttons text-sm lg:hidden fixed bottom-0 left-0 w-full bg-white flex gap-2 p-2 z-50">
+
+
+      <div className="flex gap-4 items-center">
+        <Image
+          width={46}
+          height={46}
+          className="rounded-full"
+          alt="user avatar"
+          src={user.image?.url || "/messageImage.png"}
+        />
+        <div className="flex flex-col text-sm">
+          <span className="text-black ">{user.username}</span>
+          <span>{user.phoneNumber}</span>
+        </div>
+      </div>
+
+      <div className="contact-buttons  flex gap-2  justify-stretch">
       <Button
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent the click from bubbling up to the Link
+          e.preventDefault();
           chatWith();
         }}
         className="flex gap-2  w-full h-[45px] items-center font-semibold bg-primary bg-opacity-60 text-black rounded-[.8rem] justify-center px-3"
@@ -65,7 +85,16 @@ function ContactMobile({
         <LuMessagesSquare className="w-5 h-5" />
         {t("contact.chat")}
       </Button>
-      <Mail title={title} />
+
+      <div
+          className="w-full"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+      <Mail title={title} /></div>
+
+
       <Button
         onClick={(e) => {
           e.stopPropagation(); // Prevent the click from bubbling up to the Link
@@ -77,6 +106,7 @@ function ContactMobile({
         <FaWhatsapp className="w-5 h-5" />
         {t("contact.Whatsup")}
       </Button>
+      </div>
     </Link>
   );
 }

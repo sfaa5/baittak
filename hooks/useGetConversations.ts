@@ -40,7 +40,7 @@ const useGetConversations = () => {
 
           if (chatUser) {
             const isFind = updatedConversations.some(
-              (con) => con?.post?._id === chatUser.post._id
+              (con) => con?.post?._id === chatUser?.post?._id
             );
             if (!isFind) updatedConversations.push(chatUser);
           }

@@ -20,18 +20,24 @@ function ChatButton(user: {
 }) {
   const t = useTranslations();
 
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
   const router = useRouter();
 
   const chatWith = () => {
 
-    if (session?.user?.id === user._id) return;
+    if (status === "unauthenticated") {
+      router.push(`/?login=true`);
+      return;
+    }
+
+    if (session.user.id === user._id) return;
     
     const data = {
       image: { url: user?.image?.url },
       username: user.username,
       _id: user._id,
     };
+    
     localStorage.setItem("chat-user", JSON.stringify(data));
     router.push("/messages");
   };
