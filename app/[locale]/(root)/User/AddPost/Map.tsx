@@ -1,71 +1,81 @@
 "use client";
-import React, { useEffect } from 'react';
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-
-
+import React, { useEffect, useRef, useState } from "react";
 
 const Map = ({ initialLatitude, initialLongitude, onLocationSelect }) => {
-
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const [googleLoaded, setGoogleLoaded] = useState(false);
 
   useEffect(() => {
-    // Set default icon options
-    L.Icon.Default.mergeOptions({
-      iconUrl: "/marker-icon-blue.png",
-      iconRetinaUrl: "/marker-icon-2x-blue.png",
-      shadowUrl: "/leaflet/marker-shadow.png",
+    if (window.google && window.google.maps) {
+      setGoogleLoaded(true);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.key_google}&libraries=places&v=weekly`;
+    script.async = true;
+    script.onload = () => setGoogleLoaded(true);
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!googleLoaded || !mapRef.current) return;
+
+    const map = new window.google.maps.Map(mapRef.current, {
+      center: { lat: initialLatitude, lng: initialLongitude },
+      zoom: 13,
     });
 
-    const mapInstance = L.map("map").setView([initialLatitude, initialLongitude], 13);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(mapInstance);
-
-    let marker = null;
-
-    // Function to set marker at a given location
     const setMarkerAtLocation = (lat, lng) => {
-      if (marker) {
-        console.log("marker", marker);
-        marker.setLatLng([lat, lng]);
+      if (markerRef.current) {
+        markerRef.current.setPosition({ lat, lng });
       } else {
-        console.log("marker", marker);
-         marker = L.marker([lat, lng], { draggable: true }).addTo(mapInstance);
+        markerRef.current = new window.google.maps.Marker({
+          position: { lat, lng },
+          map: map,
+          draggable: true,
+        });
+
+        markerRef.current.addListener("dragend", (event) => {
+          onLocationSelect({
+            latitude: event.latLng.lat(),
+            longitude: event.latLng.lng(),
+          });
+        });
       }
       onLocationSelect({ latitude: lat, longitude: lng });
     };
 
-    // Try to get the user's current location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          mapInstance.setView([latitude, longitude], 13);
+          map.setCenter({ lat: latitude, lng: longitude });
           setMarkerAtLocation(latitude, longitude);
         },
         () => {
-          // If the user denies permission, fall back to the initial location
           setMarkerAtLocation(initialLatitude, initialLongitude);
         }
       );
     } else {
-      // If Geolocation API is not available, fall back to the initial location
       setMarkerAtLocation(initialLatitude, initialLongitude);
     }
 
-    mapInstance.on('click', (e) => {
-      const { lat, lng } = e.latlng;
-      setMarkerAtLocation(lat, lng);
+    map.addListener("click", (event) => {
+      setMarkerAtLocation(event.latLng.lat(), event.latLng.lng());
     });
 
-
-
     return () => {
-      mapInstance.remove();
+      if (markerRef.current) markerRef.current.setMap(null);
     };
-  }, [initialLatitude, initialLongitude]);
+  }, [googleLoaded, initialLatitude, initialLongitude]);
 
-  return <div id="map" style={{ height: "600px", width: "100%" }}></div>;
+  return <div ref={mapRef} style={{ height: "600px", width: "100%" }}></div>;
 };
 
 export default Map;
