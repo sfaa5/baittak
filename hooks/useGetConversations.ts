@@ -20,7 +20,6 @@ const useGetConversations = () => {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-
     const getConversations = async () => {
       setLoading(true);
       try {
@@ -30,7 +29,7 @@ const useGetConversations = () => {
           throw new Error("Something went wrong!");
         }
 
-        setConversations(res.data.usersWithLastMessage)
+        setConversations(res.data.usersWithLastMessage);
 
         const chatUser = JSON.parse(localStorage.getItem("chat-user"));
 
@@ -38,10 +37,23 @@ const useGetConversations = () => {
         setConversations((prev) => {
           const updatedConversations = [...res.data.usersWithLastMessage];
 
+          console.log("updatedConversations", updatedConversations);
+
+          console.log("cahtUser", chatUser);
+
           if (chatUser) {
-            const isFind = updatedConversations.some(
-              (con) => con?.post?._id === chatUser?.post?._id
-            );
+            let isFind = null;
+            if (chatUser?.post) {
+              isFind = updatedConversations.some(
+                (con) => con?.post?._id === chatUser?.post?._id
+              );
+            } else {
+              isFind = updatedConversations.some(
+                (con) => !con.post && ( con._id === chatUser._id)
+              );
+            }
+
+            console.log("isFind", isFind);
             if (!isFind) updatedConversations.push(chatUser);
           }
 
@@ -53,25 +65,24 @@ const useGetConversations = () => {
         });
 
         if (chatUser) {
-          console.log("chatUser",chatUser)
+          console.log("chatUser", chatUser);
           setSelectedConversation(chatUser);
         }
 
         setTotalUnreadMessages(res.data.totalUnreadMessages);
       } catch (error) {
-        if(error.response.status===401||error.response.status===403) return
+        if (error.response.status === 401 || error.response.status === 403)
+          return;
         toast({
           description: error.message,
           className: "bg-red-500 text-white p-4 rounded shadow-lg",
         });
       } finally {
-         setLoading(false);
-        
+        setLoading(false);
       }
     };
 
     status === "authenticated" && getConversations();
-
   }, [session]);
 
   return { loading, conversations, setConversations };
