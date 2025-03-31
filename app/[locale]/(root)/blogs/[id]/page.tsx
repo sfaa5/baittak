@@ -56,7 +56,7 @@ const BlogDetail = async ({ params }: { params: Promise<{ id: string }> }) => {
       <img
         src={blog.coverImage.url}
         alt={blog.title}
-        className="w-full h-80 bg-cover mt-4 bg-center rounded-md"
+        className="w-full h-80 object-cover mt-4 bg-center rounded-md"
       />
       <p className="mt-6">{blog.content}</p>
     </div>
