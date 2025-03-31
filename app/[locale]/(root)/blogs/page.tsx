@@ -24,14 +24,14 @@ const BlogList = async ({ searchParams }: PageProps) => {
   }
 
   const page = queryParams.get("page") ?? "1";
-  const per_page = 10;
+  const per_page = 8;
   const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ...
 
 
   console.log("page", page);
 
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_URL_SERVER}/api/blogs?page=${page}&limit=9`
+    `${process.env.NEXT_PUBLIC_URL_SERVER}/api/blogs?page=${page}&limit=8`
   );
 
   const blogs = res.data.blogs;
