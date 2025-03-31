@@ -26,7 +26,7 @@ const BlogList = async ({ searchParams }: PageProps) => {
   const page = queryParams.get("page") ?? "1";
   const per_page = 10;
   const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ...
-  const end = start + Number(per_page);
+
 
   console.log("page", page);
 
@@ -55,8 +55,8 @@ const BlogList = async ({ searchParams }: PageProps) => {
         </li>
       </ul>
       <div className=" mt-10 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 ">
-        {blogs.map((blog) => (
-          <Link href={`blogs/${blog._id}`}>
+        {blogs.map((blog,index) => (
+          <Link key={index} href={`blogs/${blog._id}`}>
             <div key={blog._id} className="border rounded h-full">
               <img
                 src={blog.coverImage.url}
