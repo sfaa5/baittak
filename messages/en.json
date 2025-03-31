@@ -686,5 +686,9 @@
       "content": "We may update these terms and conditions from time to time. Any changes will be posted on this page, and your continued use of our services constitutes acceptance of the updated terms."
     }
   }
+  ,
+  "blogs":{
+    "blogs":"Blogs"
+  }
   
 }

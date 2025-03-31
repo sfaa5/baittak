@@ -71,6 +71,10 @@ export const routing = defineRouting({
       },"/User/messages":{
         en:"/User/messages",
         ar:"/User/messages"
+      },
+      "/blogs":{
+        en:"/blogs",
+        ar:"/blogs"
       }
 
 

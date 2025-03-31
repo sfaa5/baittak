@@ -59,7 +59,7 @@ const formSchema = z.object({
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 
@@ -97,15 +97,16 @@ function Page() {
   const [deletedImages, setDeletedImages] = useState([]);
   const [Amenities, setAmenities] = useState<Amenity[]>([]);
   const t = useTranslations();
-  const {status}=useSession();
+  const { status } = useSession();
 
   const params = useParams<{ id: string }>();
   const router = useRouter();
   const [errImage, setErrImage] = useState("");
   const [errorr, setErrorr] = useState(false);
   const tE = useTranslations("erorr");
-    const axiosAuth = useAxiosAuth();
-  
+  const axiosAuth = useAxiosAuth();
+
+  const locale = useLocale();
 
   const handleLocationSelect = async (selectedLocation) => {
     setLocation(selectedLocation);
@@ -321,7 +322,7 @@ function Page() {
         });
       }
 
-      console.log("values",values);
+      console.log("values", values);
 
       formData.append("propertyType", values.propertyType);
       formData.append("title", values.title);
@@ -348,23 +349,23 @@ function Page() {
         formData.append(`amenities[${index}]`, amenity);
       });
 
-      if(status==="unauthenticated"){
-          router.push("/?login=true")
+      if (status === "unauthenticated") {
+        router.push("/?login=true");
       }
 
-          console.log("first",formData.get("city"))
+      console.log("first", formData.get("city"));
 
-          const response = await axiosAuth.put(
-            `${URL_SERVER}/api/properties/${params.id}`,
-            formData,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            }
-          );
-      
-      console.log("data",response)
+      const response = await axiosAuth.put(
+        `${URL_SERVER}/api/properties/${params.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("data", response);
       if (response.status >= 200 && response.status < 300) {
         router.push("/User/Posts");
         toast({
@@ -372,9 +373,8 @@ function Page() {
           className: "bg-green-500 text-white p-4 rounded shadow-lg",
         });
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast({
         description: "Something went Wrong",
         className: "bg-red-500 text-white p-4 rounded shadow-lg",
@@ -394,7 +394,7 @@ function Page() {
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
           <div className="bg-white absolute rounded-lg -top-4 left-5">
             <h2 className="text-secondary  px-6 text-2xl font-medium">
-              {"Add Listing"}
+              {t("addUser.addListing")}
             </h2>
           </div>
 
@@ -405,14 +405,14 @@ function Page() {
                 name="propertyType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{"PropertyType"}</FormLabel>
+                    <FormLabel className="hidden sm:block"> {t("addUser.selectPropertyType")}</FormLabel>
                     <FormControl>
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder={"Select"} />
+                          <SelectValue placeholder={t("addUser.select")} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="Apartment">شقة</SelectItem>
@@ -446,9 +446,12 @@ function Page() {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{"title"}</FormLabel>
+                    <FormLabel className="hidden sm:block">{t("addUser.title")}</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder={"title"} />
+                      <Input
+                        {...field}
+                        placeholder={`${t("addUser.title")}..`}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -463,12 +466,12 @@ function Page() {
                   name="price"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Price</FormLabel>
+                      <FormLabel className="hidden sm:block"> {t("addUser.price")}</FormLabel>
                       <FormControl>
                         <Input
                           type="number"
                           {...field}
-                          placeholder={"Price.."}
+                          placeholder={`${t("addUser.price")}..`}
                         />
                       </FormControl>
                       <FormMessage />
@@ -483,7 +486,10 @@ function Page() {
                   name="currency"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{"Currency"}</FormLabel>
+                      <FormLabel className="hidden sm:block">
+                        {t("inputs.currency.label")}
+                      </FormLabel>
+
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -493,16 +499,36 @@ function Page() {
                             <SelectValue placeholder={"Select"} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="USD">USD</SelectItem>
-                            <SelectItem value="IQD">IQD</SelectItem>
-                            <SelectItem value="EUR">EUR</SelectItem>
-                            <SelectItem value="SAR">SAR</SelectItem>
-                            <SelectItem value="AED">AED</SelectItem>
-                            <SelectItem value="KWD">KWD</SelectItem>
-                            <SelectItem value="QAR">QAR</SelectItem>
-                            <SelectItem value="OMR">OMR</SelectItem>
-                            <SelectItem value="BHD">BHD</SelectItem>
-                            <SelectItem value="JOD">JOD</SelectItem>
+                            <SelectItem value="USD">
+                              {t("inputs.currency.options.USD")}
+                            </SelectItem>
+                            <SelectItem value="IQD">
+                              {t("inputs.currency.options.IQD")}
+                            </SelectItem>
+                            <SelectItem value="EUR">
+                              {t("inputs.currency.options.EUR")}
+                            </SelectItem>
+                            <SelectItem value="SAR">
+                              {t("inputs.currency.options.SAR")}
+                            </SelectItem>
+                            <SelectItem value="AED">
+                              {t("inputs.currency.options.AED")}
+                            </SelectItem>
+                            <SelectItem value="KWD">
+                              {t("inputs.currency.options.KWD")}
+                            </SelectItem>
+                            <SelectItem value="QAR">
+                              {t("inputs.currency.options.QAR")}
+                            </SelectItem>
+                            <SelectItem value="OMR">
+                              {t("inputs.currency.options.OMR")}
+                            </SelectItem>
+                            <SelectItem value="BHD">
+                              {t("inputs.currency.options.BHD")}
+                            </SelectItem>
+                            <SelectItem value="JOD">
+                              {t("inputs.currency.options.JOD")}
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>
@@ -518,18 +544,25 @@ function Page() {
                   name="rentaltype"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{"RentalType"}</FormLabel>
+                      <FormLabel className="hidden sm:block">
+                        {t("addUser.rentalType")}
+                      </FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
                           value={field.value}
+                   
                         >
                           <SelectTrigger className="w-full">
                             <SelectValue placeholder={"Select"} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="Monthly">Monthly</SelectItem>
-                            <SelectItem value="Yearly">Yearly</SelectItem>
+                            <SelectItem value="Monthly">
+                              {t("addUser.monthly")}
+                            </SelectItem>
+                            <SelectItem value="Yearly">
+                              {t("addUser.yearly")}
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>
@@ -546,7 +579,7 @@ function Page() {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>{t("addUser.description")} </FormLabel>
                 <FormControl>
                   <Textarea {...field}></Textarea>
                 </FormControl>
@@ -568,11 +601,11 @@ function Page() {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="rent" id="r1" />
-                      <Label htmlFor="r1">Rent</Label>
+                      <Label htmlFor="r1">{t("addUser.rental")}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="sell" id="r2" />
-                      <Label htmlFor="r2">Sell</Label>
+                      <Label htmlFor="r2">{t("addUser.sell")}</Label>
                     </div>
                   </RadioGroup>
                 </FormControl>
@@ -586,7 +619,7 @@ function Page() {
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
           <div className="bg-white rounded-lg absolute -top-4 left-5">
             <h2 className="text-secondary  px-6 text-2xl font-medium">
-              Address
+              {t("addUser.address")}
             </h2>
           </div>
 
@@ -604,30 +637,30 @@ function Page() {
                 type="button"
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-primary text-white text-sm border-none rounded cursor-pointer"
               >
-                Select on Map
+                {t("inputs.Select on Map")}
               </button>
             </div>
 
-            <div className="col-span-2 flex flex-col gap-5">
+            <div className="col-span-2 flex flex-col gap-5 sm:mt-0">
               <FormField
                 control={form.control}
                 name="city"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City</FormLabel>
+                    <FormLabel>{t("addUser.addCity")}</FormLabel>
                     <FormControl>
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder={"Select"} />
+                          <SelectValue placeholder={t("addUser.select")} />
                         </SelectTrigger>
 
                         <SelectContent>
                           {cities.map((city, index) => (
                             <SelectItem key={index} value={city._id}>
-                              {city.name.en}
+                              {locale === "ar" ? city.name.ar : city.name.en}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -643,9 +676,9 @@ function Page() {
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>العنوان</FormLabel>
+                    <FormLabel>{t("inputs.address")}</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="address" />
+                      <Input {...field} placeholder={t("inputs.address")} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -661,7 +694,7 @@ function Page() {
                   onClick={() => setIsModalOpen(false)}
                   className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
                 >
-                  Close
+                  {t("company.close")}
                 </button>
                 <Map
                   initialLatitude={37.7749} // Example latitude
@@ -677,7 +710,7 @@ function Page() {
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
           <div className="bg-white absolute rounded-lg -top-4 left-5">
             <h2 className="text-secondary   px-6 text-2xl font-medium">
-              Details
+              {t("addUser.details")}
             </h2>
           </div>
 
@@ -687,7 +720,7 @@ function Page() {
               name="bedrooms"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Bedrooms</FormLabel>
+                  <FormLabel>{t("addUser.bedrooms")}</FormLabel>
                   {/* Counter */}
                   <FormControl>
                     <div className="flex flex-col w-full gap-2">
@@ -722,7 +755,7 @@ function Page() {
               name="bathrooms"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Bathrooms</FormLabel>
+                  <FormLabel>{t("addUser.bathrooms")}</FormLabel>
                   {/* Counter */}
                   <FormControl>
                     <div className="flex flex-col w-full gap-2">
@@ -757,7 +790,8 @@ function Page() {
               name="numFloors"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Floors</FormLabel>
+                  <FormLabel>{t("addUser.numFloors")}</FormLabel>
+
                   {/* Counter */}
                   <FormControl>
                     <div className="flex flex-col w-full gap-2">
@@ -794,7 +828,8 @@ function Page() {
               name="area"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Area</FormLabel>
+                  <FormLabel>{t("addUser.area")}</FormLabel>
+
                   <FormControl>
                     <div className="flex relative">
                       <Input
@@ -817,7 +852,8 @@ function Page() {
               name="plotWidth"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Add plot width</FormLabel>
+                  <FormLabel>{t("addUser.plotWidth")}</FormLabel>
+
                   <FormControl>
                     <div className="flex relative">
                       <Input
@@ -839,7 +875,7 @@ function Page() {
               name="plotLength"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Add plot length</FormLabel>
+                  <FormLabel>{t("addUser.plotLength")}</FormLabel>
                   <FormControl>
                     <div className="flex relative">
                       <Input
@@ -862,7 +898,7 @@ function Page() {
             name="landNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>land Number</FormLabel>
+                <FormLabel>{t("addUser.landNumber")}</FormLabel>
                 <FormControl>
                   <Input
                     {...field} // Spread field to bind the input value and onChange
@@ -879,7 +915,7 @@ function Page() {
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
           <div className="bg-white rounded-lg absolute  -top-4 left-5">
             <h2 className="text-secondary   px-6 text-2xl font-medium">
-              {"Amenities"}
+              {t("addUser.amenities")}
             </h2>
           </div>
 
@@ -915,7 +951,7 @@ function Page() {
                           htmlFor={`amenity-${index}`}
                           className="text-sm font-medium leading-none"
                         >
-                          {amenity.name.en}
+                          {locale === "ar" ? amenity.name.ar : amenity.name.en}
                         </label>
                       </div>
                     );
@@ -931,7 +967,7 @@ function Page() {
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full mb-20 bg-white">
           <div className="bg-white absolute -top-4 left-5 rounded-lg">
             <h2 className="text-secondary   px-6 text-2xl font-medium">
-              Media
+              {t("addUser.media")}
             </h2>
           </div>
 
@@ -949,7 +985,7 @@ function Page() {
                       <div className="flex flex-col items-center space-y-2">
                         <FiUpload className="text-gray-600 text-4xl" />
                         <p className="text-gray-600 font-medium">
-                          Upload Images
+                          {t("company.agentInfo.UploadImages")}
                         </p>
                       </div>
                     </label>
@@ -979,7 +1015,7 @@ function Page() {
                                 onClick={() => handleRemoveImage(index)}
                                 className="absolute top-2 right-2 bg-red-500 text-white text-sm px-2 py-1 rounded-md"
                               >
-                                Remove
+                                {t("inputs.Remove")}
                               </button>
                             </div>
                           ))}
@@ -996,7 +1032,7 @@ function Page() {
                                 onClick={() => handelDelete(index)}
                                 className="absolute top-2 right-2 bg-red-500 text-white text-sm px-2 py-1 rounded-md"
                               >
-                                Remove
+                                {t("inputs.Remove")}
                               </button>
                             </div>
                           ))}

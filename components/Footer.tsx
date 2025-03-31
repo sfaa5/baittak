@@ -95,16 +95,18 @@ function Footer() {
             <h2 className="text-2xl font-semibold mb-3 text-white">
               {t("footer.contact")}
             </h2>
-            <p>{data.emails?.info}</p>
-            <p>{data.emails?.sales}</p>
-            <p>{data.emails?.agent}</p>
+            <ul className=" text-sm flex flex-col gap-2">
+            <li>{data.emails?.info}</li>
+            <li>{data.emails?.sales}</li>
+            <li>{data.emails?.agent}</li>
+            </ul>
           </div>
 
           <div className="flex flex-col">
-            <h2 className="text-2xl font-semibold  mb-3">
+            <h2 className="text-2xl font-semibold   mb-3">
               {t("footer.links")}
             </h2>
-            <ul className="list-disc ml-4 lg:ml-0 flex flex-col gap-1">
+            <ul className=" text-sm flex flex-col gap-2">
               <li>
                 <Link href={"/contact-us"}>{t("footer.contactUs")}</Link>
               </li>
@@ -115,21 +117,26 @@ function Footer() {
               <li>
                 <Link href={"/terms"}>{t("footer.terms")}</Link>
               </li>
+
+              <li>
+                <Link href={"/blogs"}>{t("blogs.blogs")}</Link>
+              </li>
+
             </ul>
           </div>
 
           <div className="flex flex-col">
-            <h2 className="text-2xl font-semibold lg:-ml-5 mb-3">
+            <h2 className="text-2xl font-semibold  mb-3">
               {t("footer.cities")}
             </h2>
-            <div className="grid grid-cols-3 gap-5  lg:grid-cols-[20%_20%_20%_20%]">
+            <div className="grid grid-cols-3 gap-2  lg:grid-cols-[20%_20%_20%_20%]">
               {isFetching ? (
                 <p>Loading cities...</p>
               ) : cities.length === 0 ? (
                 <p>Cities not available</p>
               ) : (
                 cities.map((city, index) => (
-                  <ul key={index} className="list-disc ml-4 lg:ml-0">
+                  <ul key={index} className=" ml-4 lg:ml-0">
                     <Link href={`/Property?city=${city.name.en}`}>
                       <li>{locale === "ar" ? city.name.ar : city.name.en}</li>
                     </Link>

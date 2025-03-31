@@ -56,6 +56,7 @@ async function Page({ searchParams }: PageProps) {
 
   const resolvedSearchParams = await searchParams;
   const queryParams = new URLSearchParams();
+  
   for (const key in resolvedSearchParams) {
     const value = resolvedSearchParams[key];
     if (Array.isArray(value)) {

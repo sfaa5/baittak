@@ -632,7 +632,7 @@ function Page() {
                     onClick={() => setIsModalOpen(false)}
                     className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
                   >
-                    Close
+                    {t("company.close")}
                   </button>
                   <Map
                     initialLatitude={37.7749} // Example latitude

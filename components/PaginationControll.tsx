@@ -47,7 +47,7 @@ const PaginationControll: FC<PaginationControlsProps> = ({
           ? '/Property'
           : normalizedPathname.includes('/Agency') || normalizedPathname.includes('/الوكيل')
           ? '/Agency'
-          : '/',
+          : normalizedPathname.includes('/blogs') ? '/blogs':"/",
           query: getUpdatedQuery({ page: page - 1, per_page }),
         }}
         className={`px-4 py-2 mx-1 text-white bg-primary rounded-md hover:bg-primary/80 ${
@@ -68,7 +68,7 @@ const PaginationControll: FC<PaginationControlsProps> = ({
               ? '/Property'
               : normalizedPathname.includes('/Agency') || normalizedPathname.includes('/الوكيل')
               ? '/Agency'
-              : '/',
+              : normalizedPathname.includes('/blogs') ? '/blogs':"/",
               query: getUpdatedQuery({ page: index + 1, per_page }),
             }}
             className={`px-4 py-2 mx-1 rounded-md ${
@@ -90,7 +90,7 @@ const PaginationControll: FC<PaginationControlsProps> = ({
           ? '/Property'
           : normalizedPathname.includes('/Agency') || normalizedPathname.includes('/الوكيل')
           ? '/Agency'
-          : '/',
+          : normalizedPathname.includes('/blogs') ? '/blogs':"/",
           query: getUpdatedQuery({ page: page + 1, per_page }),
         }}
         className={`px-4 py-2 mx-1 text-white bg-primary rounded-md hover:bg-primary/80 ${
