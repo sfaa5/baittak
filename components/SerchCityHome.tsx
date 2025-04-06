@@ -63,8 +63,8 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
 
     // Navigate to the selected city if the screen size is small
     if (window.innerWidth <= 640) {
-      const citySlug = locale === "ar" ? selectedCity.replace(/\s+/g, "-") : selectedCity.replace(/\s+/g, "-").toLowerCase();
-      router.push(`/Property?city=${citySlug}`);
+    
+      router.push(`/Property?city=${selectedCity}`);
     }
   };
 
