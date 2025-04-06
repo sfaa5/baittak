@@ -4,6 +4,7 @@ import { Combobox, Transition } from "@headlessui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { FiMapPin } from "react-icons/fi";
 import { BsSearchHeartFill } from 'react-icons/bs';
+import { useRouter } from "next/navigation";
 
 interface City {
   name: { ar: string; en: string };
@@ -17,6 +18,7 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
   const locale = useLocale();
   const t = useTranslations();
   const comboboxRef = useRef<HTMLDivElement>(null); // ✅ Ref for detecting outside clicks
+  const router = useRouter(); 
 
   // ✅ Fetch cities
   useEffect(() => {
@@ -55,15 +57,26 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleCitySelect = (selectedCity: string) => {
+    setCity(selectedCity);
+    setOpenDropdown(false);
+
+    // Navigate to the selected city if the screen size is small
+    if (window.innerWidth <= 640) {
+      const citySlug = locale === "ar" ? selectedCity.replace(/\s+/g, "-") : selectedCity.replace(/\s+/g, "-").toLowerCase();
+      router.push(`/Property?city=${citySlug}`);
+    }
+  };
+
   return (
     <div className="relative" ref={comboboxRef}> {/* ✅ Wrap with ref */}
-      <Combobox value={city} onChange={(value) => { setCity(value); setOpenDropdown(false); }}>
+      <Combobox value={city} onChange={handleCitySelect}>
         {({ open }) => (
           <div className="relative">
             {/* Icon */}
             <div className="absolute inset-y-0 flex items-center z-20">
               <FiMapPin className="absolute mx-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <BsSearchHeartFill className="absolute -left-9 top-1/2 -translate-y-1/2 text-white text-3xl bg-primary rounded-full p-2 sm:hidden" />
+              <BsSearchHeartFill className={`absolute ${locale==="en"?"left-2":"-left-9"}  top-1/2 -translate-y-1/2 text-white text-3xl bg-primary rounded-full p-2 sm:hidden`} />
             </div>
 
             {/* Input field */}
