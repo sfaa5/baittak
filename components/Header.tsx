@@ -11,7 +11,7 @@ import useListenMessages from "@/hooks/useListenMessage";
 
 import Sign from "@/components/Sign";
 import useShowSign from "@/hooks/useShowSign";
-import { useEffect, useState } from "react";
+
 
 function Header() {
   const t = useTranslations();
@@ -22,20 +22,6 @@ function Header() {
 
   const { closeModal, showLoginModal } = useShowSign();
 
-  const [dir, setDir] = useState("");
-
-  useEffect(() => {
-    const updateDir = () => {
-      const screenWidth = window.innerWidth;
-      if (screenWidth < 1280) {
-        setDir("ltr");
-      }
-    };
-
-    updateDir(); // Set initial value
-    window.addEventListener("resize", updateDir);
-    return () => window.removeEventListener("resize", updateDir);
-  }, []);
 
   return (
     <header className=" pt-3 pb-  font-work-sans border-b-[1px]">
