@@ -84,6 +84,10 @@
     "result_count": "(١٢٠٠)"
   },
   "property": {
+    "status":"الحالة",
+    "pending":"قيد الانتظار",
+    "rejected":"مرفوض",
+    "approved":"مقبول ",
     "amenity": "المزايا",
     "More_Details": "تفاصيلل اكثر",
     "rooms": "غرف",
@@ -171,7 +175,8 @@
     "PREMIUM": "مميز",
     "Days Left": " يوم متبقي",
     "Rent": "إيجار",
-    "Buy": "بيع"
+    "Buy": "بيع",
+    "Plan":"الخطة"
   },
   "userButton": {
     "yourPosts": "منشوراتك",
@@ -292,7 +297,7 @@
     "selectProjectType": "نوع المشروع",
     "sell": "بيع",
     "select": "اختر",
-    "title": "العنوان",
+    "title": "عنوان الاعلان",
     "price": "السعر",
     "description": "الوصف",
     "buy": "شراء",
@@ -437,7 +442,7 @@
     "sending": "ارسال...",
     "address": "العنوان",
     "units": "الوحدات",
-    "Filter_title": "ابحث في العنوان...",
+    "Filter_title": "ابحث في العنوان",
     "EnterCompanyName": "أدخل اسم الشركة",
     "SelectCity": "اختر المدينة",
     "EnterAddress": "أدخل العنوان",

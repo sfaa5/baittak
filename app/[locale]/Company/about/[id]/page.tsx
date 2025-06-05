@@ -122,7 +122,8 @@ const formSchema = z.object({
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`); // Handle HTTP errors
         }
-        const data = await response.json(); // Parse the JSON
+        const rowData = await response.json(); // Parse the JSON
+        const data = rowData.agency
         setAgency(data); // Update state with the fetched data
       } catch (error) {
         console.error("Failed to fetch agency:", error); // Log errors

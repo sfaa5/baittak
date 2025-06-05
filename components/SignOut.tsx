@@ -52,7 +52,7 @@ import { CgProfile } from "react-icons/cg";
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white shadow-lg rounded-md py-1 ">
 
-        <Link href={session.user.role === "user" ? "/User/Posts" : "/Company/messages"}>
+        <Link href={session.user.role === "user" ? "/User/Posts" : "/Company/about"}>
             <DropdownMenuItem dir={isRTL ? "rtl" : "ltr"}  className="flex w-full items-center gap-2 px-2 py-2 hover:bg-gray-100 cursor-pointer">
             <CgProfile  />
               <span className="text-sm font-medium">

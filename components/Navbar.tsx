@@ -18,7 +18,7 @@ const Navbar = () => {
   const t = useTranslations("header");
   const { data: session, status } = useSession();
 
-  const pathname = usePathname(); 
+  const pathname = usePathname();
   const [activeLink, setActiveLink] = useState("");
 
   // Normalize and set the active link based on the current pathname
@@ -30,7 +30,6 @@ const Navbar = () => {
     <nav className="flex justify-between items-center ">
       <div className="flex flex-col gap-4 ">
         <div className="flex gap-8 justify-end">
-
           <LocaleSwitcher />
 
           <Link
@@ -63,9 +62,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-10">
-          <div
-            className={`text-center grid grid-cols-3 `}
-          >
+          <div className={`text-center grid grid-cols-3 `}>
             {/* Property Link */}
             <Link
               className={`text-black-100 text-lg pb-3 w-[127px] border-b-2  ${
@@ -103,8 +100,6 @@ const Navbar = () => {
             >
               {t("agency")}
             </Link>
-
-
           </div>
 
           {/* Post Property Button */}

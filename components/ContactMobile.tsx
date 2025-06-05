@@ -40,7 +40,7 @@ function ContactMobile({
 
   const chatWith = () => {
     if (status==="unauthenticated"){
-      router.push(`/?login=true`);
+      router.push(`?login=true`);
       return;
     }
     if (session.user.id === user._id) return;

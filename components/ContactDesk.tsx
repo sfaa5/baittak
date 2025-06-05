@@ -40,7 +40,7 @@ function ContactDesk({
 
   const chatWith = () => {
     if (status === "unauthenticated") {
-      router.push(`/?login=true`);
+      router.push(`?login=true`);
       return;
     }
 

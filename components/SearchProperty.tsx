@@ -31,7 +31,7 @@ const SearchCity = ({
     const fetchCities = async () => {
       try {
         const response = await fetch(
-          "https://baittak-server.vercel.app/api/cities"
+          `${process.env.NEXT_PUBLIC_URL_SERVER}/api/cities`
         );
         const data = await response.json();
         setCities(data);

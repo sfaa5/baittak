@@ -24,7 +24,12 @@ async function Page() {
       </div>
     );
   }
-  const data = await response.json();
+  const rowData = await response.json();
+
+  const data = rowData.agency;
+
+
+  console.log("data", data);
 
 
 
@@ -78,7 +83,7 @@ async function Page() {
               {t("company.agentInfo.city")}:{" "}
             </span>
             <p className="text-lg">
-              {locale == "ar" ? data.city.name.ar : data.city.name.en}
+              {locale == "ar" ? data.city?.name.ar : data.city?.name.en}
             </p>
           </div>
 

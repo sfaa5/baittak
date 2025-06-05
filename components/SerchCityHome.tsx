@@ -24,7 +24,7 @@ function SerchCityHome({ city, setCity }: { city: string; setCity: (city: string
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await fetch("https://baittak-server.vercel.app/api/cities");
+        const response = await fetch( `${process.env.NEXT_PUBLIC_URL_SERVER}/api/cities`);
         const data = await response.json();
         setCities(data);
       } catch (error) {

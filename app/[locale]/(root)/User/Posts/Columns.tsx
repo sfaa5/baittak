@@ -1,10 +1,12 @@
 "use client";
 
-
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteProperty,toggleFeaturedProperty } from "@/lib/actions/property.action";
+import {
+  deleteProperty,
+  toggleFeaturedProperty,
+} from "@/lib/actions/property.action";
 import { useSharedState } from "@/app/context/stateProvider";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -21,7 +23,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import Link from "next/link";
-import {  useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 // This type is used to define the shape of our data.
@@ -36,6 +38,7 @@ export type Property = {
   _id: string;
   currency: string;
   featured: boolean;
+  status: string;
 };
 
 const FeaturedCheckbox = ({ row }) => {
@@ -87,8 +90,8 @@ export const UseColumns = (): ColumnDef<Property>[] => {
       header: t("Title"),
       cell: ({ getValue }) => {
         const title: string = getValue() as string;
-        const words = title.split(" ").slice(0, 6).join(" "); // Take only the first 5 words
-        return words + (title.split(" ").length > 6 ? "..." : ""); // Add "..." if there are more words
+        const words = title.split(" ").slice(0, 2).join(" "); // Take only the first 5 words
+        return words + (title.split(" ").length > 2 ? "..." : ""); // Add "..." if there are more words
       },
     },
     {
@@ -119,17 +122,42 @@ export const UseColumns = (): ColumnDef<Property>[] => {
         );
       },
     },
-  
+
     {
       accessorKey: "like",
       header: t("Likes"),
-      cell: ({ row }) => <span className="flex items-center justify-center">{row.original.likes?.length || 0}</span>,
+      cell: ({ row }) => (
+        <span className="flex items-center justify-center">
+          {row.original.likes?.length || 0}
+        </span>
+      ),
     },
     {
       accessorKey: "featured",
-      header: () => <div className="flex justify-center text-sm">{t("Featured")}</div>,
-      cell: ({ row }) => <FeaturedCheckbox row={row} />
-      
+      header: () => (
+        <div className="flex justify-center text-sm">{t("Featured")}</div>
+      ),
+      cell: ({ row }) => <FeaturedCheckbox row={row} />,
+    },
+    {
+      accessorKey: "status",
+      header: t("status"),
+      cell: ({ row }) => {
+        const status = row.original.status;
+        let color = "bg-gray-300 text-gray-800";
+        if (status === "active") color = "bg-green-100 text-green-700";
+        else if (status === "pending") color = "bg-yellow-100 text-yellow-700";
+        else if (status === "rejected") color = "bg-red-100 text-red-700";
+        // Add more status colors as needed
+
+        return (
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${color}`}
+          >
+            {t(status)}
+          </span>
+        );
+      },
     },
     {
       id: "actions",
@@ -198,7 +226,3 @@ export const UseColumns = (): ColumnDef<Property>[] => {
     },
   ];
 };
-
-
-
-

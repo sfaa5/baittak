@@ -10,7 +10,7 @@ function SignInWithGoogle() {
   const router =useRouter()
     const  t = useTranslations();
     function sign (){
-      router.push("/?login=true")
+      router.push("?login=true")
     }
   return (
     <button type='button' onClick={sign}>

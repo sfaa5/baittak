@@ -20,7 +20,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const t = await getTranslations();
   const locale = await getLocale();
   const session = await getServerSession(authOptions as object);
-  const userId = session?.user?.id;
+  const userId = session?.user?.id ? session?.user?.id : "" ;
 
 
 
@@ -32,7 +32,13 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
   const dataJson = await response.json();
 
+
+  console.log("dataJson",dataJson)
+
   const data = dataJson.agency;
+
+
+  console.log("data",data)
 
   const userFavorites = dataJson.userFavorites || [];
 

@@ -51,14 +51,19 @@ function MobileNavbar() {
       <SheetTrigger className="flex justify-center items-center">
         <CiMenuFries className="text-[32px] text-secondry" />
       </SheetTrigger>
+
       <SheetContent className="flex flex-col">
+
+        {/*logo*/}
         <div className="mt- mb-4 mx-auto text-center text-2xl">
           <Link href="/">
             {locale == "ar" ? <BaittaklogoArabic /> : <EnglishLogo />}
           </Link>
         </div>
+
         {/* nav */}
         <nav className="flex flex-col justify-center items-center gap-8">
+
           {links.map((link, index) => {
             return (
               <Link
@@ -75,6 +80,7 @@ function MobileNavbar() {
               </Link>
             );
           })}
+
           <div className="flex flex-col gap-8 items-center border-t-[2px] pt-6">
             {status === "loading" ? (
               <div className="flex items-center gap-2 px-4 py-2  border border-gray-300 rounded-lg text-gray-800 ">
@@ -109,6 +115,7 @@ function MobileNavbar() {
               <SignAgency />
             )}
           </div>
+          
         </nav>
       </SheetContent>
     </Sheet>

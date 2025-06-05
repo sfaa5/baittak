@@ -312,7 +312,7 @@ function PropertiesCard({ post }) {
                 <img
                   src={CompanyImage}
                   alt="comoany"
-                  className="hidden sm:flex w-10"
+                  className="hidden sm:flex w-10 rounded-lg"
                 />
               )}
             </div>

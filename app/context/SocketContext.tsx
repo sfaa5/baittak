@@ -16,7 +16,9 @@ export const SocketContextProvider = ({ children }) => {
     const { data:session } = useSession();
 
 	useEffect(() => {
+
 		if (session) {
+		
 			const socket = io(process.env.NEXT_PUBLIC_URL_SERVER, {
 				transports: ["websocket"],
 				query: {
@@ -25,6 +27,17 @@ export const SocketContextProvider = ({ children }) => {
 			});
 
 			setSocket(socket);
+
+			socket.on("connection_error", (err) => {
+				console.log("Connection error:");
+				console.log(err.req);     
+				console.log(err.code);     
+				console.log(err.message);  
+				console.log(err.context); 
+			  });
+
+
+			
 
 			// socket.on() is used to listen to the events. can be used both on client and server side
 			socket.on("getOnlineUsers", (users) => {

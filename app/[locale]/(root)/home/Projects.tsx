@@ -53,27 +53,21 @@ function Projects() {
 
             <Link href="/Projects">
               <div className="text-sm md:text-base flex items-center gap-2 cursor-pointer text-primary">
-                <h1 className="  ">
-                  {t("properties.view_all")}
-                </h1>
+                <h1 className="  ">{t("properties.view_all")}</h1>
                 <IoArrowForwardCircleOutline className="w-5 h-5" />
               </div>
             </Link>
           </div>
 
           {loading && (
-            <div className="flex w-[1000px] gap-20 justify-between">
-              {Array(4)
-                .fill(null)
-                .map((_, i) => (
-                  <SkeletonCard key={i} />
-                ))}
+            <div className="flex w-full gap-20 justify-center">
+              <SkeletonCard />
             </div>
           )}
 
           <div className="grid  gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
             {!loading &&
-              randomProperties.map((property,i) => (
+              randomProperties.map((property, i) => (
                 <ProjectCardHome key={i} property={property} />
               ))}
           </div>

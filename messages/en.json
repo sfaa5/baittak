@@ -68,6 +68,7 @@
     "copyright": "©2024 Baittak.com. All rights reserved"
   },
   "search": {
+
     "Welcome":"Welcome",
     "Select_a_chat_to_start_messaging":"Select a chat to start messaging",
     "buy": "Buy",
@@ -83,6 +84,10 @@
     "result_count": "(1200)"
   },
   "property": {
+    "status":"Status",
+        "pending":"Pending",
+    "rejected":"Rejected",
+    "approved":"Approved ",
     "amenity": "Amenities",
     "More_Details": "More Details",
     "rooms": "Rooms",
@@ -177,7 +182,8 @@
     "PREMIUM": "PREMIUM",
     "Days Left": "Days Left",
     "Rent": "Rent",
-    "Buy": "Buy"
+    "Buy": "Buy",
+    "Plan":"Plan"
   },
   "userButton": {
     "yourPosts": "Your Posts",
@@ -452,7 +458,7 @@
     "sending": "Sending...",
     "address": "Address",
     "units": "Units",
-    "Filter_title": "Filter Title...",
+    "Filter_title": "Filter Title",
     "EnterCompanyName": "Enter company name",
     "SelectCity": "Select a city",
     "EnterAddress": "Enter address",

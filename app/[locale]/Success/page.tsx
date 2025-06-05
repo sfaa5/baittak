@@ -20,7 +20,7 @@ const userId = urlParams.get("userId");
             }
 
       try {
-        const response = await fetch("http://localhost:5001/api/plans/execute", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVER}/api/plans/execute`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

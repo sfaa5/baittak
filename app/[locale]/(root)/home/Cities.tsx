@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Link from "next/link";
 
 function Cities() {
   const t = useTranslations();
@@ -47,9 +48,9 @@ function Cities() {
   }, [api]);
 
   return (
-    <section className="pt-32 pb-32 sm:pb-40 container"   dir="ltr" >
-      <div className="relative flex w-full justify-center"    >
-        <div  className="flex flex-col items-center gap-10 md:gap-16 w-full"    >
+    <section className="pt-32 pb-32 sm:pb-40 container" dir="ltr">
+      <div className="relative flex w-full justify-center">
+        <div className="flex flex-col items-center gap-10 md:gap-16 w-full">
           {/* Header Section */}
           <div className="flex flex-col items-center text-center">
             <h1 className="text-xl md:text-3xl font-semibold text-secondary">
@@ -62,7 +63,7 @@ function Cities() {
           </div>
 
           {/* Navigation Buttons */}
-          <div  className="relative w-full flex flex-col justify-between gap-10">
+          <div className="relative w-full flex flex-col justify-between gap-10">
             {/* Grid Section */}
             <Carousel
               setApi={setApi}
@@ -70,16 +71,22 @@ function Cities() {
                 align: "start",
               }}
               className="w-full"
-               // Set direction based on locale
+              // Set direction based on locale
             >
               <CarouselContent>
                 {data.map((city, index) => (
                   <CarouselItem
                     key={index}
                     className="md:basis-1/2 lg:basis-1/5 cursor-pointer"
-                    dir={ `${locale==="ar"?"rtl":"ltr"}`}
+                    dir={`${locale === "ar" ? "rtl" : "ltr"}`}
                   >
-                    <div key={index}>
+                    <Link
+                      href={{
+                        pathname: "/Property",
+                        query: { city: city.name.en },
+                      }}
+                      key={index}
+                    >
                       <div className="relative group shadow-lg rounded-[14px] overflow-hidden transition-transform transform">
                         <div className="relative h-[300px] w-full">
                           {/* Image */}
@@ -105,7 +112,7 @@ function Cities() {
                           )}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </CarouselItem>
                 ))}
               </CarouselContent>

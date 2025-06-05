@@ -6,33 +6,21 @@ import Properties from "./home/Properties";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
-import Sign from "@/components/Sign";
-import { useSearchParams, useRouter } from "next/navigation";
+
 import SearchHome from "../../../components/SearchHome";
-import { useSession } from "next-auth/react";
+
 import Link from "next/link";
 import Projects from "./home/Projects";
 
 
 export default function Home() {
-  const { status } = useSession();
+
 
   const t = useTranslations();
-  const searchParams = new URLSearchParams(window.location.search);
-  const router = useRouter();
-  const parms = useSearchParams();
-  const [showLoginModal, setShowLoginModal] = useState(false);
+
   const [landImage, setLandPage] = useState("");
 
-  if (status === "authenticated" && parms.get("login") === "true") {
-    searchParams.delete("login");
-  }
 
-  useEffect(() => {
-    if (parms.get("login") === "true") {
-      setShowLoginModal(true);
-    }
-  }, [parms.toString()]);
 
   useEffect(() => {
     const getPaner = async () => {
@@ -48,18 +36,10 @@ export default function Home() {
         console.log(error);
       }
     };
-
     getPaner();
   }, []);
 
-  const closeModal = () => {
-    setShowLoginModal(false);
 
-    // Remove the query parameter from the URL
-
-    searchParams.delete("login");
-    router.push("/");
-  };
 
   return (
     <>
@@ -119,18 +99,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* // Cities and areas */}
       <Cities />
 
       <Properties params={"properties"} />
-      
+
       <Properties params={"featured"} />
-
-
 
       <Projects/>
 
-      {showLoginModal && <Sign onClose={closeModal} />}
+    
     </>
   );
 }

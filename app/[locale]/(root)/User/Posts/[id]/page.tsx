@@ -1,5 +1,5 @@
 "use client";
-import { FiUpload } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiUpload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -19,6 +19,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 import {
   Form,
@@ -62,6 +64,7 @@ import React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
+import Link from "next/link";
 
 interface Property {
   user?: { _id: string };
@@ -388,90 +391,118 @@ function Page() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 flex flex-col gap-6 mt-6 mb-20"
+        className="space-y-4 flex flex-col gap-6 mt-1 mb-20"
       >
+        <nav
+          className="flex items-center text-sm text-gray-500 mb-2"
+          aria-label="Breadcrumb"
+        >
+          <Link href={"/User/Posts"}>
+            <span className="hover:underline cursor-pointer ">
+              {t("userButton.yourPosts")}
+            </span>
+          </Link>
+          {locale === "ar" ? (
+            <FiChevronLeft className="mx-2" />
+          ) : (
+            <FiChevronRight className="mx-2" />
+          )}
+
+          <span className=" ">{t("property.Edit")}</span>
+
+          {locale === "ar" ? (
+            <FiChevronLeft className="mx-2" />
+          ) : (
+            <FiChevronRight className="mx-2" />
+          )}
+          <span className=" t">{property?.title}</span>
+        </nav>
+
         {/* add a listing */}
-        <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
-          <div className="bg-white absolute rounded-lg -top-4 left-5">
-            <h2 className="text-secondary  px-6 text-2xl font-medium">
-              {t("addUser.addListing")}
-            </h2>
-          </div>
-
-          <div className="grid gap-3 grid-cols-8">
-            <div className="col-span-2">
-              <FormField
-                control={form.control}
-                name="propertyType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="hidden sm:block"> {t("addUser.selectPropertyType")}</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("addUser.select")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Apartment">شقة</SelectItem>
-                          <SelectItem value="Villa">فيلا</SelectItem>
-                          <SelectItem value="Farm">مزرعة</SelectItem>
-                          <SelectItem value="Rest-house">استراحة</SelectItem>
-                          <SelectItem value="Residential-complex">
-                            مجمع سكني
-                          </SelectItem>
-                          <SelectItem value="Duplex">دوبلكس</SelectItem>
-                          <SelectItem value="Building">
-                            عمارة بالكامل
-                          </SelectItem>
-                          <SelectItem value="Hotel-apartments">
-                            فندق/شقق فندقية
-                          </SelectItem>
-                          <SelectItem value="Land">ارض</SelectItem>
-                          <SelectItem value="Full-floor">طابق كامل</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+        <div className="relative  p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full">
+            <div
+              className={`bg-white absolute rounded-lg  -top-4 ${
+                locale === "ar" ? "right-5" : "left-5"
+              }`}
+            >
+              <h2 className="text-secondary  px-6 text-2xl font-medium">
+                {t("addUser.addListing")}
+              </h2>
             </div>
 
-            <div className="col-span-2">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="hidden sm:block">{t("addUser.title")}</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder={`${t("addUser.title")}..`}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="col-span-4 grid grid-cols-7 gap-2">
-              <div className="col-span-3">
+            <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+              <div className="min-w-0">
+                <FormField
+                  control={form.control}
+                  name="propertyType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="hidden sm:block">
+                        {t("addUser.selectPropertyType")}
+                      </FormLabel>
+                      <FormControl>
+                        <Select
+                          dir={locale === "ar" ? "rtl" : "ltr"}
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={t("addUser.select")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Apartment">
+                              {t("inputs.apartment")}
+                            </SelectItem>
+                            <SelectItem value="Villa">
+                              {t("inputs.villa")}
+                            </SelectItem>
+                            <SelectItem value="Farm">
+                              {t("inputs.farm")}
+                            </SelectItem>
+                            <SelectItem value="Rest-House">
+                              {t("inputs.rest-house")}
+                            </SelectItem>
+                            <SelectItem value="Residential-Complex">
+                              {t("inputs.residential-complex")}
+                            </SelectItem>
+                            <SelectItem value="Duplex">
+                              {t("inputs.duplex")}
+                            </SelectItem>
+                            <SelectItem value="Building">
+                              {t("inputs.building")}
+                            </SelectItem>
+                            <SelectItem value="Hotel-Apartments">
+                              {t("inputs.hotel-apartments")}
+                            </SelectItem>
+                            <SelectItem value="Land">
+                              {t("inputs.land")}
+                            </SelectItem>
+                            <SelectItem value="Full-Floor">
+                              {t("inputs.full-floor")}
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="min-w-0">
                 <FormField
                   control={form.control}
                   name="price"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="hidden sm:block"> {t("addUser.price")}</FormLabel>
+                      <FormLabel className="hidden sm:block">
+                        {t("addUser.price")}
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
                           {...field}
                           placeholder={`${t("addUser.price")}..`}
+                          className="w-full"
                         />
                       </FormControl>
                       <FormMessage />
@@ -479,8 +510,7 @@ function Page() {
                   )}
                 />
               </div>
-
-              <div className="col-span-2">
+              <div className="min-w-0">
                 <FormField
                   control={form.control}
                   name="currency"
@@ -489,14 +519,16 @@ function Page() {
                       <FormLabel className="hidden sm:block">
                         {t("inputs.currency.label")}
                       </FormLabel>
-
                       <FormControl>
                         <Select
+                          dir={locale === "ar" ? "rtl" : "ltr"}
                           onValueChange={field.onChange}
                           value={field.value}
                         >
                           <SelectTrigger className="w-full">
-                            <SelectValue placeholder={"Select"} />
+                            <SelectValue
+                              placeholder={t("inputs.currency.placeholder")}
+                            />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="USD">
@@ -537,87 +569,119 @@ function Page() {
                   )}
                 />
               </div>
-
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="rentaltype"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="hidden sm:block">
-                        {t("addUser.rentalType")}
-                      </FormLabel>
-                      <FormControl>
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                   
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={"Select"} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Monthly">
-                              {t("addUser.monthly")}
-                            </SelectItem>
-                            <SelectItem value="Yearly">
-                              {t("addUser.yearly")}
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
             </div>
+
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="hidden sm:block">
+                    {t("addUser.title")}
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder={`${t("addUser.title")}..`} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("addUser.description")} </FormLabel>
+                  <FormControl>
+                    <Textarea {...field}></Textarea>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="for"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-8">
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      className="flex  gap-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="rent" id="r1" />
+                        <Label htmlFor="r1">{t("addUser.rental")}</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="sell" id="r2" />
+                        <Label htmlFor="r2">{t("addUser.sell")}</Label>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                  {/* Animated rental type select */}
+                  <AnimatePresence>
+                    {field.value === "rent" && (
+                      <motion.div
+                        key="rentalType"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <FormField
+                          control={form.control}
+                          name="rentaltype"
+                          render={({ field: rentalField }) => (
+                            <FormItem>
+                              <FormLabel className="font-semibold text-gray-700">
+                                {t("addUser.rentalType")}
+                              </FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={rentalField.onChange}
+                                  value={rentalField.value}
+                                  dir={locale === "ar" ? "rtl" : "ltr"}
+                                >
+                                  <SelectTrigger className="w-full mt-2">
+                                    <SelectValue
+                                      placeholder={t("addUser.select")}
+                                    />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="Monthly">
+                                      {t("addUser.monthly")}
+                                    </SelectItem>
+                                    <SelectItem value="Yearly">
+                                      {t("addUser.yearly")}
+                                    </SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
-
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("addUser.description")} </FormLabel>
-                <FormControl>
-                  <Textarea {...field}></Textarea>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="for"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange} // Connect onChange handler
-                    value={field.value} // Bind the current field value
-                    className="flex gap-2"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="rent" id="r1" />
-                      <Label htmlFor="r1">{t("addUser.rental")}</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="sell" id="r2" />
-                      <Label htmlFor="r2">{t("addUser.sell")}</Label>
-                    </div>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
 
         {/* Address */}
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
-          <div className="bg-white rounded-lg absolute -top-4 left-5">
+          <div
+            className={`bg-white absolute rounded-lg  -top-4 ${
+              locale === "ar" ? "right-5" : "left-5"
+            }`}
+          >
             <h2 className="text-secondary  px-6 text-2xl font-medium">
               {t("addUser.address")}
             </h2>
@@ -650,6 +714,7 @@ function Page() {
                     <FormLabel>{t("addUser.addCity")}</FormLabel>
                     <FormControl>
                       <Select
+                        dir={locale === "ar" ? "rtl" : "ltr"}
                         onValueChange={field.onChange}
                         value={field.value}
                       >
@@ -708,7 +773,11 @@ function Page() {
 
         {/* details */}
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
-          <div className="bg-white absolute rounded-lg -top-4 left-5">
+          <div
+            className={`bg-white absolute rounded-lg  -top-4 ${
+              locale === "ar" ? "right-5" : "left-5"
+            }`}
+          >
             <h2 className="text-secondary   px-6 text-2xl font-medium">
               {t("addUser.details")}
             </h2>
@@ -913,7 +982,11 @@ function Page() {
 
         {/* Amenities */}
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full bg-white">
-          <div className="bg-white rounded-lg absolute  -top-4 left-5">
+          <div
+            className={`bg-white absolute rounded-lg  -top-4 ${
+              locale === "ar" ? "right-5" : "left-5"
+            }`}
+          >
             <h2 className="text-secondary   px-6 text-2xl font-medium">
               {t("addUser.amenities")}
             </h2>
@@ -965,7 +1038,11 @@ function Page() {
 
         {/* Media */}
         <div className="relative p-7 grid grid-cols-1 gap-7 pt-12 mt-5 rounded-[0.6rem] border-[1px] w-full mb-20 bg-white">
-          <div className="bg-white absolute -top-4 left-5 rounded-lg">
+          <div
+            className={`bg-white absolute rounded-lg  -top-4 ${
+              locale === "ar" ? "right-5" : "left-5"
+            }`}
+          >
             <h2 className="text-secondary   px-6 text-2xl font-medium">
               {t("addUser.media")}
             </h2>

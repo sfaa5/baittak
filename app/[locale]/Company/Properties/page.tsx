@@ -29,7 +29,8 @@ export default function DemoPage() {
                throw new Error("Failed to fetch data");
             }
             const result = await response.json();
-            setProperty(result.properties);
+            console.log("result", result);
+            setProperty(result.agency.properties);
          } catch (err) {
             console.error("Error fetching properties:", err.message);
          }
@@ -42,6 +43,8 @@ export default function DemoPage() {
 
    if (status === "loading") return <TableSkelton />;
 
+   console.log("property", property);
+
    return (
       <div className="mx-auto py-5">
          <div className="flex w-full justify-between">
@@ -51,13 +54,12 @@ export default function DemoPage() {
             </Link>
          </div>
 
-         {property ? (
+         {property && (
          
             <DataTable columns={columns} columFilter="title" data={property} />
          
-         ) : (
-            <TableSkelton />
-         )}
+         ) }
+         
       </div>
    );
 }

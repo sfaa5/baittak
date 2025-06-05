@@ -16,7 +16,8 @@ async function Page() {
   const response = await fetch(`${URL_SERVER}/api/plans`);
 
   const responseUser = await fetch(`${URL_SERVER}/api/agency/${id}`);
-  const dataUserr = await responseUser.json();
+  const rowData = await responseUser.json();
+  const dataUserr = rowData.agency;
   const data = await response.json();
 
   

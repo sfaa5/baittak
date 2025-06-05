@@ -52,7 +52,7 @@ function ShowCards({ data }) {
             return <PropertiesCard key={key} post={combinedProps} />;
           })
         ) : (
-          <p className="no-results">No startups found</p>
+          <p className="no-results">No properties found</p>
         )}
       </div>
     </>

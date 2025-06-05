@@ -22,6 +22,9 @@ const Message = ({ message }) => {
 
   const shakeClass= message.shouldShake ? 'shake' : "";
 
+
+
+
   return (
     <div className={`flex gap-3  ${chatClassName}`}>
       <div className=" avatar">

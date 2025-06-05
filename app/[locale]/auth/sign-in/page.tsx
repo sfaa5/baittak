@@ -1,18 +1,9 @@
+import React from "react";
 
-import React from 'react'
-
-
-import SignInWithGoogle from '@/components/SignInWithGoogle';
+import SignInWithGoogle from "@/components/SignInWithGoogle";
 
 function page() {
-
-  return (
-
- <SignInWithGoogle/>
-
-
-  )
+  return <SignInWithGoogle />;
 }
 
-export default page
-
+export default page;

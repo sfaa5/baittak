@@ -9,11 +9,11 @@ import { useLocale, useTranslations } from "next-intl";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 import Image from "next/image";
 
-const planTranslations ={
-  "Free":"مجاني",
-  "Basic":"الخطة الأساسية",
-  "Premium":"الخطة المميزة",
-}
+const planTranslations = {
+  Free: "مجاني",
+  Basic: "الخطة الأساسية",
+  Premium: "الخطة المميزة",
+};
 
 function UserCard() {
   const { user, setUser } = useSharedState();
@@ -25,6 +25,12 @@ function UserCard() {
   const locale = useLocale();
   console.log("sessionnnn", session);
   const axiosAuth = useAxiosAuth();
+
+  const { activePlan, propertiesPosted } = user;
+
+  console.log("activePlan", activePlan);
+
+  console.log("planTranslations", planTranslations[activePlan?.name]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -40,7 +46,8 @@ function UserCard() {
 
         setLoading(false);
       } catch (error) {
-        if(error.response.status===401||error.response.status===403) return
+        if (error.response.status === 401 || error.response.status === 403)
+          return;
         console.error("Error fetching user data:", error);
       }
     };
@@ -65,8 +72,7 @@ function UserCard() {
     );
   }
 
-  const { activePlan, propertiesPosted } = user;
-  const limit = activePlan?.limit | 0 + user.freePlanLimit;
+  const limit = activePlan?.limit | (0 + user.freePlanLimit);
 
   const postsLeft = limit - propertiesPosted;
 
@@ -78,7 +84,6 @@ function UserCard() {
     ? formatDistanceToNow(expiresAt, { addSuffix: true })
     : null;
 
-  
   console.log(user.phoneNumber);
   console.log(user);
 
@@ -86,7 +91,6 @@ function UserCard() {
     <div className="relative mx-auto w-full xl:w-1/3">
       <div className=" flex flex-col bg-gray-100 p-6  gap-8 rounded-[0.7rem]">
         <div className="flex items-center gap-5">
-
           <Image
             src={
               user?.image?.url
@@ -95,7 +99,6 @@ function UserCard() {
             }
             width={50}
             height={50}
-           
             alt="user"
             className="rounded-full  object-cover"
           />
@@ -113,9 +116,14 @@ function UserCard() {
           </div>
 
           <div className="flex  text-lg gap-3">
-            <p className="text-primary font-medium">
-              {locale==="ar"? planTranslations[activePlan?.name]:activePlan?.name || t("company.free")}
-            </p>
+            <p className="text-primary font-medium">{t("userCard.Plan")}</p>
+            <span className="mx-[11px]">
+              {" "}
+              {locale === "ar"
+                ? planTranslations[activePlan?.name] || t("company.free")
+                : activePlan?.name || t("company.free")}
+            </span>
+
             <span> {timeUntilExpiration ? timeUntilExpiration : ""} </span>
           </div>
         </div>
@@ -131,9 +139,13 @@ function UserCard() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-[16px] font-semibold text-gray-800">
-              {locale==="ar"? planTranslations[activePlan?.name]:activePlan?.name || t("company.free")}
+                {locale === "ar"
+                  ? planTranslations[activePlan?.name]
+                  : activePlan?.name || t("company.free")}
               </h2>
-              <p className="text-sm text-gray-500">{t("plan.planLimit", { limit })}</p>
+              <p className="text-sm text-gray-500">
+                {t("plan.planLimit", { limit })}
+              </p>
             </div>
             <div className="text-right">
               <p className="text-lg font-medium text-gray-800">{postsLeft}</p>
@@ -147,7 +159,7 @@ function UserCard() {
             ></div>
           </div>
           <p className="text-sm text-gray-600 mt-2 text-center">
-          {t("plan.postsUsed", { propertiesPosted, limit })}
+            {t("plan.postsUsed", { propertiesPosted, limit })}
           </p>
         </div>
       </div>

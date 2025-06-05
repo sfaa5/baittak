@@ -26,6 +26,7 @@ import { useSharedState } from "@/app/context/stateProvider";
 import { deleteSelectedRequests, } from "@/lib/actions/project.action";
 import { useRouter,usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { FiSearch } from "react-icons/fi";
 
 interface RowData {
   _id?: string;  
@@ -96,16 +97,26 @@ export function DataTable<TData extends RowData, TValue>({
       <div className="flex items-center py-4">
         
         <div className="grid grid-cols-2 gap-[10%] sm:gap-[65%]  w-full">
-          <Input
-            placeholder={t("inputs.Filter_title")}
-            value={
-              (table.getColumn(columFilter)?.getFilterValue() as string) ?? ""
-            }
-            onChange={(event) =>
-              table.getColumn(columFilter)?.setFilterValue(event.target.value)
-            }
-            className="max-w-md"
-          />
+<div className="relative max-w-lg">
+  <span
+    className={`absolute top-1/2 -translate-y-1/2 text-gray-400
+      ${locale === "ar" ? "right-3" : "left-3"}`}
+    style={{ pointerEvents: "none" }}
+  >
+    <FiSearch />
+  </span>
+  <Input
+    placeholder={t("inputs.Filter_title")}
+    value={
+      (table.getColumn(columFilter)?.getFilterValue() as string) ?? ""
+    }
+    onChange={(event) =>
+      table.getColumn(columFilter)?.setFilterValue(event.target.value)
+    }
+    className={`${locale === "ar" ? "pr-10" : "pl-10"} w-[165px]`}
+    dir={locale === "ar" ? "rtl" : "ltr"}
+  />
+</div>
 
 {activeButton === "inbox" && showDelte && (
       <div className="flex gap-5">

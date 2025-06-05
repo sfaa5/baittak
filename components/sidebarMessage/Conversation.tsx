@@ -12,6 +12,7 @@ import {
 } from "../ui/dropdown-menu";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { IoPersonRemoveOutline } from "react-icons/io5";
+import { FiShield } from "react-icons/fi";
 
 // STARTER CODE SNIPPET
 const Conversation = ({ conversation, lastIdx }) => {
@@ -33,6 +34,8 @@ const Conversation = ({ conversation, lastIdx }) => {
   const remove = async (conversation) => {
     await deleteMessage(conversation);
   };
+
+  console.log("role", conversation.role);
 
   return (
     <>
@@ -66,7 +69,18 @@ const Conversation = ({ conversation, lastIdx }) => {
 
         <div className="flex flex-col flex-1">
           <div className="flex gap-3 justify-between">
-            <p className="font-medium text-gray-700">{conversation.username}</p>
+            <p className="font-medium text-gray-700 flex items-center gap-2">
+              {conversation.username}
+              {conversation.role === "admin" && (
+                <span
+                  className="ml-2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-primary to-primary/100 text-white text-xs font-bold shadow"
+                  title="Administrator"
+                >
+                  <FiShield className="w-4 h-4" />
+                  Admin
+                </span>
+              )}
+            </p>
 
             <div className="flex gap-4 items-center">
               {conversation.unreadMessagesCount > 0 && (

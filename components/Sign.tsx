@@ -19,6 +19,7 @@ import {
 import { Checkbox } from "./ui/checkbox";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "@/hooks/use-toast";
+import { usePathname, useRouter } from "next/navigation";
 
 const URL_SERVER = process.env.NEXT_PUBLIC_URL_SERVER;
 
@@ -149,15 +150,19 @@ function Sign({ onClose }) {
   const onSubmitSign = async (values: z.infer<typeof formSchema>) => {
     setError("");
     setLoading(true);
-    const result = await signIn(
-      "credentials",
-      {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-      },
-      { callbackUrl: process.env.NEXT_PUBLIC_URL_CLIENT }
-    );
+
+    const result = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false,
+
+    }
+  
+  );
+
+    console.log("testtt");
+
+    console.log("result", result);
 
     if (result?.error) {
       setError("Invalid email or password");
@@ -167,7 +172,10 @@ function Sign({ onClose }) {
         description: "Welcome",
       });
 
-      window.location.href = "/";
+      // Remove query params and reload the page
+      const url = new URL(window.location.href);
+      url.search = ""; // remove all query params
+      window.location.href = url.toString(); // redirect without login=true
     }
   };
 
@@ -203,6 +211,17 @@ function Sign({ onClose }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleLogin = async () => {
+    // Step 1: Remove ?login=true from the URL
+    router.replace(pathname); // This updates the URL without query params
+
+    // Step 2: Call signIn and redirect back to the same clean path
+    await signIn("google", { callbackUrl: pathname });
   };
 
   return (
@@ -377,11 +396,7 @@ function Sign({ onClose }) {
           {/* Google Sign-In Button */}
           <div className="space-y-4">
             <button
-              onClick={() =>
-                signIn("google", {
-                  callbackUrl: process.env.NEXT_PUBLIC_URL_CLIENT,
-                })
-              }
+              onClick={handleLogin}
               type="button"
               className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
             >
@@ -506,11 +521,7 @@ function Sign({ onClose }) {
           {/* Google Sign-In Button */}
           <div className="space-y-4">
             <button
-              onClick={() =>
-                signIn("google", {
-                  callbackUrl: process.env.NEXT_PUBLIC_URL_CLIENT,
-                })
-              }
+              onClick={handleLogin}
               type="button"
               className="flex items-center justify-center gap-3 mt-3 bg-secondary w-full text-sm text-white  py-2 px-4 rounded-lg shadow-lg hover:bg-secondary/80 transition duration-300"
             >
